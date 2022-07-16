@@ -5,6 +5,8 @@
 
     adb.enable = true;
 
+    git.enable = true;
+
     gpaste.enable = true;
 
     kdeconnect = {
@@ -12,7 +14,7 @@
       package = pkgs.gnomeExtensions.gsconnect;
     };
 
-    starship.enable = true;
+    # starship.enable = true;
 
     xonsh.enable = true;
 

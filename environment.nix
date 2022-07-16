@@ -16,11 +16,12 @@
     ];
 
     systemPackages = with pkgs; [
+      bat
       bind
       bookworm
-      dconf-editor
       efibootmgr
       font-manager
+      gnome.dconf-editor
       gnome.gnome-tweaks
       igv
       intel-gpu-tools
@@ -30,6 +31,7 @@
       mpv
       papirus-icon-theme
       progress
+      starship
       tdesktop
       texlive.combined.scheme-small
       unar

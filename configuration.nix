@@ -17,7 +17,7 @@
 
       # The following files are not tracked by git
       ./hardware-configuration.nix
-      ./user.nix
+      ./users.nix
     ];
 
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -34,13 +34,10 @@
 
   powerManagement.powertop.enable = true;
 
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
   # https://nixos.wiki/wiki/PipeWire
   security.rtkit.enable = true;
-
+  hardware.pulseaudio.enable = false;
+  
   # https://nixos.wiki/wiki/Accelerated_Video_Playback
   hardware.opengl = {
     enable = true;

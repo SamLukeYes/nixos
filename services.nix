@@ -14,6 +14,8 @@
 
     earlyoom.enable = true;
 
+    fstrim.enable = true;
+
     onedrive.enable = true;
 
     pipewire = {
