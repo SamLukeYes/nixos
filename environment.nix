@@ -21,6 +21,8 @@
       bookworm
       efibootmgr
       font-manager
+      gnomeExtensions.freon
+      gnomeExtensions.system-monitor
       gnome.dconf-editor
       gnome.gnome-tweaks
       igv
@@ -36,11 +38,16 @@
       texlive.combined.scheme-small
       unar
       ventoy-bin
-      vivaldi
       vscode-fhs
       xorg.xeyes
       xournalpp
       zotero
+
+      (vivaldi.override {
+        proprietaryCodecs = true;
+        enableWidevine = true;
+        commandLineArgs = "--enable-features=VaapiVideoDecoder --use-gl=egl --disable-feature=UseChromeOSDirectVideoDecoder";
+      })
     ];
   };
 }

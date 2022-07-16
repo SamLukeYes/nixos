@@ -34,6 +34,16 @@
 
   powerManagement.powertop.enable = true;
 
+  systemd.services.set-energy-preference = {
+    wantedBy = ["multi-user.target"];
+    description = "Set energy preference to balance power";
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "/run/current-system/sw/bin/cpupower-gui ene --pref balance_power";
+    };
+  };
+
   # https://nixos.wiki/wiki/PipeWire
   security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
@@ -44,14 +54,9 @@
     extraPackages = [ pkgs.intel-media-driver ];
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    vivaldi = {
-      proprietaryCodecs = true;
-      enableWidevine = true;
-      commandLineArgs = "--enable-features=VaapiVideoDecoder --use-gl=egl --disable-feature=UseChromeOSDirectVideoDecoder";
-    };
-  };
+  hardware.sensor.iio.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   zramSwap.enable = true;
 }

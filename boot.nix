@@ -13,5 +13,6 @@
       "vm.swappiness" = 180;
       "vm.page-cluster" = 0;
     };
+    plymouth.enable = true;
   };
 }
