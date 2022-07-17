@@ -5,6 +5,7 @@
     gc = {
       automatic = true;
       options = "--delete-older-than 30d";
+      randomizedDelaySec = "20min"; # workaround for GDM login
     };
     settings = {
       auto-optimise-store = true;
