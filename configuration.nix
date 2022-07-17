@@ -4,6 +4,8 @@
 
 { config, pkgs, ... }:
 
+let rp = (import ./reverse-proxy.nix); in
+
 {
   imports =
     [
@@ -27,7 +29,8 @@
 
   # https://nixos.wiki/wiki/Fonts
   fonts.fonts = with pkgs; [
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
     noto-fonts-emoji
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
@@ -60,10 +63,12 @@
     allowUnfree = true;
     packageOverrides = pkgs: {
       nur = import (builtins.fetchTarball 
-        "https://github.com/nix-community/NUR/archive/master.tar.gz"
+        "${rp}https://github.com/nix-community/NUR/archive/master.tar.gz"
       ) {
         inherit pkgs;
       };
+      
+      lx-music-desktop = pkgs.callPackage ./lx-music-desktop { inherit rp; };
     };
   };
 

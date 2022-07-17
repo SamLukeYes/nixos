@@ -24,6 +24,7 @@
       efibootmgr
       electron
       ffmpeg
+      file
       firefox-esr-wayland
       font-manager
       gnomeExtensions.freon
@@ -50,6 +51,9 @@
 
       nur.repos.linyinfeng.icalingua-plus-plus
       nur.repos.linyinfeng.wemeet
+
+      # custom packages
+      lx-music-desktop
     ];
 
     sessionVariables = {

@@ -1,4 +1,3 @@
 hardware-configuration.nix
-reverse-proxy.nix
 users.nix
 TODO.txt

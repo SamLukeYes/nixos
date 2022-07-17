@@ -16,4 +16,4 @@
 
 - Additional Packages
   - [X] NUR
-  - [ ] custom packages
+  - [X] custom packages
