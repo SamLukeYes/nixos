@@ -4,22 +4,26 @@
   environment = {
 
     gnome.excludePackages = with pkgs.gnome; [
-      epiphany  # use vivaldi instead
+      epiphany  # use firefox instead
       pkgs.gnome-text-editor  # use vscode instead
       gnome-calculator  # use xonsh instead
+      gnome-contacts  # not managing contacts on PC
       gnome-font-viewer  # use font-manager instead
       gnome-music  # use mpv instead
       simple-scan  # no scanner available
       totem  # use mpv instead
-      evince  # use vivaldi instead
-      geary  # use vivaldi instead
+      evince  # use firefox for email
+      geary  # use firefox for email
     ];
 
     systemPackages = with pkgs; [
       bat
       bind
       bookworm
+      clash
       efibootmgr
+      electron
+      firefox-esr-wayland
       font-manager
       gnomeExtensions.freon
       gnomeExtensions.system-monitor
@@ -31,11 +35,11 @@
       libreoffice
       mkpasswd
       mpv
+      onedrive
       papirus-icon-theme
       progress
       starship
       tdesktop
-      texlive.combined.scheme-small
       unar
       ventoy-bin
       vscode-fhs
@@ -43,11 +47,13 @@
       xournalpp
       zotero
 
-      (vivaldi.override {
-        proprietaryCodecs = true;
-        enableWidevine = true;
-        commandLineArgs = "--enable-features=VaapiVideoDecoder --use-gl=egl --disable-feature=UseChromeOSDirectVideoDecoder";
-      })
+      nur.repos.linyinfeng.icalingua-plus-plus
+      nur.repos.linyinfeng.wemeet
     ];
+
+    sessionVariables = {
+      MOZ_DBUS_REMOTE = "1";
+      QT_QPA_PLATFORM = "wayland;xcb";
+    };
   };
 }

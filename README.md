@@ -6,10 +6,14 @@
   - [ ] GDM tap-to-click
   - [ ] additional nautilus extensions
 
+- VSCode
+  - [ ] LaTEX
+  - [ ] Python
+
 - Web Browser
-  - [ ] vaapi
-  - [ ] password sync
+  - [X] vaapi
+  - [X] password sync
 
 - Additional Packages
-  - [ ] NUR
+  - [X] NUR
   - [ ] custom packages

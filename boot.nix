@@ -2,8 +2,13 @@
 
 {
   boot = {
+    # consoleLogLevel = 0;
     loader = {
-      systemd-boot.enable = true;
+      systemd-boot = {
+        configurationLimit = 10;
+        editor = false;
+        enable = true;
+      };
       efi = {
         canTouchEfiVariables = true;
         efiSysMountPoint = "/efi";
@@ -13,6 +18,6 @@
       "vm.swappiness" = 180;
       "vm.page-cluster" = 0;
     };
-    plymouth.enable = true;
+    kernelParams = ["i915.modeset=1" "bgrt_disable"];
   };
 }
