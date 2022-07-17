@@ -23,6 +23,7 @@
       clash
       efibootmgr
       electron
+      ffmpeg
       firefox-esr-wayland
       font-manager
       gnomeExtensions.freon
