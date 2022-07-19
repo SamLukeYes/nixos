@@ -62,6 +62,7 @@ let rp = (import ./reverse-proxy.nix); in
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = pkgs: {
+
       nur = import (builtins.fetchTarball 
         "${rp}https://github.com/nix-community/NUR/archive/master.tar.gz"
       ) {
@@ -69,6 +70,28 @@ let rp = (import ./reverse-proxy.nix); in
       };
       
       lx-music-desktop = pkgs.callPackage ./lx-music-desktop { inherit rp; };
+
+      xonsh = pkgs.xonsh.overrideAttrs (oldAttrs: rec {
+        version = "0.13.0";
+        src = pkgs.fetchzip {
+          url = "${rp}https://github.com/xonsh/xonsh/releases/download/${version}/xonsh-${version}.tar.gz";
+          sha256 = "sha256-8X/+mQrwJ0yaUHRKdoY3G0P8kq22hYfRK+7WRl/zamc=";
+        };
+        postInstall = ''
+          wrapProgram $out/bin/xonsh \
+            $makeWrapperArgs
+        '';
+        disabledTests = oldAttrs.disabledTests ++ [
+          "test_ptk_prompt"
+          "test_ptk_default_append_history"
+          "test_bash_and_is_alias_is_only_functional_alias"
+          "test_xonsh_lexer"
+          "test_xonsh_activator"
+          "test_complete_command"
+          "test_skipper_command"
+        ];
+      });
+      
     };
   };
 

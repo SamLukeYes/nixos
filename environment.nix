@@ -20,10 +20,8 @@
       bat
       bind
       bookworm
-      clash
       efibootmgr
       electron
-      ffmpeg
       file
       firefox-esr-wayland
       font-manager
