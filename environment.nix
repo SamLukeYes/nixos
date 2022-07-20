@@ -18,11 +18,9 @@
 
     systemPackages = with pkgs; [
       bat
-      bind
       bookworm
       efibootmgr
       electron
-      file
       firefox-esr-wayland
       font-manager
       gnomeExtensions.freon
@@ -30,18 +28,12 @@
       gnome.dconf-editor
       gnome.gnome-tweaks
       igv
-      intel-gpu-tools
-      inxi
       libreoffice
-      mkpasswd
       mpv
       onedrive
       papirus-icon-theme
-      progress
       starship
       tdesktop
-      unar
-      ventoy-bin
       vscode-fhs
       xorg.xeyes
       xournalpp
