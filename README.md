@@ -18,3 +18,5 @@
   - [X] NUR
   - [X] custom packages
     - [ ] separate into another repo
+
+- [ ] Use systemd units instead of cron

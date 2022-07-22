@@ -47,6 +47,7 @@
     ];
 
     sessionVariables = {
+      EDITOR = "nano";
       MOZ_DBUS_REMOTE = "1";
       QT_QPA_PLATFORM = "wayland;xcb";
     };
