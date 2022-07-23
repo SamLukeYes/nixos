@@ -4,12 +4,14 @@
   environment = {
 
     gnome.excludePackages = with pkgs.gnome; [
+      eog  # use gthumb instead
       epiphany  # use firefox instead
       pkgs.gnome-text-editor  # use vscode instead
       gnome-calculator  # use xonsh instead
       gnome-contacts  # not managing contacts on PC
       gnome-font-viewer  # use font-manager instead
       gnome-music  # use mpv instead
+      pkgs.gnome-photos  # use gthumb instead
       simple-scan  # no scanner available
       totem  # use mpv instead
       evince  # use firefox for email
@@ -27,6 +29,7 @@
       gnomeExtensions.system-monitor
       gnome.dconf-editor
       gnome.gnome-tweaks
+      gthumb
       igv
       libreoffice
       mpv
