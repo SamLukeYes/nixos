@@ -19,4 +19,6 @@
   - [X] custom packages
     - [ ] separate into another repo
 
-- [ ] Use systemd units instead of cron
+- systemd
+  - [ ] use systemd units instead of cron
+  - [ ] Arch Linux clean chroot (nspawn)

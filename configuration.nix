@@ -16,6 +16,7 @@ let rp = (import ./reverse-proxy.nix); in
       ./programs.nix
       ./services.nix
       ./system.nix
+      ./systemd.nix
 
       # The following files are not tracked by git
       ./hardware-configuration.nix
@@ -42,16 +43,6 @@ let rp = (import ./reverse-proxy.nix); in
   ];
 
   powerManagement.powertop.enable = true;
-
-  systemd.services.set-energy-preference = {
-    wantedBy = ["multi-user.target"];
-    description = "Set energy preference to balance power";
-    serviceConfig = {
-      Type = "oneshot";
-      RemainAfterExit = true;
-      ExecStart = "/run/current-system/sw/bin/cpupower-gui ene --pref balance_power";
-    };
-  };
 
   # https://nixos.wiki/wiki/PipeWire
   security.rtkit.enable = true;
