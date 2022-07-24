@@ -38,7 +38,6 @@
       starship
       tdesktop
       vscode-fhs
-      xorg.xeyes
       xournalpp
       zotero
 
