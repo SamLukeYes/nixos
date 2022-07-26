@@ -35,7 +35,6 @@
       onedrive
       papirus-icon-theme
       starship
-      tdesktop
       vscode-fhs
       xournalpp
       zotero
