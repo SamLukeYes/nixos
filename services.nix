@@ -8,8 +8,6 @@
       downloadDir = "/home/aria2";
     };
 
-    cron.enable = true;
-
     cpupower-gui.enable = true;
 
     earlyoom.enable = true;

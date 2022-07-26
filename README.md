@@ -20,5 +20,5 @@
     - [ ] separate into another repo
 
 - systemd
-  - [ ] use systemd units instead of cron
+  - [ ] custom timers
   - [ ] Arch Linux clean chroot (nspawn)

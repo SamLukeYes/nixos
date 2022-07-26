@@ -22,7 +22,6 @@
       bat
       bookworm
       efibootmgr
-      electron
       firefox-esr-wayland
       font-manager
       gnomeExtensions.freon
@@ -41,6 +40,7 @@
       xournalpp
       zotero
 
+      nur.repos.linyinfeng.clash-for-windows
       nur.repos.linyinfeng.icalingua-plus-plus
       nur.repos.linyinfeng.wemeet
 
