@@ -44,6 +44,7 @@
       nur.repos.linyinfeng.wemeet
 
       # custom packages
+      adw-gtk3
       lx-music-desktop
     ];
 

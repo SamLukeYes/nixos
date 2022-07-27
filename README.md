@@ -3,7 +3,7 @@
 ### TODO
 
 - GNOME
-  - [ ] adw-gtk3
+  - [X] adw-gtk3
   - [ ] GDM tap-to-click
   - [ ] additional nautilus extensions
 
