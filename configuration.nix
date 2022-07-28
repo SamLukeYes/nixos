@@ -66,9 +66,9 @@ let rp = (import ./reverse-proxy.nix); in
         inherit pkgs;
       };
 
-      adw-gtk3 = pkgs.callPackage "${builtins.fetchTarball 
-        "${rp}https://github.com/InternetUnexplorer/nixpkgs-overlay/archive/main.tar.gz"
-      }/adw-gtk3" {};
+      adw-gtk3 = pkgs.callPackage (builtins.fetchurl 
+        "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
+      ) {};
       
       lx-music-desktop = pkgs.callPackage ./lx-music-desktop { inherit rp; };
       
