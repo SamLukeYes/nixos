@@ -19,6 +19,7 @@
     ];
 
     systemPackages = with pkgs; [
+      adw-gtk3
       bat
       bookworm
       efibootmgr
@@ -43,9 +44,7 @@
       nur.repos.linyinfeng.icalingua-plus-plus
       nur.repos.linyinfeng.wemeet
 
-      # custom packages
-      adw-gtk3
-      lx-music-desktop
+      custom.lx-music-desktop
     ];
 
     sessionVariables = {

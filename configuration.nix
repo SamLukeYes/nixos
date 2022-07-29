@@ -70,7 +70,7 @@ let rp = (import ./reverse-proxy.nix); in
         "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
       ) {};
       
-      lx-music-desktop = pkgs.callPackage ./lx-music-desktop { inherit rp; };
+      custom = import ./packages { inherit rp; };
       
     };
   };

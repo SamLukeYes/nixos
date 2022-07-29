@@ -18,7 +18,7 @@
 - Additional Packages
   - [X] NUR
   - [X] custom packages
-    - [ ] separate into another repo
+    - [X] separate into another repo
 
 - systemd
   - [ ] custom timers
