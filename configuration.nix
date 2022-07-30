@@ -21,6 +21,7 @@ in
     [
       ./boot.nix
       ./environment.nix
+      ./fonts.nix
       ./i18n.nix
       ./nix.nix
       ./programs.nix
@@ -37,14 +38,6 @@ in
 
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
-
-  # https://nixos.wiki/wiki/Fonts
-  fonts.fonts = with pkgs; [
-    noto-fonts-cjk-sans
-    noto-fonts-cjk-serif
-    noto-fonts-emoji
-    inconsolata-nerdfont
-  ];
 
   powerManagement.powertop.enable = true;
 
