@@ -14,7 +14,7 @@
 
     fstrim.enable = true;
 
-    # onedrive.enable = true;
+    onedrive.enable = true;
 
     pipewire = {
       enable = true;

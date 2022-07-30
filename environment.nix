@@ -33,7 +33,6 @@
       igv
       libreoffice
       mpv
-      onedrive
       papirus-icon-theme
       starship
       vscode-fhs
@@ -44,6 +43,7 @@
       nur.repos.linyinfeng.icalingua-plus-plus
       nur.repos.linyinfeng.wemeet
 
+      custom.gnomeExtensions.onedrive
       custom.lx-music-desktop
     ];
 
