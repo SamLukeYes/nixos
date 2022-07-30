@@ -5,7 +5,7 @@
 - GNOME
   - [X] adw-gtk3
   - [ ] GDM tap-to-click
-  - [ ] additional nautilus extensions
+  - [ ] nixified OneDrive extension
 
 - VSCode
   - [ ] LaTEX
@@ -14,11 +14,6 @@
 - Web Browser
   - [X] vaapi
   - [X] password sync
-
-- Additional Packages
-  - [X] NUR
-  - [X] custom packages
-    - [X] separate into another repo
 
 - systemd
   - [ ] custom timers

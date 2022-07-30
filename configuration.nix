@@ -4,7 +4,17 @@
 
 { config, pkgs, ... }:
 
-let rp = (import ./reverse-proxy.nix); in
+let
+
+  rp = (import ./reverse-proxy.nix);
+
+  nur = import (builtins.fetchTarball 
+    "${rp}https://github.com/nix-community/NUR/archive/master.tar.gz"
+  ) {
+    inherit pkgs;
+  };
+
+in
 
 {
   imports =
@@ -33,13 +43,7 @@ let rp = (import ./reverse-proxy.nix); in
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     noto-fonts-emoji
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-    (nur.repos.vanilla.Win10_LTSC_2021_fonts.overrideAttrs (oldAttrs: rec {
-      src = fetchurl {
-        url = "${rp}https://software-download.microsoft.com/download/pr/19043.928.210409-1212.21h1_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso";
-        sha256 = "026607e7aa7ff80441045d8830556bf8899062ca9b3c543702f112dd6ffe6078";
-      };
-    }))
+    inconsolata-nerdfont
   ];
 
   powerManagement.powertop.enable = true;
@@ -60,11 +64,7 @@ let rp = (import ./reverse-proxy.nix); in
     allowUnfree = true;
     packageOverrides = pkgs: {
 
-      nur = import (builtins.fetchTarball 
-        "${rp}https://github.com/nix-community/NUR/archive/master.tar.gz"
-      ) {
-        inherit pkgs;
-      };
+      inherit nur;
 
       adw-gtk3 = pkgs.callPackage (builtins.fetchurl 
         "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"

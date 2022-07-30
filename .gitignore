@@ -1,3 +1,5 @@
+cachix/
+cachix.nix
 hardware-configuration.nix
 users.nix
 TODO.txt
