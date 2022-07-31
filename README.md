@@ -5,7 +5,7 @@
 - GNOME
   - [X] adw-gtk3
   - [ ] GDM tap-to-click
-  - [ ] nixified OneDrive extension
+  - [X] nixified OneDrive extension
 
 - VSCode
   - [ ] LaTEX
