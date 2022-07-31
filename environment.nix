@@ -14,8 +14,7 @@
       pkgs.gnome-photos  # use gthumb instead
       simple-scan  # no scanner available
       totem  # use mpv instead
-      evince  # use firefox for email
-      geary  # use firefox for email
+      evince  # use many other apps for pdf
     ];
 
     systemPackages = with pkgs; [
