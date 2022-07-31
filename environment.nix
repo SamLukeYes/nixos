@@ -42,9 +42,8 @@
       nur.repos.linyinfeng.clash-for-windows
       nur.repos.linyinfeng.icalingua-plus-plus
       nur.repos.linyinfeng.wemeet
-
-      custom.gnomeExtensions.onedrive
-      custom.lx-music-desktop
+      nur.repos.yes.gnomeExtensions.onedrive
+      nur.repos.yes.lx-music-desktop
     ];
 
     sessionVariables = {

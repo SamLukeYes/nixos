@@ -12,6 +12,9 @@ let
     "${rp}https://github.com/nix-community/NUR/archive/master.tar.gz"
   ) {
     inherit pkgs;
+    repoOverrides = {
+      yes = import ./packages { inherit pkgs rp; };
+    };
   };
 
 in
@@ -62,8 +65,6 @@ in
       adw-gtk3 = pkgs.callPackage (builtins.fetchurl 
         "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
       ) {};
-      
-      custom = import ./packages { inherit rp; };
       
     };
   };
