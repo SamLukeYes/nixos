@@ -14,6 +14,8 @@
 
     fstrim.enable = true;
 
+    fwupd.enable = true;
+
     onedrive.enable = true;
 
     pipewire = {

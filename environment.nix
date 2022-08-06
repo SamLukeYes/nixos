@@ -26,6 +26,7 @@
       font-manager
       gnomeExtensions.freon
       gnomeExtensions.system-monitor
+      gnome-firmware
       gnome.dconf-editor
       gnome.gnome-tweaks
       gthumb
