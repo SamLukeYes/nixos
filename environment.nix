@@ -34,7 +34,6 @@
       mpv
       papirus-icon-theme
       starship
-      vscode-fhs
       xournalpp
       zotero
 
@@ -43,6 +42,15 @@
       nur.repos.linyinfeng.wemeet
       nur.repos.yes.gnomeExtensions.onedrive
       nur.repos.yes.lx-music-desktop
+
+      (python3.withPackages (p: with p; [
+        jupyter openpyxl pandas scipy
+      ]))
+
+      (vscode.fhsWithPackages (ps: with ps; [
+        nodePackages.pyright
+        texlive.combined.scheme-full
+      ]))
     ];
 
     sessionVariables = {
