@@ -44,7 +44,7 @@
       nur.repos.yes.lx-music-desktop
 
       (python3.withPackages (p: with p; [
-        jupyter openpyxl pandas scipy
+        ipykernel openpyxl pandas scipy
       ]))
 
       (vscode.fhsWithPackages (ps: with ps; [
