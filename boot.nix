@@ -5,7 +5,7 @@
     # consoleLogLevel = 0;
     loader = {
       systemd-boot = {
-        configurationLimit = 10;
+        # configurationLimit = 10;
         editor = false;
         enable = true;
       };
