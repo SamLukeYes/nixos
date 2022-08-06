@@ -8,8 +8,8 @@
   - [X] nixified OneDrive extension
 
 - VSCode
-  - [ ] LaTEX
-  - [ ] Python
+  - [X] LaTEX
+  - [X] Python
 
 - Web Browser
   - [X] vaapi
