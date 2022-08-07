@@ -24,8 +24,6 @@
       efibootmgr
       firefox-esr-wayland
       font-manager
-      gnomeExtensions.freon
-      gnomeExtensions.system-monitor
       gnome-firmware
       gnome.dconf-editor
       gnome.gnome-tweaks
@@ -41,8 +39,14 @@
       nur.repos.linyinfeng.clash-for-windows
       nur.repos.linyinfeng.icalingua-plus-plus
       nur.repos.linyinfeng.wemeet
-      nur.repos.yes.gnomeExtensions.onedrive
       nur.repos.yes.lx-music-desktop
+
+      gnomeExtensions.appindicator
+      gnomeExtensions.customize-ibus
+      gnomeExtensions.freon
+      gnomeExtensions.improved-osk
+      gnomeExtensions.system-monitor
+      nur.repos.yes.gnomeExtensions.onedrive
 
       (python3.withPackages (p: with p; [
         ipykernel openpyxl pandas scipy
