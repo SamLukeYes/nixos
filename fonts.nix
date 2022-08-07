@@ -10,6 +10,10 @@
     fontconfig.defaultFonts = {
       serif = ["Noto Serif CJK SC"];
       sansSerif = ["Noto Sans CJK SC"];
+      monospace = [
+        "DejaVu Sans Mono"
+        "Noto Sans Mono CJK SC"
+      ];
     };
   };
 }
