@@ -65,6 +65,15 @@ in
       adw-gtk3 = pkgs.callPackage (builtins.fetchurl 
         "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
       ) {};
+
+      electron-netease-cloud-music = nur.repos.rewine.electron-netease-cloud-music.overrideAttrs
+        (old: rec {
+          version = "0.9.35";
+          src = pkgs.fetchurl {
+            url = "${rp}https://github.com/Rocket1184/${old.pname}/releases/download/v${version}/${old.pname}_v${version}.asar";
+            sha256 = "sha256-OD4xSytwJyFM0IrdN7elj6v5OFDO8viyGYls/Z3d+Hc=";
+          };
+        });
       
     };
   };

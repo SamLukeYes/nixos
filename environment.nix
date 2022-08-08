@@ -18,7 +18,6 @@
     ];
 
     systemPackages = with pkgs; [
-      adw-gtk3
       bat
       bookworm
       efibootmgr
@@ -47,6 +46,10 @@
       gnomeExtensions.improved-osk
       gnomeExtensions.system-monitor
       nur.repos.yes.gnomeExtensions.onedrive
+
+      # custom packages
+      adw-gtk3
+      electron-netease-cloud-music
 
       (python3.withPackages (p: with p; [
         ipykernel openpyxl pandas scipy
