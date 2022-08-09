@@ -18,9 +18,7 @@
     ];
 
     systemPackages = with pkgs; [
-      bat
       bookworm
-      efibootmgr
       firefox-esr-wayland
       font-manager
       gnome-firmware
@@ -31,7 +29,6 @@
       libreoffice
       mpv
       papirus-icon-theme
-      starship
       xournalpp
       zotero
 
@@ -46,6 +43,11 @@
       gnomeExtensions.improved-osk
       gnomeExtensions.system-monitor
       nur.repos.yes.gnomeExtensions.onedrive
+
+      # CLI programs
+      bat   # frequently used in terminal
+      pdftk   # required by Jasminum
+      starship  # configured in ~/.xonshrc
 
       # custom packages
       adw-gtk3
