@@ -18,6 +18,6 @@
       "vm.swappiness" = 180;
       "vm.page-cluster" = 0;
     };
-    kernelParams = ["i915.modeset=1" "bgrt_disable"];
+    kernelParams = ["bgrt_disable"];
   };
 }

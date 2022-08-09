@@ -35,6 +35,8 @@ in
       # The following files are not tracked by git
       ./hardware-configuration.nix
       ./users.nix
+
+      "${builtins.fetchGit "${rp}https://github.com/NixOS/nixos-hardware"}/lenovo/thinkpad/l13/yoga"
     ];
 
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -42,19 +44,9 @@ in
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
 
-  powerManagement.powertop.enable = true;
-
   # https://nixos.wiki/wiki/PipeWire
   security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
-  
-  # https://nixos.wiki/wiki/Accelerated_Video_Playback
-  hardware.opengl = {
-    enable = true;
-    extraPackages = [ pkgs.intel-media-driver ];
-  };
-
-  hardware.sensor.iio.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -77,8 +69,6 @@ in
       
     };
   };
-
-  # qt5.platformTheme = "gnome";
 
   zramSwap.enable = true;
 }
