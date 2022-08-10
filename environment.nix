@@ -10,10 +10,10 @@
       gnome-calculator  # use xonsh instead
       gnome-contacts  # not managing contacts on PC
       gnome-font-viewer  # use font-manager instead
-      gnome-music  # use mpv instead
+      gnome-music  # use gthumb instead
       pkgs.gnome-photos  # use gthumb instead
       simple-scan  # no scanner available
-      totem  # use mpv instead
+      totem  # use gthumb instead
       evince  # use many other apps for pdf
     ];
 
@@ -24,10 +24,10 @@
       gnome-firmware
       gnome.dconf-editor
       gnome.gnome-tweaks
+      gst_all_1.gst-vaapi
       gthumb
       igv
       libreoffice
-      mpv
       papirus-icon-theme
       xournalpp
       zotero
@@ -65,6 +65,8 @@
 
     sessionVariables = {
       EDITOR = "nano";
+      GST_PLUGIN_PATH_1_0 = ["/run/current-system/sw/lib/gstreamer-1.0"];
+      LIBVA_DRIVER_NAME = "iHD";
       MOZ_DBUS_REMOTE = "1";
       QT_QPA_PLATFORM = "wayland;xcb";
     };
