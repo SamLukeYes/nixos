@@ -24,7 +24,6 @@
       gnome-firmware
       gnome.dconf-editor
       gnome.gnome-tweaks
-      gst_all_1.gst-vaapi
       gthumb
       igv
       libreoffice
@@ -65,7 +64,7 @@
 
     sessionVariables = {
       EDITOR = "nano";
-      GST_PLUGIN_PATH_1_0 = ["/run/current-system/sw/lib/gstreamer-1.0"];
+      GST_PLUGIN_PATH_1_0 = ["${pkgs.gst_all_1.gst-vaapi}/lib/gstreamer-1.0"];
       LIBVA_DRIVER_NAME = "iHD";
       MOZ_DBUS_REMOTE = "1";
       QT_QPA_PLATFORM = "wayland;xcb";
