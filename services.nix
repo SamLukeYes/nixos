@@ -38,7 +38,16 @@
     xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
-      desktopManager.gnome.enable = true;
+      desktopManager.gnome = {
+        enable = true;
+        extraGSettingsOverrides = ''
+          [org.gnome.desktop.peripherals.touchpad]
+          tap-to-click=true
+        '';
+        extraGSettingsOverridePackages = with pkgs; [
+          gsettings-desktop-schemas
+        ];
+      };
       displayManager.gdm.enable = true;
     };
 
