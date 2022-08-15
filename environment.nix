@@ -15,7 +15,6 @@ in
       pkgs.gnome-text-editor  # use vscode instead
       gnome-calculator  # use xonsh instead
       gnome-contacts  # not managing contacts on PC
-      gnome-font-viewer  # use font-manager instead
       gnome-music  # use gthumb instead
       pkgs.gnome-photos  # use gthumb instead
       simple-scan  # no scanner available
@@ -26,7 +25,6 @@ in
     systemPackages = with pkgs; [
       bookworm
       firefox-esr-wayland
-      font-manager
       gnome-firmware
       gnome.dconf-editor
       gnome.gnome-tweaks
