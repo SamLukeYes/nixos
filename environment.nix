@@ -28,6 +28,7 @@ in
       gnome-firmware
       gnome.dconf-editor
       gnome.gnome-tweaks
+      gnome.nautilus-python
       gthumb
       igv
       libreoffice
