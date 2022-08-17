@@ -60,10 +60,10 @@ in
 
       electron-netease-cloud-music = nur.repos.rewine.electron-netease-cloud-music.overrideAttrs
         (old: rec {
-          version = "0.9.35";
+          version = "0.9.36";
           src = pkgs.fetchurl {
             url = "${rp}https://github.com/Rocket1184/${old.pname}/releases/download/v${version}/${old.pname}_v${version}.asar";
-            sha256 = "sha256-OD4xSytwJyFM0IrdN7elj6v5OFDO8viyGYls/Z3d+Hc=";
+            sha256 = "sha256-ElJKdI+yuvvjUtqEulyFHz3VvMKXgAbX9QXwRk1oQkg=";
           };
         });
       
