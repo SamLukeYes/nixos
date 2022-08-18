@@ -24,6 +24,8 @@ let rp = import ./reverse-proxy.nix; in
     };
   });
 
+  firefox = firefox-esr-wayland;
+
   win10-fonts = (callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/VergeDX/nur-packages/pkgs/Win10_LTSC_2021_fonts/default.nix"
   ) {}).overrideAttrs (old: {

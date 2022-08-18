@@ -24,7 +24,7 @@ in
 
     systemPackages = with pkgs; [
       bookworm
-      firefox-esr-wayland
+      firefox
       gnome-firmware
       gnome.dconf-editor
       gnome.gnome-tweaks
