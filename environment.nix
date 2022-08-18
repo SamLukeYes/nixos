@@ -39,6 +39,7 @@ in
       nur.repos.linyinfeng.clash-for-windows
       nur.repos.linyinfeng.icalingua-plus-plus
       nur.repos.linyinfeng.wemeet
+      nur.repos.shadowrz.adw-gtk3
       nur.repos.yes.lx-music-desktop
 
       gnomeExtensions.appindicator
@@ -54,7 +55,6 @@ in
       starship  # configured in ~/.xonshrc
 
       # custom packages
-      adw-gtk3
       electron-netease-cloud-music
 
       (vscode.fhsWithPackages (ps: with ps; [

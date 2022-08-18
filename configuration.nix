@@ -4,20 +4,7 @@
 
 { config, pkgs, ... }:
 
-let
-
-  rp = (import ./reverse-proxy.nix);
-
-  nur = import (builtins.fetchTarball 
-    "${rp}https://github.com/nix-community/NUR/archive/master.tar.gz"
-  ) {
-    inherit pkgs;
-    repoOverrides = {
-      yes = import ./packages { inherit pkgs rp; };
-    };
-  };
-
-in
+let rp = import ./reverse-proxy.nix; in
 
 {
   imports =
@@ -27,6 +14,7 @@ in
       ./fonts.nix
       ./i18n.nix
       ./nix.nix
+      ./nixpkgs.nix
       ./programs.nix
       ./services.nix
       ./system.nix
@@ -47,28 +35,6 @@ in
   # https://nixos.wiki/wiki/PipeWire
   security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
-
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = pkgs: {
-
-      inherit nur;
-
-      adw-gtk3 = pkgs.callPackage (builtins.fetchurl 
-        "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
-      ) {};
-
-      electron-netease-cloud-music = nur.repos.rewine.electron-netease-cloud-music.overrideAttrs
-        (old: rec {
-          version = "0.9.36";
-          src = pkgs.fetchurl {
-            url = "${rp}https://github.com/Rocket1184/${old.pname}/releases/download/v${version}/${old.pname}_v${version}.asar";
-            sha256 = "sha256-ElJKdI+yuvvjUtqEulyFHz3VvMKXgAbX9QXwRk1oQkg=";
-          };
-        });
-      
-    };
-  };
 
   zramSwap.enable = true;
 }
