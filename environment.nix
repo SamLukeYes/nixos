@@ -51,6 +51,7 @@ in
 
       # CLI programs
       bat   # frequently used in terminal
+      dig   # must be available without Internet connection
       pdftk   # required by Jasminum
       starship  # configured in ~/.xonshrc
 
