@@ -33,6 +33,7 @@ in
       igv
       libreoffice
       papirus-icon-theme
+      ppsspp-sdl-wayland
       xournalpp
       zotero
 
