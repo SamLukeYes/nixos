@@ -9,8 +9,14 @@
       win10-fonts
     ];
     fontconfig.defaultFonts = {
-      serif = ["Noto Serif CJK SC"];
-      sansSerif = ["Noto Sans CJK SC"];
+      serif = [
+        "FreeSerif"
+        "Noto Serif CJK SC"
+      ];
+      sansSerif = [
+        "FreeSans"
+        "Noto Sans CJK SC"
+      ];
       monospace = [
         "DejaVu Sans Mono"
         "Noto Sans Mono CJK SC"
