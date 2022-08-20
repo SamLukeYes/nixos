@@ -13,7 +13,6 @@ let rp = import ./reverse-proxy.nix; in
       keep-outputs = true;
       substituters = lib.mkForce [
         "https://mirrors.bfsu.edu.cn/nix-channels/store"
-        "https://mirror.sjtu.edu.cn/nix-channels/store"
         "${rp}https://cache.nixos.org"
         "${rp}https://nix-community.cachix.org"
         "${rp}https://linyinfeng.cachix.org"
