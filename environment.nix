@@ -2,7 +2,7 @@
 
 let
   my-python = pkgs.python3.withPackages (p: with p; [
-    ipykernel openpyxl pandas scipy
+    ipykernel openpyxl statsmodels
   ]);
 in
 
@@ -62,6 +62,7 @@ in
       (vscode.fhsWithPackages (ps: with ps; [
         nodePackages.pyright
         texlive.combined.scheme-full
+        my-python
       ]))
     ];
 
