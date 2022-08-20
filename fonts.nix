@@ -10,11 +10,11 @@
     ];
     fontconfig.defaultFonts = {
       serif = [
-        "FreeSerif"
+        "DejaVu Serif"
         "Noto Serif CJK SC"
       ];
       sansSerif = [
-        "FreeSans"
+        "Source Sans 3"
         "Noto Sans CJK SC"
       ];
       monospace = [
