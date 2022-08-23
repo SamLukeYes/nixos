@@ -9,6 +9,12 @@ in
 {
   environment = {
 
+    etc."pacman.d/mirrorlist".text = ''
+      Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
+      Server = https://m.mirrorz.org/archlinux/$repo/os/$arch
+      Server = https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch
+    '';
+
     gnome.excludePackages = with pkgs.gnome; [
       eog  # use gthumb instead
       epiphany  # use firefox instead
@@ -17,6 +23,7 @@ in
       gnome-contacts  # not managing contacts on PC
       gnome-music  # use gthumb instead
       pkgs.gnome-photos  # use gthumb instead
+      gnome-weather  # ugly as hell
       simple-scan  # no scanner available
       totem  # use gthumb instead
       evince  # use many other apps for pdf
@@ -71,6 +78,7 @@ in
       GST_PLUGIN_PATH_1_0 = ["${pkgs.gst_all_1.gst-vaapi}/lib/gstreamer-1.0"];
       LIBVA_DRIVER_NAME = "iHD";
       MOZ_DBUS_REMOTE = "1";
+      MOZ_USE_XINPUT2 = "1";
       PYTHONPATH = ["${my-python}/${my-python.sitePackages}"];
       QT_QPA_PLATFORM = "wayland;xcb";
     };

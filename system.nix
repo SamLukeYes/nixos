@@ -3,7 +3,7 @@
 {
   system = {
     stateVersion = "22.11";
-    copySystemConfiguration = true;
+    # copySystemConfiguration = true;
     # autoUpgrade.enable = true;
   };
 }
