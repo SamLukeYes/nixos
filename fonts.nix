@@ -3,9 +3,10 @@
 {
   fonts = {
     fonts = with pkgs; [
+      inconsolata-nerdfont
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
-      inconsolata-nerdfont
+      ubuntu_font_family
       win10-fonts
     ];
     fontconfig.defaultFonts = {
@@ -14,7 +15,7 @@
         "Noto Serif CJK SC"
       ];
       sansSerif = [
-        "Source Sans 3"
+        "Ubuntu"
         "Noto Sans CJK SC"
       ];
       monospace = [
