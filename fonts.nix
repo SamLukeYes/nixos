@@ -4,23 +4,16 @@
   fonts = {
     fonts = with pkgs; [
       inconsolata-nerdfont
-      noto-fonts
       noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
       powerline-fonts
       win10-fonts
     ];
     fontconfig.defaultFonts = {
-      serif = [
-        "Noto Serif"
-        "Noto Serif CJK SC"
-      ];
       sansSerif = [
-        "Noto Sans"
-        "Noto Sans CJK SC"
+        "Microsoft YaHei UI"
       ];
       monospace = [
-        "Noto Sans Mono"
+        "Noto Mono for Powerline"
         "Noto Sans Mono CJK SC"
       ];
     };
