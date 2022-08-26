@@ -49,6 +49,7 @@ in
       nur.repos.linyinfeng.wemeet
       nur.repos.shadowrz.adw-gtk3
       nur.repos.yes.lx-music-desktop
+      nur.repos.yes.ppet
 
       gnomeExtensions.appindicator
       gnomeExtensions.customize-ibus
