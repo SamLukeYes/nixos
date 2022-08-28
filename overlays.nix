@@ -26,6 +26,13 @@ let rp = import ./reverse-proxy.nix; in
 
   firefox = firefox-esr-wayland;
 
+  # https://github.com/NixOS/nixpkgs/pull/187764
+  vscode = (callPackage "${
+    builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/vscode.tar.gz"
+  }/pkgs/applications/editors/vscode/vscode.nix" {}).override {
+    commandLineArgs = "--touch-events -w";
+  };
+
   win10-fonts = (callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/VergeDX/nur-packages/pkgs/Win10_LTSC_2021_fonts/default.nix"
   ) {}).overrideAttrs (old: {

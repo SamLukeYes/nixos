@@ -10,6 +10,9 @@ let rp = import ./reverse-proxy.nix; in
     };
     settings = {
       auto-optimise-store = true;
+      experimental-features = [
+        "nix-command"
+      ];
       keep-outputs = true;
       substituters = lib.mkForce [
         "https://mirrors.bfsu.edu.cn/nix-channels/store"

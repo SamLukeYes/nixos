@@ -9,11 +9,16 @@ in
 {
   environment = {
 
-    etc."pacman.d/mirrorlist".text = ''
-      Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
-      Server = https://m.mirrorz.org/archlinux/$repo/os/$arch
-      Server = https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch
-    '';
+    etc = {
+      # "makepkg.conf".source = "${pkgs.nur.repos.yes.archlinux.pacman}/etc/makepkg.conf";
+      # "pacman.conf".source = "${pkgs.nur.repos.yes.archlinux.pacman}/etc/pacman.conf";
+      "pacman.d/gnupg".source = "${pkgs.nur.repos.yes.archlinux.pacman-gnupg}/etc/pacman.d/gnupg";
+      "pacman.d/mirrorlist".text = ''
+        Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
+        Server = https://m.mirrorz.org/archlinux/$repo/os/$arch
+        Server = https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch
+      '';
+    };
 
     gnome.excludePackages = with pkgs.gnome; [
       eog  # use gthumb instead
