@@ -10,8 +10,8 @@ in
   environment = {
 
     etc = {
-      # "makepkg.conf".source = "${pkgs.nur.repos.yes.archlinux.pacman}/etc/makepkg.conf";
-      # "pacman.conf".source = "${pkgs.nur.repos.yes.archlinux.pacman}/etc/pacman.conf";
+      "makepkg.conf".source = "${pkgs.nur.repos.yes.archlinux.devtools}/share/devtools/makepkg-x86_64.conf";
+      "pacman.conf".source = "${pkgs.nur.repos.yes.archlinux.devtools}/share/devtools/pacman-extra.conf";
       "pacman.d/gnupg".source = "${pkgs.nur.repos.yes.archlinux.pacman-gnupg}/etc/pacman.d/gnupg";
       "pacman.d/mirrorlist".text = ''
         Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
