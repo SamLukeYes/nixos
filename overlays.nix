@@ -2,9 +2,7 @@ final: prev:
 
 with prev;
 
-let rp = import ./reverse-proxy.nix; in
-
-{
+let rp = import ./reverse-proxy.nix; in rec {
   nur = import (builtins.fetchTarball 
     "${rp}https://github.com/nix-community/NUR/archive/master.tar.gz"
   ) rec {
@@ -13,6 +11,8 @@ let rp = import ./reverse-proxy.nix; in
       yes = import ./packages { inherit pkgs rp; };
     };
   };
+
+  arch-install-scripts = nur.repos.yes.archlinux.arch-install-scripts;
 
   electron-netease-cloud-music = (callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/wineee/nur-packages/pkgs/electron-netease-cloud-music/default.nix"
@@ -25,6 +25,8 @@ let rp = import ./reverse-proxy.nix; in
   });
 
   firefox = firefox-esr-wayland;
+
+  pacman = nur.repos.yes.archlinux.pacman;
 
   # https://github.com/NixOS/nixpkgs/pull/187764
   vscode = (callPackage "${

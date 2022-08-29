@@ -73,9 +73,10 @@ in
       electron-netease-cloud-music
 
       (vscode.fhsWithPackages (ps: with ps; [
-        nodePackages.pyright
-        texlive.combined.scheme-full
-        my-python
+        my-python                     # allow modify python env without reboot
+        nodePackages.pyright          # for pylance
+        pacman                        # add a dummy makepkg.conf to FHS
+        texlive.combined.scheme-full  # for latex workshop
       ]))
     ];
 
