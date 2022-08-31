@@ -14,6 +14,10 @@ let rp = import ./reverse-proxy.nix; in rec {
 
   arch-install-scripts = nur.repos.yes.archlinux.arch-install-scripts;
 
+  adw-gtk3 = callPackage (builtins.fetchurl 
+    "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
+  ) {};
+
   electron-netease-cloud-music = (callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/wineee/nur-packages/pkgs/electron-netease-cloud-music/default.nix"
   ) {}).overrideAttrs (old: rec {
