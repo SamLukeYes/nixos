@@ -35,8 +35,6 @@ let rp = import ./reverse-proxy.nix; in
   security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
 
-  hardware.bluetooth.powerOnBoot = false;
-
   zramSwap.enable = true;
 }
 
