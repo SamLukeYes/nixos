@@ -18,6 +18,7 @@ let rp = import ./reverse-proxy.nix; in
       ./programs.nix
       ./services.nix
       ./system.nix
+      ./systemd.nix
 
       # The following files are not tracked by git
       ./hardware-configuration.nix
