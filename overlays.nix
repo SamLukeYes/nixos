@@ -36,7 +36,7 @@ let rp = import ./reverse-proxy.nix; in rec {
   vscode = (callPackage "${
     builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/vscode.tar.gz"
   }/pkgs/applications/editors/vscode/vscode.nix" {}).override {
-    commandLineArgs = "--touch-events -w";
+    commandLineArgs = "--touch-events -n";
   };
 
   win10-fonts = (callPackage (builtins.fetchurl 
