@@ -11,7 +11,7 @@ in
 
     etc = {
       "makepkg.conf".source = "${pkgs.nur.repos.yes.archlinux.devtools}/share/devtools/makepkg-x86_64.conf";
-      "pacman.conf".source = "${pkgs.nur.repos.yes.archlinux.devtools}/share/devtools/pacman-multilib.conf";
+      "pacman.conf".source = "/old-root/etc/pacman.conf";
       "pacman.d/gnupg".source = "${pkgs.nur.repos.yes.archlinux.pacman-gnupg}/etc/pacman.d/gnupg";
       "pacman.d/mirrorlist".text = ''
         Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
