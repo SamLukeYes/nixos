@@ -12,7 +12,10 @@ let rp = import ./reverse-proxy.nix; in rec {
     };
   };
 
-  arch-install-scripts = nur.repos.yes.archlinux.arch-install-scripts;
+  # https://github.com/NixOS/nixpkgs/pull/189678
+  arch-install-scripts = callPackage "${
+    builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/arch-install-scripts.tar.gz"
+  }/pkgs/tools/misc/arch-install-scripts" {};
 
   adw-gtk3 = callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
@@ -30,7 +33,10 @@ let rp = import ./reverse-proxy.nix; in rec {
 
   firefox = firefox-esr-wayland;
 
-  pacman = nur.repos.yes.archlinux.pacman;
+  # https://github.com/NixOS/nixpkgs/pull/188038
+  pacman = callPackage "${
+    builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/pacman.tar.gz"
+  }/pkgs/tools/package-management/pacman" {};
 
   # https://github.com/NixOS/nixpkgs/pull/187764
   vscode = (callPackage "${
