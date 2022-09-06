@@ -65,10 +65,11 @@ in
       nur.repos.yes.gnomeExtensions.onedrive
 
       # CLI programs
-      bat   # frequently used in terminal
-      dig   # must be available without Internet connection
-      pdftk   # required by Jasminum
-      starship  # configured in ~/.xonshrc
+      bat                           # frequently used in terminal
+      dig                           # must be available without Internet connection
+      pdftk                         # required by Jasminum
+      starship                      # configured in ~/.xonshrc
+      nur.repos.yes.archlinux.paru  # takes too long to build
 
       # custom packages
       adw-gtk3
