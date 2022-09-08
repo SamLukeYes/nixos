@@ -4,6 +4,7 @@ let
   my-python = pkgs.python3.withPackages (p: with p; [
     ipykernel openpyxl statsmodels
   ]);
+  rp = import ./reverse-proxy.nix;
 in
 
 {
@@ -16,6 +17,7 @@ in
       "pacman.d/mirrorlist".text = ''
         Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
         Server = https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch
+        Server = ${rp}https://geo.mirror.pkgbuild.com/$repo/os/$arch
       '';
     };
 
