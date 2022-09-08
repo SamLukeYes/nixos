@@ -45,6 +45,7 @@ in
       gthumb
       igv
       libreoffice
+      obs-studio
       papirus-icon-theme
       ppsspp-sdl-wayland
       xournalpp
