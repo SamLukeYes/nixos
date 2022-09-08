@@ -10,8 +10,6 @@
 
     cpupower-gui.enable = true;
 
-    earlyoom.enable = true;
-
     fstrim.enable = true;
 
     fwupd.enable = true;
