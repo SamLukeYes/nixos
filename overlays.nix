@@ -13,9 +13,9 @@ let rp = import ./reverse-proxy.nix; in rec {
   };
 
   # https://github.com/NixOS/nixpkgs/pull/189678
-  arch-install-scripts = callPackage "${
-    builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/arch-install-scripts.tar.gz"
-  }/pkgs/tools/misc/arch-install-scripts" {};
+  # arch-install-scripts = callPackage "${
+  #   builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/arch-install-scripts.tar.gz"
+  # }/pkgs/tools/misc/arch-install-scripts" {};
 
   adw-gtk3 = callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
@@ -34,16 +34,9 @@ let rp = import ./reverse-proxy.nix; in rec {
   firefox = firefox-esr-wayland;
 
   # https://github.com/NixOS/nixpkgs/pull/188038
-  pacman = callPackage "${
-    builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/pacman.tar.gz"
-  }/pkgs/tools/package-management/pacman" {};
-
-  # https://github.com/NixOS/nixpkgs/pull/187764
-  vscode = (callPackage "${
-    builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/vscode.tar.gz"
-  }/pkgs/applications/editors/vscode/vscode.nix" {}).override {
-    commandLineArgs = "--touch-events -n";
-  };
+  # pacman = callPackage "${
+  #   builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/pacman.tar.gz"
+  # }/pkgs/tools/package-management/pacman" {};
 
   win10-fonts = (callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/VergeDX/nur-packages/pkgs/Win10_LTSC_2021_fonts/default.nix"

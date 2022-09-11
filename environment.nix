@@ -77,8 +77,10 @@ in
       adw-gtk3
       electron-netease-cloud-music
 
-      (vscode.fhsWithPackages (ps: with ps; [
-        my-python                     # allow modify python env without reboot
+      ((vscode.override {
+        commandLineArgs = "--touch-events -n";
+      }).fhsWithPackages (ps: with ps; [
+        my-python                     # allow updating python env without reboot
         nodePackages.pyright          # for pylance
         pacman                        # add a dummy makepkg.conf to FHS
         texlive.combined.scheme-full  # for latex workshop
