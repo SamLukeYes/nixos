@@ -65,6 +65,7 @@ in
       gnomeExtensions.improved-osk
       gnomeExtensions.system-monitor
       nur.repos.yes.gnomeExtensions.onedrive
+      pano
 
       # CLI programs
       bat                           # frequently used in terminal

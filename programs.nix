@@ -9,8 +9,6 @@
 
     gnupg.agent.enable = true;
 
-    gpaste.enable = true;
-
     kdeconnect = {
       enable = true;
       package = pkgs.gnomeExtensions.gsconnect;

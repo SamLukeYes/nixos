@@ -38,6 +38,11 @@ let rp = import ./reverse-proxy.nix; in rec {
   #   builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/pacman.tar.gz"
   # }/pkgs/tools/package-management/pacman" {};
 
+  # https://github.com/NixOS/nixpkgs/pull/189091
+  pano = callPackage "${
+    builtins.fetchTarball "${rp}https://github.com/michojel/nixpkgs/archive/gnome-shell-extension-pano.tar.gz"
+  }/pkgs/desktops/gnome/extensions/pano" {};
+
   win10-fonts = (callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/VergeDX/nur-packages/pkgs/Win10_LTSC_2021_fonts/default.nix"
   ) {}).overrideAttrs (old: {
