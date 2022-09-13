@@ -40,6 +40,7 @@ in {
       MOZ_USE_XINPUT2 = "1";
       PYTHONPATH = ["${pkgs.my-python}/${pkgs.my-python.sitePackages}"];
       QT_QPA_PLATFORM = "wayland;xcb";
+      SDL_VIDEODRIVER = "wayland";
     };
   };
 }
