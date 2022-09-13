@@ -12,10 +12,6 @@ let rp = import ./reverse-proxy.nix; in rec {
     };
   };
 
-  adw-gtk3 = callPackage (builtins.fetchurl 
-    "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
-  ) {};
-
   # https://github.com/NixOS/nixpkgs/pull/189678
   # arch-install-scripts = callPackage "${
   #   builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/arch-install-scripts.tar.gz"

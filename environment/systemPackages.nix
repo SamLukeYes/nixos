@@ -12,9 +12,9 @@
     igv
     libreoffice
     obs-studio
-    papirus-icon-theme
     ppsspp-sdl-wayland
     xournalpp
+    yaru-theme
     zotero
 
     nur.repos.linyinfeng.icalingua-plus-plus
@@ -37,7 +37,6 @@
     nur.repos.yes.archlinux.paru  # takes too long to build
 
     # custom packages
-    adw-gtk3
     electron-netease-cloud-music
     wemeet
 
