@@ -12,26 +12,24 @@ let rp = import ./reverse-proxy.nix; in rec {
     };
   };
 
+  adw-gtk3 = callPackage (builtins.fetchurl 
+    "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
+  ) {};
+
   # https://github.com/NixOS/nixpkgs/pull/189678
   # arch-install-scripts = callPackage "${
   #   builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/arch-install-scripts.tar.gz"
   # }/pkgs/tools/misc/arch-install-scripts" {};
 
-  adw-gtk3 = callPackage (builtins.fetchurl 
-    "https://cdn.jsdelivr.net/gh/InternetUnexplorer/nixpkgs-overlay/adw-gtk3/default.nix"
+  electron-netease-cloud-music = callPackage (builtins.fetchurl 
+    "https://cdn.jsdelivr.net/gh/wineee/nur-packages/pkgs/electron-netease-cloud-music/default.nix"
   ) {};
 
-  electron-netease-cloud-music = (callPackage (builtins.fetchurl 
-    "https://cdn.jsdelivr.net/gh/wineee/nur-packages/pkgs/electron-netease-cloud-music/default.nix"
-  ) {}).overrideAttrs (old: rec {
-    version = "0.9.36";
-    src = fetchurl {
-      url = "${rp}https://github.com/Rocket1184/${old.pname}/releases/download/v${version}/${old.pname}_v${version}.asar";
-      sha256 = "sha256-ElJKdI+yuvvjUtqEulyFHz3VvMKXgAbX9QXwRk1oQkg=";
-    };
-  });
-
   firefox = firefox-esr-wayland;
+
+  my-python = python3.withPackages (p: with p; [
+    ipykernel openpyxl statsmodels
+  ]);
 
   # https://github.com/NixOS/nixpkgs/pull/188038
   # pacman = callPackage "${
@@ -42,6 +40,17 @@ let rp = import ./reverse-proxy.nix; in rec {
   pano = callPackage "${
     builtins.fetchTarball "${rp}https://github.com/michojel/nixpkgs/archive/gnome-shell-extension-pano.tar.gz"
   }/pkgs/desktops/gnome/extensions/pano" {};
+
+  wemeet = let _wemeet = nur.repos.linyinfeng.wemeet; in stdenvNoCC.mkDerivation {
+    inherit (_wemeet) version;
+    pname = "wemeet-x11";
+    buildCommand = ''
+      mkdir -p $out/
+      cp -r ${_wemeet}/share $out/
+      substituteInPlace $out/share/applications/wemeetapp.desktop \
+        --replace "Exec=wemeetapp" "Exec=${_wemeet}/bin/wemeetapp-force-x11"
+    '';
+  };
 
   win10-fonts = (callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/VergeDX/nur-packages/pkgs/Win10_LTSC_2021_fonts/default.nix"

@@ -10,7 +10,7 @@ let rp = import ./reverse-proxy.nix; in
   imports =
     [
       ./boot.nix
-      ./environment.nix
+      ./environment
       ./fonts.nix
       ./i18n.nix
       ./nix.nix
