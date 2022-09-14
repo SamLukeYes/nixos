@@ -11,6 +11,7 @@ let rp = import ./reverse-proxy.nix; in
     [
       ./boot.nix
       ./environment
+      ./fileSystems.nix
       ./fonts.nix
       ./i18n.nix
       ./nix.nix
