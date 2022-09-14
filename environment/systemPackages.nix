@@ -20,6 +20,7 @@
     nur.repos.linyinfeng.icalingua-plus-plus
     nur.repos.yes.lx-music-desktop
     nur.repos.yes.ppet
+    nur.repos.yes.pypvz
 
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
