@@ -18,7 +18,7 @@ let rp = import ./reverse-proxy.nix; in rec {
   # }/pkgs/tools/misc/arch-install-scripts" {};
 
   electron-netease-cloud-music = callPackage (builtins.fetchurl 
-    "https://cdn.jsdelivr.net/gh/wineee/nur-packages/pkgs/electron-netease-cloud-music/default.nix"
+    "https://cdn.jsdelivr.net/gh/wineee/nur-packages/packages/electron-netease-cloud-music/default.nix"
   ) {};
 
   firefox = firefox-esr-wayland;
