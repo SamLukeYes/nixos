@@ -31,9 +31,7 @@
         script = ''
           export DISPLAY=:0
           export XDG_RUNTIME_DIR=/run/user/`id -u`
-          content=`${pkgs.curl}/bin/curl -L https://stuhealth.jnu.edu.cn | ${pkgs.gnugrep}/bin/grep verifyID`
-          verifyID=`echo $content | ${pkgs.python3}/bin/python -c "print(input().split('%3D')[-1].split('&')[0])"`
-          ${pkgs.firefox}/bin/firefox https://weixinfwh.jnu.edu.cn/wechat_auth/wechat/wechatClientAsync?verifyID=$verifyID
+          ${pkgs.nur.repos.yes.jnu-open}/bin/jnu-open https://stuhealth.jnu.edu.cn
         '';
         serviceConfig.Type = "oneshot";
         startAt = "daily";

@@ -27,10 +27,10 @@ let rp = import ./reverse-proxy.nix; in rec {
     ipykernel openpyxl statsmodels
   ]);
 
-  # https://github.com/NixOS/nixpkgs/pull/188038
-  # pacman = callPackage "${
-  #   builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/pacman.tar.gz"
-  # }/pkgs/tools/package-management/pacman" {};
+  # https://github.com/NixOS/nixpkgs/pull/192896
+  pacman = callPackage "${
+    builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/pacman.tar.gz"
+  }/pkgs/tools/package-management/pacman" {};
 
   # https://github.com/NixOS/nixpkgs/pull/189091
   pano = callPackage "${

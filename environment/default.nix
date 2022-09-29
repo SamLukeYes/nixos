@@ -33,6 +33,7 @@ in {
     ];
 
     sessionVariables = {
+      BROWSER = "${pkgs.firefox}/bin/firefox";
       EDITOR = "nano";
       GST_PLUGIN_PATH_1_0 = ["${pkgs.gst_all_1.gst-vaapi}/lib/gstreamer-1.0"];
       LIBVA_DRIVER_NAME = "iHD";
