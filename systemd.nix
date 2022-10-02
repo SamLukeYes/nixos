@@ -2,9 +2,12 @@
 
 {
   systemd = {
-    nspawn.old-root = {
+    nspawn = (builtins.mapAttrs (name: value: {
       networkConfig.Private = false;
-    };
+    }) {
+      deepin20 = {};
+      old-root = {};
+    });
     services.update-pacman-db = {
       requires = [ "network-online.target" ];
       script = ''
@@ -31,7 +34,7 @@
         script = ''
           export DISPLAY=:0
           export XDG_RUNTIME_DIR=/run/user/`id -u`
-          ${pkgs.nur.repos.yes.jnu-open}/bin/jnu-open https://stuhealth.jnu.edu.cn
+          ${pkgs.nur.repos.yes.jnu-open}/bin/jnu-open https://stuhealth.jnu.edu.cn || ${pkgs.libnotify}/bin/notify-send "jnu-open" "Failed to open stuhealth.jnu.edu.cn"
         '';
         serviceConfig.Type = "oneshot";
         startAt = "daily";
