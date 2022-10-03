@@ -23,8 +23,8 @@
     nur.repos.yes.pypvz
 
     gnomeExtensions.appindicator
+    gnomeExtensions.customize-ibus
     gnomeExtensions.freon
-    gnomeExtensions.ibus-tweaker
     gnomeExtensions.improved-osk
     gnomeExtensions.system-monitor
     nur.repos.yes.gnomeExtensions.onedrive
