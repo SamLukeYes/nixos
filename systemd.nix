@@ -34,7 +34,7 @@
         script = ''
           export DISPLAY=:0
           export XDG_RUNTIME_DIR=/run/user/`id -u`
-          ${pkgs.nur.repos.yes.jnu-open}/bin/jnu-open https://stuhealth.jnu.edu.cn || ${pkgs.libnotify}/bin/notify-send "jnu-open" "Failed to open stuhealth.jnu.edu.cn"
+          ${pkgs.xdg-utils}/bin/xdg-open https://stuhealth.jnu.edu.cn
         '';
         serviceConfig.Type = "oneshot";
         startAt = "daily";
