@@ -2,6 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
+    authenticator
     bookworm
     firefox
     gnome-firmware
