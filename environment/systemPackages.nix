@@ -7,6 +7,7 @@
     firefox
     gnome-firmware
     gnome.dconf-editor
+    gnome.gnome-sound-recorder
     gnome.gnome-tweaks
     gnome.nautilus-python
     gthumb
