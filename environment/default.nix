@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   rp = import ../reverse-proxy.nix;
@@ -35,7 +35,12 @@ in {
     sessionVariables = {
       BROWSER = "${pkgs.firefox}/bin/firefox";
       EDITOR = "nano";
-      GST_PLUGIN_PATH_1_0 = ["${pkgs.gst_all_1.gst-vaapi}/lib/gstreamer-1.0"];
+      GST_PLUGIN_PATH_1_0 = lib.makeSearchPath "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
+        gst-plugins-bad
+        gst-plugins-good
+        gst-plugins-ugly
+        gst-vaapi
+      ]);
       LIBVA_DRIVER_NAME = "iHD";
       MOZ_DBUS_REMOTE = "1";
       MOZ_USE_XINPUT2 = "1";
