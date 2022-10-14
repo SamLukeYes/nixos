@@ -28,7 +28,7 @@
     gnomeExtensions.customize-ibus
     gnomeExtensions.freon
     gnomeExtensions.improved-osk
-    gnomeExtensions.system-monitor
+    gnomeExtensions.network-stats
     nur.repos.yes.gnomeExtensions.onedrive
     pano
 
