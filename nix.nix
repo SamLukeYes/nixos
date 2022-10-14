@@ -6,7 +6,7 @@ let rp = import ./reverse-proxy.nix; in
   nix = {
     gc = {
       automatic = true;
-      options = "--delete-older-than 7d";
+      options = "--delete-older-than 3d";
     };
     settings = {
       auto-optimise-store = true;
