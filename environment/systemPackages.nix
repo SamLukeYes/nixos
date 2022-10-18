@@ -40,6 +40,7 @@
 
     # custom packages
     electron-netease-cloud-music
+    wechat
     wemeet
 
     ((vscode.override {

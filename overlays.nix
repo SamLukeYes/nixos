@@ -37,6 +37,15 @@ let rp = import ./reverse-proxy.nix; in rec {
     builtins.fetchTarball "${rp}https://github.com/michojel/nixpkgs/archive/gnome-shell-extension-pano.tar.gz"
   }/pkgs/desktops/gnome/extensions/pano" {};
 
+  wechat = makeDesktopItem {
+    name = "wechat";
+    exec = "${electron}/bin/electron https://wx2.qq.com";
+    icon = builtins.fetchurl "https://res.wx.qq.com/a/wx_fed/assets/res/OTE0YTAw.png";
+    desktopName = "WeChat";
+    genericName = "WeChat";
+    categories = ["Network" "Chat"];
+  };
+
   wemeet = let _wemeet = nur.repos.linyinfeng.wemeet; in stdenvNoCC.mkDerivation {
     inherit (_wemeet) version;
     pname = "wemeet-x11";
