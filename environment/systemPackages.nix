@@ -3,7 +3,6 @@
 {
   environment.systemPackages = with pkgs; [
     authenticator
-    bookworm
     firefox
     gnome-firmware
     gnome.dconf-editor
@@ -23,6 +22,7 @@
     nur.repos.yes.lx-music-desktop
     nur.repos.yes.ppet
     nur.repos.yes.pypvz
+    nur.repos.yes.wewechatpp
 
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
@@ -40,7 +40,6 @@
 
     # custom packages
     electron-netease-cloud-music
-    wechat
     wemeet
 
     ((vscode.override {
