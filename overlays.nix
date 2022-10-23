@@ -8,6 +8,7 @@ let rp = import ./reverse-proxy.nix; in rec {
   ) rec {
     pkgs = prev;
     repoOverrides = {
+      # xddxdd = import ./xddxdd-nur-packages { inherit pkgs; };
       yes = import ./packages { inherit pkgs rp; };
     };
   };

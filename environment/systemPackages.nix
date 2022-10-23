@@ -19,10 +19,10 @@
     zotero
 
     nur.repos.linyinfeng.icalingua-plus-plus
+    nur.repos.xddxdd.wechat-uos
     nur.repos.yes.lx-music-desktop
     nur.repos.yes.ppet
     nur.repos.yes.pypvz
-    nur.repos.yes.wewechatpp
 
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
