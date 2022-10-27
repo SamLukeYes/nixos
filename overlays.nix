@@ -13,10 +13,10 @@ let rp = import ./reverse-proxy.nix; in rec {
     };
   };
 
-  # https://github.com/NixOS/nixpkgs/pull/189678
-  # arch-install-scripts = callPackage "${
-  #   builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/arch-install-scripts.tar.gz"
-  # }/pkgs/tools/misc/arch-install-scripts" {};
+  # https://github.com/NixOS/nixpkgs/pull/197594
+  arch-install-scripts = callPackage "${
+    builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/arch-install-scripts.tar.gz"
+  }/pkgs/tools/misc/arch-install-scripts" {};
 
   electron-netease-cloud-music = callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/wineee/nur-packages/packages/electron-netease-cloud-music/default.nix"
