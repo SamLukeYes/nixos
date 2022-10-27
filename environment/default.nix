@@ -22,6 +22,7 @@ in {
       epiphany                # use firefox instead
       pkgs.gnome-text-editor  # use vscode instead
       gnome-calculator        # use xonsh instead
+      gnome-calendar          # broken with my local data
       gnome-contacts          # not managing contacts on PC
       gnome-music             # use gthumb instead
       pkgs.gnome-photos       # use gthumb instead
