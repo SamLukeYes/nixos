@@ -6,15 +6,15 @@
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];
+    initrd.verbose = false;
     kernel.sysctl = {
       "dev.i915.perf_stream_paranoid" = 0;
       "vm.swappiness" = 180;
       "vm.page-cluster" = 0;
     };
-    kernelParams = ["bgrt_disable"];
+    kernelParams = [ "quiet" "udev.log_level=3" ];
     loader = {
       systemd-boot = {
-        # configurationLimit = 10;
         editor = false;
         enable = true;
       };
@@ -23,5 +23,6 @@
         efiSysMountPoint = "/efi";
       };
     };
+    plymouth.enable = true;
   };
 }
