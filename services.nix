@@ -17,6 +17,8 @@
     # Disable the event list of the calendar menu
     gnome.evolution-data-server.enable = lib.mkForce false;
 
+    logind.lidSwitch = "lock";
+
     onedrive.enable = true;
 
     pipewire = {
