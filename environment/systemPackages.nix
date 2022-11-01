@@ -19,6 +19,7 @@
     zotero
 
     nur.repos.linyinfeng.icalingua-plus-plus
+    nur.repos.linyinfeng.wemeet
     nur.repos.xddxdd.wechat-uos
     nur.repos.yes.lx-music-desktop
     nur.repos.yes.ppet
@@ -40,7 +41,6 @@
 
     # custom packages
     electron-netease-cloud-music
-    wemeet
 
     ((vscode.override {
       commandLineArgs = "--touch-events -n";

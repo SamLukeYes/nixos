@@ -38,17 +38,6 @@ let rp = import ./reverse-proxy.nix; in rec {
     builtins.fetchTarball "${rp}https://github.com/michojel/nixpkgs/archive/gnome-shell-extension-pano.tar.gz"
   }/pkgs/desktops/gnome/extensions/pano" {};
 
-  wemeet = let _wemeet = nur.repos.linyinfeng.wemeet; in stdenvNoCC.mkDerivation {
-    inherit (_wemeet) version;
-    pname = "wemeet-x11";
-    buildCommand = ''
-      mkdir -p $out/
-      cp -r ${_wemeet}/share $out/
-      substituteInPlace $out/share/applications/wemeetapp.desktop \
-        --replace "Exec=wemeetapp" "Exec=${_wemeet}/bin/wemeetapp-force-x11"
-    '';
-  };
-
   win10-fonts = (callPackage (builtins.fetchurl 
     "https://cdn.jsdelivr.net/gh/VergeDX/nur-packages/pkgs/Win10_LTSC_2021_fonts/default.nix"
   ) {}).overrideAttrs (old: {
