@@ -42,7 +42,7 @@
       yacd = {
         script = ''
           cd ${pkgs.nur.repos.linyinfeng.yacd}
-          ${pkgs.my-python}/bin/python -m http.server 8080
+          ${pkgs.python3}/bin/python -m http.server 8080
         '';
         serviceConfig.restart = "always";
         wantedBy = [ "default.target" ];

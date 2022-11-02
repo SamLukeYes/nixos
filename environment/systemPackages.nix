@@ -46,7 +46,6 @@
     ((vscode.override {
       commandLineArgs = "--touch-events -n";
     }).fhsWithPackages (ps: with ps; [
-      my-python                     # allow updating python env without reboot
       nodePackages.pyright          # for pylance
       pacman                        # add a dummy makepkg.conf to FHS
       texlive.combined.scheme-full  # for latex workshop

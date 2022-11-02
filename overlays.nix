@@ -24,10 +24,6 @@ let rp = import ./reverse-proxy.nix; in rec {
 
   firefox = firefox-esr-wayland;
 
-  my-python = python3.withPackages (p: with p; [
-    ipykernel openpyxl statsmodels
-  ]);
-
   # https://github.com/NixOS/nixpkgs/pull/192896
   # pacman = callPackage "${
   #   builtins.fetchTarball "${rp}https://github.com/SamLukeYes/nixpkgs/archive/pacman.tar.gz"
