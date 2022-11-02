@@ -48,6 +48,7 @@
     }).fhsWithPackages (ps: with ps; [
       nodePackages.pyright          # for pylance
       pacman                        # add a dummy makepkg.conf to FHS
+      rnix-lsp                      # nix language server for nix IDE
       texlive.combined.scheme-full  # for latex workshop
     ]))
   ];
