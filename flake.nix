@@ -37,10 +37,6 @@
         rp = import ./rp.nix;
       };
     };
-    pkgs = import nixpkgs {
-      inherit system;
-      overlays = [ overlay ];
-    };
     nixpkgs-config = {
       nix.settings.nix-path = [ "nixpkgs=${nixpkgs}" ];
       nixpkgs = {
@@ -49,7 +45,10 @@
       };
     };
   in {
-    inherit pkgs;
+    legacyPackages.${system} = import nixpkgs {
+      inherit system;
+      overlays = [ overlay ];
+    };
     nixosConfigurations = {
       absolute = nixpkgs.lib.nixosSystem {
         inherit system;
