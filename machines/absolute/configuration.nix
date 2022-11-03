@@ -5,4 +5,6 @@
   ];
   
   hardware.bluetooth.powerOnBoot = false;
+
+  networking.hostName = "absolute";
 }
