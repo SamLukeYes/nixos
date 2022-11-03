@@ -6,7 +6,7 @@
       inconsolata-nerdfont
       noto-fonts-cjk-sans
       powerline-fonts
-      win10-fonts
+      rewine.ttf-ms-win10
     ];
     fontconfig.defaultFonts = {
       sansSerif = [

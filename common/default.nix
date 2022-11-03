@@ -4,8 +4,6 @@
 
 { config, pkgs, ... }:
 
-let rp = import ./reverse-proxy.nix; in
-
 {
   imports =
     [
@@ -15,17 +13,11 @@ let rp = import ./reverse-proxy.nix; in
       ./fonts.nix
       ./i18n.nix
       ./nix.nix
-      ./nixpkgs.nix
       ./programs.nix
       ./services.nix
       ./system.nix
       ./systemd.nix
-
-      # The following files are not tracked by git
-      ./hardware-configuration.nix
       ./users.nix
-
-      "${builtins.fetchGit "${rp}https://github.com/NixOS/nixos-hardware"}/lenovo/thinkpad/l13/yoga"
     ];
 
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.

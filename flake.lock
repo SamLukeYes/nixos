@@ -1,0 +1,253 @@
+{
+  "nodes": {
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1638122382,
+        "narHash": "sha256-sQzZzAbvKEqN9s0bzWuYmRaA03v40gaJ4+iL1LXjaeI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "74f7e4319258e287b0f9cb95426c9853b282730b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
+        "lastModified": 1667077288,
+        "narHash": "sha256-bdC8sFNDpT0HK74u9fUkpbf1MEzVYJ+ka7NXCdgBoaA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "6ee9ebb6b1ee695d2cacc4faa053a7b9baa76817",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "keycloak-lantian": {
+      "inputs": {
+        "nixpkgs": [
+          "xddxdd",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1647333801,
+        "narHash": "sha256-fE9gOjkbho/2Pct/gZi5iMoXyf0a7rWPZxon8yDDzsQ=",
+        "ref": "refs/heads/master",
+        "rev": "ae034b600c62a9a460d3e16897ad485e837a5e8a",
+        "revCount": 19,
+        "type": "git",
+        "url": "https://git.lantian.pub/lantian/keycloak-lantian.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.lantian.pub/lantian/keycloak-lantian.git"
+      }
+    },
+    "nixos-cn": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1667441166,
+        "narHash": "sha256-kZdadEn87vMEgBZMp0pKa8sLMyjf4gKdRZTfcIlvM6k=",
+        "owner": "nixos-cn",
+        "repo": "flakes",
+        "rev": "64793dca147899e021d0b57daf90c3fff2308e41",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos-cn",
+        "repo": "flakes",
+        "type": "github"
+      }
+    },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1667283320,
+        "narHash": "sha256-qHvB/6XBKVjjJJCUM+z6/t9HzUC7J55wdY3KJ/ZWSHo=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "18934557eeba8fa2e575b0fd4ab95186e2e3bde3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixos-unstable": {
+      "locked": {
+        "lastModified": 1667231093,
+        "narHash": "sha256-RERXruzBEBuf0c7OfZeX1hxEKB+PTCUNxWeB6C1jd8Y=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d40fea9aeb8840fea0d377baa4b38e39b9582458",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1642104392,
+        "narHash": "sha256-m71b7MgMh9FDv4MnI5sg9MiBVW6DhE1zq+d/KlLWSC8=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5aaed40d22f0d9376330b6fa413223435ad6fee5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1667231093,
+        "narHash": "sha256-RERXruzBEBuf0c7OfZeX1hxEKB+PTCUNxWeB6C1jd8Y=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d40fea9aeb8840fea0d377baa4b38e39b9582458",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1666688649,
+        "narHash": "sha256-i1Tq2VgXbEZKgjM2p2OqZdxcnK4FZjRZ9Oy4Ewx8gjA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "03a00f66fc4e893dccba1579df6d0c83852e1c2c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1667055375,
+        "narHash": "sha256-xfSTHYxuKRiqF4dcuAFdti1OUvrC2lHpQqCHWUK5/JA=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "7f9be6a505a31f88499c5d20d11f98accf5ae6ba",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pr-pano": {
+      "locked": {
+        "lastModified": 1664099313,
+        "narHash": "sha256-Ij4EHvbWlRQdZgnqKovg+4HmQpc/s8g2X9S/gjVTUzs=",
+        "owner": "michojel",
+        "repo": "nixpkgs",
+        "rev": "80c746afb20380de354223693cd640154e5a4016",
+        "type": "github"
+      },
+      "original": {
+        "owner": "michojel",
+        "ref": "gnome-shell-extension-pano",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "rewine": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1666797461,
+        "narHash": "sha256-R+bF5ZHftlD6EoxglZoaImWikNzwHm/ST+/ADidfjBA=",
+        "owner": "wineee",
+        "repo": "nur-packages",
+        "rev": "eaa354b53b25ec7cb8544f94253bedc88d7426f1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "wineee",
+        "repo": "nur-packages",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "nixos-cn": "nixos-cn",
+        "nixos-hardware": "nixos-hardware",
+        "nixos-unstable": "nixos-unstable",
+        "nixpkgs": "nixpkgs_2",
+        "pr-pano": "pr-pano",
+        "rewine": "rewine",
+        "xddxdd": "xddxdd",
+        "yes": "yes"
+      }
+    },
+    "xddxdd": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "keycloak-lantian": "keycloak-lantian",
+        "nixpkgs": "nixpkgs_4"
+      },
+      "locked": {
+        "lastModified": 1667444708,
+        "narHash": "sha256-227xYHrMIL+4RZV52unWI9V0/ZDkaf9merfGI4zmp3E=",
+        "owner": "xddxdd",
+        "repo": "nur-packages",
+        "rev": "743d5c3db03f3fe1d74b5e139e3431aca172f693",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xddxdd",
+        "repo": "nur-packages",
+        "type": "github"
+      }
+    },
+    "yes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1667009515,
+        "narHash": "sha256-gbxhtSbIAhBVDEJ2WFMDKmlCPe1/iLMXB0M1Pdp8ftU=",
+        "owner": "SamLukeYes",
+        "repo": "nix-custom-packages",
+        "rev": "5fbea8cbfe1834a20a576b880cc55274d6dd83c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SamLukeYes",
+        "repo": "nix-custom-packages",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}

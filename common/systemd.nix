@@ -41,7 +41,7 @@
       };
       yacd = {
         script = ''
-          cd ${pkgs.nur.repos.linyinfeng.yacd}
+          cd ${pkgs.nixos-cn.re-export.yacd-linyinfeng}
           ${pkgs.python3}/bin/python -m http.server 8080
         '';
         serviceConfig.restart = "always";

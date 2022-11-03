@@ -1,6 +1,6 @@
 { config, pkgs, options, lib, ... }:
 
-let rp = import ./reverse-proxy.nix; in
+let rp = import ../rp.nix; in
 
 {
   nix = {
