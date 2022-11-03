@@ -24,28 +24,32 @@
   outputs = { self, nixpkgs, ... }@inputs: 
   let
     system = "x86_64-linux";
+    overlay = final: prev: {
+      firefox = final.firefox-esr-wayland;
+      pano = final.callPackage (
+        inputs.pr-pano + "/pkgs/desktops/gnome/extensions/pano"
+      ) {};
+      nixos-cn = inputs.nixos-cn.legacyPackages.${system};
+      rewine = inputs.rewine.packages.${system};
+      xddxdd = inputs.xddxdd.packages.${system};
+      yes = import inputs.yes {
+        pkgs = prev;
+        rp = import ./rp.nix;
+      };
+    };
+    pkgs = import nixpkgs {
+      inherit system;
+      overlays = [ overlay ];
+    };
     nixpkgs-config = {
+      nix.settings.nix-path = [ "nixpkgs=${nixpkgs}" ];
       nixpkgs = {
         config.allowUnfree = true;
-        overlays = [
-          (final: prev: {
-            firefox = final.firefox-esr-wayland;
-            pano = final.callPackage (
-              inputs.pr-pano + "/pkgs/desktops/gnome/extensions/pano"
-            ) {};
-            nixos-cn = inputs.nixos-cn.legacyPackages.${system};
-            rewine = inputs.rewine.packages.${system};
-            xddxdd = inputs.xddxdd.packages.${system};
-            yes = import inputs.yes {
-              pkgs = prev;
-              rp = import ./rp.nix;
-            };
-          })
-        ];
+        overlays = [ overlay ];
       };
     };
   in {
-    # nixosConfigurations is the key that nixos-rebuild looks for.
+    inherit pkgs;
     nixosConfigurations = {
       absolute = nixpkgs.lib.nixosSystem {
         inherit system;
