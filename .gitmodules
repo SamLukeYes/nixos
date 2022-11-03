@@ -1,4 +1,0 @@
-[submodule "packages"]
-	path = packages
-	url = git@github.com:SamLukeYes/nix-custom-packages.git
-	branch = main
