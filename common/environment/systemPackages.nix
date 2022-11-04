@@ -12,7 +12,7 @@
     gnome.nautilus-python
     gthumb
     igv
-    libreoffice
+    libreoffice-fresh
     obs-studio
     ppsspp-sdl-wayland
     xournalpp
