@@ -18,16 +18,16 @@
       startAt = "daily";
     };
     user.services = {
-      clash = {
-        after = [ "clash-subscription.service" ];
-        serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
-        wantedBy = [ "default.target" ];
-      };
+      clash.serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
       clash-subscription = {
+        onSuccess = [ "clash.service" ];
         script = ''
           ${pkgs.curl}/bin/curl -L https://openit.daycat.space/clash -o ~/.config/clash/config.yaml
         '';
-        serviceConfig.Type = "oneshot";
+        serviceConfig = {
+          Restart = "on-failure";
+          Type = "oneshot";
+        };
         wantedBy = [ "default.target" ];
       };
       stuhealth = {
@@ -44,7 +44,7 @@
           cd ${pkgs.nixos-cn.re-export.yacd-linyinfeng}
           ${pkgs.python3}/bin/python -m http.server 8080
         '';
-        serviceConfig.restart = "always";
+        serviceConfig.Restart = "always";
         wantedBy = [ "default.target" ];
       };
     };
