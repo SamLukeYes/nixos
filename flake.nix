@@ -4,20 +4,29 @@
   description = "My NixOS configuration";
 
   inputs = rec {
-    nixos-cn.url = "github:nixos-cn/flakes";
+    nixos-cn = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nixos-cn/flakes";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    rewine.url = "github:wineee/nur-packages";
-    xddxdd.url = "github:xddxdd/nur-packages";
+    rewine = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:wineee/nur-packages";
+    };
+    xddxdd = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:xddxdd/nur-packages";
+    };
     yes = {
       url = "github:SamLukeYes/nix-custom-packages";
       flake = false;
     };
 
     # nixpkgs
+    nixpkgs.url = "github:NixOS/nixpkgs";
     nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
-    nixpkgs = nixos-unstable;
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -27,9 +36,9 @@
     system = "x86_64-linux";
     overlay = final: prev: {
       firefox = final.firefox-esr-wayland;
-      pacman = final.callPackage (
-        inputs.pr-pacman + "/pkgs/tools/package-management/pacman"
-      ) {};
+      # pacman = final.callPackage (
+      #   inputs.pr-pacman + "/pkgs/tools/package-management/pacman"
+      # ) {};
       pano = final.callPackage (
         inputs.pr-pano + "/pkgs/desktops/gnome/extensions/pano"
       ) {};
@@ -38,7 +47,7 @@
       xddxdd = inputs.xddxdd.packages.${system};
       yes = import inputs.yes {
         pkgs = prev;
-        rp = import ./rp.nix;
+        # rp = import ./rp.nix;
       };
     };
     nixpkgs-config = {
