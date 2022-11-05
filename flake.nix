@@ -3,7 +3,7 @@
 {
   description = "My NixOS configuration";
 
-  inputs = rec {
+  inputs = {
     nixos-cn = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nixos-cn/flakes";
@@ -13,19 +13,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:wineee/nur-packages";
     };
-    xddxdd = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:xddxdd/nur-packages";
-    };
     yes = {
-      url = "github:SamLukeYes/nix-custom-packages";
       flake = false;
+      url = "github:SamLukeYes/nix-custom-packages";
     };
 
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs";
-    nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
+    # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
   };
 
@@ -44,7 +39,6 @@
       ) {};
       nixos-cn = inputs.nixos-cn.legacyPackages.${system};
       rewine = inputs.rewine.packages.${system};
-      xddxdd = inputs.xddxdd.packages.${system};
       yes = import inputs.yes {
         pkgs = prev;
         # rp = import ./rp.nix;
