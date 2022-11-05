@@ -1,5 +1,7 @@
 {config, pkgs, ...}:
 
+let rp = import ../rp.nix; in
+
 {
   systemd = {
     nspawn = (builtins.mapAttrs (name: value: {
@@ -29,6 +31,16 @@
           Type = "oneshot";
         };
         wantedBy = [ "default.target" ];
+      };
+      nix-index = {
+        script = ''
+          FILE=index-x86_64-linux
+          cd ~/.cache/nix-index
+          ${pkgs.curl}/bin/curl -LO https://github.com/Mic92/nix-index-database/releases/download/latest/$FILE
+          ln -f $FILE index
+        '';
+        serviceConfig.Type = "oneshot";
+        startAt = "weekly";
       };
       stuhealth = {
         script = ''

@@ -19,7 +19,7 @@
     };
 
     # nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
   };
