@@ -36,8 +36,8 @@ let rp = import ../rp.nix; in
         script = ''
           FILE=index-x86_64-linux
           cd ~/.cache/nix-index
-          ${pkgs.curl}/bin/curl -LO https://github.com/Mic92/nix-index-database/releases/download/latest/$FILE
-          ln -f $FILE index
+          ${pkgs.curl}/bin/curl -LO ${rp}https://github.com/Mic92/nix-index-database/releases/latest/download/$FILE
+          mv -v $FILE files
         '';
         serviceConfig.Type = "oneshot";
         startAt = "weekly";
