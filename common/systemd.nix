@@ -24,6 +24,7 @@ let rp = import ../rp.nix; in
       clash-subscription = {
         onSuccess = [ "clash.service" ];
         script = ''
+          mkdir -p ~/.config/clash
           ${pkgs.curl}/bin/curl -L https://openit.daycat.space/clash -o ~/.config/clash/config.yaml
         '';
         serviceConfig = {
@@ -35,6 +36,7 @@ let rp = import ../rp.nix; in
       nix-index = {
         script = ''
           FILE=index-x86_64-linux
+          mkdir -p ~/.cache/nix-index
           cd ~/.cache/nix-index
           ${pkgs.curl}/bin/curl -LO ${rp}https://github.com/Mic92/nix-index-database/releases/latest/download/$FILE
           mv -v $FILE files
