@@ -30,7 +30,6 @@
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
     gnomeExtensions.freon
-    gnomeExtensions.improved-osk
     pano
     yes.gnomeExtensions.onedrive
 
