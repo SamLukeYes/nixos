@@ -61,7 +61,6 @@
         inherit system;
         modules = [
           nixpkgs-config
-          inputs.nixos-cn.nixosModules.nixos-cn-registries
           inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
           ./machines/absolute/configuration.nix
         ];
