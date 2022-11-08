@@ -30,7 +30,7 @@
   let
     system = "x86_64-linux";
     overlay = final: prev: {
-      firefox = final.firefox-esr-wayland;
+      firefox = final.firefox-wayland;
       # pacman = final.callPackage (
       #   inputs.pr-pacman + "/pkgs/tools/package-management/pacman"
       # ) {};
