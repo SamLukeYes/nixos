@@ -17,7 +17,6 @@
       ./services.nix
       ./system.nix
       ./systemd.nix
-      ./users.nix
     ];
 
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
