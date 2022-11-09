@@ -5,19 +5,26 @@ let rp = import ../rp.nix; in
 {
   systemd = {
     nspawn = (builtins.mapAttrs (name: value: {
+      filesConfig.Bind = [ "/dev/dri" ];
       networkConfig.Private = false;
     }) {
       deepin20 = {};
       old-root = {};
     });
-    services.update-pacman-db = {
-      requires = [ "network-online.target" ];
-      script = ''
-        ${pkgs.pacman}/bin/pacman -Sy
-        ${pkgs.pacman}/bin/pacman -Fy
-      '';
-      serviceConfig.Type = "oneshot";
-      startAt = "daily";
+    services = {
+      "systemd-nspawn@".serviceConfig.DeviceAllow = [
+        "char-drm rwm"
+        "/dev/dri rw"
+      ];
+      update-pacman-db = {
+        requires = [ "network-online.target" ];
+        script = ''
+          ${pkgs.pacman}/bin/pacman -Sy
+          ${pkgs.pacman}/bin/pacman -Fy
+        '';
+        serviceConfig.Type = "oneshot";
+        startAt = "daily";
+      };
     };
     user.services = {
       clash.serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
