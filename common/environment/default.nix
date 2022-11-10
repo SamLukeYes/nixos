@@ -18,17 +18,15 @@ in {
 
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/gnome.nix
     gnome.excludePackages = with pkgs.gnome; [
-      eog                     # use gthumb instead
       epiphany                # use firefox instead
       pkgs.gnome-text-editor  # use vscode instead
       gnome-calculator        # use xonsh instead
       gnome-calendar          # broken with my local data
       gnome-contacts          # not managing contacts on PC
-      gnome-music             # use gthumb instead
-      pkgs.gnome-photos       # use gthumb instead
+      gnome-music             # use celluloid instead
       gnome-weather           # ugly as hell
       simple-scan             # no scanner available
-      totem                   # use gthumb instead
+      totem                   # use celluloid instead
       evince                  # use many other apps for pdf
       geary                   # use web browser instead
     ];
