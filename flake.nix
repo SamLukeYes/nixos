@@ -4,6 +4,10 @@
   description = "My NixOS configuration";
 
   inputs = {
+    nil = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:oxalica/nil";
+    };
     nixos-cn = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nixos-cn/flakes";
@@ -31,13 +35,14 @@
     system = "x86_64-linux";
     overlay = final: prev: {
       firefox = final.firefox-wayland;
+      nil = inputs.nil.packages.${system}.nil;
+      nixos-cn = inputs.nixos-cn.legacyPackages.${system};
       # pacman = final.callPackage (
       #   inputs.pr-pacman + "/pkgs/tools/package-management/pacman"
       # ) {};
       pano = final.callPackage (
         inputs.pr-pano + "/pkgs/desktops/gnome/extensions/pano"
       ) {};
-      nixos-cn = inputs.nixos-cn.legacyPackages.${system};
       rewine = inputs.rewine.packages.${system};
       yes = import inputs.yes {
         pkgs = prev;
