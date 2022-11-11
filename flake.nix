@@ -36,7 +36,7 @@
     system = "x86_64-linux";
     overlay = final: prev: {
       firefox = final.firefox-wayland;
-      glib = final.callPackage "${inputs.nixos-unstable}/pkgs/development/libraries/glib" {};
+      glib = inputs.nixos-unstable.legacyPackages.${system}.glib;
       nil = inputs.nil.packages.${system}.nil;
       nixos-cn = inputs.nixos-cn.legacyPackages.${system};
       pano = final.callPackage "${inputs.pr-pano}/pkgs/desktops/gnome/extensions/pano" {};
