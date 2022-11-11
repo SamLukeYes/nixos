@@ -88,6 +88,22 @@
         "type": "github"
       }
     },
+    "nixos-unstable": {
+      "locked": {
+        "lastModified": 1667991831,
+        "narHash": "sha256-DHgEsLZI044B9T4AjA3K6+yB9/DqLr4dyA7OIx0FG7o=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "872fceeed60ae6b7766cc0a4cd5bf5901b9098ec",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1668085575,
@@ -145,6 +161,7 @@
         "nil": "nil",
         "nixos-cn": "nixos-cn",
         "nixos-hardware": "nixos-hardware",
+        "nixos-unstable": "nixos-unstable",
         "nixpkgs": "nixpkgs",
         "pr-pano": "pr-pano",
         "rewine": "rewine",

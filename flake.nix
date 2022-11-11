@@ -24,6 +24,7 @@
 
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixos-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
   };
@@ -35,14 +36,10 @@
     system = "x86_64-linux";
     overlay = final: prev: {
       firefox = final.firefox-wayland;
+      glib = final.callPackage "${inputs.nixos-unstable}/pkgs/development/libraries/glib" {};
       nil = inputs.nil.packages.${system}.nil;
       nixos-cn = inputs.nixos-cn.legacyPackages.${system};
-      # pacman = final.callPackage (
-      #   inputs.pr-pacman + "/pkgs/tools/package-management/pacman"
-      # ) {};
-      pano = final.callPackage (
-        inputs.pr-pano + "/pkgs/desktops/gnome/extensions/pano"
-      ) {};
+      pano = final.callPackage "${inputs.pr-pano}/pkgs/desktops/gnome/extensions/pano" {};
       rewine = inputs.rewine.packages.${system};
       yes = import inputs.yes {
         pkgs = prev;
