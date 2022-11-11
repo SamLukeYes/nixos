@@ -15,7 +15,6 @@
       ./nix.nix
       ./programs.nix
       ./services.nix
-      ./system.nix
       ./systemd.nix
     ];
 
