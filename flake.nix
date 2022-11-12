@@ -38,7 +38,7 @@
   let
     system = "x86_64-linux";
     overlay = final: prev: {
-      aria2-conf = final.callPackage ./aria2-conf {
+      aria2-conf = final.callPackage ./aria2-conf.nix {
         bt-tracker = "${inputs.trackers}/all_aria2.txt";
       };
       firefox = final.firefox-wayland;
