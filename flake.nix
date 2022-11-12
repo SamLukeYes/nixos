@@ -38,14 +38,12 @@
   let
     system = "x86_64-linux";
     overlay = final: prev: {
-      aria2-conf = final.callPackage ./aria2-conf.nix {
-        bt-tracker = "${inputs.trackers}/all_aria2.txt";
-      };
       firefox = final.firefox-wayland;
       nil = inputs.nil.packages.${system}.nil;
       nixos-cn = inputs.nixos-cn.legacyPackages.${system};
       pano = final.callPackage "${inputs.pr-pano}/pkgs/desktops/gnome/extensions/pano" {};
       rewine = inputs.rewine.packages.${system};
+      trackers = inputs.trackers;
       yes = import inputs.yes {
         pkgs = prev;
         # rp = import ./rp.nix;
