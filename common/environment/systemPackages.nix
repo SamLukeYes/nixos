@@ -40,6 +40,13 @@
     starship                      # configured in ~/.xonshrc
     yes.archlinux.paru            # takes too long to build
 
+    (makeDesktopItem {
+      desktopName = "yacd";
+      name = "yacd";
+      exec = "${electron}/bin/electron ${nixos-cn.re-export.yacd-linyinfeng}/index.html";
+      icon = "${nixos-cn.re-export.yacd-linyinfeng}/yacd-128.png";
+    })
+
     ((vscode.override {
       commandLineArgs = "--touch-events -n";
     }).fhsWithPackages (ps: with ps; [

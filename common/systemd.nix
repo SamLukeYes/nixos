@@ -36,6 +36,7 @@ let rp = import ../rp.nix; in
         '';
         serviceConfig = {
           Restart = "on-failure";
+          RestartSec = 5;
           Type = "oneshot";
         };
         wantedBy = [ "default.target" ];
@@ -59,14 +60,6 @@ let rp = import ../rp.nix; in
         '';
         serviceConfig.Type = "oneshot";
         startAt = "daily";
-      };
-      yacd = {
-        script = ''
-          cd ${pkgs.nixos-cn.re-export.yacd-linyinfeng}
-          ${pkgs.python3}/bin/python -m http.server 8080
-        '';
-        serviceConfig.Restart = "always";
-        wantedBy = [ "default.target" ];
       };
     };
   };
