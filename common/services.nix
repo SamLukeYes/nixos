@@ -4,8 +4,9 @@
   services = {
 
     aria2 = {
-      enable = true;
       downloadDir = "/home/aria2";
+      enable = true;
+      extraArguments = "--conf-path=${pkgs.aria2-conf}";
     };
 
     cpupower-gui.enable = true;

@@ -17,6 +17,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:wineee/nur-packages";
     };
+    trackers = {
+      flake = false;
+      url = "github:XIU2/TrackersListCollection";
+    };
     yes = {
       flake = false;
       url = "github:SamLukeYes/nix-custom-packages";
@@ -34,6 +38,9 @@
   let
     system = "x86_64-linux";
     overlay = final: prev: {
+      aria2-conf = final.callPackage ./aria2-conf {
+        bt-tracker = "${inputs.trackers}/all_aria2.txt";
+      };
       firefox = final.firefox-wayland;
       nil = inputs.nil.packages.${system}.nil;
       nixos-cn = inputs.nixos-cn.legacyPackages.${system};

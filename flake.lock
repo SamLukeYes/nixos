@@ -148,6 +148,7 @@
         "nixpkgs": "nixpkgs",
         "pr-pano": "pr-pano",
         "rewine": "rewine",
+        "trackers": "trackers",
         "yes": "yes"
       }
     },
@@ -173,6 +174,22 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "trackers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1668211694,
+        "narHash": "sha256-PAEbdlUEgZgiDwZyQklmJEGik6bxabSvSAYdJ1winhk=",
+        "owner": "XIU2",
+        "repo": "TrackersListCollection",
+        "rev": "f506ed7e3e7be7c91e2917ef07f9f8f3a5989f4e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "XIU2",
+        "repo": "TrackersListCollection",
         "type": "github"
       }
     },
