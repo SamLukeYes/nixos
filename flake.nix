@@ -27,7 +27,8 @@
     };
 
     # nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # Pin until the next glib update
+    nixpkgs.url = "github:NixOS/nixpkgs/872fceeed60ae6b7766cc0a4cd5bf5901b9098ec";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
   };

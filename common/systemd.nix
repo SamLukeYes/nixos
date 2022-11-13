@@ -16,6 +16,18 @@ let rp = import ../rp.nix; in
         "char-drm rwm"
         "/dev/dri rw"
       ];
+      aria2b = {
+        after = [ "aria2.service" ];
+        script = ''
+          cd /var/lib/aria2
+          ${pkgs.yes.nodePackages.aria2b}/bin/aria2b
+        '';
+        serviceConfig = {
+          Restart = "on-failure";
+          RestartSec = 5;
+        };
+        wantedBy = [ "multi-user.target" ];
+      };
       update-pacman-db = {
         requires = [ "network-online.target" ];
         script = ''
