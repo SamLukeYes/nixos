@@ -27,7 +27,7 @@
     };
 
     # nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     glib_2_74_0.url = "github:NixOS/nixpkgs/872fceeed60ae6b7766cc0a4cd5bf5901b9098ec";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
@@ -40,7 +40,7 @@
     system = "x86_64-linux";
     overlay = final: prev: {
       firefox = final.firefox-wayland;
-      gnome = prev.gnome.overrideScope (self: super: {
+      gnome = prev.gnome.overrideScope' (self: super: {
         gnome-keyring = inputs.glib_2_74_0.legacyPackages.${system}.gnome.gnome-keyring;
       });
       nil = inputs.nil.packages.${system}.nil;
