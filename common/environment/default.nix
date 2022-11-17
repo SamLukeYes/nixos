@@ -8,7 +8,6 @@ in {
     etc = {
       "makepkg.conf".source = "${pkgs.yes.archlinux.devtools}/share/devtools/makepkg-x86_64.conf";
       "pacman.conf".source = "/old-root/etc/pacman.conf";
-      "pacman.d/gnupg".source = "${pkgs.yes.archlinux.pacman-gnupg}/etc/pacman.d/gnupg";
       "pacman.d/mirrorlist".text = ''
         Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
         Server = https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch
