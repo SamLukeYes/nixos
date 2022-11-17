@@ -122,11 +122,11 @@
     },
     "pr-pacman": {
       "locked": {
-        "lastModified": 1668652094,
-        "narHash": "sha256-6OP0DyK3aUMIz0d/+TVrz6z48S/P2V8YJpk/TDZAqaE=",
+        "lastModified": 1668661279,
+        "narHash": "sha256-LaQ5lHIXY72LADXn5mxEw5zRufiGVGZmwrHoQTyYXdw=",
         "owner": "SamLukeYes",
         "repo": "nixpkgs",
-        "rev": "47ab7ffc67b9722b11fc1927b832c3c76520b08a",
+        "rev": "1f8b8cc49aed8a6b55ebb42afcbaf45d0b45cf74",
         "type": "github"
       },
       "original": {
