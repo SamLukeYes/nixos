@@ -32,7 +32,6 @@ in {
 
     sessionVariables = {
       BROWSER = "${pkgs.firefox}/bin/firefox";
-      EDITOR = "nano";
       GST_PLUGIN_PATH_1_0 = lib.makeSearchPath "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
         gst-plugins-bad
         gst-plugins-good
