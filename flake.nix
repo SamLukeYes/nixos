@@ -39,7 +39,6 @@
   let
     system = "x86_64-linux";
     overlay = final: prev: {
-      firefox = final.firefox-wayland;
       gnome = prev.gnome.overrideScope' (self: super: {
         gnome-keyring = inputs.glib_2_74_0.legacyPackages.${system}.gnome.gnome-keyring;
       });
