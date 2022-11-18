@@ -12,10 +12,10 @@
     gnome.gnome-tweaks
     gnome.nautilus-python
     igv
-    kotatogram-desktop
     libreoffice-fresh
     obs-studio
     ppsspp-sdl-wayland
+    tdesktop
     xournalpp
     yaru-theme
     zotero
