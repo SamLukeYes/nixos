@@ -152,22 +152,6 @@
         "type": "github"
       }
     },
-    "pr-qt6-theme": {
-      "locked": {
-        "lastModified": 1666532767,
-        "narHash": "sha256-l3wKXlaL9FnvwECecHTXTOk9jDtONVfycuCcGVR73k8=",
-        "owner": "linsui",
-        "repo": "nixpkgs",
-        "rev": "0027b2777c844bc9d5bcfb3e27c9f0ba7fab2b2c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "linsui",
-        "ref": "qgnomeplatform",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "rewine": {
       "inputs": {
         "nixpkgs": [
@@ -197,7 +181,6 @@
         "nixpkgs": "nixpkgs",
         "pr-pacman": "pr-pacman",
         "pr-pano": "pr-pano",
-        "pr-qt6-theme": "pr-qt6-theme",
         "rewine": "rewine",
         "trackers": "trackers",
         "yes": "yes"
