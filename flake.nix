@@ -40,9 +40,10 @@
   let
     system = "x86_64-linux";
     overlay = final: prev: {
-      adwaita-qt6 = final.qt6Packages.callPackage "${inputs.pr-qt6-theme}/pkgs/data/themes/adwaita-qt" {
-        useQt6 = true;
-      };
+      adwaita-qt6 = final.qt6Packages.callPackage
+        "${inputs.pr-qt6-theme}/pkgs/data/themes/adwaita-qt" {
+          useQt6 = true;
+        };
       gnome = prev.gnome.overrideScope' (self: super: {
         gnome-keyring = inputs.glib_2_74_0.legacyPackages.${system}.gnome.gnome-keyring;
       });
@@ -50,9 +51,10 @@
       nixos-cn = inputs.nixos-cn.legacyPackages.${system};
       pacman = final.callPackage "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
       pano = final.callPackage "${inputs.pr-pano}/pkgs/desktops/gnome/extensions/pano" {};
-      qgnomeplatform-qt6 = final.callPackage "${inputs.pr-qt6-theme}/pkgs/development/libraries/qgnomeplatform" {
-        useQt6 = true;
-      };
+      qgnomeplatform-qt6 = final.qt6Packages.callPackage
+        "${inputs.pr-qt6-theme}/pkgs/development/libraries/qgnomeplatform" {
+          useQt6 = true;
+        };
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
       yes = import inputs.yes {
