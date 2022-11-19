@@ -40,7 +40,7 @@
   let
     system = "x86_64-linux";
     overlay = final: prev: {
-      adwaita-qt6 = final.callPackage "${inputs.pr-qt6-theme}/pkgs/data/themes/adwaita-qt" {
+      adwaita-qt6 = final.qt6Packages.callPackage "${inputs.pr-qt6-theme}/pkgs/data/themes/adwaita-qt" {
         useQt6 = true;
       };
       gnome = prev.gnome.overrideScope' (self: super: {
