@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     adw-gtk3
+    adwaita-qt6
     authenticator
     celluloid
     firefox
@@ -15,6 +16,7 @@
     libreoffice-fresh
     obs-studio
     ppsspp-sdl-wayland
+    qgnomeplatform-qt6
     tdesktop
     xournalpp
     yaru-theme

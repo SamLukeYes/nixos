@@ -76,11 +76,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1668737438,
-        "narHash": "sha256-AsLju/7tQNk8V2nzZP1jRAuHnUVm9QN5AmMZ3YFw1S8=",
+        "lastModified": 1668823485,
+        "narHash": "sha256-40cSCHPcqho61a1LI5+iSBBjFFh9foH77kf76AL3t1w=",
         "owner": "nixos-cn",
         "repo": "flakes",
-        "rev": "f08011f090b066e147c79cd5c169e042eae21edd",
+        "rev": "6d6a0f0d45e45d9f28d07d2613fa8e83ea464ec1",
         "type": "github"
       },
       "original": {
@@ -152,6 +152,22 @@
         "type": "github"
       }
     },
+    "pr-qt6-theme": {
+      "locked": {
+        "lastModified": 1666532767,
+        "narHash": "sha256-l3wKXlaL9FnvwECecHTXTOk9jDtONVfycuCcGVR73k8=",
+        "owner": "linsui",
+        "repo": "nixpkgs",
+        "rev": "0027b2777c844bc9d5bcfb3e27c9f0ba7fab2b2c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "linsui",
+        "ref": "qgnomeplatform",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "rewine": {
       "inputs": {
         "nixpkgs": [
@@ -181,6 +197,7 @@
         "nixpkgs": "nixpkgs",
         "pr-pacman": "pr-pacman",
         "pr-pano": "pr-pano",
+        "pr-qt6-theme": "pr-qt6-theme",
         "rewine": "rewine",
         "trackers": "trackers",
         "yes": "yes"
@@ -214,11 +231,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1668758910,
-        "narHash": "sha256-gt2joa2X2qKH57D9xWD7O93oTAMl4XKCwruWUTmZH1A=",
+        "lastModified": 1668816563,
+        "narHash": "sha256-Csn1X5fmhnfDaDUqXrhXxlXh9Wv5MQMy91U5DuunBXM=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "3ff2a1228602edafa9f5a437d9bb67f53bf7656b",
+        "rev": "ba730ff1f641d7bf87a8e8dedd137386abdd2440",
         "type": "github"
       },
       "original": {
