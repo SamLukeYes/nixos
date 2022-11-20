@@ -76,11 +76,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1668910310,
-        "narHash": "sha256-5OnZHnlJHU3Dh1b+1Rpr1em7yvaFXA5dzbmYWPofToo=",
+        "lastModified": 1668823485,
+        "narHash": "sha256-40cSCHPcqho61a1LI5+iSBBjFFh9foH77kf76AL3t1w=",
         "owner": "nixos-cn",
         "repo": "flakes",
-        "rev": "54e817d40e166e632a99333f9b6ff0229f583117",
+        "rev": "6d6a0f0d45e45d9f28d07d2613fa8e83ea464ec1",
         "type": "github"
       },
       "original": {
@@ -136,6 +136,22 @@
         "type": "github"
       }
     },
+    "pr-pano": {
+      "locked": {
+        "lastModified": 1664099313,
+        "narHash": "sha256-Ij4EHvbWlRQdZgnqKovg+4HmQpc/s8g2X9S/gjVTUzs=",
+        "owner": "michojel",
+        "repo": "nixpkgs",
+        "rev": "80c746afb20380de354223693cd640154e5a4016",
+        "type": "github"
+      },
+      "original": {
+        "owner": "michojel",
+        "ref": "gnome-shell-extension-pano",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "rewine": {
       "inputs": {
         "nixpkgs": [
@@ -164,6 +180,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "pr-pacman": "pr-pacman",
+        "pr-pano": "pr-pano",
         "rewine": "rewine",
         "trackers": "trackers",
         "yes": "yes"
@@ -197,11 +214,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1668902920,
-        "narHash": "sha256-68A4Ra22lOZHs+ChNRi5528b5qjYGUD7XgkDf8+oMzk=",
+        "lastModified": 1668816563,
+        "narHash": "sha256-Csn1X5fmhnfDaDUqXrhXxlXh9Wv5MQMy91U5DuunBXM=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "5dc357235673c3a744549a1ceb2285d6da4a738e",
+        "rev": "ba730ff1f641d7bf87a8e8dedd137386abdd2440",
         "type": "github"
       },
       "original": {

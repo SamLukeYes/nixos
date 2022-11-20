@@ -31,7 +31,7 @@
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
     gnomeExtensions.freon
-    gnomeExtensions.pano
+    pano
     yes.gnomeExtensions.onedrive
 
     # CLI programs
