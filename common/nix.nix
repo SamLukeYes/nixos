@@ -17,7 +17,6 @@ let rp = import ../rp.nix; in
       max-jobs = 3;   # https://github.com/NixOS/nixpkgs/issues/198668
       substituters = lib.mkForce [
         "https://mirrors.bfsu.edu.cn/nix-channels/store"
-        "https://mirror.sjtu.edu.cn/nix-channels/store"
         "${rp}https://cache.nixos.org"
         "${rp}https://nixos-cn.cachix.org"
         "${rp}https://rewine.cachix.org"
