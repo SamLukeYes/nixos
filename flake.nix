@@ -30,7 +30,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     glib_2_74_0.url = "github:NixOS/nixpkgs/872fceeed60ae6b7766cc0a4cd5bf5901b9098ec";
     pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
-    pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -45,7 +44,6 @@
       nil = inputs.nil.packages.${system}.nil;
       nixos-cn = inputs.nixos-cn.legacyPackages.${system};
       pacman = final.callPackage "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
-      pano = final.callPackage "${inputs.pr-pano}/pkgs/desktops/gnome/extensions/pano" {};
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
       yes = import inputs.yes {
