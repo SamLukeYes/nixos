@@ -120,6 +120,22 @@
         "type": "github"
       }
     },
+    "pr-arch-install-scripts": {
+      "locked": {
+        "lastModified": 1668957486,
+        "narHash": "sha256-pryTcYE2CvRfnls+JbgMB23U8fB09bDiXo3DI/lVNY4=",
+        "owner": "SamLukeYes",
+        "repo": "nixpkgs",
+        "rev": "22d2017050fc0683bbcff8b1ecd3a2514ab77f14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SamLukeYes",
+        "ref": "arch-install-scripts",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "pr-pacman": {
       "locked": {
         "lastModified": 1668661279,
@@ -179,6 +195,7 @@
         "nixos-cn": "nixos-cn",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "pr-arch-install-scripts": "pr-arch-install-scripts",
         "pr-pacman": "pr-pacman",
         "pr-pano": "pr-pano",
         "rewine": "rewine",
@@ -214,11 +231,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1668902920,
-        "narHash": "sha256-68A4Ra22lOZHs+ChNRi5528b5qjYGUD7XgkDf8+oMzk=",
+        "lastModified": 1668931754,
+        "narHash": "sha256-EXyme09z5W1TddKB3j+cHzeDLiLKiSjdEZd7mgUsYls=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "5dc357235673c3a744549a1ceb2285d6da4a738e",
+        "rev": "a64e523e00b19813538cc14ce93a8f27c45b08ca",
         "type": "github"
       },
       "original": {
