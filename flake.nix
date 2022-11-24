@@ -4,10 +4,10 @@
   description = "My NixOS configuration";
 
   inputs = {
-    nil = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:oxalica/nil";
-    };
+    # nil = {
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    #   url = "github:oxalica/nil";
+    # };
     nixos-cn = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nixos-cn/flakes";
@@ -45,7 +45,7 @@
       # gnome = prev.gnome.overrideScope' (self: super: {
       #   gnome-keyring = inputs.glib_2_74_0.legacyPackages.${system}.gnome.gnome-keyring;
       # });
-      nil = inputs.nil.packages.${system}.nil;
+      # nil = inputs.nil.packages.${system}.nil;
       nixos-cn = inputs.nixos-cn.legacyPackages.${system};
       # pacman = final.callPackage
       #   "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
