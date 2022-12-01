@@ -13,6 +13,7 @@ let rp = import ../rp.nix; in
       experimental-features = [
         "flakes" "nix-command"
       ];
+      fallback = true;
       keep-outputs = true;
       max-jobs = 3;   # https://github.com/NixOS/nixpkgs/issues/198668
       substituters = lib.mkForce [
