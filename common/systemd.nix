@@ -55,7 +55,7 @@ let rp = import ../rp.nix; in
         onSuccess = [ "clash.service" ];
         script = ''
           mkdir -p ~/.config/clash
-          ${pkgs.curl}/bin/curl -L https://openit.daycat.space/clash -o ~/.config/clash/config.yaml
+          ${pkgs.curl}/bin/curl -L https://cdn.jsdelivr.net/gh/yu-steven/openit/Clash.yaml -o ~/.config/clash/config.yaml
         '';
         serviceConfig = {
           Restart = "on-failure";
