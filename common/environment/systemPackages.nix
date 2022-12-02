@@ -31,12 +31,13 @@
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
     gnomeExtensions.freon
+    gnomeExtensions.one-drive-resurrect
     pano
-    yes.gnomeExtensions.onedrive
 
     # CLI programs
     bat                           # frequently used in terminal
     dig                           # must be available without Internet connection
+    onedrive                      # required by gnomeExtensions.one-drive-resurrect
     pdftk                         # required by Jasminum
     starship                      # configured in ~/.xonshrc
     yes.archlinux.paru            # takes too long to build

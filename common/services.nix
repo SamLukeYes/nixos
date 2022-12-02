@@ -20,8 +20,6 @@
 
     logind.lidSwitch = "ignore";
 
-    onedrive.enable = true;
-
     pipewire = {
       enable = true;
       alsa.enable = true;

@@ -11,6 +11,7 @@ let rp = import ../rp.nix; in
       deepin20 = {};
       old-root = {};
     });
+    packages = [ pkgs.onedrive ];
     services = {
       "systemd-nspawn@".serviceConfig.DeviceAllow = [
         "char-drm rwm"
@@ -75,6 +76,7 @@ let rp = import ../rp.nix; in
         serviceConfig.Type = "oneshot";
         startAt = "weekly";
       };
+      onedrive.wantedBy = [ "default.target" ];
       stuhealth = {
         script = ''
           export DISPLAY=:0
