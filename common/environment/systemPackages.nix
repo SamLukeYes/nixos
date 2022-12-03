@@ -37,6 +37,7 @@
     # CLI programs
     bat                           # frequently used in terminal
     dig                           # must be available without Internet connection
+    nix-index                     # frequently used in terminal
     onedrive                      # required by gnomeExtensions.one-drive-resurrect
     pdftk                         # required by Jasminum
     starship                      # configured in ~/.xonshrc
