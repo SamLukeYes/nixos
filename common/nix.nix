@@ -6,7 +6,8 @@ let rp = import ../rp.nix; in
   nix = {
     gc = {
       automatic = true;
-      options = "--delete-older-than 3d";
+      dates = "weekly";
+      options = "--delete-older-than 2d";
     };
     settings = {
       auto-optimise-store = true;
@@ -14,7 +15,6 @@ let rp = import ../rp.nix; in
         "flakes" "nix-command"
       ];
       fallback = true;
-      keep-outputs = true;
       max-jobs = 3;   # https://github.com/NixOS/nixpkgs/issues/198668
       substituters = lib.mkForce [
         "https://mirrors.bfsu.edu.cn/nix-channels/store"
