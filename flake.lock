@@ -23,11 +23,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1670636471,
-        "narHash": "sha256-vObS4tQDRlkdkQDCmF7gIG9WPlm+LnGBmwk/FN+AaBs=",
+        "lastModified": 1670723729,
+        "narHash": "sha256-3P5BZVfcFTxzj6WzoEmIpbZ5ZtR56bNyzpoFLphKxvI=",
         "owner": "nixos-cn",
         "repo": "flakes",
-        "rev": "3d2737fd16194c3a2dc8207d203e50ce2cfb5ea6",
+        "rev": "208c73999628d3a735d2411753d88b234f9b2e1c",
         "type": "github"
       },
       "original": {
@@ -67,6 +67,22 @@
         "type": "github"
       }
     },
+    "pr-onedrive": {
+      "locked": {
+        "lastModified": 1670340829,
+        "narHash": "sha256-cawlG1XR37aHdCt1r4xKeuMYiYlqLz8V3kw1k6kxGEE=",
+        "owner": "r-ryantm",
+        "repo": "nixpkgs",
+        "rev": "6a5deafce97258e69c922fd27dabeeb7e52fd957",
+        "type": "github"
+      },
+      "original": {
+        "owner": "r-ryantm",
+        "ref": "auto-update/onedrive",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "pr-pano": {
       "locked": {
         "lastModified": 1664099313,
@@ -79,6 +95,22 @@
       "original": {
         "owner": "michojel",
         "ref": "gnome-shell-extension-pano",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pr-resholve": {
+      "locked": {
+        "lastModified": 1670627519,
+        "narHash": "sha256-1QsfO9GPN31+RH/bQgjenDMePLBEhXqRsv8Y9rw7WvE=",
+        "owner": "abathur",
+        "repo": "nixpkgs",
+        "rev": "4fabafb699bc4fa91594fce7fd7eaf57c7fcdede",
+        "type": "github"
+      },
+      "original": {
+        "owner": "abathur",
+        "ref": "resholve_fold_in_py_deps",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -108,7 +140,9 @@
         "nixos-cn": "nixos-cn",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "pr-onedrive": "pr-onedrive",
         "pr-pano": "pr-pano",
+        "pr-resholve": "pr-resholve",
         "rewine": "rewine",
         "trackers": "trackers",
         "yes": "yes"
@@ -117,11 +151,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1670688462,
-        "narHash": "sha256-wbcbooEFhIhNJ1OBJXuhmJoCDqDEq5eDsUhlRkxoaQM=",
+        "lastModified": 1670746069,
+        "narHash": "sha256-1GTFOqRkkTyMyr2R+2twqbAEqbn3S3U+pcpeEOBv204=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "35e7b23620e32e10c75c0bdac7834168a8fa688b",
+        "rev": "79405222e574fe2a5c8d3229b83380578c0886f3",
         "type": "github"
       },
       "original": {
