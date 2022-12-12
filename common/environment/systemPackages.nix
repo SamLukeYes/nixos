@@ -54,7 +54,6 @@
       commandLineArgs = "--touch-events -n";
     }).fhsWithPackages (ps: with ps; [
       nil                               # for nix IDE
-      nodePackages.pyright              # for pylance
       pacman                            # add a dummy makepkg.conf to FHS
       # python3Packages.python-lsp-server # for xonsh IDE
       texlive.combined.scheme-full      # for latex workshop
