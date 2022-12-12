@@ -32,7 +32,6 @@
     pr-onedrive.url = "github:r-ryantm/nixpkgs/auto-update/onedrive";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
-    pr-resholve.url = "github:abathur/nixpkgs/resholve_fold_in_py_deps";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -41,9 +40,6 @@
   let
     system = "x86_64-linux";
     overlay = final: prev: {
-      inherit (
-        final.callPackage "${inputs.pr-resholve}/pkgs/development/misc/resholve" {}
-      ) resholve;
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
       # gnome = prev.gnome.overrideScope' (self: super: {
