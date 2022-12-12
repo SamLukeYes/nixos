@@ -99,6 +99,22 @@
         "type": "github"
       }
     },
+    "pr-xonsh": {
+      "locked": {
+        "lastModified": 1670791784,
+        "narHash": "sha256-q4XY1/kJsuRnxv2kLnIh0c+4hAj+pai9cKk8TuxnTjQ=",
+        "owner": "r-ryantm",
+        "repo": "nixpkgs",
+        "rev": "3faf25d6aa4870f5d16c5887e83fd61105c528b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "r-ryantm",
+        "ref": "auto-update/xonsh",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "rewine": {
       "inputs": {
         "nixpkgs": [
@@ -126,6 +142,7 @@
         "nixpkgs": "nixpkgs",
         "pr-onedrive": "pr-onedrive",
         "pr-pano": "pr-pano",
+        "pr-xonsh": "pr-xonsh",
         "rewine": "rewine",
         "trackers": "trackers",
         "yes": "yes"

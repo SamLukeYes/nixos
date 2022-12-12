@@ -32,6 +32,7 @@
     pr-onedrive.url = "github:r-ryantm/nixpkgs/auto-update/onedrive";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
+    pr-xonsh.url = "github:r-ryantm/nixpkgs/auto-update/xonsh";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -55,6 +56,8 @@
         "${inputs.pr-pano}/pkgs/desktops/gnome/extensions/pano" {};
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
+      xonsh = final.callPackage
+        "${inputs.pr-xonsh}/pkgs/shells/xonsh" {};
       yes = import inputs.yes {
         pkgs = prev;
         # rp = import ./rp.nix;
