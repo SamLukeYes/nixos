@@ -14,7 +14,6 @@
     igv
     libreoffice-fresh
     obs-studio
-    ppsspp-sdl-wayland
     tdesktop
     xournalpp
     yaru-theme
@@ -23,10 +22,8 @@
     nixos-cn.re-export.icalingua-plus-plus
     nixos-cn.re-export.wemeet-linyinfeng
     rewine.electron-netease-cloud-music
-    yes.electronic-wechat
     yes.lx-music-desktop
     yes.ppet
-    yes.pypvz
 
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
