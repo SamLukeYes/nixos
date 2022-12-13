@@ -23,11 +23,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1670809975,
-        "narHash": "sha256-oOh9+Ebyb4lT8LtXGlW9s/ydputIaSKa8SexMDWjWJY=",
+        "lastModified": 1670896356,
+        "narHash": "sha256-CJXxZysEGOA4jyyqbL0oJY+G8jCg+GVHgtg4m+OY8os=",
         "owner": "nixos-cn",
         "repo": "flakes",
-        "rev": "7880743c77c745418010fcfd428d2bb2782cecff",
+        "rev": "eb95e30bac0eca5ea87b4120d36774bbea8cdc37",
         "type": "github"
       },
       "original": {
@@ -53,32 +53,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1670751203,
-        "narHash": "sha256-XdoH1v3shKDGlrwjgrNX/EN8s3c+kQV7xY6cLCE8vcI=",
+        "lastModified": 1670841420,
+        "narHash": "sha256-mSEia1FzrsHbfqjorMyYiX8NXdDVeR1Pw1k55jMJlJY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "64e0bf055f9d25928c31fb12924e59ff8ce71e60",
+        "rev": "33e0d99cbedf2acfd7340d2150837fbb28039a64",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "pr-onedrive": {
-      "locked": {
-        "lastModified": 1670340829,
-        "narHash": "sha256-cawlG1XR37aHdCt1r4xKeuMYiYlqLz8V3kw1k6kxGEE=",
-        "owner": "r-ryantm",
-        "repo": "nixpkgs",
-        "rev": "6a5deafce97258e69c922fd27dabeeb7e52fd957",
-        "type": "github"
-      },
-      "original": {
-        "owner": "r-ryantm",
-        "ref": "auto-update/onedrive",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -95,22 +79,6 @@
       "original": {
         "owner": "michojel",
         "ref": "gnome-shell-extension-pano",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "pr-xonsh": {
-      "locked": {
-        "lastModified": 1670791784,
-        "narHash": "sha256-q4XY1/kJsuRnxv2kLnIh0c+4hAj+pai9cKk8TuxnTjQ=",
-        "owner": "r-ryantm",
-        "repo": "nixpkgs",
-        "rev": "3faf25d6aa4870f5d16c5887e83fd61105c528b8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "r-ryantm",
-        "ref": "auto-update/xonsh",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -140,9 +108,7 @@
         "nixos-cn": "nixos-cn",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "pr-onedrive": "pr-onedrive",
         "pr-pano": "pr-pano",
-        "pr-xonsh": "pr-xonsh",
         "rewine": "rewine",
         "trackers": "trackers",
         "yes": "yes"
@@ -151,11 +117,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1670832455,
-        "narHash": "sha256-gDw8fa7yZg89ZAzuPxJH6VVZB4PxYD/A9Qb9lP57blM=",
+        "lastModified": 1670918844,
+        "narHash": "sha256-9Qocjj5kayEZ/Sty98Wsyilfx5j8a0cTyk97LWckSAE=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "28556f8257e3d48efc325fbc80b0f3d64d9d425d",
+        "rev": "e05f5360d755e142dba7efd7ec342e4e278d1256",
         "type": "github"
       },
       "original": {
@@ -167,11 +133,11 @@
     "yes": {
       "flake": false,
       "locked": {
-        "lastModified": 1670566090,
-        "narHash": "sha256-MgEcfomacwk08payL99rDOXyCoVjZr2Jvfam2ec/aKg=",
+        "lastModified": 1670927454,
+        "narHash": "sha256-5blsi48lCaW64mvZHCKxDBOIqObNQR11i5Z7tUBR6CQ=",
         "owner": "SamLukeYes",
         "repo": "nix-custom-packages",
-        "rev": "237085befa64df486b4e5b7433503abfc95c25da",
+        "rev": "3fa1250e8ba7b1f7648ed08d314f3ee905eb6cf7",
         "type": "github"
       },
       "original": {

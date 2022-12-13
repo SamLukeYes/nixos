@@ -29,10 +29,8 @@
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # pr-arch-install-scripts.url = "github:SamLukeYes/nixpkgs/arch-install-scripts";
-    pr-onedrive.url = "github:r-ryantm/nixpkgs/auto-update/onedrive";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
-    pr-xonsh.url = "github:r-ryantm/nixpkgs/auto-update/xonsh";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -48,16 +46,21 @@
       # });
       # nil = inputs.nil.packages.${system}.nil;
       nixos-cn = inputs.nixos-cn.legacyPackages.${system};
-      onedrive = final.callPackage
-        "${inputs.pr-onedrive}/pkgs/applications/networking/sync/onedrive" {};
+      onedrive = prev.onedrive.overrideAttrs (old: rec {
+        version = "2.4.22";
+        src = prev.fetchFromGitHub {
+          owner = "abraunegg";
+          repo = "onedrive";
+          rev = "v${version}";
+          hash = "sha256-KZVRLXXaJYMqHzjxTfQaD0u7n3ACBEk3fLOmqwybNhM=";
+        };
+      });
       # pacman = final.callPackage
       #   "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
       pano = final.callPackage
         "${inputs.pr-pano}/pkgs/desktops/gnome/extensions/pano" {};
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
-      xonsh = final.callPackage
-        "${inputs.pr-xonsh}/pkgs/shells/xonsh" {};
       yes = import inputs.yes {
         pkgs = prev;
         # rp = import ./rp.nix;
