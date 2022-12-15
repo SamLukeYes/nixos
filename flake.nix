@@ -31,6 +31,7 @@
     # pr-arch-install-scripts.url = "github:SamLukeYes/nixpkgs/arch-install-scripts";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
+    pr-vscode.url = "github:bobby285271/nixpkgs/vscode";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -61,6 +62,8 @@
         "${inputs.pr-pano}/pkgs/desktops/gnome/extensions/pano" {};
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
+      vscode = final.callPackage
+        "${inputs.pr-vscode}/pkgs/applications/editors/vscode/vscode.nix" {};
       yes = import inputs.yes {
         pkgs = prev;
         # rp = import ./rp.nix;

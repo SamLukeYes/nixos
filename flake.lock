@@ -83,6 +83,22 @@
         "type": "github"
       }
     },
+    "pr-vscode": {
+      "locked": {
+        "lastModified": 1671099102,
+        "narHash": "sha256-jqsdyccYNVMKx+NskDvgGgCC5PWq6Feh/+7Qsb8nX+c=",
+        "owner": "bobby285271",
+        "repo": "nixpkgs",
+        "rev": "711cf5ecd0f751eb662feb7f6557ffbe92a317cc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "bobby285271",
+        "ref": "vscode",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "rewine": {
       "inputs": {
         "nixpkgs": [
@@ -109,6 +125,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "pr-pano": "pr-pano",
+        "pr-vscode": "pr-vscode",
         "rewine": "rewine",
         "trackers": "trackers",
         "yes": "yes"
@@ -117,11 +134,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1671091676,
-        "narHash": "sha256-eiDpJHy/uAhQV/j/QoK/ZlMBdLBi8I/igfswm65e0QE=",
+        "lastModified": 1671120477,
+        "narHash": "sha256-dLZpiJLXiYHGvGOSlDqg7g9iWCvK7yy8lScuIVIZmzc=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "45ecf6beba11bc283dea34dd9be2152a8eb6fe81",
+        "rev": "47b6b2612a04bae19359f033df6e8ff7b1bfef3e",
         "type": "github"
       },
       "original": {
