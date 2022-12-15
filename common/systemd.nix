@@ -56,7 +56,7 @@ let rp = import ../rp.nix; in
         onSuccess = [ "clash.service" ];
         script = ''
           mkdir -p ~/.config/clash
-          ${pkgs.curl}/bin/curl -L https://cdn.jsdelivr.net/gh/alanbobs999/TopFreeProxies/Eternity.yaml -o ~/.config/clash/config.yaml
+          ${pkgs.curl}/bin/curl -L https://cdn.jsdelivr.net/gh/alanbobs999/TopFreeProxies@master/Eternity.yaml -o ~/.config/clash/config.yaml
         '';
         serviceConfig = {
           Restart = "on-failure";
