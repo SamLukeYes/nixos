@@ -19,8 +19,8 @@
     yaru-theme
     zotero
 
-    nixos-cn.re-export.icalingua-plus-plus
-    nixos-cn.re-export.wemeet-linyinfeng
+    linyinfeng.icalingua-plus-plus
+    linyinfeng.wemeet-linyinfeng
     rewine.electron-netease-cloud-music
     yes.electronic-wechat
     yes.lx-music-desktop
@@ -44,8 +44,8 @@
     (makeDesktopItem {
       desktopName = "yacd";
       name = "yacd";
-      exec = "${electron}/bin/electron ${nixos-cn.re-export.yacd-linyinfeng}/index.html";
-      icon = "${nixos-cn.re-export.yacd-linyinfeng}/yacd-128.png";
+      exec = "${electron}/bin/electron ${linyinfeng.yacd}/index.html";
+      icon = "${linyinfeng.yacd}/yacd-128.png";
     })
 
     ((vscode.override {

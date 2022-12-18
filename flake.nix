@@ -4,14 +4,14 @@
   description = "My NixOS configuration";
 
   inputs = {
+    linyinfeng = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:linyinfeng/nur-packages";
+    };
     # nil = {
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   url = "github:oxalica/nil";
     # };
-    nixos-cn = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:nixos-cn/flakes";
-    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     rewine = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,8 +44,8 @@
       # gnome = prev.gnome.overrideScope' (self: super: {
       #   gnome-keyring = inputs.glib_2_74_0.legacyPackages.${system}.gnome.gnome-keyring;
       # });
+      linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
-      nixos-cn = inputs.nixos-cn.legacyPackages.${system};
       # onedrive = prev.onedrive.overrideAttrs (old: rec {
       #   version = "2.4.22";
       #   src = prev.fetchFromGitHub {

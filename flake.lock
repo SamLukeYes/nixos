@@ -2,11 +2,11 @@
   "nodes": {
     "flake-utils": {
       "locked": {
-        "lastModified": 1638122382,
-        "narHash": "sha256-sQzZzAbvKEqN9s0bzWuYmRaA03v40gaJ4+iL1LXjaeI=",
+        "lastModified": 1644229661,
+        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "74f7e4319258e287b0f9cb95426c9853b282730b",
+        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
         "type": "github"
       },
       "original": {
@@ -15,24 +15,43 @@
         "type": "github"
       }
     },
-    "nixos-cn": {
+    "flake-utils-plus": {
       "inputs": {
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils"
+      },
+      "locked": {
+        "lastModified": 1657226504,
+        "narHash": "sha256-GIYNjuq4mJlFgqKsZ+YrgzWm0IpA4axA3MCrdKYj7gs=",
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "rev": "2bf0f91643c2e5ae38c1b26893ac2927ac9bd82a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gytis-ivaskevicius",
+        "repo": "flake-utils-plus",
+        "type": "github"
+      }
+    },
+    "linyinfeng": {
+      "inputs": {
+        "flake-utils-plus": "flake-utils-plus",
+        "nixos-stable": "nixos-stable",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1671327412,
-        "narHash": "sha256-FR6kh88ED4AtaJK3knd8h5Q/thReIyQrIjcMrnTZ6Vw=",
-        "owner": "nixos-cn",
-        "repo": "flakes",
-        "rev": "8c4869f99f415ea30a25e91a913b4809a54cf0c7",
+        "lastModified": 1671262942,
+        "narHash": "sha256-o4cIczYCgWGCtjj2JjLXmN62rdSoqkmkdc1PNSRYa5M=",
+        "owner": "linyinfeng",
+        "repo": "nur-packages",
+        "rev": "08f89651c6835525329ab663c4ab5d14128a8642",
         "type": "github"
       },
       "original": {
-        "owner": "nixos-cn",
-        "repo": "flakes",
+        "owner": "linyinfeng",
+        "repo": "nur-packages",
         "type": "github"
       }
     },
@@ -48,6 +67,22 @@
       "original": {
         "owner": "NixOS",
         "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
+    "nixos-stable": {
+      "locked": {
+        "lastModified": 1671215800,
+        "narHash": "sha256-2W54K41A7MefEaWzgL/TsaWlhKRK/RhWUybyOW4i0K8=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "9d692a724e74d2a49f7c985132972f991d144254",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-22.11",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -121,7 +156,7 @@
     },
     "root": {
       "inputs": {
-        "nixos-cn": "nixos-cn",
+        "linyinfeng": "linyinfeng",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "pr-arch-install-scripts": "pr-arch-install-scripts",
