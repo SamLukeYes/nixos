@@ -5,7 +5,6 @@
     adw-gtk3
     authenticator
     celluloid
-    firefox
     gnome-firmware
     gnome.dconf-editor
     gnome.gnome-sound-recorder
