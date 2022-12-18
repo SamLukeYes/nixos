@@ -69,11 +69,11 @@
     },
     "pr-arch-install-scripts": {
       "locked": {
-        "lastModified": 1671333965,
-        "narHash": "sha256-b04i12OUzTLhwplGEy5BxYN+8lwPuaJBAOQQJKktH/Q=",
+        "lastModified": 1671340746,
+        "narHash": "sha256-4CyWt9vCUOySTV8FczuawWpiKaCe1rX7z+k+Pex8sJs=",
         "owner": "SamLukeYes",
         "repo": "nixpkgs",
-        "rev": "d078522aaaa1abb309051969b5ae9518d22dc62f",
+        "rev": "f44f4260358cea96e4c3e7ca386da5bda35a0438",
         "type": "github"
       },
       "original": {
