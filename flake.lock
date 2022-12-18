@@ -23,11 +23,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1671240592,
-        "narHash": "sha256-zTRaBBvDBTelPcB1Xxn0Iy4EtDzeM5PCj+rINq2qer8=",
+        "lastModified": 1671327412,
+        "narHash": "sha256-FR6kh88ED4AtaJK3knd8h5Q/thReIyQrIjcMrnTZ6Vw=",
         "owner": "nixos-cn",
         "repo": "flakes",
-        "rev": "b717fd9d9f29446d66c6fbcb4f2e5975ab0dae37",
+        "rev": "8c4869f99f415ea30a25e91a913b4809a54cf0c7",
         "type": "github"
       },
       "original": {
@@ -63,6 +63,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "pr-arch-install-scripts": {
+      "locked": {
+        "lastModified": 1671333965,
+        "narHash": "sha256-b04i12OUzTLhwplGEy5BxYN+8lwPuaJBAOQQJKktH/Q=",
+        "owner": "SamLukeYes",
+        "repo": "nixpkgs",
+        "rev": "d078522aaaa1abb309051969b5ae9518d22dc62f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SamLukeYes",
+        "ref": "arch-install-scripts",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -108,6 +124,7 @@
         "nixos-cn": "nixos-cn",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "pr-arch-install-scripts": "pr-arch-install-scripts",
         "pr-pano": "pr-pano",
         "rewine": "rewine",
         "trackers": "trackers",
@@ -117,11 +134,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1671264464,
-        "narHash": "sha256-xNlbA6wSupHhccDWYQUNz8Icllbh7Rmx4biyRf1ualc=",
+        "lastModified": 1671322104,
+        "narHash": "sha256-UJkcotE0Fs8vZrL5OCne/Lj147D19+kd8DwchoaNTUQ=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "df093837da1598b0abc934d7fc0f904be2cb71ba",
+        "rev": "5bd210a37aa67ee481a9f05ada1ce02031e23a3c",
         "type": "github"
       },
       "original": {
