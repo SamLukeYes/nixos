@@ -169,11 +169,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1671350903,
-        "narHash": "sha256-TgTGsfY8TaLl9FuN8jmgZpAS75HEg4w6rN4kcBVeY3E=",
+        "lastModified": 1671408486,
+        "narHash": "sha256-EiRkgi1vYP+9sSwxj8gu9oljmmh4YCutgDpfey1rwEo=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "509027118595ac397b7c89007e8661b918f76936",
+        "rev": "c01eefb35903c8ed0938d8841e10aac5ab3c5201",
         "type": "github"
       },
       "original": {
