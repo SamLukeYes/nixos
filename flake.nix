@@ -41,6 +41,7 @@
     overlay = final: prev: {
       arch-install-scripts = final.callPackage
         "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
+      clisp = prev.clisp.override { readline = final.readline6; };
       # gnome = prev.gnome.overrideScope' (self: super: {
       #   gnome-keyring = inputs.glib_2_74_0.legacyPackages.${system}.gnome.gnome-keyring;
       # });
