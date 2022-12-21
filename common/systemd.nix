@@ -54,9 +54,10 @@ let rp = import ../rp.nix; in
       clash.serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
       clash-subscription = {
         onSuccess = [ "clash.service" ];
+        path = with pkgs; [ curl xonsh ];
         script = ''
           mkdir -p ~/.config/clash
-          ${pkgs.curl}/bin/curl -L https://cdn.jsdelivr.net/gh/alanbobs999/TopFreeProxies@master/Eternity.yaml -o ~/.config/clash/config.yaml
+          ${./fetch-subscription.xsh} > ~/.config/clash/config.yaml
         '';
         serviceConfig = {
           Restart = "on-failure";
