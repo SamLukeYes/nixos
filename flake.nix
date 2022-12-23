@@ -28,7 +28,7 @@
 
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    pr-arch-install-scripts.url = "github:SamLukeYes/nixpkgs/arch-install-scripts";
+    # pr-arch-install-scripts.url = "github:SamLukeYes/nixpkgs/arch-install-scripts";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
   };
@@ -39,9 +39,8 @@
   let
     system = "x86_64-linux";
     overlay = final: prev: {
-      arch-install-scripts = final.callPackage
-        "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
-      clisp = prev.clisp.override { readline = final.readline6; };
+      # arch-install-scripts = final.callPackage
+      #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
       # gnome = prev.gnome.overrideScope' (self: super: {
       #   gnome-keyring = inputs.glib_2_74_0.legacyPackages.${system}.gnome.gnome-keyring;
       # });
