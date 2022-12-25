@@ -51,19 +51,8 @@ let rp = import ../rp.nix; in
       };
     };
     user.services = {
-      clash.serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
-      clash-subscription = {
-        onSuccess = [ "clash.service" ];
-        path = with pkgs; [ curl xonsh ];
-        script = ''
-          mkdir -p ~/.config/clash
-          ${./fetch-subscription.xsh} > ~/.config/clash/config.yaml
-        '';
-        serviceConfig = {
-          Restart = "on-failure";
-          RestartSec = 5;
-          Type = "oneshot";
-        };
+      clash = {
+        serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
         wantedBy = [ "default.target" ];
       };
       nix-index = {
