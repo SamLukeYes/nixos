@@ -3,7 +3,7 @@
 {
   fonts = {
     fonts = with pkgs; [
-      inconsolata-nerdfont
+      (nerdfonts.override { fonts = [ "Noto" ]; })
       noto-fonts-cjk-sans
       powerline-fonts
       rewine.ttf-ms-win10
@@ -13,7 +13,7 @@
         "Microsoft YaHei UI"
       ];
       monospace = [
-        "Noto Mono for Powerline"
+        "NotoMono Nerd Font Mono"
         "Noto Sans Mono CJK SC"
       ];
     };
