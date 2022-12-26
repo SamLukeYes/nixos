@@ -4,7 +4,14 @@
   users = {
     users.yes = {
       description = "Sam L. Yes";
-      extraGroups = ["wheel" "aria2" "adbusers" "networkmanager" "wireshark"];
+      extraGroups = [
+        "adbusers"
+        "aria2"
+        "libvirtd"
+        "networkmanager"
+        "wheel"
+        "wireshark"
+      ];
       isNormalUser = true;
       shell = pkgs.xonsh;
       uid = 1000;

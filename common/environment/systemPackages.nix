@@ -7,7 +7,6 @@
     celluloid
     gnome-firmware
     gnome.dconf-editor
-    gnome.gnome-boxes
     gnome.gnome-sound-recorder
     gnome.gnome-tweaks
     gnome.nautilus-python
@@ -15,6 +14,7 @@
     libreoffice-fresh
     obs-studio
     tdesktop
+    virt-manager
     xournalpp
     yaru-theme
     zotero

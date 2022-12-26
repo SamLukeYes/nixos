@@ -27,6 +27,7 @@
   security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
 
+  virtualisation.libvirtd.enable = true;
   zramSwap.enable = true;
 }
 
