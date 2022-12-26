@@ -8,7 +8,6 @@ let rp = import ../rp.nix; in
       filesConfig.Bind = [ "/dev/dri" ];
       networkConfig.Private = false;
     }) {
-      deepin20 = {};
       old-root = {};
     });
     packages = [ pkgs.onedrive ];
