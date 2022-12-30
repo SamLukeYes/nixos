@@ -50,8 +50,18 @@ let rp = import ../rp.nix; in
       };
     };
     user.services = {
-      clash = {
-        serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
+      clash.serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
+      clash-subscription = {
+        onSuccess = [ "clash.service" ];
+        script = ''
+          mkdir -p ~/.config/clash
+          ${pkgs.curl}/bin/curl -L https://cdn.jsdelivr.net/gh/ssrsub/ssr@master/Clash.yml -o ~/.config/clash/config.yaml
+        '';
+        serviceConfig = {
+          Restart = "on-failure";
+          RestartSec = 5;
+          Type = "oneshot";
+        };
         wantedBy = [ "default.target" ];
       };
       nix-index = {
