@@ -6,6 +6,7 @@
     authenticator
     celluloid
     gnome-firmware
+    gnome-frog
     gnome.dconf-editor
     gnome.gnome-sound-recorder
     gnome.gnome-tweaks
