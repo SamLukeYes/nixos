@@ -30,6 +30,9 @@ in {
       geary                   # use web browser instead
     ];
 
+    homeBinInPath = true;
+    localBinInPath = true;
+
     sessionVariables = {
       BROWSER = "${pkgs.firefox}/bin/firefox";
       GST_PLUGIN_PATH_1_0 = lib.makeSearchPath "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
