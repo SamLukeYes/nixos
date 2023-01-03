@@ -16,6 +16,8 @@
 
     gnupg.agent.enable = true;
 
+    nix-index.enable = true;
+
     wireshark.enable = true;
 
     xonsh.enable = true;
