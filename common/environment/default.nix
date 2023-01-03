@@ -34,6 +34,7 @@ in {
     localBinInPath = true;
 
     sessionVariables = {
+      BASH_COMPLETIONS = ["${pkgs.bash-completion}/share/bash-completion/bash_completion"];
       BROWSER = "${pkgs.firefox}/bin/firefox";
       GST_PLUGIN_PATH_1_0 = lib.makeSearchPath "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
         gst-plugins-bad
