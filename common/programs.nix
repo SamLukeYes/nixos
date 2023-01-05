@@ -10,6 +10,7 @@
     firefox = {
       enable = true;
       languagePacks = [ "zh-CN" ];
+      package = pkgs.firefox-esr;
     };
 
     git.enable = true;
