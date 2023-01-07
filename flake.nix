@@ -30,7 +30,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # pr-arch-install-scripts.url = "github:SamLukeYes/nixpkgs/arch-install-scripts";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
-    pr-pano.url = "github:michojel/nixpkgs/gnome-shell-extension-pano";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -44,6 +43,20 @@
       # gnome = prev.gnome.overrideScope' (self: super: {
       #   gnome-keyring = inputs.glib_2_74_0.legacyPackages.${system}.gnome.gnome-keyring;
       # });
+      gnomeExtensions = prev.gnomeExtensions // {
+        pano = prev.gnomeExtensions.pano.overrideAttrs (oldAttrs: {
+          patches = [
+            (final.substituteAll {
+              src = final.fetchpatch {
+                url = "https://cdn.jsdelivr.net/gh/piousdeer/nixpkgs@pano/pkgs/desktops/gnome/extensions/extensionOverridesPatches/pano_at_elhan.io.patch";
+                hash = "sha256-1mlv9gha59g3jw03p4mf4fj5xiffchgivp6mn12k782w7mr2j588";
+              };
+              gda_path = "${final.libgda}/lib/girepository-1.0";
+              gsound_path = "${final.gsound}/lib/girepository-1.0";
+            })
+          ];
+        });
+      };
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       # onedrive = prev.onedrive.overrideAttrs (old: rec {
@@ -57,8 +70,6 @@
       # });
       # pacman = final.callPackage
       #   "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
-      pano = final.callPackage
-        "${inputs.pr-pano}/pkgs/desktops/gnome/extensions/pano" {};
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
       yes = import inputs.yes {

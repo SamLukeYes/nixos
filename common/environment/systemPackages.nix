@@ -31,8 +31,8 @@
     gnomeExtensions.customize-ibus
     gnomeExtensions.freon
     gnomeExtensions.one-drive-resurrect
+    gnomeExtensions.pano
     gnomeExtensions.section-todo-list
-    pano
 
     # CLI programs
     bat                           # frequently used in terminal

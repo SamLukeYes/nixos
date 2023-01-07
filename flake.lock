@@ -88,32 +88,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1672791794,
-        "narHash": "sha256-mqGPpGmwap0Wfsf3o2b6qHJW1w2kk/I6cGCGIU+3t6o=",
+        "lastModified": 1672953546,
+        "narHash": "sha256-oz757DnJ1ITvwyTovuwG3l9cX6j9j6/DH9eH+cXFJmc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9813adc7f7c0edd738c6bdd8431439688bb0cb3d",
+        "rev": "a518c77148585023ff56022f09c4b2c418a51ef5",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "pr-pano": {
-      "locked": {
-        "lastModified": 1664099313,
-        "narHash": "sha256-Ij4EHvbWlRQdZgnqKovg+4HmQpc/s8g2X9S/gjVTUzs=",
-        "owner": "michojel",
-        "repo": "nixpkgs",
-        "rev": "80c746afb20380de354223693cd640154e5a4016",
-        "type": "github"
-      },
-      "original": {
-        "owner": "michojel",
-        "ref": "gnome-shell-extension-pano",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -143,7 +127,6 @@
         "linyinfeng": "linyinfeng",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "pr-pano": "pr-pano",
         "rewine": "rewine",
         "trackers": "trackers",
         "yes": "yes"
@@ -152,11 +135,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1672963664,
-        "narHash": "sha256-umGSZbYRP3yn58nC4HNUdfWbc2HMMTCBDh03WNGmX3k=",
+        "lastModified": 1673078858,
+        "narHash": "sha256-pdgaKfjsjIwpp5UOXVCjW8irSJpvrSTmb8AEh1sZKPo=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "a9ba7e40f2f3fc8f6957edea65c47bf1b036dbb4",
+        "rev": "3e2961d968a53afd08e46abdb7ede8c642c79058",
         "type": "github"
       },
       "original": {
