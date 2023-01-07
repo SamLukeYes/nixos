@@ -51,8 +51,7 @@
                 url = "https://cdn.jsdelivr.net/gh/piousdeer/nixpkgs@pano/pkgs/desktops/gnome/extensions/extensionOverridesPatches/pano_at_elhan.io.patch";
                 hash = "sha256-XYA2nPoNC0ft27NhiI7iAyOr/chnoXvyn3hCEDnzdfY=";
               };
-              gda_path = "${final.libgda}/lib/girepository-1.0";
-              gsound_path = "${final.gsound}/lib/girepository-1.0";
+              inherit (final) gsound libgda;
             })
           ];
         });
