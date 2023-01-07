@@ -31,6 +31,7 @@
     gnomeExtensions.customize-ibus
     gnomeExtensions.freon
     gnomeExtensions.one-drive-resurrect
+    gnomeExtensions.section-todo-list
     pano
 
     # CLI programs
