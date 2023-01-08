@@ -49,6 +49,11 @@
       icon = "${linyinfeng.yacd}/yacd-128.png";
     })
 
+    (ventoy-bin.override {
+      defaultGuiType = "gtk3";
+      withGtk3 = true;
+    })
+
     ((vscode.override {
       commandLineArgs = "--touch-events -n";
     }).fhsWithPackages (ps: with ps; [
