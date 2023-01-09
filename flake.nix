@@ -79,6 +79,7 @@
       xournalpp = prev.xournalpp.overrideAttrs (old: {
         src = inputs.xournalpp;
         version = "${old.version}+dev";
+        buildInputs = old.buildInputs ++ [ final.alsa-lib ];
       });
       yes = import inputs.yes { pkgs = prev; };
     };
