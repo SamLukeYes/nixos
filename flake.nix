@@ -36,6 +36,7 @@
   # specific keys. Wiki page: https://nixos.wiki/wiki/Flakes#Output_schema
   outputs = { self, nixpkgs, ... }@inputs: 
   let
+    rp = import ./rp.nix;
     system = "x86_64-linux";
     overlay = final: prev: {
       # arch-install-scripts = final.callPackage
@@ -71,10 +72,15 @@
       #   "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
-      yes = import inputs.yes {
-        pkgs = prev;
-        # rp = import ./rp.nix;
-      };
+      xournalpp = prev.xournalpp.overrideAttrs (old: {
+        patches = [
+          (final.fetchpatch {
+            url = "${rp}https://github.com/xournalpp/xournalpp/pull/3326.patch";
+            hash = "sha256-jI1Nv4MfKlQ/cezvTkHFsRFQ/ZlnB4Fb9hm8O6meFwg=";
+          })
+        ];
+      });
+      yes = import inputs.yes { pkgs = prev; };
     };
     nixpkgs-config = {
       nix.settings.nix-path = [ "nixpkgs=${nixpkgs}" ];
