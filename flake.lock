@@ -129,22 +129,39 @@
         "nixpkgs": "nixpkgs",
         "rewine": "rewine",
         "trackers": "trackers",
+        "xournalpp": "xournalpp",
         "yes": "yes"
       }
     },
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1673165235,
-        "narHash": "sha256-2ZimWxqVmk+sPTP1u+63hlGDnCKBK/MGd1N+k0PH13k=",
+        "lastModified": 1673222827,
+        "narHash": "sha256-eNnK+XKrZRUCEmOQFHeFyPkjZmvhKQk8msXL27oot+Q=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "be217c95f2a6e0730b5e66beb5b17b07afea20f9",
+        "rev": "0a65e17a265bef3ede82fb585cec61ddfc243a36",
         "type": "github"
       },
       "original": {
         "owner": "XIU2",
         "repo": "TrackersListCollection",
+        "type": "github"
+      }
+    },
+    "xournalpp": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673131595,
+        "narHash": "sha256-WqFLcqqrYTChOsvN8ohryKiVdLQZODo8jY3hrHZzhLE=",
+        "owner": "xournalpp",
+        "repo": "xournalpp",
+        "rev": "1c82178faff710491dac39367c546a70717b1df2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xournalpp",
+        "repo": "xournalpp",
         "type": "github"
       }
     },

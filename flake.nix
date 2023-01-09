@@ -21,6 +21,10 @@
       flake = false;
       url = "github:XIU2/TrackersListCollection";
     };
+    xournalpp = {
+      flake = false;
+      url = "github:xournalpp/xournalpp";
+    };
     yes = {
       flake = false;
       url = "github:SamLukeYes/nix-custom-packages";
@@ -36,7 +40,7 @@
   # specific keys. Wiki page: https://nixos.wiki/wiki/Flakes#Output_schema
   outputs = { self, nixpkgs, ... }@inputs: 
   let
-    rp = import ./rp.nix;
+    # rp = import ./rp.nix;
     system = "x86_64-linux";
     overlay = final: prev: {
       # arch-install-scripts = final.callPackage
@@ -73,12 +77,8 @@
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
       xournalpp = prev.xournalpp.overrideAttrs (old: {
-        patches = [
-          (final.fetchpatch {
-            url = "${rp}https://github.com/xournalpp/xournalpp/pull/3326.patch";
-            hash = "sha256-jI1Nv4MfKlQ/cezvTkHFsRFQ/ZlnB4Fb9hm8O6meFwg=";
-          })
-        ];
+        src = inputs.xournalpp;
+        version = "${old.version}+dev";
       });
       yes = import inputs.yes { pkgs = prev; };
     };
