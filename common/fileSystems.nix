@@ -3,7 +3,7 @@
     "/".device = "/dev/disk/by-label/root";
     "/home".device = "/dev/disk/by-label/data";
     "/var/lib/archbuild" = {
-      device = "/var/archbuild.img";
+      device = "/home/archbuild.img";
       options = [ "compress=zstd" "autodefrag" ];
     };
     "/var/lib/aurbuild" = {
