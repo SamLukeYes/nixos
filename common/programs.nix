@@ -10,7 +10,8 @@
     firefox = {
       enable = true;
       languagePacks = [ "zh-CN" ];
-      package = pkgs.firefox-esr;
+      package = pkgs.firefox-beta-bin;
+      policies.DisableAppUpdate = true;
     };
 
     git.enable = true;
