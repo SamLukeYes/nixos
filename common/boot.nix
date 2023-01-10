@@ -12,6 +12,7 @@
       "vm.swappiness" = 180;
       "vm.page-cluster" = 0;
     };
+    kernelPackages = pkgs.linuxPackages_testing_bcachefs;
     kernelParams = [ "quiet" "udev.log_level=3" ];
     loader = {
       systemd-boot = {
