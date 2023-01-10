@@ -11,7 +11,6 @@
     gnome.gnome-sound-recorder
     gnome.gnome-tweaks
     gnome.nautilus-python
-    igv
     libreoffice-fresh
     obs-studio
     tdesktop
