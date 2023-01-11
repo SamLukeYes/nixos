@@ -77,7 +77,7 @@
   in {
     legacyPackages.${system} = import nixpkgs {
       inherit system;
-      overlays = [ overlay ];
+      inherit (nixpkgs-config.nixpkgs) config overlays;
     };
     nixosConfigurations = {
       absolute = nixpkgs.lib.nixosSystem {
