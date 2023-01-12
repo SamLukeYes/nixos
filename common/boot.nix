@@ -20,7 +20,6 @@
       };
       efi = {
         canTouchEfiVariables = true;
-        efiSysMountPoint = "/efi";
       };
     };
     plymouth.enable = true;
