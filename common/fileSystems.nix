@@ -1,6 +1,9 @@
 {
   fileSystems = {
-    "/".device = "/dev/disk/by-label/root";
+    "/" = {
+      device = "/dev/disk/by-label/root";
+      fsType = "xfs";
+    };
     "/home".device = "/dev/disk/by-label/data";
     "/var/lib/archbuild" = {
       device = "/home/archbuild.img";
