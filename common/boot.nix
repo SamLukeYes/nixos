@@ -23,6 +23,6 @@
       };
     };
     plymouth.enable = true;
-    supportedFilesystems = [ "bcachefs" ];
+    # supportedFilesystems = [ "bcachefs" ];
   };
 }
