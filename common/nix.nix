@@ -6,6 +6,7 @@ let rp = import ../rp.nix; in
   nix = {
     gc = {
       automatic = true;
+      dates = "weekly";
       options = "--delete-older-than 3d";
     };
     settings = {
