@@ -45,6 +45,9 @@
     overlay = final: prev: {
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
+      authenticator = prev.authenticator.override {
+        pipewire = final.pipewire_0_2;
+      };
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       # onedrive = prev.onedrive.overrideAttrs (old: rec {
