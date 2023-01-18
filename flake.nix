@@ -43,11 +43,15 @@
   let
     # rp = import ./rp.nix;
     system = "x86_64-linux";
+    pkgs-20230113 = inputs.nixpkgs-20230113.legacyPackages.${system};
     overlay = final: prev: {
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
       authenticator = prev.authenticator.override {
-        pipewire = inputs.nixpkgs-20230113.legacyPackages.${system}.pipewire;
+        pipewire = pkgs-20230113.pipewire;
+      };
+      devtools = final.yes.archlinux.devtools.override {
+        bash = pkgs-20230113.bash;
       };
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
@@ -62,6 +66,9 @@
       # });
       # pacman = final.callPackage
       #   "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
+      paru = final.yes.archlinux.paru.override {
+        devtools = final.devtools;
+      };
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
       xournalpp = prev.xournalpp.overrideAttrs (old: {
