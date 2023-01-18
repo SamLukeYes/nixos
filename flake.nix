@@ -47,7 +47,7 @@
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
       authenticator = prev.authenticator.override {
-        pipewire = inputs.nixpkgs-20230113.pipewire;
+        pipewire = inputs.nixpkgs-20230113.legacyPackages.pipewire;
       };
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
