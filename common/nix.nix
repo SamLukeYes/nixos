@@ -15,6 +15,7 @@ let rp = import ../rp.nix; in
         "flakes" "nix-command"
       ];
       fallback = true;
+      keep-failed = true;
       keep-outputs = true;
       max-jobs = 3;   # https://github.com/NixOS/nixpkgs/issues/198668
       substituters = lib.mkForce [
