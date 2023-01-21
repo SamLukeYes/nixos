@@ -32,7 +32,7 @@
 
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-20230113.url = "github:NixOS/nixpkgs/befc83905c965adfd33e5cae49acb0351f6e0404";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
     # pr-arch-install-scripts.url = "github:SamLukeYes/nixpkgs/arch-install-scripts";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
   };
@@ -43,15 +43,15 @@
   let
     # rp = import ./rp.nix;
     system = "x86_64-linux";
-    pkgs-20230113 = inputs.nixpkgs-20230113.legacyPackages.${system};
+    pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
     overlay = final: prev: {
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
       authenticator = prev.authenticator.override {
-        pipewire = pkgs-20230113.pipewire;
+        NIX_CFLAGS_COMPILE = [ "-DPW_ENABLE_DEPRECATED" ];
       };
       devtools = final.yes.archlinux.devtools.override {
-        bash = pkgs-20230113.bash;
+        bash = pkgs-stable.bash;
       };
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;

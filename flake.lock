@@ -42,11 +42,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1674217933,
-        "narHash": "sha256-270+l+t2t5poiGkUD4mno9c/B1jxsXQL0p9g+je0i1g=",
+        "lastModified": 1674278711,
+        "narHash": "sha256-7w+XlSrtly6f3tKvCdFKVCOPkzjfuSTm495jgLNiAbU=",
         "owner": "linyinfeng",
         "repo": "nur-packages",
-        "rev": "2e125e4846257913d25353ce8445594f78463562",
+        "rev": "1f6f2b397a3012e7fcfa5b475f4bfefd21b653ba",
         "type": "github"
       },
       "original": {
@@ -102,19 +102,19 @@
         "type": "github"
       }
     },
-    "nixpkgs-20230113": {
+    "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1673631141,
-        "narHash": "sha256-AprpYQ5JvLS4wQG/ghm2UriZ9QZXvAwh1HlgA/6ZEVQ=",
+        "lastModified": 1674242456,
+        "narHash": "sha256-yBy7rCH7EiBe9+CHZm9YB5ii5GRa+MOxeW0oDEBO8SE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "befc83905c965adfd33e5cae49acb0351f6e0404",
+        "rev": "cdead16a444a3e5de7bc9b0af8e198b11bb01804",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
+        "ref": "nixos-22.11",
         "repo": "nixpkgs",
-        "rev": "befc83905c965adfd33e5cae49acb0351f6e0404",
         "type": "github"
       }
     },
@@ -143,7 +143,7 @@
         "linyinfeng": "linyinfeng",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-20230113": "nixpkgs-20230113",
+        "nixpkgs-stable": "nixpkgs-stable",
         "rewine": "rewine",
         "trackers": "trackers",
         "xournalpp": "xournalpp",
@@ -153,11 +153,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1674230857,
-        "narHash": "sha256-Qc5sosMUro7nMBrKy7KzWfvIAhXsJtSznp+hSKZNwFw=",
+        "lastModified": 1674317245,
+        "narHash": "sha256-XKGQmpDVGc9p5SiUMzd4f2dMJlXTRa6W271CTqwiuss=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "fc3a794dde8af5d6bb344c63f4e3d179a1e0db53",
+        "rev": "bac63efe97a3605b9988395f7f84dfff759b341e",
         "type": "github"
       },
       "original": {
@@ -169,11 +169,11 @@
     "xournalpp": {
       "flake": false,
       "locked": {
-        "lastModified": 1674121138,
-        "narHash": "sha256-/qKAsFzGVAOBB4uZ3lSFpj9Htatk6R4gwMhJxlMcCWw=",
+        "lastModified": 1674309679,
+        "narHash": "sha256-Zcuw1tvhhEJ6RAtjaa3gqsF1Q2m18O2wHm+4kd7uXXE=",
         "owner": "xournalpp",
         "repo": "xournalpp",
-        "rev": "2222e53421bc467dc3a217f02f546f129ce136fb",
+        "rev": "3971c1a051293f6ef45f68a80ba49b96354062dd",
         "type": "github"
       },
       "original": {
