@@ -47,9 +47,6 @@
     overlay = final: prev: {
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
-      authenticator = prev.authenticator.overrideAttrs (old: {
-        NIX_CFLAGS_COMPILE = [ "-DPW_ENABLE_DEPRECATED" ];
-      });
       devtools = final.yes.archlinux.devtools.override {
         bash = pkgs-stable.bash;
       };
