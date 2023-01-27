@@ -5,7 +5,10 @@
 
   inputs = {
     linyinfeng = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixos-stable.follows = "nixpkgs-stable";
+        nixpkgs.follows = "nixpkgs";
+      };
       url = "github:linyinfeng/nur-packages";
     };
     # nil = {
