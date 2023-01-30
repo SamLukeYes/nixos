@@ -11,7 +11,7 @@
     gnome.gnome-sound-recorder
     gnome.gnome-tweaks
     gnome.nautilus-python
-    libreoffice-fresh
+    libreoffice
     obs-studio
     tdesktop
     virt-manager
