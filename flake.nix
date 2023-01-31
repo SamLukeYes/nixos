@@ -53,7 +53,6 @@
       devtools = final.yes.archlinux.devtools.override {
         bash = pkgs-stable.bash;
       };
-      libreoffice = pkgs-stable.libreoffice;
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       # onedrive = prev.onedrive.overrideAttrs (old: rec {
