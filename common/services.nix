@@ -29,6 +29,8 @@
 
     power-profiles-daemon.enable = false;
 
+    throttled.enable = false;
+
     tlp = {
       enable = true;
       settings = {
