@@ -16,6 +16,7 @@
       ./programs.nix
       ./services.nix
       ./systemd.nix
+      ./virtualisation.nix
     ];
 
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
@@ -27,7 +28,6 @@
   security.rtkit.enable = true;
   hardware.pulseaudio.enable = false;
 
-  virtualisation.libvirtd.enable = true;
   zramSwap.enable = true;
 }
 
