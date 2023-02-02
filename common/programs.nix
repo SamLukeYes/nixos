@@ -10,7 +10,6 @@
     firefox = {
       enable = true;
       languagePacks = [ "zh-CN" ];
-      package = pkgs.firefox-beta-bin.override { wmClass = "firefox-beta"; };
       policies.DisableAppUpdate = true;
     };
 
