@@ -46,7 +46,17 @@
   let
     # rp = import ./rp.nix;
     system = "x86_64-linux";
-    pkgs-stable = inputs.nixpkgs-stable.legacyPackages.${system};
+    nixpkgs-config = {
+      nix.settings.nix-path = [ "nixpkgs=${nixpkgs}" ];
+      nixpkgs = {
+        config.allowUnfree = true;
+        overlays = [ overlay ];
+      };
+    };
+    pkgs-stable = import inputs.nixpkgs-stable {
+      inherit system;
+      inherit (nixpkgs-config.nixpkgs) config;
+    };
     overlay = final: prev: {
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
@@ -72,19 +82,13 @@
       };
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
+      vscode = pkgs-stable.vscode;
       xournalpp = prev.xournalpp.overrideAttrs (old: {
         src = inputs.xournalpp;
         version = "${old.version}+dev";
         buildInputs = old.buildInputs ++ [ final.alsa-lib ];
       });
       yes = import inputs.yes { pkgs = prev; };
-    };
-    nixpkgs-config = {
-      nix.settings.nix-path = [ "nixpkgs=${nixpkgs}" ];
-      nixpkgs = {
-        config.allowUnfree = true;
-        overlays = [ overlay ];
-      };
     };
   in {
     legacyPackages.${system} = import nixpkgs {
