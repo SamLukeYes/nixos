@@ -10,12 +10,15 @@ let rp = import ../rp.nix; in
     }) {
       old-root = {};
     });
+
     packages = [ pkgs.onedrive ];
+
     services = {
       "systemd-nspawn@".serviceConfig.DeviceAllow = [
         "char-drm rwm"
         "/dev/dri rw"
       ];
+
       aria2b = {
         after = [ "aria2.service" ];
         script = ''
@@ -28,13 +31,19 @@ let rp = import ../rp.nix; in
         };
         wantedBy = [ "multi-user.target" ];
       };
-      
+
+      aria2.restartIfChanged = false;
+      display-manager.restartIfChanged = false;
+      NetworkManager.restartIfChanged = false;
+      waydroid-container.restartIfChanged = false;
     };
+
     user.services = {
       clash = {
         serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
         wantedBy = [ "default.target" ];
       };
+
       nix-index = {
         script = ''
           FILE=index-x86_64-linux
@@ -46,7 +55,9 @@ let rp = import ../rp.nix; in
         serviceConfig.Type = "oneshot";
         startAt = "weekly";
       };
+
       onedrive.wantedBy = [ "default.target" ];
+      
       stuhealth = {
         script = ''
           export DISPLAY=:0
