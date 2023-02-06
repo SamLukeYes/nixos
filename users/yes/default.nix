@@ -12,6 +12,7 @@
         "wheel"
         "wireshark"
       ];
+      initialHashedPassword = "";
       isNormalUser = true;
       shell = pkgs.xonsh;
       uid = 1000;

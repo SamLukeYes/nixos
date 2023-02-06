@@ -1,20 +1,8 @@
 { config, lib, pkgs, ... }:
 
-let
-  rp = import ../../rp.nix;
-in {
+{
   imports = [ ./systemPackages.nix ];
   environment = {
-    etc = {
-      "makepkg.conf".source = "${pkgs.devtools}/share/devtools/makepkg-x86_64.conf";
-      "pacman.conf".source = "/old-root/etc/pacman.conf";
-      "pacman.d/mirrorlist".text = ''
-        Server = https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch
-        Server = https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch
-        Server = ${rp}https://geo.mirror.pkgbuild.com/$repo/os/$arch
-      '';
-    };
-
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/gnome.nix
     gnome.excludePackages = with pkgs.gnome; [
       epiphany                # use firefox instead

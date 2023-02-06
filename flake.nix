@@ -104,6 +104,15 @@
           ./machines/absolute/configuration.nix
         ];
       };
+      vm = nixpkgs.lib.nixosSystem {
+        inherit system;
+        modules = [
+          nixpkgs-config
+          "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+          ./machines/vm
+        ];
+      };
     };
+    packages.${system}.default = self.nixosConfigurations.vm.config.system.build.vm;
   };
 }

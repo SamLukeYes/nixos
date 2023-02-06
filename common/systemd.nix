@@ -28,26 +28,7 @@ let rp = import ../rp.nix; in
         };
         wantedBy = [ "multi-user.target" ];
       };
-      pacman-init = {
-        script = ''
-          export KEYRING_IMPORT_DIR=${pkgs.yes.archlinux.archlinux-keyring}/share/pacman/keyrings
-          ${pkgs.pacman}/bin/pacman-key --init
-          ${pkgs.pacman}/bin/pacman-key --populate archlinux
-        '';
-        serviceConfig = {
-          Type = "oneshot";
-        };
-        wantedBy = [ "multi-user.target" ];
-      };
-      update-pacman-db = {
-        requires = [ "network-online.target" ];
-        script = ''
-          ${pkgs.pacman}/bin/pacman -Sy
-          ${pkgs.pacman}/bin/pacman -Fy
-        '';
-        serviceConfig.Type = "oneshot";
-        startAt = "daily";
-      };
+      
     };
     user.services = {
       clash = {
