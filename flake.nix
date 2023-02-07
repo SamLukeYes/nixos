@@ -82,7 +82,6 @@
       };
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
-      vscode = pkgs-stable.vscode;
       xournalpp = prev.xournalpp.overrideAttrs (old: {
         src = inputs.xournalpp;
         version = "${old.version}+dev";
