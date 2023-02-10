@@ -60,7 +60,16 @@
     overlay = final: prev: {
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
-      authenticator = pkgs-stable.authenticator;
+      authenticator = prev.authenticator.override {
+        pipewire = final.pipewire.overrideAttrs (old: {
+          patches = old.patches ++ [
+            (final.fetchpatch {
+              url = "https://gitlab.freedesktop.org/pipewire/pipewire/-/commit/caf58ecffb4dc8e2bfa7898d0ed910cf0a82d65f.patch";
+              hash = "sha256-kCQNG0j3lwT01WNfGsdUmKvDHg8tvMfS2eunPyXBV1E=";
+            })
+          ];
+        });
+      };
       devtools = final.yes.archlinux.devtools.override {
         bash = pkgs-stable.bash;
       };
