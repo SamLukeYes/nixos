@@ -22,7 +22,6 @@
     linyinfeng.icalingua-plus-plus
     linyinfeng.wemeet
     rewine.electron-netease-cloud-music
-    yes.electronic-wechat
     yes.lx-music-desktop
     yes.ppet
 
