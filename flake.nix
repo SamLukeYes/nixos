@@ -4,6 +4,10 @@
   description = "My NixOS configuration";
 
   inputs = {
+    linglong = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:SamLukeYes/linglong-flake";
+    };
     linyinfeng = {
       inputs = {
         nixos-stable.follows = "nixpkgs-stable";
@@ -118,6 +122,12 @@
           nixpkgs-config
           "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
           ./machines/vm
+
+          # experimental linglong support
+          inputs.linglong.nixosModules
+          {
+            services.linglong.enable = true;
+          }
         ];
       };
     };

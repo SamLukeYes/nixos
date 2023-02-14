@@ -33,6 +33,26 @@
         "type": "github"
       }
     },
+    "linglong": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1676254273,
+        "narHash": "sha256-y2RvkkC1VRxuVLx45RXwYqB//VKEjgrZpdKT0xWdE4I=",
+        "owner": "SamLukeYes",
+        "repo": "linglong-flake",
+        "rev": "285a8a90b2cd2f51c3853d315ad3f9f6d1fb8ebf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SamLukeYes",
+        "repo": "linglong-flake",
+        "type": "github"
+      }
+    },
     "linyinfeng": {
       "inputs": {
         "flake-utils-plus": "flake-utils-plus",
@@ -90,11 +110,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1676094287,
-        "narHash": "sha256-z2gc84Hs9JmzmSmQ/n3Ano/uhYPS4uF8jZPcgKDTfb8=",
+        "lastModified": 1676177817,
+        "narHash": "sha256-OQnBnuKkpwkfNY31xQyfU5hNpLs1ilWt+hVY6ztEEOM=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "103fe0800b9d739c279997561c9da9d242d5b6b8",
+        "rev": "1b82144edfcd0c86486d2e07c7298f85510e7fb8",
         "type": "github"
       },
       "original": {
@@ -126,6 +146,7 @@
     },
     "root": {
       "inputs": {
+        "linglong": "linglong",
         "linyinfeng": "linyinfeng",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
@@ -139,11 +160,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1676189269,
-        "narHash": "sha256-rBROi7ZyDps4bY1I7Ijam0aajcXW+qnZZG7e3fSOi1c=",
+        "lastModified": 1676246852,
+        "narHash": "sha256-jAwMKCTNV1ankABcRQe90gMpdWoidBw9utaxV0YIat4=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "e6e3a5263e317d9980b78379b2dd04241cf97667",
+        "rev": "8f4f607b47d4a3bcae2a637a973157b542114861",
         "type": "github"
       },
       "original": {
