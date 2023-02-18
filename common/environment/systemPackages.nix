@@ -13,13 +13,13 @@
     gnome.nautilus-python
     libreoffice
     obs-studio
+    qq
     tdesktop
     virt-manager
     xournalpp
     yaru-theme
     zotero
 
-    linyinfeng.icalingua-plus-plus
     linyinfeng.wemeet
     rewine.electron-netease-cloud-music
     yes.lx-music-desktop
