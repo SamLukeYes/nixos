@@ -23,7 +23,6 @@
     linyinfeng.wemeet
     rewine.electron-netease-cloud-music
     yes.lx-music-desktop
-    yes.ppet
 
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
