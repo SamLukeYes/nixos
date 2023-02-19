@@ -13,7 +13,6 @@
     gnome.nautilus-python
     libreoffice
     obs-studio
-    qq
     tdesktop
     virt-manager
     xournalpp
@@ -23,6 +22,7 @@
     linyinfeng.wemeet
     rewine.electron-netease-cloud-music
     yes.lx-music-desktop
+    yes.qq-appimage
 
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
