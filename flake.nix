@@ -54,43 +54,12 @@
       nix.settings.nix-path = [ "nixpkgs=${nixpkgs}" ];
       nixpkgs = {
         config.allowUnfree = true;
-        overlays = [ overlay ];
+        overlays = [ self.overlays.default ];
       };
     };
     pkgs-stable = import inputs.nixpkgs-stable {
       inherit system;
       inherit (nixpkgs-config.nixpkgs) config;
-    };
-    overlay = final: prev: {
-      # arch-install-scripts = final.callPackage
-      #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
-      devtools = final.yes.archlinux.devtools.override {
-        bash = pkgs-stable.bash;
-      };
-      linyinfeng = inputs.linyinfeng.packages.${system};
-      # nil = inputs.nil.packages.${system}.nil;
-      # onedrive = prev.onedrive.overrideAttrs (old: rec {
-      #   version = "2.4.22";
-      #   src = prev.fetchFromGitHub {
-      #     owner = "abraunegg";
-      #     repo = "onedrive";
-      #     rev = "v${version}";
-      #     hash = "sha256-KZVRLXXaJYMqHzjxTfQaD0u7n3ACBEk3fLOmqwybNhM=";
-      #   };
-      # });
-      # pacman = final.callPackage
-      #   "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
-      paru = final.yes.archlinux.paru.override {
-        devtools = final.devtools;
-      };
-      rewine = inputs.rewine.packages.${system};
-      trackers = inputs.trackers;
-      xournalpp = prev.xournalpp.overrideAttrs (old: {
-        src = inputs.xournalpp;
-        version = "${old.version}+dev";
-        buildInputs = old.buildInputs ++ [ final.alsa-lib ];
-      });
-      yes = import inputs.yes { pkgs = prev; };
     };
   in {
     legacyPackages.${system} = import nixpkgs {
@@ -120,6 +89,37 @@
           }
         ];
       };
+    };
+    overlays.default = final: prev: {
+      # arch-install-scripts = final.callPackage
+      #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
+      devtools = final.yes.archlinux.devtools.override {
+        bash = pkgs-stable.bash;
+      };
+      linyinfeng = inputs.linyinfeng.packages.${system};
+      # nil = inputs.nil.packages.${system}.nil;
+      # onedrive = prev.onedrive.overrideAttrs (old: rec {
+      #   version = "2.4.22";
+      #   src = prev.fetchFromGitHub {
+      #     owner = "abraunegg";
+      #     repo = "onedrive";
+      #     rev = "v${version}";
+      #     hash = "sha256-KZVRLXXaJYMqHzjxTfQaD0u7n3ACBEk3fLOmqwybNhM=";
+      #   };
+      # });
+      # pacman = final.callPackage
+      #   "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
+      paru = final.yes.archlinux.paru.override {
+        devtools = final.devtools;
+      };
+      rewine = inputs.rewine.packages.${system};
+      trackers = inputs.trackers;
+      xournalpp = prev.xournalpp.overrideAttrs (old: {
+        src = inputs.xournalpp;
+        version = "${old.version}+dev";
+        buildInputs = old.buildInputs ++ [ final.alsa-lib ];
+      });
+      yes = import inputs.yes { pkgs = prev; };
     };
     packages.${system}.default = self.nixosConfigurations.vm.config.system.build.vm;
   };
