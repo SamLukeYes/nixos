@@ -31,5 +31,9 @@
     cores = 2;
     memorySize = 4096;
     qemu.options = [ "-device virtio-vga-gl -display sdl,gl=on" ];
+    sharedDirectories.download = {
+      source = "/home/yes/Downloads";
+      target = "/home/yes/Downloads";
+    };
   };
 }
