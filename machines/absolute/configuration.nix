@@ -35,6 +35,7 @@ let rp = import ../../rp.nix; in
         ${pkgs.pacman}/bin/pacman-key --populate archlinux
       '';
       serviceConfig = {
+        RemainAfterExit = true;
         Type = "oneshot";
       };
       wantedBy = [ "multi-user.target" ];
