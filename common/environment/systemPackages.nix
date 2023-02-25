@@ -23,6 +23,7 @@
     rewine.electron-netease-cloud-music
     yes.lx-music-desktop
     yes.qq-appimage
+    yes.snapgene-viewer
 
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
