@@ -208,11 +208,11 @@
     "yes": {
       "flake": false,
       "locked": {
-        "lastModified": 1677379961,
-        "narHash": "sha256-/CIKuhRuHruC6WQTidJvB4bMYxPhvYowI+oiUoQnr5Y=",
+        "lastModified": 1677382383,
+        "narHash": "sha256-k70DqON+ULDQFrX55OaplOSLb6KtuhccYplHkz90tRY=",
         "owner": "SamLukeYes",
         "repo": "nix-custom-packages",
-        "rev": "4baacf6829ab28713d502b5ce414ecb5ce3428ed",
+        "rev": "b698865b15901fc5c869ca54456457afac6ced4c",
         "type": "github"
       },
       "original": {
