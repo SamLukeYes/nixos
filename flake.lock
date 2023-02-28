@@ -140,6 +140,22 @@
         "type": "github"
       }
     },
+    "pr-authenticator": {
+      "locked": {
+        "lastModified": 1676774934,
+        "narHash": "sha256-4hNMWKp3VfxGAqfJObCdyKUK9YqNHn7Wv+oOTdnGh7I=",
+        "owner": "austinbutler",
+        "repo": "nixpkgs",
+        "rev": "e60a0c1f92d59cba0696b402ee87360de60e0a5c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "austinbutler",
+        "ref": "authenticator-gtk4-override",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "rewine": {
       "inputs": {
         "nixpkgs": [
@@ -167,6 +183,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
+        "pr-authenticator": "pr-authenticator",
         "rewine": "rewine",
         "trackers": "trackers",
         "xournalpp": "xournalpp",

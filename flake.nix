@@ -42,6 +42,7 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
     # pr-arch-install-scripts.url = "github:SamLukeYes/nixpkgs/arch-install-scripts";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
+    pr-authenticator.url = "github:austinbutler/nixpkgs/authenticator-gtk4-override";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -93,6 +94,16 @@
     overlays.default = final: prev: {
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
+      authenticator = final.callPackage
+        "${inputs.pr-authenticator}/pkgs/applications/misc/authenticator" {
+          gtk4 = final.gtk4.overrideAttrs (attrs: rec {
+            version = "4.9.4";
+            src = final.fetchurl {
+              url = "mirror://gnome/sources/gtk/${final.lib.versions.majorMinor version}/gtk-${version}.tar.xz";
+              sha256 = "sha256-kaOv1YQB1OXYHjCwjuPxE6R2j/EBQDNqcqMmx3JyvjA=";
+            };
+          });
+        };
       devtools = final.yes.archlinux.devtools.override {
         bash = pkgs-stable.bash;
       };
