@@ -94,16 +94,7 @@
     overlays.default = final: prev: {
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
-      authenticator = final.callPackage
-        "${inputs.pr-authenticator}/pkgs/applications/misc/authenticator" {
-          gtk4 = final.gtk4.overrideAttrs (attrs: rec {
-            version = "4.9.4";
-            src = final.fetchurl {
-              url = "mirror://gnome/sources/gtk/${final.lib.versions.majorMinor version}/gtk-${version}.tar.xz";
-              sha256 = "sha256-kaOv1YQB1OXYHjCwjuPxE6R2j/EBQDNqcqMmx3JyvjA=";
-            };
-          });
-        };
+      authenticator = inputs.pr-authenticator.legacyPackages.${system}.authenticator;
       devtools = final.yes.archlinux.devtools.override {
         bash = pkgs-stable.bash;
       };
