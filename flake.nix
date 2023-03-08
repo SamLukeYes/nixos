@@ -10,7 +10,7 @@
     };
     linyinfeng = {
       inputs = {
-        nixos-stable.follows = "nixpkgs-stable";
+        # nixos-stable.follows = "nixpkgs-stable";
         nixpkgs.follows = "nixpkgs";
       };
       url = "github:linyinfeng/nur-packages";
@@ -39,7 +39,7 @@
 
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
+    # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
     # pr-arch-install-scripts.url = "github:SamLukeYes/nixpkgs/arch-install-scripts";
     # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
     pr-authenticator.url = "github:austinbutler/nixpkgs/authenticator-gtk4-override";
@@ -58,10 +58,10 @@
         overlays = [ self.overlays.default ];
       };
     };
-    pkgs-stable = import inputs.nixpkgs-stable {
-      inherit system;
-      inherit (nixpkgs-config.nixpkgs) config;
-    };
+    # pkgs-stable = import inputs.nixpkgs-stable {
+    #   inherit system;
+    #   inherit (nixpkgs-config.nixpkgs) config;
+    # };
   in {
     legacyPackages.${system} = import nixpkgs {
       inherit system;
@@ -95,9 +95,7 @@
       # arch-install-scripts = final.callPackage
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
       authenticator = inputs.pr-authenticator.legacyPackages.${system}.authenticator;
-      devtools = final.yes.archlinux.devtools.override {
-        bash = pkgs-stable.bash;
-      };
+      devtools = final.yes.archlinux.devtools;
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       # onedrive = prev.onedrive.overrideAttrs (old: rec {
@@ -111,9 +109,7 @@
       # });
       # pacman = final.callPackage
       #   "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
-      paru = final.yes.archlinux.paru.override {
-        devtools = final.devtools;
-      };
+      paru = final.yes.archlinux.paru;
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
       xournalpp = prev.xournalpp.overrideAttrs (old: {
