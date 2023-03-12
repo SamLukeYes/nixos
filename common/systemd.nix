@@ -31,10 +31,6 @@ let rp = import ../rp.nix; in
       
     };
     user.services = {
-      clash = {
-        serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
-        wantedBy = [ "default.target" ];
-      };
       nix-index = {
         script = ''
           FILE=index-x86_64-linux
@@ -47,6 +43,13 @@ let rp = import ../rp.nix; in
         startAt = "weekly";
       };
       onedrive.wantedBy = [ "default.target" ];
+      shadowsocks-ws = {
+        script = ''
+          cd ~/.config/shadowsocks-ws
+          ${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local
+        '';
+        wantedBy = [ "default.target" ];
+      };
       stuhealth = {
         script = ''
           export DISPLAY=:0
