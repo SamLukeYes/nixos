@@ -58,7 +58,11 @@ let rp = import ../rp.nix; in
         '';
         serviceConfig = {
           Restart = "on-failure";
-          RestartSec = 5;
+          RestartSec = 15;
+        };
+        unitConfig = {
+          StartLimitBurst = 5;
+          StartLimitIntervalSec = 120;
         };
         wantedBy = [ "default.target" ];
       };
