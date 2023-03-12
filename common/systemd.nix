@@ -47,6 +47,21 @@ let rp = import ../rp.nix; in
         startAt = "weekly";
       };
       onedrive.wantedBy = [ "default.target" ];
+      ss-ws-local = with pkgs.yes.nodePackages; {
+        script = ''
+          if [ ! -f ~/.config/shadowsocks-ws/config.json ]; then
+            echo "~/.config/shadowsocks-ws/config.json not found. Not starting."
+            exit 0
+          fi
+          cd ~/.config/shadowsocks-ws
+          ${shadowsocks-ws}/bin/ss-ws-local
+        '';
+        serviceConfig = {
+          Restart = "on-failure";
+          RestartSec = 5;
+        };
+        wantedBy = [ "default.target" ];
+      };
       stuhealth = {
         script = ''
           export DISPLAY=:0
