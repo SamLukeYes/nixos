@@ -39,8 +39,6 @@
       };
     };
 
-    v2raya.enable = true;
-
     xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
