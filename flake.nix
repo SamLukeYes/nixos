@@ -58,15 +58,12 @@
         overlays = [ self.overlays.default ];
       };
     };
-    # pkgs-stable = import inputs.nixpkgs-stable {
-    #   inherit system;
-    #   inherit (nixpkgs-config.nixpkgs) config;
-    # };
-  in {
-    legacyPackages.${system} = import nixpkgs {
+    args = {
       inherit system;
       inherit (nixpkgs-config.nixpkgs) config overlays;
     };
+  in {
+    legacyPackages.${system} = import nixpkgs args;
     nixosConfigurations = {
       absolute = nixpkgs.lib.nixosSystem {
         inherit system;
@@ -96,6 +93,7 @@
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
       authenticator = inputs.pr-authenticator.legacyPackages.${system}.authenticator;
       devtools = final.yes.archlinux.devtools;
+      libreoffice = inputs.pr-authenticator.legacyPackages.${system}.libreoffice;
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       # onedrive = prev.onedrive.overrideAttrs (old: rec {
