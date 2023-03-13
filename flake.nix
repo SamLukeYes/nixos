@@ -93,7 +93,6 @@
       #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
       authenticator = inputs.pr-authenticator.legacyPackages.${system}.authenticator;
       devtools = final.yes.archlinux.devtools;
-      libreoffice = inputs.pr-authenticator.legacyPackages.${system}.libreoffice;
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       # onedrive = prev.onedrive.overrideAttrs (old: rec {
