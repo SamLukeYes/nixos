@@ -109,11 +109,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1678711212,
-        "narHash": "sha256-OVGVMd4xmcsWrNpBI2/ebst6eSoKlx8b5RrA9AjEDNU=",
+        "lastModified": 1678764379,
+        "narHash": "sha256-Uy8eA7is4tPuwSvRQ06La4+OWj6sPB8mh6nypw4qDJY=",
         "owner": "linyinfeng",
         "repo": "nur-packages",
-        "rev": "c392477c913a8b9465ea734fbc296554eb1f084b",
+        "rev": "ccad33a41b8c46f2f95cac4da4d80b305d1676fd",
         "type": "github"
       },
       "original": {
@@ -169,6 +169,27 @@
         "type": "github"
       }
     },
+    "olex2": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "src": "src"
+      },
+      "locked": {
+        "lastModified": 1678816980,
+        "narHash": "sha256-1zwgF05PQd+WPKjK2IPTJ93m8D1vqobjgpMkWrZuIaM=",
+        "owner": "SamLukeYes",
+        "repo": "olex2-flake",
+        "rev": "cdab44d51345fc2a3e46e7eed4b438bd1c8ecb36",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SamLukeYes",
+        "repo": "olex2-flake",
+        "type": "github"
+      }
+    },
     "pr-authenticator": {
       "locked": {
         "lastModified": 1677874863,
@@ -211,6 +232,7 @@
         "linyinfeng": "linyinfeng",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "olex2": "olex2",
         "pr-authenticator": "pr-authenticator",
         "rewine": "rewine",
         "trackers": "trackers",
@@ -218,14 +240,31 @@
         "yes": "yes"
       }
     },
+    "src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678114146,
+        "narHash": "sha256-vPuYgNBYqFNF63el3KB6KEDxh11VIjrDuXF4LjaWfbk=",
+        "owner": "pcxod",
+        "repo": "olex2",
+        "rev": "bb2c1857f024bb7d44bf01b2aa30c2eb0d727b14",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pcxod",
+        "ref": "1.5",
+        "repo": "olex2",
+        "type": "github"
+      }
+    },
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1678708658,
-        "narHash": "sha256-3Z6Iy9uZ/3I8zzXrBGJP4sfx3eQ94HpoUaVSIr5F1+o=",
+        "lastModified": 1678810073,
+        "narHash": "sha256-UcvqS4IM6O+tFsyI50T2NjyKoCP3kLKwRO48Bte6LHg=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "eec5631ffa84b31fa581169e3cf9aff68040d78c",
+        "rev": "9e94b750d6e0be805c9871c6b922eedeed4616e7",
         "type": "github"
       },
       "original": {
@@ -258,11 +297,11 @@
     "xournalpp": {
       "flake": false,
       "locked": {
-        "lastModified": 1678688576,
-        "narHash": "sha256-RZXcZVONxUBRqgFnZ1kvlkyO1a5o8IlEVfQjbnAp2V8=",
+        "lastModified": 1678760955,
+        "narHash": "sha256-dbE/C6mvU1NvD48t8l+pfpEYfAQDN2yxn+0zkxjYbEc=",
         "owner": "xournalpp",
         "repo": "xournalpp",
-        "rev": "cf6b4f12cb0a534c4acb173285d9a1065c4b1588",
+        "rev": "63394a5ee7a95e4a4df0258eaa732e44afb77947",
         "type": "github"
       },
       "original": {
