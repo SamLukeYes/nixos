@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -13,6 +13,7 @@
     gnome.nautilus-python
     libreoffice
     obs-studio
+    olex2
     tdesktop
     virt-manager
     xournalpp
