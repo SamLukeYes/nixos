@@ -177,11 +177,11 @@
         "src": "src"
       },
       "locked": {
-        "lastModified": 1678816980,
-        "narHash": "sha256-1zwgF05PQd+WPKjK2IPTJ93m8D1vqobjgpMkWrZuIaM=",
+        "lastModified": 1678844177,
+        "narHash": "sha256-eRdPNVUAZHlN01pMjlxgJrbiAASJ1+1ODaT9CzZC+60=",
         "owner": "SamLukeYes",
         "repo": "olex2-flake",
-        "rev": "cdab44d51345fc2a3e46e7eed4b438bd1c8ecb36",
+        "rev": "f848c3011a053e7a737c4032d004ab9058110448",
         "type": "github"
       },
       "original": {
@@ -260,11 +260,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1678810073,
-        "narHash": "sha256-UcvqS4IM6O+tFsyI50T2NjyKoCP3kLKwRO48Bte6LHg=",
+        "lastModified": 1678838902,
+        "narHash": "sha256-pU9VJsurHGEel5EcR9rqPaY7KM4uBzbpiJMd4Y/crm8=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "9e94b750d6e0be805c9871c6b922eedeed4616e7",
+        "rev": "cafc6e1ba65703759e5dba4394b0850123bd7684",
         "type": "github"
       },
       "original": {
