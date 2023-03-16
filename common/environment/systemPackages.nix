@@ -51,7 +51,6 @@
     ((vscode.override {
       commandLineArgs = "--touch-events -n";
     }).fhsWithPackages (ps: with ps; [
-      chromium                          # for markdown export
       nil                               # for nix IDE
       pacman                            # add a dummy makepkg.conf to FHS
       python3Packages.python-lsp-server # for xonsh IDE
