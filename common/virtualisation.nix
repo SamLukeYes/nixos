@@ -1,10 +1,11 @@
 {
   virtualisation = {
-    docker.rootless = {
-      enable = true;
-      setSocketVariable = true;
-    };
     libvirtd.enable = true;
+    podman = {
+      enable = true;
+      autoPrune.enable = true;
+      dockerCompat = true;
+    };
     waydroid.enable = true;
   };
 }
