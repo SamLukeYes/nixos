@@ -4,12 +4,18 @@
   description = "My NixOS configuration";
 
   inputs = {
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils-plus = {
+      inputs.flake-utils.follows = "flake-utils";
+      url = "github:gytis-ivaskevicius/flake-utils-plus";
+    };
     linglong = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/linglong-flake";
     };
     linyinfeng = {
       inputs = {
+        flake-utils.follows = "flake-utils";
         # nixos-stable.follows = "nixpkgs-stable";
         nixpkgs.follows = "nixpkgs";
       };
@@ -44,73 +50,65 @@
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
-    # pr-arch-install-scripts.url = "github:SamLukeYes/nixpkgs/arch-install-scripts";
-    # pr-pacman.url = "github:SamLukeYes/nixpkgs/pacman";
-    pr-authenticator.url = "github:austinbutler/nixpkgs/authenticator-gtk4-override";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
   # specific keys. Wiki page: https://nixos.wiki/wiki/Flakes#Output_schema
-  outputs = { self, nixpkgs, ... }@inputs: 
+  outputs = { self, nixpkgs, flake-utils-plus, ... }@inputs: 
   let
     # rp = import ./rp.nix;
     system = "x86_64-linux";
-    nixpkgs-config = {
-      nix.settings.nix-path = [ "nixpkgs=${nixpkgs}" ];
-      nixpkgs = {
-        config.allowUnfree = true;
-        overlays = [ self.overlays.default ];
-      };
-    };
-    args = {
-      inherit system;
-      inherit (nixpkgs-config.nixpkgs) config overlays;
-    };
-  in {
-    legacyPackages.${system} = import nixpkgs args;
-    nixosConfigurations = {
-      absolute = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          nixpkgs-config
-          inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
-          ./machines/absolute/configuration.nix
-        ];
-      };
-      vm = nixpkgs.lib.nixosSystem {
-        inherit system;
-        modules = [
-          nixpkgs-config
-          "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
-          ./machines/vm
 
-          # experimental linglong support
-          inputs.linglong.nixosModules
-          {
-            services.linglong.enable = true;
-          }
-        ];
-      };
+  in flake-utils-plus.lib.mkFlake rec {
+    inherit self inputs;
+    channelsConfig.allowUnfree = true;
+    sharedOverlays = [ self.overlays.default ];
+    supportedSystems = [ system ];
+
+    channels.nixpkgs = {
+      input = nixpkgs;
+      patches = [
+        ./patches/pr-217069.patch
+      ];
     };
+
+    hostDefaults = {
+      inherit system;
+      channelName = "nixpkgs";
+      modules = [
+        {
+          nix = {
+            generateNixPathFromInputs = true;
+            generateRegistryFromInputs = true;
+            linkInputs = true;
+          };
+        }
+      ];
+    };
+
+    hosts = {
+      absolute.modules = [
+        inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
+        ./machines/absolute/configuration.nix
+      ];
+
+      vm.modules = [
+        "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+        ./machines/vm
+
+        # experimental linglong support
+        inputs.linglong.nixosModules
+        {
+          services.linglong.enable = true;
+        }
+      ];
+    };
+
     overlays.default = final: prev: {
-      # arch-install-scripts = final.callPackage
-      #   "${inputs.pr-arch-install-scripts}/pkgs/tools/misc/arch-install-scripts" {};
-      authenticator = inputs.pr-authenticator.legacyPackages.${system}.authenticator;
       devtools = final.yes.archlinux.devtools;
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       olex2 = inputs.olex2.packages.${system}.olex2-launcher-x11;
-      # onedrive = prev.onedrive.overrideAttrs (old: rec {
-      #   version = "2.4.22";
-      #   src = prev.fetchFromGitHub {
-      #     owner = "abraunegg";
-      #     repo = "onedrive";
-      #     rev = "v${version}";
-      #     hash = "sha256-KZVRLXXaJYMqHzjxTfQaD0u7n3ACBEk3fLOmqwybNhM=";
-      #   };
-      # });
-      # pacman = final.callPackage
-      #   "${inputs.pr-pacman}/pkgs/tools/package-management/pacman" {};
       paru = final.yes.archlinux.paru;
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
@@ -121,6 +119,5 @@
       });
       yes = import inputs.yes { pkgs = prev; };
     };
-    packages.${system}.default = self.nixosConfigurations.vm.config.system.build.vm;
   };
 }

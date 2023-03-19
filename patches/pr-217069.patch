@@ -1,0 +1,85 @@
+From ba07e5688267842920bd00e3bbabddc1e40de2df Mon Sep 17 00:00:00 2001
+From: Austin Butler <austinabutler@gmail.com>
+Date: Sat, 18 Mar 2023 17:16:17 -0700
+Subject: [PATCH] authenticator: 4.1.6 -> 4.2.0
+
+---
+ pkgs/applications/misc/authenticator/default.nix |  9 ++++-----
+ pkgs/top-level/all-packages.nix                  | 13 ++++++++++++-
+ 2 files changed, 16 insertions(+), 6 deletions(-)
+
+diff --git a/pkgs/applications/misc/authenticator/default.nix b/pkgs/applications/misc/authenticator/default.nix
+index 5fb336d8de371..318418e7b8e5a 100644
+--- a/pkgs/applications/misc/authenticator/default.nix
++++ b/pkgs/applications/misc/authenticator/default.nix
+@@ -2,7 +2,6 @@
+ , stdenv
+ , fetchFromGitLab
+ , appstream-glib
+-, clang
+ , desktop-file-utils
+ , meson
+ , ninja
+@@ -14,7 +13,6 @@
+ , gst_all_1
+ , gtk4
+ , libadwaita
+-, libclang
+ , openssl
+ , pipewire
+ , sqlite
+@@ -24,20 +22,20 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "authenticator";
+-  version = "4.1.6";
++  version = "4.2.0";
+ 
+   src = fetchFromGitLab {
+     domain = "gitlab.gnome.org";
+     owner = "World";
+     repo = "Authenticator";
+     rev = version;
+-    hash = "sha256-fv7Np3haRCJABlJocKuu+1jevHYrdo+VyiQBpRmHs2g=";
++    hash = "sha256-Nv4QE6gyh42Na/stAgTIapV8GQuUHCdL6IEO//J8dV8=";
+   };
+ 
+   cargoDeps = rustPlatform.fetchCargoTarball {
+     inherit src;
+     name = "${pname}-${version}";
+-    hash = "sha256-8GddlDM1lU365GXdrKNhO331/y1p3Om5uZfVLy8TBGI=";
++    hash = "sha256-IS9jdr19VvgX6M1OqM6rjE8veujZcwBuOTuDm5mDXso=";
+   };
+ 
+   nativeBuildInputs = [
+@@ -80,5 +78,6 @@ stdenv.mkDerivation rec {
+     license = lib.licenses.gpl3Plus;
+     maintainers = with lib.maintainers; [ austinbutler ];
+     platforms = lib.platforms.linux;
++    broken = stdenv.isLinux && stdenv.isAarch64;
+   };
+ }
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index b41fc209c3c6a..10868980f5390 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -2811,7 +2811,18 @@ with pkgs;
+ 
+   audiowaveform = callPackage ../tools/audio/audiowaveform { };
+ 
+-  authenticator = callPackage ../applications/misc/authenticator { };
++  authenticator = callPackage ../applications/misc/authenticator rec {
++    # Remove when GTK is upgraded past 4.8
++    # https://github.com/NixOS/nixpkgs/issues/216770
++    gtk4 = pkgs.gtk4.overrideAttrs (_: rec {
++      version = "4.9.4";
++      src = fetchurl {
++        url = "mirror://gnome/sources/gtk/${lib.versions.majorMinor version}/gtk-${version}.tar.xz";
++        sha256 = "sha256-kaOv1YQB1OXYHjCwjuPxE6R2j/EBQDNqcqMmx3JyvjA=";
++      };
++    });
++    wrapGAppsHook4 = wrapGAppsHook.override { gtk3 = gtk4; };
++   };
+ 
+   autoflake = with python3.pkgs; toPythonApplication autoflake;
+ 
