@@ -104,6 +104,12 @@
       ];
     };
 
+    legacyPackages.${system} = import nixpkgs {
+      inherit system;
+      config = channelsConfig;
+      overlays = sharedOverlays;
+    };
+
     overlays.default = final: prev: {
       devtools = final.yes.archlinux.devtools;
       linyinfeng = inputs.linyinfeng.packages.${system};
