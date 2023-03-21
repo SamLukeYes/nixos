@@ -67,9 +67,7 @@
 
     channels.nixpkgs = {
       input = nixpkgs;
-      patches = [
-        ./patches/pr-217069.patch
-      ];
+      patches = [ ];
     };
 
     hostDefaults = {
