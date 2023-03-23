@@ -1,4 +1,4 @@
-{ config, pkgs, options, lib, ... }:
+{ lib, ... }:
 
 let rp = import ../rp.nix; in
 
@@ -12,7 +12,7 @@ let rp = import ../rp.nix; in
     settings = {
       auto-optimise-store = true;
       experimental-features = [
-        "flakes" "nix-command"
+        "flakes" "nix-command" "repl-flake"
       ];
       fallback = true;
       keep-failed = true;
