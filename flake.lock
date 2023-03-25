@@ -131,11 +131,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1679712835,
-        "narHash": "sha256-g9uQ7tSINX6RZQAvSj+uucdLinX7T/X0jufJV6aVI7I=",
+        "lastModified": 1679728128,
+        "narHash": "sha256-c40IOw38cpojzZ3HIPpBwDZ+BaauXT23JO2qsFf9IVA=",
         "owner": "linyinfeng",
         "repo": "nur-packages",
-        "rev": "30cbec755f471382c8165a68d8c1dfd11eb7b5c9",
+        "rev": "c14845df51d9c98dc698a63e07d695212232c41d",
         "type": "github"
       },
       "original": {
@@ -191,6 +191,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-gnome": {
+      "locked": {
+        "lastModified": 1679733110,
+        "narHash": "sha256-n5JwLCl93XazAu1w84S6jrNfQrs3tgM1Wx7QS/rE1TM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "8764aceee661ef6ec0e3eab0ca82a3c46e020a0b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "gnome",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "olex2": {
       "inputs": {
         "nixpkgs": [
@@ -240,6 +256,7 @@
         "linyinfeng": "linyinfeng",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-gnome": "nixpkgs-gnome",
         "olex2": "olex2",
         "rewine": "rewine",
         "trackers": "trackers",
@@ -267,11 +284,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1679702850,
-        "narHash": "sha256-utFjng8u6hL41+5g2zJX9Bb7ZZWnt3eqIrZBc+oij8c=",
+        "lastModified": 1679731645,
+        "narHash": "sha256-C0OltbTsXHP8qMmKe6ANCBeN2klUygbdwOf70I31ozk=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "35d5c1bb41d957b17c794fba2d524bc238f1ff92",
+        "rev": "930592c24fd7cca4435cb9e418cfcddb431b4bea",
         "type": "github"
       },
       "original": {
