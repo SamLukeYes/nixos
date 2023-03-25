@@ -49,6 +49,7 @@
 
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-gnome.url = "github:NixOS/nixpkgs/gnome";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
   };
 
@@ -65,14 +66,17 @@
     sharedOverlays = [ self.overlays.default ];
     supportedSystems = [ system ];
 
-    channels.nixpkgs = {
-      input = nixpkgs;
-      patches = [ ];
+    channels = {
+      gnome.input = inputs.nixpkgs-gnome;
+      nixos-unstable = {
+        input = nixpkgs;
+        patches = [ ];
+      };
     };
 
     hostDefaults = {
       inherit system;
-      channelName = "nixpkgs";
+      channelName = "nixos-unstable";
       modules = [
         {
           nix = {
@@ -90,16 +94,19 @@
         ./machines/absolute/configuration.nix
       ];
 
-      vm.modules = [
-        "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
-        ./machines/vm
+      vm = {
+        channelName = "gnome";
+        modules = [
+          "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
+          ./machines/vm
 
-        # experimental linglong support
-        inputs.linglong.nixosModules
-        {
-          services.linglong.enable = true;
-        }
-      ];
+          # experimental linglong support
+          inputs.linglong.nixosModules
+          {
+            services.linglong.enable = true;
+          }
+        ];
+      };
     };
 
     legacyPackages.${system} = import nixpkgs {
