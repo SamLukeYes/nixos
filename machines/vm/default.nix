@@ -1,8 +1,6 @@
-{ lib, pkgs, ... }:
-
 {
   imports = [
-    ../../common
+    ../../common/services.nix
     ../../users/yes
   ];
 
