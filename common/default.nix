@@ -2,8 +2,6 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
 {
   imports =
     [
@@ -14,7 +12,7 @@
       ./i18n.nix
       ./nix.nix
       ./programs.nix
-      ./services.nix
+      ./services
       ./systemd.nix
       ./virtualisation.nix
     ];
@@ -23,10 +21,6 @@
 
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
-
-  # https://nixos.wiki/wiki/PipeWire
-  security.rtkit.enable = true;
-  hardware.pulseaudio.enable = false;
 
   zramSwap.enable = true;
 }

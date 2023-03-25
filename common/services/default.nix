@@ -1,8 +1,11 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
-  services = {
+  imports = [
+    ./pipewire.nix
+  ];
 
+  services = {
     aria2 = {
       downloadDir = "/home/aria2";
       enable = true;
@@ -19,13 +22,6 @@
     gnome.evolution-data-server.enable = lib.mkForce false;
 
     logind.lidSwitch = "ignore";
-
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      pulse.enable = true;
-      jack.enable = true;
-    };
 
     power-profiles-daemon.enable = false;
 
@@ -54,6 +50,5 @@
       };
       displayManager.gdm.enable = true;
     };
-
   };
 }

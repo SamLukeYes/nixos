@@ -1,6 +1,6 @@
 {
   imports = [
-    ../../common/services.nix
+    ../../common/services
     ../../users/yes
   ];
 
