@@ -1,8 +1,5 @@
-{ config, pkgs, ... }:
-
 {
   programs = {
-
     adb.enable = true;
 
     command-not-found.enable = false;
@@ -20,8 +17,5 @@
     nix-index.enable = true;
 
     wireshark.enable = true;
-
-    xonsh.enable = true;
-
   };
 }

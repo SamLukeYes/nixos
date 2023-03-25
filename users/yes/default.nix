@@ -1,6 +1,7 @@
-{config, pkgs, ...}:
+{ pkgs, ... }:
 
 {
+  programs.xonsh.enable = true;
   users = {
     users.yes = {
       description = "Sam L. Yes";

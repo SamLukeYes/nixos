@@ -39,7 +39,7 @@
     nix-output-monitor            # frequently used in nix operations
     onedrive                      # required by gnomeExtensions.one-drive-resurrect
     pdftk                         # required by Jasminum
-    starship                      # configured in ~/.xonshrc
+    starship                      # configured without nix
 
     (makeDesktopItem {
       desktopName = "yacd";
