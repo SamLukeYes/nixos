@@ -94,11 +94,11 @@
         ./machines/absolute/configuration.nix
       ];
 
-      vm = {
+      test = {
         channelName = "gnome";
         modules = [
           "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
-          ./machines/vm
+          ./machines/test
 
           # experimental linglong support
           inputs.linglong.nixosModules
