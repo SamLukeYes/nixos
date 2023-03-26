@@ -1,5 +1,6 @@
 {
   imports = [
+    ../../common/boot.nix
     ../../common/services
     ../../users/yes
   ];
