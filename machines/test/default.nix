@@ -1,8 +1,15 @@
+{ pkgs, ... }:
+
 {
   imports = [
     ../../common/boot.nix
     ../../common/services
     ../../users/yes
+  ];
+
+  # packages to test
+  environment.systemPackages = with pkgs; [
+    yes.qq-appimage
   ];
 
   security = {
