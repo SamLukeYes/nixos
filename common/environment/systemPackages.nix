@@ -40,6 +40,10 @@
     pdftk                         # required by Jasminum
     starship                      # configured without nix
 
+    # direnv
+    direnv
+    nix-direnv
+
     (makeDesktopItem {
       desktopName = "yacd";
       name = "yacd";

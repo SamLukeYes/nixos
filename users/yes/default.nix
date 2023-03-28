@@ -1,7 +1,15 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
-  programs.xonsh.enable = true;
+  programs.xonsh = {
+    enable = true;
+    package = pkgs.xonsh.overrideAttrs (oldAttrs: {
+      propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ (with pkgs; [
+        yes.xonsh-direnv
+      ]);
+    });
+  };
+
   users = {
     users.yes = {
       description = "Sam L. Yes";
@@ -15,7 +23,7 @@
       ];
       initialHashedPassword = "";
       isNormalUser = true;
-      shell = pkgs.xonsh;
+      shell = config.programs.xonsh.package;
       uid = 1000;
     };
   };
