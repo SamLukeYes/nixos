@@ -1,6 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+{ pkgs, ... }:
 
 {
   imports =
@@ -16,6 +14,9 @@
       ./systemd.nix
       ./virtualisation.nix
     ];
+
+  # Use the default mesa package in nixpkgs
+  hardware.opengl.mesaPackage = pkgs.mesa;
 
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
