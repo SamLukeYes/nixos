@@ -11,6 +11,7 @@ let rp = import ../rp.nix; in
     };
     settings = {
       auto-optimise-store = true;
+      download-attempts = 3;
       experimental-features = [
         "flakes" "nix-command" "repl-flake"
       ];
@@ -20,7 +21,7 @@ let rp = import ../rp.nix; in
       max-jobs = 3;   # https://github.com/NixOS/nixpkgs/issues/198668
       narinfo-cache-negative-ttl = 300;
       substituters = lib.mkForce [
-        "https://mirror.nju.edu.cn/nix-channels/store"
+        "https://mirror.iscas.ac.cn/nix-channels/store"
         "https://mirrors.bfsu.edu.cn/nix-channels/store"
         "https://mirror.sjtu.edu.cn/nix-channels/store"
         "https://linyinfeng.cachix.org"
