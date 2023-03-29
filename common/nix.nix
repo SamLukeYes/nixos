@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 let rp = import ../rp.nix; in
 
@@ -9,6 +9,7 @@ let rp = import ../rp.nix; in
       dates = "weekly";
       options = "--delete-older-than 3d";
     };
+    package = pkgs.nix;   # avoid using nixUnstable
     settings = {
       auto-optimise-store = true;
       download-attempts = 3;
