@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{ pkgs, ... }:
 
 let rp = import ../rp.nix; in
 
@@ -28,13 +28,14 @@ let rp = import ../rp.nix; in
         };
         wantedBy = [ "multi-user.target" ];
       };
-      
+      cpupower-gui.enable = false;
     };
     user.services = {
       clash = {
         serviceConfig.ExecStart = "${pkgs.clash}/bin/clash";
         wantedBy = [ "default.target" ];
       };
+      cpupower-gui.enable = false;
       nix-index = {
         script = ''
           FILE=index-x86_64-linux
