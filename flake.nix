@@ -123,6 +123,7 @@
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
         version = "master";
+        patches = [];
       });
       devtools = final.yes.archlinux.devtools;
       linyinfeng = inputs.linyinfeng.packages.${system};
