@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cpupower-gui": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1674405743,
+        "narHash": "sha256-nQgofy/URdT99GGYYuV16gaBnX94YHSro6RT1iQaqdI=",
+        "owner": "vagnum08",
+        "repo": "cpupower-gui",
+        "rev": "96b231b4fed59f854ad417cd1893be0b5fd28c1d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vagnum08",
+        "repo": "cpupower-gui",
+        "type": "github"
+      }
+    },
     "devshell": {
       "inputs": {
         "flake-utils": [
@@ -250,6 +266,7 @@
     },
     "root": {
       "inputs": {
+        "cpupower-gui": "cpupower-gui",
         "flake-utils": "flake-utils",
         "flake-utils-plus": "flake-utils-plus",
         "linglong": "linglong",
