@@ -4,6 +4,10 @@
   description = "My NixOS configuration";
 
   inputs = {
+    cpupower-gui = {
+      flake = false;
+      url = "github:vagnum08/cpupower-gui";
+    };
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils-plus = {
       inputs.flake-utils.follows = "flake-utils";
@@ -116,6 +120,10 @@
     };
 
     overlays.default = final: prev: {
+      cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
+        src = inputs.cpupower-gui;
+        version = "master";
+      });
       devtools = final.yes.archlinux.devtools;
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
