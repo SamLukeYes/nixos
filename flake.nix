@@ -124,6 +124,10 @@
         src = inputs.cpupower-gui;
         version = "master";
         patches = [];
+        postPatch = ''
+          substituteInPlace build-aux/meson/postinstall.py \
+            --replace '"systemctl"' '"echo", "Skipping:", "systemctl"'
+        '';
       });
       devtools = final.yes.archlinux.devtools;
       linyinfeng = inputs.linyinfeng.packages.${system};
