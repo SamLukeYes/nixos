@@ -17,6 +17,7 @@
     tdesktop
     virt-manager
     xournalpp
+    yaru-theme
     zotero
 
     linyinfeng.wemeet
