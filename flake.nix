@@ -122,7 +122,6 @@
     overlays.default = final: prev: {
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
-        version = "master";
         patches = [];
         postPatch = ''
           substituteInPlace build-aux/meson/postinstall.py \
