@@ -40,6 +40,7 @@
     onedrive                      # required by gnomeExtensions.one-drive-resurrect
     pdftk                         # required by Jasminum
     starship                      # configured without nix
+    texlive.combined.scheme-full  # required by Xournal++ and VSCode LateX Workshop
 
     # direnv
     direnv
@@ -58,7 +59,6 @@
       nil                               # for nix IDE
       pacman                            # add a dummy makepkg.conf to FHS
       python3Packages.python-lsp-server # for xonsh IDE
-      texlive.combined.scheme-full      # for latex workshop
     ]))
   ];
 }
