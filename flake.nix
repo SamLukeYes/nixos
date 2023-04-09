@@ -129,7 +129,6 @@
         '';
       });
       devtools = final.yes.archlinux.devtools;
-      libreoffice = final.libreoffice-fresh;
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       olex2 = inputs.olex2.packages.${system}.olex2-launcher-x11;
