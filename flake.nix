@@ -53,7 +53,7 @@
 
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-gnome.url = "github:NixOS/nixpkgs/gnome";
+    # nixpkgs-gnome.url = "github:NixOS/nixpkgs/gnome";
     # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
   };
 
@@ -71,7 +71,7 @@
     supportedSystems = [ system ];
 
     channels = {
-      gnome.input = inputs.nixpkgs-gnome;
+      # gnome.input = inputs.nixpkgs-gnome;
       nixos-unstable = {
         input = nixpkgs;
         patches = [ ];
@@ -99,7 +99,7 @@
       ];
 
       test = {
-        channelName = "gnome";
+        # channelName = "gnome";
         modules = [
           "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
           ./machines/test
