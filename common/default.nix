@@ -15,9 +15,6 @@
       ./virtualisation.nix
     ];
 
-  # Use the default mesa package in nixpkgs
-  hardware.opengl.mesaPackage = pkgs.mesa;
-
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
