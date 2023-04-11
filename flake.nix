@@ -130,6 +130,9 @@
       });
       devtools = final.yes.archlinux.devtools;
       electron = final.yes.lx-music-desktop.electron;
+      electron-ncm = final.rewine.electron-netease-cloud-music.override {
+        inherit (final) electron;
+      };
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       olex2 = inputs.olex2.packages.${system}.olex2-launcher-x11;

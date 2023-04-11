@@ -13,19 +13,28 @@
     gnome.nautilus-python
     libreoffice
     obs-studio
-    olex2
     tdesktop
     virt-manager
     xournalpp
     yaru-theme
     zotero
+    
+    (makeDesktopItem {
+      desktopName = "yacd";
+      name = "yacd";
+      exec = "${electron}/bin/electron ${linyinfeng.yacd}/index.html";
+      icon = "${linyinfeng.yacd}/yacd-128.png";
+    })
 
-    linyinfeng.wemeet
-    rewine.electron-netease-cloud-music
-    yes.lx-music-desktop
-    yes.qq-appimage
-    yes.snapgene-viewer
+    ((vscode.override {
+      commandLineArgs = "--touch-events -n";
+    }).fhsWithPackages (ps: with ps; [
+      nil                               # for nix IDE
+      pacman                            # add a dummy makepkg.conf to FHS
+      python3Packages.python-lsp-server # for xonsh IDE
+    ]))
 
+    # GNOME Shell extensions
     gnomeExtensions.appindicator
     gnomeExtensions.customize-ibus
     gnomeExtensions.freon
@@ -46,19 +55,12 @@
     direnv
     nix-direnv
 
-    (makeDesktopItem {
-      desktopName = "yacd";
-      name = "yacd";
-      exec = "${electron}/bin/electron ${linyinfeng.yacd}/index.html";
-      icon = "${linyinfeng.yacd}/yacd-128.png";
-    })
-
-    ((vscode.override {
-      commandLineArgs = "--touch-events -n";
-    }).fhsWithPackages (ps: with ps; [
-      nil                               # for nix IDE
-      pacman                            # add a dummy makepkg.conf to FHS
-      python3Packages.python-lsp-server # for xonsh IDE
-    ]))
+    # Out-of-tree packages
+    electron-ncm
+    linyinfeng.wemeet
+    olex2
+    yes.lx-music-desktop
+    yes.qq-appimage
+    yes.snapgene-viewer
   ];
 }
