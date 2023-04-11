@@ -50,6 +50,7 @@
     pdftk                         # required by Jasminum
     starship                      # configured without nix
     texlive.combined.scheme-full  # required by Xournal++ and VSCode LateX Workshop
+    wl-clipboard                  # required by WayDroid
 
     # direnv
     direnv
