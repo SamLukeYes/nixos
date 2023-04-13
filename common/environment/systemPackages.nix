@@ -13,6 +13,7 @@
     gnome.nautilus-python
     libreoffice
     obs-studio
+    qq
     tdesktop
     virt-manager
     xournalpp
@@ -61,7 +62,6 @@
     linyinfeng.wemeet
     olex2
     yes.lx-music-desktop
-    yes.qq-appimage
     yes.snapgene-viewer
   ];
 }

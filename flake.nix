@@ -20,7 +20,7 @@
     linyinfeng = {
       inputs = {
         flake-utils.follows = "flake-utils";
-        # nixos-stable.follows = "nixpkgs-stable";
+        nixos-stable.follows = "nixpkgs-stable";
         nixpkgs.follows = "nixpkgs";
       };
       url = "github:linyinfeng/nur-packages";
@@ -54,7 +54,7 @@
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-gnome.url = "github:NixOS/nixpkgs/gnome";
-    # nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -137,6 +137,7 @@
       # nil = inputs.nil.packages.${system}.nil;
       olex2 = inputs.olex2.packages.${system}.olex2-launcher-x11;
       paru = final.yes.archlinux.paru;
+      qq = final.yes-stable.qq-appimage;
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
       xournalpp = prev.xournalpp.overrideAttrs (old: {
@@ -145,6 +146,11 @@
         buildInputs = old.buildInputs ++ [ final.alsa-lib ];
       });
       yes = import inputs.yes { pkgs = prev; };
+      yes-stable = import inputs.yes {
+        pkgs = import inputs.nixpkgs-stable {
+          config = channelsConfig;
+        };
+      };
     };
   };
 }
