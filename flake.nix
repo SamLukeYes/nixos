@@ -148,6 +148,7 @@
       yes = import inputs.yes { pkgs = prev; };
       yes-stable = import inputs.yes {
         pkgs = import inputs.nixpkgs-stable {
+          inherit system;
           config = channelsConfig;
         };
       };
