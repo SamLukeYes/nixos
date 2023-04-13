@@ -305,11 +305,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1681344416,
-        "narHash": "sha256-NSDVPwJOHTIbfgfi/CMdkOzhTXtAhv9lit393EbuJK4=",
+        "lastModified": 1681373246,
+        "narHash": "sha256-poYXE+wFYLBKBVcA/BzWyMBAy1ONoS2Ig9Tplo45LpA=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "a9d2096406d2ff03d9c33f6943881d7db1a526e2",
+        "rev": "c9ec561ed172717809b5c7aa241fe1baddf36aa4",
         "type": "github"
       },
       "original": {
@@ -358,11 +358,11 @@
     "yes": {
       "flake": false,
       "locked": {
-        "lastModified": 1681182459,
-        "narHash": "sha256-Lqn1Am+IiukSBHI0zZOzDHENGUEIaV8vQahJLHdht0g=",
+        "lastModified": 1681395754,
+        "narHash": "sha256-VuYpNeFY/7qRgd+sZfoICPGyIcMfO7YnblEftdfV8B4=",
         "owner": "SamLukeYes",
         "repo": "nix-custom-packages",
-        "rev": "71b5486dfda6f41bda04ae0a2eeca4580aa28c05",
+        "rev": "24f7eb7b0c9d13e7e5ee3a3646af1ba4ad618411",
         "type": "github"
       },
       "original": {
