@@ -137,7 +137,9 @@
       # nil = inputs.nil.packages.${system}.nil;
       olex2 = inputs.olex2.packages.${system}.olex2-launcher-x11;
       paru = final.yes.archlinux.paru;
-      qq = final.yes-stable.qq-appimage;
+      qq = final.yes-stable.qq-appimage.override {
+        extraPkgs = ps: with ps; [ libappindicator ];
+      };
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
       xournalpp = prev.xournalpp.overrideAttrs (old: {
