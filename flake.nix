@@ -8,7 +8,7 @@
       flake = false;
       url = "github:vagnum08/cpupower-gui";
     };
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.follows = "linyinfeng/flake-utils";
     flake-utils-plus = {
       inputs.flake-utils.follows = "flake-utils";
       url = "github:gytis-ivaskevicius/flake-utils-plus";
@@ -19,8 +19,8 @@
     };
     linyinfeng = {
       inputs = {
-        flake-utils.follows = "flake-utils";
-        nixos-stable.follows = "nixpkgs-stable";
+        # flake-utils.follows = "flake-utils";
+        # nixos-stable.follows = "nixpkgs-stable";
         nixpkgs.follows = "nixpkgs";
       };
       url = "github:linyinfeng/nur-packages";
@@ -54,7 +54,7 @@
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-gnome.url = "github:NixOS/nixpkgs/gnome";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs-stable.follows = "linyinfeng/nixos-stable";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
