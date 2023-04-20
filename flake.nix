@@ -74,7 +74,9 @@
       # gnome.input = inputs.nixpkgs-gnome;
       nixos-unstable = {
         input = nixpkgs;
-        patches = [ ];
+        patches = [
+          ./patches/qq-runtime.patch
+        ];
       };
     };
 
@@ -137,9 +139,6 @@
       # nil = inputs.nil.packages.${system}.nil;
       olex2 = inputs.olex2.packages.${system}.olex2-launcher-x11;
       paru = final.yes.archlinux.paru;
-      qq = final.yes-stable.qq-appimage.override {
-        extraPkgs = ps: with ps; [ libappindicator ];
-      };
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
       xournalpp = prev.xournalpp.overrideAttrs (old: {
@@ -148,12 +147,6 @@
         buildInputs = old.buildInputs ++ [ final.alsa-lib ];
       });
       yes = import inputs.yes { pkgs = prev; };
-      yes-stable = import inputs.yes {
-        pkgs = import inputs.nixpkgs-stable {
-          inherit system;
-          config = channelsConfig;
-        };
-      };
     };
   };
 }

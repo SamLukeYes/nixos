@@ -1,0 +1,65 @@
+From 4677ccf8887477361f34e86dc000677a60ebc888 Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Thu, 20 Apr 2023 14:47:02 +0800
+Subject: [PATCH] qq: add missing dependencies
+
+---
+ .../networking/instant-messengers/qq/default.nix   | 14 +++++++++-----
+ 1 file changed, 9 insertions(+), 5 deletions(-)
+
+diff --git a/pkgs/applications/networking/instant-messengers/qq/default.nix b/pkgs/applications/networking/instant-messengers/qq/default.nix
+index 32d34787d6579..9266f9082fdf2 100644
+--- a/pkgs/applications/networking/instant-messengers/qq/default.nix
++++ b/pkgs/applications/networking/instant-messengers/qq/default.nix
+@@ -2,10 +2,9 @@
+ , cups
+ , dpkg
+ , fetchurl
+-, gjs
+-, glib
+ , gtk3
+ , lib
++, libappindicator
+ , libdrm
+ , libgcrypt
+ , libkrb5
+@@ -14,6 +13,7 @@
+ , xorg
+ , systemd
+ , stdenv
++, vips
+ , at-spi2-core
+ , autoPatchelfHook
+ , wrapGAppsHook
+@@ -50,17 +50,18 @@ stdenv.mkDerivation {
+     at-spi2-core
+     cups
+     gtk3
+-    glib
+     libdrm
+     libgcrypt
+     libkrb5
+     mesa
+     nss
++    vips
+     xorg.libXdamage
+   ];
+ 
+-  runtimeDependencies = [
+-    (lib.getLib systemd)
++  runtimeDependencies = map lib.getLib [
++    libappindicator
++    systemd
+   ];
+ 
+   installPhase = ''
+@@ -74,6 +75,9 @@ stdenv.mkDerivation {
+       --replace "/usr/share" "$out/share"
+     ln -s $out/opt/QQ/qq $out/bin/qq
+ 
++    # Remove bundled libraries
++    rm -r $out/opt/QQ/resources/app/sharp-lib
++
+     runHook postInstall
+   '';
+ 
