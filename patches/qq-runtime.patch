@@ -1,29 +1,25 @@
-From 4677ccf8887477361f34e86dc000677a60ebc888 Mon Sep 17 00:00:00 2001
+From 75eb0a3f6f7a1cc89aad5ee0a6616cbb912b770c Mon Sep 17 00:00:00 2001
 From: SamLukeYes <samlukeyes123@gmail.com>
-Date: Thu, 20 Apr 2023 14:47:02 +0800
+Date: Thu, 20 Apr 2023 18:27:52 +0800
 Subject: [PATCH] qq: add missing dependencies
 
 ---
- .../networking/instant-messengers/qq/default.nix   | 14 +++++++++-----
- 1 file changed, 9 insertions(+), 5 deletions(-)
+ .../instant-messengers/qq/default.nix           | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
 
 diff --git a/pkgs/applications/networking/instant-messengers/qq/default.nix b/pkgs/applications/networking/instant-messengers/qq/default.nix
-index 32d34787d6579..9266f9082fdf2 100644
+index 32d34787d6579..9f037845def66 100644
 --- a/pkgs/applications/networking/instant-messengers/qq/default.nix
 +++ b/pkgs/applications/networking/instant-messengers/qq/default.nix
-@@ -2,10 +2,9 @@
- , cups
- , dpkg
- , fetchurl
--, gjs
--, glib
+@@ -6,6 +6,7 @@
+ , glib
  , gtk3
  , lib
 +, libappindicator
  , libdrm
  , libgcrypt
  , libkrb5
-@@ -14,6 +13,7 @@
+@@ -14,6 +15,7 @@
  , xorg
  , systemd
  , stdenv
@@ -31,11 +27,13 @@ index 32d34787d6579..9266f9082fdf2 100644
  , at-spi2-core
  , autoPatchelfHook
  , wrapGAppsHook
-@@ -50,17 +50,18 @@ stdenv.mkDerivation {
+@@ -49,18 +51,20 @@ stdenv.mkDerivation {
+     alsa-lib
      at-spi2-core
      cups
-     gtk3
--    glib
+-    gtk3
+     glib
++    gtk3
      libdrm
      libgcrypt
      libkrb5
@@ -53,7 +51,7 @@ index 32d34787d6579..9266f9082fdf2 100644
    ];
  
    installPhase = ''
-@@ -74,6 +75,9 @@ stdenv.mkDerivation {
+@@ -74,9 +78,16 @@ stdenv.mkDerivation {
        --replace "/usr/share" "$out/share"
      ln -s $out/opt/QQ/qq $out/bin/qq
  
@@ -63,3 +61,10 @@ index 32d34787d6579..9266f9082fdf2 100644
      runHook postInstall
    '';
  
++  preFixup = ''
++    gappsWrapperArgs+=(--prefix PATH : "${lib.makeBinPath [ gjs ]}")
++  '';
++
+   meta = with lib; {
+     homepage = "https://im.qq.com/linuxqq/";
+     description = "Messaging app";
