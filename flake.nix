@@ -122,6 +122,9 @@
     };
 
     overlays.default = final: prev: {
+      celluloid = prev.celluloid.overrideAttrs (old: {
+        patches = [ ./patches/celluloid-pr-796.patch ];
+      });
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
         patches = [];
