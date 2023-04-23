@@ -1,0 +1,83 @@
+From 08675a00386fdda9e8f03edff7ff68f87d51e977 Mon Sep 17 00:00:00 2001
+From: "R. Ryantm" <ryantm-bot@ryantm.com>
+Date: Fri, 24 Feb 2023 23:54:58 +0000
+Subject: [PATCH 1/2] ibus: 1.5.27 -> 1.5.28
+
+---
+ pkgs/tools/inputmethods/ibus/default.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/tools/inputmethods/ibus/default.nix b/pkgs/tools/inputmethods/ibus/default.nix
+index e3b4acf7f28dd..381a3a90bab41 100644
+--- a/pkgs/tools/inputmethods/ibus/default.nix
++++ b/pkgs/tools/inputmethods/ibus/default.nix
+@@ -56,13 +56,13 @@ in
+ 
+ stdenv.mkDerivation rec {
+   pname = "ibus";
+-  version = "1.5.27";
++  version = "1.5.28";
+ 
+   src = fetchFromGitHub {
+     owner = "ibus";
+     repo = "ibus";
+     rev = version;
+-    sha256 = "sha256-DwX7SYRb18C0Lz2ySPS3yV99Q1xQezs0Ls2P7Rbtk5Q=";
++    sha256 = "sha256-zjV+QkhVkrHFs9Vt1FpbvmS4nRHxwKaKU3mQkSgyLaQ=";
+   };
+ 
+   patches = [
+
+From e988628695172c06589915bee543c4c4172065ed Mon Sep 17 00:00:00 2001
+From: pennae <github@quasiparticle.net>
+Date: Wed, 19 Apr 2023 01:08:42 +0200
+Subject: [PATCH 2/2] ibus: fix build and codepoint/emoji input
+
+see https://github.com/NixOS/nixpkgs/issues/226526,
+https://github.com/ibus/ibus/issues/2496,
+https://github.com/NixOS/nixpkgs/pull/218120#issuecomment-1514027173
+
+codepoint and emoji input simply don't show due to runtime
+initialization issues, and a missing make dependency makes the build flaky.
+---
+ pkgs/tools/inputmethods/ibus/default.nix | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/pkgs/tools/inputmethods/ibus/default.nix b/pkgs/tools/inputmethods/ibus/default.nix
+index 381a3a90bab41..140ca8c86ea8d 100644
+--- a/pkgs/tools/inputmethods/ibus/default.nix
++++ b/pkgs/tools/inputmethods/ibus/default.nix
+@@ -1,6 +1,7 @@
+ { lib, stdenv
+ , substituteAll
+ , fetchFromGitHub
++, fetchpatch
+ , autoreconfHook
+ , gettext
+ , makeWrapper
+@@ -72,6 +73,12 @@ stdenv.mkDerivation rec {
+       pythonSitePackages = python3.sitePackages;
+     })
+     ./build-without-dbus-launch.patch
++    # unicode and emoji input are broken before 1.5.29
++    # https://github.com/NixOS/nixpkgs/issues/226526
++    (fetchpatch {
++      url = "https://github.com/ibus/ibus/commit/7c8abbe89403c2fcb08e3fda42049a97187e53ab.patch";
++      hash = "sha256-59HzAdLq8ahrF7K+tFGLjTodwIiTkJGEkFe8quqIkhU=";
++    })
+   ];
+ 
+   outputs = [ "out" "dev" "installedTests" ];
+@@ -98,6 +105,12 @@ stdenv.mkDerivation rec {
+     "--with-ucd-dir=${unicode-character-database}/share/unicode"
+   ];
+ 
++  # missing make dependency
++  # https://github.com/NixOS/nixpkgs/pull/218120#issuecomment-1514027173
++  preBuild = ''
++    make -C src ibusenumtypes.h
++  '';
++
+   makeFlags = [
+     "test_execsdir=${placeholder "installedTests"}/libexec/installed-tests/ibus"
+     "test_sourcesdir=${placeholder "installedTests"}/share/installed-tests/ibus"
