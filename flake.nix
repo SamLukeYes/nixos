@@ -74,10 +74,7 @@
       # gnome.input = inputs.nixpkgs-gnome;
       nixos-unstable = {
         input = nixpkgs;
-        patches = [
-          ./patches/pr-218120.patch
-          ./patches/qq-runtime.patch
-        ];
+        patches = [ ];
       };
     };
 
