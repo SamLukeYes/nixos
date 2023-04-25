@@ -1,6 +1,12 @@
+{ config, pkgs }:
+
 {
   programs = {
     adb.enable = true;
+
+    bash.interactiveShellInit = ''
+      exec ${config.programs.xonsh.package}/bin/xonsh
+    '';
 
     command-not-found.enable = false;
 
@@ -17,5 +23,14 @@
     nix-index.enable = true;
 
     wireshark.enable = true;
+
+    xonsh = {
+      enable = true;
+      package = pkgs.xonsh.overrideAttrs (oldAttrs: {
+        propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ (with pkgs; [
+          yes.xonsh-direnv
+        ]);
+      });
+    };
   };
 }
