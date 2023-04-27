@@ -1,13 +1,14 @@
 { pkgs, ... }:
 
-let rp = import ../rp.nix; in
-
-{
+let
+  rp = import ../rp.nix;
+in {
   systemd = {
     nspawn = (builtins.mapAttrs (name: value: {
       filesConfig.Bind = [ "/dev/dri" ];
       networkConfig.Private = false;
     }) {
+      archriscv = {};
       old-root = {};
     });
     packages = [ pkgs.onedrive ];
