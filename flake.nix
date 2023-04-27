@@ -9,10 +9,7 @@
       url = "github:vagnum08/cpupower-gui";
     };
     flake-utils.follows = "linyinfeng/flake-utils";
-    flake-utils-plus = {
-      inputs.flake-utils.follows = "flake-utils";
-      url = "github:gytis-ivaskevicius/flake-utils-plus";
-    };
+    flake-utils-plus.follows = "xddxdd/flake-utils-plus";
     linglong = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/linglong-flake";
@@ -41,6 +38,11 @@
     trackers = {
       flake = false;
       url = "github:XIU2/TrackersListCollection";
+    };
+    xddxdd = {
+      url = "github:xddxdd/nur-packages";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     xournalpp = {
       flake = false;
@@ -95,6 +97,7 @@
     hosts = {
       absolute.modules = [
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
+        inputs.xddxdd.nixosModules.qemu-user-static-binfmt
         ./machines/absolute/configuration.nix
       ];
 
@@ -139,8 +142,10 @@
       # nil = inputs.nil.packages.${system}.nil;
       olex2 = inputs.olex2.packages.${system}.olex2-launcher-x11;
       paru = final.yes.archlinux.paru;
+      qemu-user-static = final.xddxdd.qemu-user-static;
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
+      xddxdd = inputs.xddxdd.packages.${system};
       xournalpp = prev.xournalpp.overrideAttrs (old: {
         src = inputs.xournalpp;
         version = "${old.version}+dev";

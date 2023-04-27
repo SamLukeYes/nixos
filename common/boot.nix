@@ -2,7 +2,7 @@
 
 {
   boot = {
-    binfmt.emulatedSystems = [ "riscv64-linux" ];
+    # binfmt.emulatedSystems = [ "riscv64-linux" ];
     # consoleLogLevel = 0;
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
