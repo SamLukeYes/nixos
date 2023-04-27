@@ -80,6 +80,7 @@
     "flake-utils-plus": {
       "inputs": {
         "flake-utils": [
+          "xddxdd",
           "flake-utils"
         ]
       },
@@ -148,11 +149,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1682569835,
-        "narHash": "sha256-2Fx4DcZjITklODi9WI3SmK5GJt0aUb+4Psrjts0hNxI=",
+        "lastModified": 1682587521,
+        "narHash": "sha256-qTqoLWQKVECkc3NKUDyNY8MKbYnYP9I8nC6b/oMG1PI=",
         "owner": "linyinfeng",
         "repo": "nur-packages",
-        "rev": "06d778032380afd366fd2543b87f8b77e2ab9b28",
+        "rev": "5f6db476b6768364c119c5eb794d2e7263ede713",
         "type": "github"
       },
       "original": {
@@ -256,7 +257,10 @@
           "linyinfeng",
           "flake-utils"
         ],
-        "flake-utils-plus": "flake-utils-plus",
+        "flake-utils-plus": [
+          "xddxdd",
+          "flake-utils-plus"
+        ],
         "linglong": "linglong",
         "linyinfeng": "linyinfeng",
         "nixos-hardware": "nixos-hardware",
@@ -268,6 +272,7 @@
         "olex2": "olex2",
         "rewine": "rewine",
         "trackers": "trackers",
+        "xddxdd": "xddxdd",
         "xournalpp": "xournalpp",
         "yes": "yes"
       }
@@ -307,11 +312,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1682553996,
-        "narHash": "sha256-yR/YgtPQJkiEZJn14vJbZpxrQ16iSJvRmWKl+zkoIcU=",
+        "lastModified": 1682582838,
+        "narHash": "sha256-04oBWMtimbk4Cx+K+pP89K2Q8SLQ/gMaIEQ3tsQrqCg=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "8a07546627c57a6757c4cf29c7985b05bb352f8d",
+        "rev": "9989f636707ca56eaa9c8e3ca98c4c6fed7f9590",
         "type": "github"
       },
       "original": {
@@ -338,6 +343,30 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "xddxdd": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "flake-utils-plus": "flake-utils-plus",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1682134347,
+        "narHash": "sha256-OIGM8R+CkvE36gpv41VHIhaoktMUFUdAmH2Lu4mORPQ=",
+        "owner": "xddxdd",
+        "repo": "nur-packages",
+        "rev": "c165fd40dc3682d6691298882744d02f078edbff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "xddxdd",
+        "repo": "nur-packages",
         "type": "github"
       }
     },
