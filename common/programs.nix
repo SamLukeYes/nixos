@@ -29,7 +29,7 @@ let rp = import ../rp.nix; in
         ILoveCandy
       '';
       mirrors = [
-        "https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch"
+        # "https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch"
         "https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch"
         "${rp}https://geo.mirror.pkgbuild.com/$repo/os/$arch"
       ];
