@@ -4,12 +4,16 @@
   description = "My NixOS configuration";
 
   inputs = {
+    archix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:SamLukeYes/archix";
+    };
     cpupower-gui = {
       flake = false;
       url = "github:vagnum08/cpupower-gui";
     };
     flake-utils.follows = "linyinfeng/flake-utils";
-    flake-utils-plus.follows = "xddxdd/flake-utils-plus";
+    flake-utils-plus.follows = "archix/xddxdd/flake-utils-plus";
     linglong = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/linglong-flake";
@@ -39,11 +43,7 @@
       flake = false;
       url = "github:XIU2/TrackersListCollection";
     };
-    xddxdd = {
-      url = "github:xddxdd/nur-packages";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    xddxdd.follows = "archix/xddxdd";
     xournalpp = {
       flake = false;
       url = "github:xournalpp/xournalpp";
@@ -86,27 +86,20 @@
       inherit system;
       channelName = "nixos-unstable";
       modules = [
-        {
-          nix = {
-            generateNixPathFromInputs = true;
-            generateRegistryFromInputs = true;
-            linkInputs = true;
-          };
-        }
+        inputs.archix.nixosModules.default
       ];
     };
 
     hosts = {
       absolute.modules = [
+        inputs.archix.nixosModules.binfmt
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
-        inputs.xddxdd.nixosModules.qemu-user-static-binfmt
         ./machines/absolute/configuration.nix
       ];
 
       test = {
         # channelName = "gnome";
         modules = [
-          "${nixpkgs}/nixos/modules/virtualisation/qemu-vm.nix"
           ./machines/test
 
           # experimental linglong support
@@ -135,7 +128,6 @@
             --replace '"systemctl"' '"echo", "Skipping:", "systemctl"'
         '';
       });
-      devtools = final.yes.archlinux.devtools;
       electron = final.yes.lx-music-desktop.electron;
       electron-ncm = final.rewine.electron-netease-cloud-music.override {
         inherit (final) electron;
@@ -143,11 +135,8 @@
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       olex2 = inputs.olex2.packages.${system}.olex2-launcher-x11;
-      paru = final.yes.archlinux.paru;
-      qemu-user-static = final.xddxdd.qemu-user-static;
       rewine = inputs.rewine.packages.${system};
       trackers = inputs.trackers;
-      xddxdd = inputs.xddxdd.packages.${system};
       xournalpp = prev.xournalpp.overrideAttrs (old: {
         src = inputs.xournalpp;
         version = "${old.version}+dev";

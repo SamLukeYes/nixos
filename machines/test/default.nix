@@ -1,6 +1,10 @@
+{ modulesPath, ... }:
+
 {
   imports = [
+    "${modulesPath}/virtualisation/qemu-vm.nix"
     ../../common/boot.nix
+    ../../common/programs.nix
     ../../common/services
     ../../users/yes
   ];
