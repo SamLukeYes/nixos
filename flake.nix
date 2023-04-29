@@ -130,7 +130,6 @@
       electron-ncm = final.rewine.electron-netease-cloud-music.override {
         inherit (final) electron;
       };
-      libappindicator-gtk3 = final.libayatana-appindicator;
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       olex2 = inputs.olex2.packages.${system}.olex2-launcher-x11;
