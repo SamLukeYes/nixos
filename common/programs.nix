@@ -23,6 +23,11 @@ let rp = import ../rp.nix; in
     # requires archix
     pacman = {
       autoSync.enable = true;
+      conf.extraConfig = ''
+        [options]
+        Color
+        ILoveCandy
+      '';
       mirrors = [
         "https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch"
         "https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch"
