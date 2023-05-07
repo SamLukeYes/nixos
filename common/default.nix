@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 {
   imports =
     [
@@ -19,6 +17,8 @@
 
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
+
+  xdg.portal.xdgOpenUsePortal = true;
 
   zramSwap.enable = true;
 }
