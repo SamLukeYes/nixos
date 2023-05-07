@@ -15,6 +15,7 @@
     flake-utils.follows = "linyinfeng/flake-utils";
     flake-utils-plus.follows = "archix/xddxdd/flake-utils-plus";
     linglong = {
+      inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/linglong-flake";
     };
