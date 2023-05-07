@@ -144,6 +144,7 @@
         cargoDeps = final.rustPlatform.importCargoLock {
           lockFile = "${inputs.starship}/Cargo.lock";
         };
+        doCheck = false;
       });
       trackers = inputs.trackers;
       xournalpp = prev.xournalpp.overrideAttrs (old: {
