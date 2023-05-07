@@ -141,6 +141,9 @@
       rewine = inputs.rewine.packages.${system};
       starship = prev.starship.overrideAttrs (old: {
         src = inputs.starship;
+        cargoDeps = final.rustPlatform.importCargoLock {
+          lockFile = "${inputs.starship}/Cargo.lock";
+        };
       });
       trackers = inputs.trackers;
       xournalpp = prev.xournalpp.overrideAttrs (old: {
