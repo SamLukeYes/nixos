@@ -102,7 +102,7 @@
           ./machines/test
 
           # experimental linglong support
-          inputs.linglong.nixosModules
+          inputs.linglong.nixosModules.default
           {
             services.linglong.enable = true;
           }
