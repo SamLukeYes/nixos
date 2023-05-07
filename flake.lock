@@ -300,6 +300,7 @@
         ],
         "olex2": "olex2",
         "rewine": "rewine",
+        "starship": "starship",
         "trackers": "trackers",
         "xournalpp": "xournalpp",
         "yes": "yes"
@@ -319,6 +320,23 @@
         "owner": "pcxod",
         "ref": "1.5",
         "repo": "olex2",
+        "type": "github"
+      }
+    },
+    "starship": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683195850,
+        "narHash": "sha256-WtLj9ycrzEdkitL8F6S22W2V3VeZyWZrrTMvGb0iJAE=",
+        "owner": "mickimnet",
+        "repo": "starship",
+        "rev": "92d1b3d05653d328aa982c5f8a0c78029b0582b2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mickimnet",
+        "ref": "docs-update-nerdfonts",
+        "repo": "starship",
         "type": "github"
       }
     },
