@@ -44,7 +44,6 @@
       flake = false;
       url = "github:XIU2/TrackersListCollection";
     };
-    xddxdd.follows = "archix/xddxdd";
     xournalpp = {
       flake = false;
       url = "github:xournalpp/xournalpp";
