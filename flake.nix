@@ -42,7 +42,7 @@
     };
     starship = {
       flake = false;
-      url = "github:mickimnet/starship/docs-update-nerdfonts";
+      url = "github:starship/starship";
     };
     trackers = {
       flake = false;
