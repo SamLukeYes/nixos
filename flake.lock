@@ -233,27 +233,6 @@
         "type": "github"
       }
     },
-    "olex2": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "src": "src"
-      },
-      "locked": {
-        "lastModified": 1679970507,
-        "narHash": "sha256-I3pqTRb8YItjI9mH9mGTxnqcTnsmC0oT132RdDC4PPY=",
-        "owner": "SamLukeYes",
-        "repo": "olex2-flake",
-        "rev": "8879909e9aa119fd7ea33c17c202d013377e9a5d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "SamLukeYes",
-        "repo": "olex2-flake",
-        "type": "github"
-      }
-    },
     "rewine": {
       "inputs": {
         "nixpkgs": [
@@ -295,7 +274,6 @@
           "linyinfeng",
           "nixos-stable"
         ],
-        "olex2": "olex2",
         "rewine": "rewine",
         "starship": "starship",
         "trackers": "trackers",
@@ -303,31 +281,14 @@
         "yes": "yes"
       }
     },
-    "src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1678114146,
-        "narHash": "sha256-vPuYgNBYqFNF63el3KB6KEDxh11VIjrDuXF4LjaWfbk=",
-        "owner": "pcxod",
-        "repo": "olex2",
-        "rev": "bb2c1857f024bb7d44bf01b2aa30c2eb0d727b14",
-        "type": "github"
-      },
-      "original": {
-        "owner": "pcxod",
-        "ref": "1.5",
-        "repo": "olex2",
-        "type": "github"
-      }
-    },
     "starship": {
       "flake": false,
       "locked": {
-        "lastModified": 1683722497,
-        "narHash": "sha256-ErTNFHJTGYth37S8SSqRYPkUix/VCfa4Sjzxiy2LerI=",
+        "lastModified": 1683789750,
+        "narHash": "sha256-V/zaE2YZTH/WeQcvg+Hwww7gT2vAMaE8Fs2LZGuQNcY=",
         "owner": "starship",
         "repo": "starship",
-        "rev": "b758d52eb2e4f62fb500853135d4dae9cca6788a",
+        "rev": "532fd10bf859cd7f29622df186aabff980616454",
         "type": "github"
       },
       "original": {
@@ -384,11 +345,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1683705976,
-        "narHash": "sha256-86d+0Qk/NqxJHe3Or1nidn1pNv39xE1Q3dWuo0a2bLs=",
+        "lastModified": 1683792398,
+        "narHash": "sha256-CN1MMjnFq7JWsa4daO0Tjx76of9b7W9ZGR0rv25CXsc=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "a6eeb6c9b95ca578bd9ee7c348db7a7d8ab8a322",
+        "rev": "7934609c57e5f2863de52fe9bf66d4c36e961a4f",
         "type": "github"
       },
       "original": {
