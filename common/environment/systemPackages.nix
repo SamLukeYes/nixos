@@ -60,7 +60,6 @@
     # Out-of-tree packages
     electron-ncm
     linyinfeng.wemeet
-    olex2
     yes.lx-music-desktop
     yes.snapgene-viewer
   ];

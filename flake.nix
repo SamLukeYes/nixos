@@ -32,10 +32,6 @@
     #   url = "github:oxalica/nil";
     # };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    olex2 = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:SamLukeYes/olex2-flake";
-    };
     rewine = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:wineee/nur-packages";
@@ -137,7 +133,6 @@
       libreoffice = final.libreoffice-fresh;
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
-      olex2 = inputs.olex2.packages.${system}.olex2-launcher-x11;
       rewine = inputs.rewine.packages.${system};
       starship = prev.starship.overrideAttrs (old: {
         src = inputs.starship;
