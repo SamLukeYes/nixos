@@ -19,13 +19,6 @@
     xournalpp
     yaru-theme
     zotero
-    
-    (makeDesktopItem {
-      desktopName = "yacd";
-      name = "yacd";
-      exec = "${electron}/bin/electron ${linyinfeng.yacd}/index.html";
-      icon = "${linyinfeng.yacd}/yacd-128.png";
-    })
 
     ((vscode.override {
       commandLineArgs = "--touch-events -n";

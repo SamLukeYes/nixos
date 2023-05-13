@@ -4,6 +4,11 @@ let rp = import ../rp.nix; in
   programs = {
     adb.enable = true;
 
+    clash-verge = {
+      enable = true;
+      autoStart = true;
+    };
+
     command-not-found.enable = false;
 
     firefox = {
