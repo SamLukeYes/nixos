@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 let rp = import ../rp.nix; in
 
@@ -21,14 +21,13 @@ let rp = import ../rp.nix; in
       keep-outputs = true;
       max-jobs = 3;   # https://github.com/NixOS/nixpkgs/issues/198668
       narinfo-cache-negative-ttl = 300;
-      substituters = lib.mkForce [
+      substituters = [
         "https://mirror.iscas.ac.cn/nix-channels/store"
         "https://mirror.sjtu.edu.cn/nix-channels/store"
         "https://mirrors.bfsu.edu.cn/nix-channels/store"
         "https://linyinfeng.cachix.org"
         "https://rewine.cachix.org"
         "https://xddxdd.cachix.org"
-        "${rp}https://cache.nixos.org"
         "${rp}https://cache.garnix.io"
       ];
       trusted-public-keys = [
