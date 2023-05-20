@@ -54,6 +54,5 @@
     electron-ncm
     linyinfeng.wemeet
     yes.lx-music-desktop
-    yes.snapgene-viewer
   ];
 }
