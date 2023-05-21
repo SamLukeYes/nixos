@@ -28,6 +28,7 @@ let rp = import ../rp.nix; in
     # requires archix
     pacman = {
       autoSync.enable = true;
+      confMode = "0644";
       conf.extraConfig = ''
         [options]
         Color
