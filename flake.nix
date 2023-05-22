@@ -78,8 +78,6 @@
         input = nixpkgs;
         patches = [
           ./patches/pr-232373.patch   # clash-verge
-          ./patches/pr-232409.patch   # qq
-          ./patches/pr-232928.patch   # clash
         ];
       };
     };
