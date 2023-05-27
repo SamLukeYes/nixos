@@ -37,8 +37,9 @@
     gnomeExtensions.section-todo-list
 
     # CLI programs
-    bat                           # frequently used in terminal
+    bat                           # frequently used to view text in terminal
     dig                           # must be available without Internet connection
+    file                          # frequently used to view executable type
     nix-output-monitor            # frequently used in nix operations
     onedrive                      # required by gnomeExtensions.one-drive-resurrect
     pdftk                         # required by Jasminum
