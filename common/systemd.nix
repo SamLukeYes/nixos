@@ -64,15 +64,6 @@ in {
         };
         wantedBy = [ "default.target" ];
       };
-      stuhealth = {
-        script = ''
-          export DISPLAY=:0
-          export XDG_RUNTIME_DIR=/run/user/`id -u`
-          ${pkgs.xdg-utils}/bin/xdg-open https://stuhealth.jnu.edu.cn
-        '';
-        serviceConfig.Type = "oneshot";
-        startAt = "daily";
-      };
     };
   };
 }
