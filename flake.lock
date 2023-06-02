@@ -87,11 +87,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1685546676,
-        "narHash": "sha256-XDbjJyAg6odX5Vj0Q22iI/gQuFvEkv9kamsSbQ+npaI=",
+        "lastModified": 1685662779,
+        "narHash": "sha256-cKDDciXGpMEjP1n6HlzKinN0H+oLmNpgeCTzYnsA2po=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "6ef2707776c6379bc727faf3f83c0dd60b06e0c6",
+        "rev": "71fb97f0d875fd4de4994dfb849f2c75e17eb6c3",
         "type": "github"
       },
       "original": {
@@ -168,11 +168,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1683450515,
-        "narHash": "sha256-aVl8WK+DcJ4OsYzHmrZAGV6fXgCeHVXugc3YZhjeQ50=",
+        "lastModified": 1685716263,
+        "narHash": "sha256-afnFJpkGrl30loFEi5krvSvVhDVdn2rAr/H8DdJbzhY=",
         "owner": "SamLukeYes",
         "repo": "linglong-flake",
-        "rev": "54dfc39f2f481c2f58694c0a308901ba65e3e058",
+        "rev": "0f927fcee42cf6357da67d3f9239eb1e9b774896",
         "type": "github"
       },
       "original": {
@@ -195,11 +195,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1685622836,
-        "narHash": "sha256-W5HhVKsD9Its6O4Ud9Xo1J9Tm495Sv53J8lwyYFJlic=",
+        "lastModified": 1685669385,
+        "narHash": "sha256-Mx4bKModQPDetkJkYAC7qid+Gx0F06184RjGe2MijlQ=",
         "owner": "linyinfeng",
         "repo": "nur-packages",
-        "rev": "93c527b20e5731d1179af0aac772068ac9e2d4fa",
+        "rev": "2cd0172a775d8c2f59f845a7a052869cdf8a32e9",
         "type": "github"
       },
       "original": {
@@ -241,11 +241,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1685564631,
-        "narHash": "sha256-8ywr3AkblY4++3lIVxmrWZFzac7+f32ZEhH/A8pNscI=",
+        "lastModified": 1685655444,
+        "narHash": "sha256-6EujQNAeaUkWvpEZZcVF8qSfQrNVWFNNGbUJxv/A5a8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4f53efe34b3a8877ac923b9350c874e3dcd5dc0a",
+        "rev": "e635192892f5abbc2289eaac3a73cdb249abaefd",
         "type": "github"
       },
       "original": {
@@ -291,11 +291,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1685509918,
-        "narHash": "sha256-Ney56Rbcb2TER97Fw30Nvhfdys2p0MHDY+oPVditR1A=",
+        "lastModified": 1685691677,
+        "narHash": "sha256-20bYuZxotG9ufaVNJ6imBxCaTVyTTwb6EeBt4+d+gLw=",
         "owner": "wineee",
         "repo": "nur-packages",
-        "rev": "b1ab1d41002264940fd1d336f70260dcdc40222c",
+        "rev": "3d760bcaecd9ccd3a35d4922f5be29b5a96e7ed7",
         "type": "github"
       },
       "original": {
@@ -335,11 +335,11 @@
     "starship": {
       "flake": false,
       "locked": {
-        "lastModified": 1685478087,
-        "narHash": "sha256-mMzQ3ItPdvIPQTs1MKhU0ZlZljyhGJVObGU6OJC64i4=",
+        "lastModified": 1685679438,
+        "narHash": "sha256-RSpgDNf05MOmxp3nNlvtZ0nFXAnfWOapKSM5NOPrCtI=",
         "owner": "starship",
         "repo": "starship",
-        "rev": "d2c336cc073974d092281b447336764f87ad47a0",
+        "rev": "1245a6b459e8f433c742bbb5351e3a3eb8f9363f",
         "type": "github"
       },
       "original": {
@@ -381,11 +381,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1685635671,
-        "narHash": "sha256-eKCJ1UcPlkslV2FL0NIocdgm1KRSaOCCj2g+6bVvE1M=",
+        "lastModified": 1685693278,
+        "narHash": "sha256-aPeOybpWsqdMN18n7A0pownbb2ZFjtT/ZSZ88j33XyE=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "29f126fd914a63c28f5f5598beed9752474c1885",
+        "rev": "1d76f3dc96a3a833364b355e0a2f2b258ecb06f5",
         "type": "github"
       },
       "original": {
