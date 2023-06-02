@@ -78,7 +78,8 @@
         input = nixpkgs;
         patches = [
           # Add nixpkgs patches here
-          ./patches/235007.patch
+          ./patches/235007.patch    # qq
+          ./patches/235347.patch    # biber
         ];
       };
     };
