@@ -119,8 +119,6 @@
     };
 
     overlays.default = final: prev: {
-      celluloid = final.callPackage
-        "${inputs.nixpkgs-stable}/pkgs/applications/video/celluloid" {};
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
         patches = [];
