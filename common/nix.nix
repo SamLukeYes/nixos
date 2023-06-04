@@ -23,7 +23,7 @@ let rp = import ../rp.nix; in
       narinfo-cache-negative-ttl = 300;
       substituters = [
         "https://mirror.iscas.ac.cn/nix-channels/store"
-        "https://mirror.sjtu.edu.cn/nix-channels/store"
+        # "https://mirror.sjtu.edu.cn/nix-channels/store"
         "https://mirrors.bfsu.edu.cn/nix-channels/store"
         "https://linyinfeng.cachix.org"
         "https://rewine.cachix.org"
