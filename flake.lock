@@ -50,11 +50,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1683635384,
-        "narHash": "sha256-9goJTd05yOyD/McaMqZ4BUB8JW+mZMnZQJZ7VQ6C/Lw=",
+        "lastModified": 1685972731,
+        "narHash": "sha256-VpwVUthxs3AFgvWxGTHu+KVDnS/zT3xkCtmjX2PjNQs=",
         "owner": "numtide",
         "repo": "devshell",
-        "rev": "5143ea68647c4cf5227e4ad2100db6671fc4c369",
+        "rev": "6b2554d28d46bfa6e24b941e999a145760dad0e1",
         "type": "github"
       },
       "original": {
@@ -195,11 +195,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1685903054,
-        "narHash": "sha256-1+KkpgSaKFZBgVQcwWCVAKG+BJWGholopAqehDPdu2s=",
+        "lastModified": 1686055149,
+        "narHash": "sha256-4WZEkUFDBDpcdgB5yB2B6BL9w4BEdVpfU4oDk7ugcnY=",
         "owner": "linyinfeng",
         "repo": "nur-packages",
-        "rev": "52dbb83b9e4fb4ecd8c05de05b894d3343241246",
+        "rev": "3aebf695126f16e1ecb1d60939834744181afa6b",
         "type": "github"
       },
       "original": {
@@ -225,11 +225,11 @@
     },
     "nixos-stable": {
       "locked": {
-        "lastModified": 1685801374,
-        "narHash": "sha256-otaSUoFEMM+LjBI1XL/xGB5ao6IwnZOXc47qhIgJe8U=",
+        "lastModified": 1685865905,
+        "narHash": "sha256-XJZ/o17eOd2sEsGif+/MQBnfa2DKmndWgJyc7CWajFc=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c37ca420157f4abc31e26f436c1145f8951ff373",
+        "rev": "e7603eba51f2c7820c0a182c6bbb351181caa8e7",
         "type": "github"
       },
       "original": {
@@ -326,26 +326,9 @@
           "nixos-stable"
         ],
         "rewine": "rewine",
-        "starship": "starship",
         "trackers": "trackers",
         "xournalpp": "xournalpp",
         "yes": "yes"
-      }
-    },
-    "starship": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1685726228,
-        "narHash": "sha256-F6RZ/8v3hrDfOwg1vWLgMpSFqNsPxrPswYRdusw1bGY=",
-        "owner": "starship",
-        "repo": "starship",
-        "rev": "85304d1d39f7fc1e0530a9ed09178b2251c0a221",
-        "type": "github"
-      },
-      "original": {
-        "owner": "starship",
-        "repo": "starship",
-        "type": "github"
       }
     },
     "systems": {
@@ -381,11 +364,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1685952485,
-        "narHash": "sha256-ORjApgkD9fqZQZPLpJKBmh0HMEDVlNSttR7R0buivMM=",
+        "lastModified": 1686067691,
+        "narHash": "sha256-kta5tPowgpUadcHzsd0fq1x383OWZyL/ZkFBiHPW4r4=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "64f99122e1b5824ab6c36c577316457e9edc6a2a",
+        "rev": "5ae12fac7e4ae686b881aea1a19e801ee6d496c9",
         "type": "github"
       },
       "original": {
