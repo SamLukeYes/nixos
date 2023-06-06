@@ -36,10 +36,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:wineee/nur-packages";
     };
-    starship = {
-      flake = false;
-      url = "github:starship/starship";
-    };
+    # starship = {
+    #   flake = false;
+    #   url = "github:starship/starship";
+    # };
     trackers = {
       flake = false;
       url = "github:XIU2/TrackersListCollection";
@@ -78,7 +78,8 @@
         input = nixpkgs;
         patches = [
           # Add nixpkgs patches here
-          ./patches/235007.patch
+          ./patches/235007.patch    # qq
+          ./patches/236298.patch    # starship
         ];
       };
     };
@@ -135,14 +136,17 @@
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       rewine = inputs.rewine.packages.${system};
-      starship = prev.starship.overrideAttrs (old: {
-        src = inputs.starship;
-        cargoDeps = final.rustPlatform.importCargoLock {
-          lockFile = "${inputs.starship}/Cargo.lock";
-        };
-        doCheck = false;
-      });
+      # starship = prev.starship.overrideAttrs (old: {
+      #   src = inputs.starship;
+      #   cargoDeps = final.rustPlatform.importCargoLock {
+      #     lockFile = "${inputs.starship}/Cargo.lock";
+      #   };
+      #   doCheck = false;
+      # });
       trackers = inputs.trackers;
+      virt-manager = prev.virt-manager.overrideAttrs (old: {
+        patches = [ ./patches/virt-manager-loongarch.patch ];
+      });
       xournalpp = prev.xournalpp.overrideAttrs (old: {
         src = inputs.xournalpp;
         version = "${old.version}+dev";

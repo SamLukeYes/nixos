@@ -1,0 +1,190 @@
+From 49874e7491b10b7cf47f842e2967dc843fb862a0 Mon Sep 17 00:00:00 2001
+From: zhaotianrui <zhaotianrui@loongson.cn>
+Date: Mon, 12 Dec 2022 16:51:20 +0800
+Subject: [PATCH] Add loongarch support
+
+Signed-off-by: zhaotianrui <zhaotianrui@loongson.cn>
+---
+ virtManager/createvm.py     |  5 ++++-
+ virtinst/devices/disk.py    |  2 ++
+ virtinst/devices/video.py   |  2 ++
+ virtinst/domain/cpu.py      |  5 +++++
+ virtinst/domain/os.py       |  3 +++
+ virtinst/domcapabilities.py |  6 +++++-
+ virtinst/guest.py           | 16 ++++++++++++----
+ 7 files changed, 33 insertions(+), 6 deletions(-)
+
+diff --git a/virtManager/createvm.py b/virtManager/createvm.py
+index 7e5ded6..7930b37 100644
+--- a/virtManager/createvm.py
++++ b/virtManager/createvm.py
+@@ -476,7 +476,8 @@ class vmmCreateVM(vmmGObjectUI):
+ 
+         installable_arch = bool(guest.os.is_x86() or
+                 guest.os.is_ppc64() or
+-                guest.os.is_s390x())
++                guest.os.is_s390x() or
++                guest.os.is_loongarch())
+ 
+         default_efi = (
+             self.config.get_default_firmware_setting() == "uefi" and
+@@ -857,6 +858,8 @@ class vmmCreateVM(vmmGObjectUI):
+         machines.sort()
+ 
+         defmachine = None
++        if self._capsinfo.arch in ["loongarch64"]:
++            defmachine = "loongson7a"
+         prios = []
+         recommended_machine = virtinst.Guest.get_recommended_machine(
+                 self._capsinfo)
+diff --git a/virtinst/devices/disk.py b/virtinst/devices/disk.py
+index dc59fd1..261b82b 100644
+--- a/virtinst/devices/disk.py
++++ b/virtinst/devices/disk.py
+@@ -974,6 +974,8 @@ class DeviceDisk(Device):
+             return "sd"
+         if guest.os.is_q35():
+             return "sata"
++        if self.is_cdrom() and guest.os.is_loongarch():
++            return "scsi"
+         if self.conn.is_bhyve():
+             # IDE bus is not supported by bhyve
+             return "sata"
+diff --git a/virtinst/devices/video.py b/virtinst/devices/video.py
+index 70067a7..d10fd7a 100644
+--- a/virtinst/devices/video.py
++++ b/virtinst/devices/video.py
+@@ -27,6 +27,8 @@ class DeviceVideo(Device):
+ 
+     @staticmethod
+     def default_model(guest):
++        if guest.os.is_loongarch():
++            return "virtio"
+         if not guest.os.is_hvm():
+             return None
+         if guest.os.is_pseries():
+diff --git a/virtinst/domain/cpu.py b/virtinst/domain/cpu.py
+index 5de42b4..82b68ac 100644
+--- a/virtinst/domain/cpu.py
++++ b/virtinst/domain/cpu.py
+@@ -449,5 +449,10 @@ class DomainCpu(XMLBuilder):
+             # -M virt defaults to a 32bit CPU, even if using aarch64
+             self.set_model(guest, "cortex-a57")
+ 
++        elif guest.os.is_loongarch() and guest.type == "kvm":
++            if guest.os.arch != self.conn.caps.host.cpu.arch:
++                return
++            self.set_special_mode(guest, guest.loongarch_cpu_default)
++
+         elif guest.os.is_x86() and guest.type == "kvm":
+             self._set_cpu_x86_kvm_default(guest)
+diff --git a/virtinst/domain/os.py b/virtinst/domain/os.py
+index e2cea75..bd0deac 100644
+--- a/virtinst/domain/os.py
++++ b/virtinst/domain/os.py
+@@ -70,6 +70,9 @@ class DomainOs(XMLBuilder):
+     def is_pseries(self):
+         return self.is_ppc64() and str(self.machine).startswith("pseries")
+ 
++    def is_loongarch(self):
++        return self.arch == "loongarch64"
++
+     def is_s390x(self):
+         return self.arch == "s390x"
+ 
+diff --git a/virtinst/domcapabilities.py b/virtinst/domcapabilities.py
+index d22ce6a..50ce12c 100644
+--- a/virtinst/domcapabilities.py
++++ b/virtinst/domcapabilities.py
+@@ -289,6 +289,10 @@ class DomainCapabilities(XMLBuilder):
+             r".*arm/QEMU_EFI.*",  # fedora, gerd's firmware repo
+             r".*edk2-arm-code\.fd"  # upstream qemu
+         ],
++        "loongarch64": [
++            ".*loongarch_bios.bin",  # loongarch
++            ".*loongarch_vars.bin",  # gerd's firmware repo
++        ],
+     }
+ 
+     def find_uefi_path_for_arch(self):
+@@ -444,7 +448,7 @@ class DomainCapabilities(XMLBuilder):
+             # support. Use our pre-existing logic
+             if not self.conn.is_qemu() and not self.conn.is_test():
+                 return False
+-            return self.conn.caps.host.cpu.arch in ["i686", "x86_64"]
++            return self.conn.caps.host.cpu.arch in ["i686", "x86_64", "loongarch64"]
+ 
+         return self.devices.graphics.get_enum("type").has_value("spice")
+ 
+diff --git a/virtinst/guest.py b/virtinst/guest.py
+index e663602..f0f2d67 100644
+--- a/virtinst/guest.py
++++ b/virtinst/guest.py
+@@ -212,6 +212,7 @@ class Guest(XMLBuilder):
+         self.skip_default_rng = False
+         self.skip_default_tpm = False
+         self.x86_cpu_default = self.cpu.SPECIAL_MODE_APP_DEFAULT
++        self.loongarch_cpu_default = self.cpu.SPECIAL_MODE_HOST_MODEL_ONLY
+ 
+         # qemu 6.1, fairly new when we added this option, has an unfortunate
+         # bug with >= 15 root ports, so we choose 14 instead of our original 16
+@@ -352,7 +353,8 @@ class Guest(XMLBuilder):
+         if (self.os.is_arm_machvirt() or
+             self.os.is_riscv_virt() or
+             self.os.is_s390x() or
+-            self.os.is_pseries()):
++            self.os.is_pseries() or
++            self.os.is_loongarch()):
+             return True
+ 
+         if not os_support:
+@@ -541,7 +543,7 @@ class Guest(XMLBuilder):
+             # and doesn't break QEMU internal snapshots
+             prefer_efi = self.osinfo.requires_firmware_efi(self.os.arch)
+         else:
+-            prefer_efi = self.os.is_arm_machvirt() or self.conn.is_bhyve()
++            prefer_efi = self.os.is_arm_machvirt() or self.conn.is_bhyve() or self.os.is_loongarch()
+ 
+         log.debug("Prefer EFI => %s", prefer_efi)
+         return prefer_efi
+@@ -558,6 +560,8 @@ class Guest(XMLBuilder):
+         """
+         self.os.loader_ro = True
+         self.os.loader_type = "pflash"
++        if (self.os.is_loongarch()):
++            self.os.loader_type = "rom"
+         self.os.loader = path
+ 
+         # If the firmware name contains "secboot" it is probably build
+@@ -902,7 +906,8 @@ class Guest(XMLBuilder):
+             usb_tablet = True
+         if (self.os.is_arm_machvirt() or
+             self.os.is_riscv_virt() or
+-            self.os.is_pseries()):
++            self.os.is_pseries() or
++            self.os.is_loongarch()):
+             usb_tablet = True
+             usb_keyboard = True
+ 
+@@ -1016,7 +1021,8 @@ class Guest(XMLBuilder):
+         if self.os.is_container() and not self.conn.is_vz():
+             return
+         if (not self.os.is_x86() and
+-            not self.os.is_pseries()):
++            not self.os.is_pseries() and
++            not self.os.is_loongarch()):
+             return
+         self.add_device(DeviceGraphics(self.conn))
+ 
+@@ -1155,6 +1161,8 @@ class Guest(XMLBuilder):
+         self.add_device(dev)
+ 
+     def _add_spice_usbredir(self):
++        if (self.os.is_loongarch()):
++            return
+         if self.skip_default_usbredir:
+             return
+         if self.devices.redirdev:
+-- 
+2.33.0
+

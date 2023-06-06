@@ -1,0 +1,47 @@
+From 9ff9f4935abf895c788fc27ff7b43e56110cc9b6 Mon Sep 17 00:00:00 2001
+From: kilianar <mail@kilianar.de>
+Date: Tue, 6 Jun 2023 17:34:43 +0200
+Subject: [PATCH] starship: 1.14.2 -> 1.15.0
+
+https://github.com/starship/starship/releases/tag/v1.15.0
+---
+ pkgs/tools/misc/starship/default.nix | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/pkgs/tools/misc/starship/default.nix b/pkgs/tools/misc/starship/default.nix
+index d343ad9917c9f..1100a62b09474 100644
+--- a/pkgs/tools/misc/starship/default.nix
++++ b/pkgs/tools/misc/starship/default.nix
+@@ -4,7 +4,6 @@
+ , rustPlatform
+ , installShellFiles
+ , cmake
+-, fetchpatch
+ , git
+ , nixosTests
+ , Security
+@@ -14,13 +13,13 @@
+ 
+ rustPlatform.buildRustPackage rec {
+   pname = "starship";
+-  version = "1.14.2";
++  version = "1.15.0";
+ 
+   src = fetchFromGitHub {
+     owner = "starship";
+     repo = pname;
+     rev = "v${version}";
+-    hash = "sha256-t+Ur6QmemMz6WAZnii7f2O+9R7hPp+5oej4PuaifznE=";
++    hash = "sha256-aINiWzkt4sAWgcGdkHTb2KRMh2z+LiOhDdTJbzbXwR4=";
+   };
+ 
+   nativeBuildInputs = [ installShellFiles cmake ];
+@@ -36,7 +35,7 @@ rustPlatform.buildRustPackage rec {
+       --zsh <($out/bin/starship completions zsh)
+   '';
+ 
+-  cargoHash = "sha256-NSUId0CXTRF1Qqo9XPDgxY2vMyMBuJtJYGGuQ0HHk90=";
++  cargoHash = "sha256-XT2kgiITtG1FNyztNvos/r01pvdF1xPhHA4+YhFGFEU=";
+ 
+   nativeCheckInputs = [ git ];
+ 
