@@ -1,0 +1,118 @@
+diff --git a/po/POTFILES b/po/POTFILES
+index 5d6ec195b4..c137120c40 100644
+--- a/po/POTFILES
++++ b/po/POTFILES
+@@ -68,6 +68,7 @@ src/conf/virsecretobj.c
+ src/conf/virstorageobj.c
+ src/cpu/cpu.c
+ src/cpu/cpu_arm.c
++src/cpu/cpu_loongarch.c
+ src/cpu/cpu_map.c
+ src/cpu/cpu_ppc64.c
+ src/cpu/cpu_riscv64.c
+diff --git a/src/conf/schemas/basictypes.rng b/src/conf/schemas/basictypes.rng
+index 2d6f1a2c84..548dcf60a7 100644
+--- a/src/conf/schemas/basictypes.rng
++++ b/src/conf/schemas/basictypes.rng
+@@ -444,6 +444,7 @@
+       <value>i686</value>
+       <value>ia64</value>
+       <value>lm32</value>
++      <value>loongarch64</value>
+       <value>m68k</value>
+       <value>microblaze</value>
+       <value>microblazeel</value>
+diff --git a/src/cpu_map/index.xml b/src/cpu_map/index.xml
+index 0187016c1c..f72c8e336c 100644
+--- a/src/cpu_map/index.xml
++++ b/src/cpu_map/index.xml
+@@ -118,4 +118,9 @@
+     <include filename='arm_FT-2000plus.xml'/>
+     <include filename='arm_Tengyun-S2500.xml'/>
+   </arch>
++
++  <arch name='loongarch64'>
++    <include filename="loongarch_vendors.xml"/>
++    <include filename="loongarch_3a5000.xml"/>
++  </arch>
+ </cpus>
+diff --git a/src/cpu_map/loongarch_3a5000.xml b/src/cpu_map/loongarch_3a5000.xml
+new file mode 100644
+index 0000000000..f6fe3386f7
+--- /dev/null
++++ b/src/cpu_map/loongarch_3a5000.xml
+@@ -0,0 +1,6 @@
++<cpus>
++  <model name='Loongson-3A5000'>
++    <vendor name='Loongson'/>
++      <prid value='0x14c010' mask='0xfffff0'/>
++  </model>
++</cpus>
+diff --git a/src/cpu_map/loongarch_vendors.xml b/src/cpu_map/loongarch_vendors.xml
+new file mode 100644
+index 0000000000..c744654617
+--- /dev/null
++++ b/src/cpu_map/loongarch_vendors.xml
+@@ -0,0 +1,3 @@
++<cpus>
++  <vendor name='Loongson'/>
++</cpus>
+diff --git a/src/cpu_map/meson.build b/src/cpu_map/meson.build
+index fa83b23474..b373456489 100644
+--- a/src/cpu_map/meson.build
++++ b/src/cpu_map/meson.build
+@@ -14,6 +14,8 @@ cpumap_data = [
+   'arm_ThunderX299xx.xml',
+   'arm_vendors.xml',
+   'index.xml',
++  'loongarch_vendors.xml',
++  'loongarch_3a5000.xml',
+   'ppc64_POWER6.xml',
+   'ppc64_POWER7.xml',
+   'ppc64_POWER8.xml',
+diff --git a/src/qemu/qemu_capabilities.c b/src/qemu/qemu_capabilities.c
+index cf85d42198..a500e6afa3 100644
+--- a/src/qemu/qemu_capabilities.c
++++ b/src/qemu/qemu_capabilities.c
+@@ -2728,6 +2728,8 @@ static const char *preferredMachines[] =
+ 
+     "sim", /* VIR_ARCH_XTENSA */
+     "sim", /* VIR_ARCH_XTENSAEB */
++
++    "loongson7a", /* VIR_ARCH_LOONGARCH64 */
+ };
+ G_STATIC_ASSERT(G_N_ELEMENTS(preferredMachines) == VIR_ARCH_LAST);
+ 
+diff --git a/src/util/virarch.c b/src/util/virarch.c
+index 2134dd6a9d..16f8e46bab 100644
+--- a/src/util/virarch.c
++++ b/src/util/virarch.c
+@@ -50,6 +50,7 @@ static const struct virArchData {
+     { "i686",         32, VIR_ARCH_LITTLE_ENDIAN },
+     { "ia64",         64, VIR_ARCH_LITTLE_ENDIAN },
+     { "lm32",         32, VIR_ARCH_BIG_ENDIAN },
++    { "loongarch64",  64, VIR_ARCH_LITTLE_ENDIAN },
+ 
+     { "m68k",         32, VIR_ARCH_BIG_ENDIAN },
+     { "microblaze",   32, VIR_ARCH_BIG_ENDIAN },
+diff --git a/src/util/virarch.h b/src/util/virarch.h
+index 81b1b27a57..b6f3a1d71a 100644
+--- a/src/util/virarch.h
++++ b/src/util/virarch.h
+@@ -35,6 +35,7 @@ typedef enum {
+     VIR_ARCH_I686,         /* x86         32 LE https://en.wikipedia.org/wiki/X86 */
+     VIR_ARCH_ITANIUM,      /* Itanium     64 LE https://en.wikipedia.org/wiki/Itanium */
+     VIR_ARCH_LM32,         /* MilkyMist   32 BE https://en.wikipedia.org/wiki/Milkymist */
++    VIR_ARCH_LOONGARCH64,  /* LoongArch   64 LE */
+ 
+     VIR_ARCH_M68K,         /* m68k        32 BE https://en.wikipedia.org/wiki/Motorola_68000_family */
+     VIR_ARCH_MICROBLAZE,   /* Microblaze  32 BE https://en.wikipedia.org/wiki/MicroBlaze */
+@@ -103,6 +104,8 @@ typedef enum {
+ #define ARCH_IS_MIPS64(arch) ((arch) == VIR_ARCH_MIPS64 ||\
+                               (arch) == VIR_ARCH_MIPS64EL)
+ 
++#define ARCH_IS_LOONGARCH(arch)  ((arch) == VIR_ARCH_LOONGARCH64)
++
+ typedef enum {
+     VIR_ARCH_LITTLE_ENDIAN,
+     VIR_ARCH_BIG_ENDIAN,

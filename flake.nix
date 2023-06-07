@@ -133,6 +133,13 @@
         inherit (final) electron;
       };
       libreoffice = final.libreoffice-fresh;
+      libvirt = prev.libvirt.overrideAttrs (old: {
+        # https://gitee.com/src-openeuler/libvirt/
+        patches = old.patches ++ [
+          ./patches/libvirt-loongarch.patch
+        ];
+        doCheck = false;
+      });
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       rewine = inputs.rewine.packages.${system};
@@ -145,6 +152,7 @@
       # });
       trackers = inputs.trackers;
       virt-manager = prev.virt-manager.overrideAttrs (old: {
+        # https://gitee.com/src-openeuler/virt-manager
         patches = [ ./patches/virt-manager-loongarch.patch ];
       });
       xournalpp = prev.xournalpp.overrideAttrs (old: {
