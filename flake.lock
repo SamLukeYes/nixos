@@ -63,6 +63,60 @@
         "type": "github"
       }
     },
+    "edk2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1683289238,
+        "narHash": "sha256-VcjmJ82toQw5gFsRl5Gqnsz2e6WRLud+P39dIUuHYjY=",
+        "ref": "LoongArch",
+        "rev": "b962523e1f21f4b084358a6c69f7ad294a92029e",
+        "revCount": 31285,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/loongson/edk2.git"
+      },
+      "original": {
+        "ref": "LoongArch",
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/loongson/edk2.git"
+      }
+    },
+    "edk2-non-osi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1685439633,
+        "narHash": "sha256-8vekvnPR9S1PQEjk2RSpMoHh6V6mcRbKWgk8892geYA=",
+        "owner": "tianocore",
+        "repo": "edk2-non-osi",
+        "rev": "f0bb00937ad6bfdf92d9c7fea9f7277c160d82e9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "tianocore",
+        "repo": "edk2-non-osi",
+        "type": "github"
+      }
+    },
+    "edk2-platforms": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1672744930,
+        "narHash": "sha256-l8egOsWt8AP5Eg2axqyJfcCffMSxqh90OFaYn0Jedms=",
+        "ref": "devel-LoongArch",
+        "rev": "b31334a97a41fab9c00c0b4c1af22d28ac7177e7",
+        "revCount": 3288,
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/loongson/edk2-platforms.git"
+      },
+      "original": {
+        "ref": "devel-LoongArch",
+        "submodules": true,
+        "type": "git",
+        "url": "https://github.com/loongson/edk2-platforms.git"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -195,16 +249,42 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1686141540,
-        "narHash": "sha256-gXi/JHhV1elq4ni02Bd7JvI60swFY+axLQh8ffllg1w=",
+        "lastModified": 1686187965,
+        "narHash": "sha256-fk86m9kvwt+lXFKvvrS15RbVVY19i0oE5LG4ocmnJoE=",
         "owner": "linyinfeng",
         "repo": "nur-packages",
-        "rev": "c2bd2ee2d0216f0acca1bbdb4c80691db09acace",
+        "rev": "5d1b887836e475b83b10b797d45c909e266724ee",
         "type": "github"
       },
       "original": {
         "owner": "linyinfeng",
         "repo": "nur-packages",
+        "type": "github"
+      }
+    },
+    "loongarch-ovmf": {
+      "inputs": {
+        "edk2": "edk2",
+        "edk2-non-osi": "edk2-non-osi",
+        "edk2-platforms": "edk2-platforms",
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1686214158,
+        "narHash": "sha256-DmRYEwhQdr0zKuxZsRlhH92tRIr3hH7HGn03up6uJWM=",
+        "owner": "SamLukeYes",
+        "repo": "loongarchOVMF",
+        "rev": "a426a790ea49d25a462e38778114c59cdb736fda",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SamLukeYes",
+        "repo": "loongarchOVMF",
         "type": "github"
       }
     },
@@ -319,6 +399,7 @@
         ],
         "linglong": "linglong",
         "linyinfeng": "linyinfeng",
+        "loongarch-ovmf": "loongarch-ovmf",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": [
@@ -364,11 +445,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1686154065,
-        "narHash": "sha256-nvJmgXFkrB14Ik6ebfZkwu6sRZKH8kBk39rbRbtFWCQ=",
+        "lastModified": 1686211702,
+        "narHash": "sha256-ywOflrZ5QLMWkbkojWiwHGpsWnHwWDbC3A/CfpaDn50=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "67a2f802e864bf7ff0ecfd013c2d110221b50abb",
+        "rev": "3135d7f44d4e773cda50a80a56a5297d4f224983",
         "type": "github"
       },
       "original": {
