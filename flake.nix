@@ -27,6 +27,13 @@
       };
       url = "github:linyinfeng/nur-packages";
     };
+    loongarch-ovmf = {
+      inputs = {
+        flake-utils.follows = "flake-utils";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:SamLukeYes/loongarchOVMF";
+    };
     # nil = {
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   url = "github:oxalica/nil";
@@ -142,6 +149,7 @@
       });
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
+      ovmf-loongarch = inputs.loongarch-ovmf.defaultPackage.${system};
       rewine = inputs.rewine.packages.${system};
       # starship = prev.starship.overrideAttrs (old: {
       #   src = inputs.starship;
