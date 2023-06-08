@@ -27,13 +27,6 @@
       };
       url = "github:linyinfeng/nur-packages";
     };
-    loongarch-ovmf = {
-      inputs = {
-        flake-utils.follows = "flake-utils";
-        nixpkgs.follows = "nixpkgs";
-      };
-      url = "github:SamLukeYes/loongarchOVMF";
-    };
     # nil = {
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   url = "github:oxalica/nil";
@@ -86,6 +79,7 @@
         patches = [
           # Add nixpkgs patches here
           ./patches/235007.patch    # qq
+          ./patches/236109.patch    # coreutils
           ./patches/236298.patch    # starship
         ];
       };
@@ -140,13 +134,6 @@
         inherit (final) electron;
       };
       libreoffice = final.libreoffice-fresh;
-      libvirt = prev.libvirt.overrideAttrs (old: {
-        # https://gitee.com/src-openeuler/libvirt/
-        patches = old.patches ++ [
-          ./patches/libvirt-loongarch.patch
-        ];
-        doCheck = false;
-      });
       linyinfeng = inputs.linyinfeng.packages.${system};
       # nil = inputs.nil.packages.${system}.nil;
       ovmf-loongarch = inputs.loongarch-ovmf.defaultPackage.${system};
@@ -159,10 +146,6 @@
       #   doCheck = false;
       # });
       trackers = inputs.trackers;
-      virt-manager = prev.virt-manager.overrideAttrs (old: {
-        # https://gitee.com/src-openeuler/virt-manager
-        patches = [ ./patches/virt-manager-loongarch.patch ];
-      });
       xournalpp = prev.xournalpp.overrideAttrs (old: {
         src = inputs.xournalpp;
         version = "${old.version}+dev";
