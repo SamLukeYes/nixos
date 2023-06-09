@@ -78,6 +78,7 @@
         input = nixpkgs;
         patches = [
           # Add nixpkgs patches here
+          ./patches/nixos-rebuild-use-nom.patch
         ];
       };
     };
