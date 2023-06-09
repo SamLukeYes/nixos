@@ -78,7 +78,6 @@
         input = nixpkgs;
         patches = [
           # Add nixpkgs patches here
-          ./patches/236298.patch    # starship
         ];
       };
     };
