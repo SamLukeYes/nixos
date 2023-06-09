@@ -14,6 +14,8 @@
 
     cpupower-gui.enable = lib.mkDefault true;
 
+    dbus.implementation = "broker";
+
     fstrim.enable = true;
 
     fwupd.enable = true;
