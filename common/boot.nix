@@ -24,6 +24,6 @@
       };
     };
     plymouth.enable = true;
-    # supportedFilesystems = [ "bcachefs" ];
+    tmp.cleanOnBoot = true;
   };
 }
