@@ -37,6 +37,7 @@
     gnomeExtensions.section-todo-list
 
     # CLI programs
+    archix.paru                   # frequently used to query AUR packages
     bat                           # frequently used to view text in terminal
     dig                           # must be available without Internet connection
     file                          # frequently used to view executable type

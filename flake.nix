@@ -119,6 +119,7 @@
     };
 
     overlays.default = final: prev: {
+      archix = inputs.archix.packages.${system};
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
         patches = [];
