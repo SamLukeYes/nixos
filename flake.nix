@@ -14,6 +14,9 @@
     };
     flake-utils.follows = "archix/xddxdd/flake-utils";
     flake-utils-plus.follows = "archix/xddxdd/flake-utils-plus";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+    };
     linglong = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,8 +28,15 @@
     # };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpak = {
-      url = "github:max-privatevoid/nixpak";
+      url = "github:nixpak/nixpak";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixpak-pkgs = {
+      url = "github:nixpak/pkgs";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpak.follows = "nixpak";
+      };
     };
     rewine = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -132,9 +142,40 @@
       };
       # nil = inputs.nil.packages.${system}.nil;
       qq = (final.mkNixPak {
-        config = { sloth, ... }: {
-          app.package = prev.qq;
-          bubblewrap.bind.dev = [ "/dev" ];
+        config = { sloth, ... }: let
+          nixpakModules = "${inputs.nixpak-pkgs}/pkgs/modules";
+        in {
+          imports = [
+            "${nixpakModules}/gui-base.nix"
+            "${nixpakModules}/network.nix"
+          ];
+          app.package = prev.qq.overrideAttrs (old: {
+            postInstall = ''
+              substituteInPlace $out/share/applications/qq.desktop \
+                --replace "$out/bin/qq" "qq"
+            '';
+          });
+          bubblewrap = {
+            bind = {
+              dev = [
+                # Waiting for implementation:
+                # https://github.com/nixpak/nixpak/issues/6
+                "/run/dbus"
+              ];
+              ro = [
+                "/etc/fonts"
+                "/etc/machine-id"
+                "/etc/passwd"
+                "/run/current-system/sw"
+                (sloth.env "XAUTHORITY")
+                # (sloth.concat' sloth.homeDir "/.config/gtk-3.0")
+              ];
+              rw = [
+                (sloth.concat' sloth.homeDir "/.config/QQ")
+                (sloth.concat' sloth.homeDir "/Downloads")
+              ];
+            };
+          };
         };
       }).config.env;
       rewine = inputs.rewine.packages.${system};

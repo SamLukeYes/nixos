@@ -37,6 +37,24 @@
         "type": "github"
       }
     },
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1685662779,
+        "narHash": "sha256-cKDDciXGpMEjP1n6HlzKinN0H+oLmNpgeCTzYnsA2po=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "71fb97f0d875fd4de4994dfb849f2c75e17eb6c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -124,14 +142,37 @@
       "locked": {
         "lastModified": 1684947696,
         "narHash": "sha256-MMzn7fj4Uxkd92M8nyMLibQfD4P33RtseFAJKEJjrs4=",
-        "owner": "max-privatevoid",
+        "owner": "nixpak",
         "repo": "nixpak",
         "rev": "3f73217767d94f46d41e93a3b6a8fe31b8056818",
         "type": "github"
       },
       "original": {
-        "owner": "max-privatevoid",
+        "owner": "nixpak",
         "repo": "nixpak",
+        "type": "github"
+      }
+    },
+    "nixpak-pkgs": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpak": [
+          "nixpak"
+        ]
+      },
+      "locked": {
+        "lastModified": 1673387097,
+        "narHash": "sha256-Z7bdJfv90ktfhNVh/9dsmdY2ue17MUgT325i1SPToGE=",
+        "owner": "nixpak",
+        "repo": "pkgs",
+        "rev": "ee75ca2bd481c1ff7a950ee7c2700d23e683f4b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixpak",
+        "repo": "pkgs",
         "type": "github"
       }
     },
@@ -145,6 +186,24 @@
         "type": "github"
       },
       "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-lib": {
+      "locked": {
+        "dir": "lib",
+        "lastModified": 1685564631,
+        "narHash": "sha256-8ywr3AkblY4++3lIVxmrWZFzac7+f32ZEhH/A8pNscI=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "4f53efe34b3a8877ac923b9350c874e3dcd5dc0a",
+        "type": "github"
+      },
+      "original": {
+        "dir": "lib",
         "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
@@ -175,6 +234,7 @@
       "inputs": {
         "archix": "archix",
         "cpupower-gui": "cpupower-gui",
+        "flake-parts": "flake-parts",
         "flake-utils": [
           "archix",
           "xddxdd",
@@ -188,6 +248,7 @@
         "linglong": "linglong",
         "nixos-hardware": "nixos-hardware",
         "nixpak": "nixpak",
+        "nixpak-pkgs": "nixpak-pkgs",
         "nixpkgs": "nixpkgs",
         "rewine": "rewine",
         "trackers": "trackers",
