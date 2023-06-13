@@ -55,7 +55,6 @@
 
     # Out-of-tree packages
     electron-ncm
-    linyinfeng.wemeet
     yes.lx-music-desktop
   ];
 }

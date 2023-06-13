@@ -12,26 +12,22 @@
       flake = false;
       url = "github:vagnum08/cpupower-gui";
     };
-    flake-utils.follows = "linyinfeng/flake-utils";
+    flake-utils.follows = "archix/xddxdd/flake-utils";
     flake-utils-plus.follows = "archix/xddxdd/flake-utils-plus";
     linglong = {
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/linglong-flake";
     };
-    linyinfeng = {
-      inputs = {
-        # flake-utils.follows = "flake-utils";
-        # nixos-stable.follows = "nixpkgs-stable";
-        nixpkgs.follows = "nixpkgs";
-      };
-      url = "github:linyinfeng/nur-packages";
-    };
     # nil = {
     #   inputs.nixpkgs.follows = "nixpkgs";
     #   url = "github:oxalica/nil";
     # };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixpak = {
+      url = "github:max-privatevoid/nixpak";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     rewine = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:wineee/nur-packages";
@@ -55,8 +51,6 @@
 
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs-gnome.url = "github:NixOS/nixpkgs/gnome";
-    nixpkgs-stable.follows = "linyinfeng/nixos-stable";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -73,7 +67,6 @@
     supportedSystems = [ system ];
 
     channels = {
-      # gnome.input = inputs.nixpkgs-gnome;
       nixos-unstable = {
         input = nixpkgs;
         patches = [
@@ -133,9 +126,17 @@
         inherit (final) electron;
       };
       libreoffice = final.libreoffice-fresh;
-      linyinfeng = inputs.linyinfeng.packages.${system};
+      mkNixPak = inputs.nixpak.lib.nixpak {
+        inherit (final) lib;
+        pkgs = final;
+      };
       # nil = inputs.nil.packages.${system}.nil;
-      ovmf-loongarch = inputs.loongarch-ovmf.defaultPackage.${system};
+      qq = (final.mkNixPak {
+        config = { sloth, ... }: {
+          app.package = prev.qq;
+          bubblewrap.bind.dev = [ "/dev" ];
+        };
+      }).config.env;
       rewine = inputs.rewine.packages.${system};
       # starship = prev.starship.overrideAttrs (old: {
       #   src = inputs.starship;
