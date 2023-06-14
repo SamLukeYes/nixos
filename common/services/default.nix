@@ -16,6 +16,8 @@
 
     dbus.implementation = "broker";
 
+    flatpak.enable = true;
+
     fstrim.enable = true;
 
     fwupd.enable = true;

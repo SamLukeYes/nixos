@@ -5,7 +5,6 @@
     adw-gtk3
     authenticator
     celluloid
-    gnome-firmware
     gnome-frog
     gnome.dconf-editor
     gnome.gnome-sound-recorder
@@ -13,7 +12,6 @@
     gnome.nautilus-python
     libreoffice
     obs-studio
-    qq
     tdesktop
     virt-manager
     xournalpp

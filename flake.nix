@@ -22,22 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/linglong-flake";
     };
-    # nil = {
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   url = "github:oxalica/nil";
-    # };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixpak = {
-      url = "github:nixpak/nixpak";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixpak-pkgs = {
-      url = "github:nixpak/pkgs";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        nixpak.follows = "nixpak";
-      };
-    };
     rewine = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:wineee/nur-packages";
@@ -135,49 +120,12 @@
       electron-ncm = final.rewine.electron-netease-cloud-music.override {
         inherit (final) electron;
       };
+      flatpak = prev.flatpak.overrideAttrs (old: {
+        configureFlags = old.configureFlags ++ [
+          "--with-system-fonts-dir=/run/current-system/sw/share/X11/fonts"
+        ];
+      });
       libreoffice = final.libreoffice-fresh;
-      mkNixPak = inputs.nixpak.lib.nixpak {
-        inherit (final) lib;
-        pkgs = final;
-      };
-      # nil = inputs.nil.packages.${system}.nil;
-      qq = (final.mkNixPak {
-        config = { sloth, ... }: let
-          nixpakModules = "${inputs.nixpak-pkgs}/pkgs/modules";
-        in {
-          imports = [
-            "${nixpakModules}/gui-base.nix"
-            "${nixpakModules}/network.nix"
-          ];
-          app.package = prev.qq.overrideAttrs (old: {
-            postInstall = ''
-              substituteInPlace $out/share/applications/qq.desktop \
-                --replace "$out/bin/qq" "qq"
-            '';
-          });
-          bubblewrap = {
-            bind = {
-              dev = [
-                # Waiting for implementation:
-                # https://github.com/nixpak/nixpak/issues/6
-                "/run/dbus"
-              ];
-              ro = [
-                "/etc/fonts"
-                "/etc/machine-id"
-                "/etc/passwd"
-                "/run/current-system/sw"
-                (sloth.env "XAUTHORITY")
-                # (sloth.concat' sloth.homeDir "/.config/gtk-3.0")
-              ];
-              rw = [
-                (sloth.concat' sloth.homeDir "/.config/QQ")
-                (sloth.concat' sloth.homeDir "/Downloads")
-              ];
-            };
-          };
-        };
-      }).config.env;
       rewine = inputs.rewine.packages.${system};
       # starship = prev.starship.overrideAttrs (old: {
       #   src = inputs.starship;
