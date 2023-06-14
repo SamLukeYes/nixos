@@ -133,49 +133,6 @@
         "type": "github"
       }
     },
-    "nixpak": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1684947696,
-        "narHash": "sha256-MMzn7fj4Uxkd92M8nyMLibQfD4P33RtseFAJKEJjrs4=",
-        "owner": "nixpak",
-        "repo": "nixpak",
-        "rev": "3f73217767d94f46d41e93a3b6a8fe31b8056818",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixpak",
-        "repo": "nixpak",
-        "type": "github"
-      }
-    },
-    "nixpak-pkgs": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpak": [
-          "nixpak"
-        ]
-      },
-      "locked": {
-        "lastModified": 1673387097,
-        "narHash": "sha256-Z7bdJfv90ktfhNVh/9dsmdY2ue17MUgT325i1SPToGE=",
-        "owner": "nixpak",
-        "repo": "pkgs",
-        "rev": "ee75ca2bd481c1ff7a950ee7c2700d23e683f4b3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixpak",
-        "repo": "pkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1686501370,
@@ -247,8 +204,6 @@
         ],
         "linglong": "linglong",
         "nixos-hardware": "nixos-hardware",
-        "nixpak": "nixpak",
-        "nixpak-pkgs": "nixpak-pkgs",
         "nixpkgs": "nixpkgs",
         "rewine": "rewine",
         "trackers": "trackers",
@@ -274,11 +229,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1686643702,
-        "narHash": "sha256-Ty3rCThvwDC26Jhy59q1NHY1a+HL1bfFrLi/LAE/iK8=",
+        "lastModified": 1686730078,
+        "narHash": "sha256-w8kDSveauv4PfG0X3h+1OKAazhqY3IKeMSTjMuVVLEA=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "4a887b7a732b4c91fb8296125621e2fea440a59f",
+        "rev": "337ea08d0da1da70a88afc7ee60743fc2a1eac8d",
         "type": "github"
       },
       "original": {
