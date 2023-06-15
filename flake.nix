@@ -93,9 +93,6 @@
 
           # experimental linglong support
           inputs.linglong.nixosModules.default
-          {
-            services.linglong.enable = true;
-          }
         ];
       };
     };
