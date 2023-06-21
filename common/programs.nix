@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 let rp = import ../rp.nix; in
 
 {
@@ -20,6 +22,11 @@ let rp = import ../rp.nix; in
     git.enable = true;
 
     gnupg.agent.enable = true;
+
+    kdeconnect = {
+      enable = true;
+      package = pkgs.gnomeExtensions.gsconnect;
+    };
 
     nix-index.enable = true;
 
