@@ -114,9 +114,6 @@
         '';
       });
       electron = final.yes.lx-music-desktop.electron;
-      electron-ncm = final.rewine.electron-netease-cloud-music.override {
-        inherit (final) electron;
-      };
       flatpak = prev.flatpak.overrideAttrs (old: {
         configureFlags = old.configureFlags ++ [
           "--with-system-fonts-dir=/run/current-system/sw/share/X11/fonts"

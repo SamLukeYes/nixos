@@ -52,7 +52,6 @@
     nix-direnv
 
     # Out-of-tree packages
-    electron-ncm
     yes.lx-music-desktop
   ];
 }
