@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -17,6 +17,11 @@
     xournalpp
     yaru-theme
     zotero
+
+    (makeAutostartItem {
+      name = "firefox";
+      package = config.programs.firefox.package;
+    })
 
     ((vscode.override {
       commandLineArgs = "--touch-events -n";
