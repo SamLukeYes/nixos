@@ -17,11 +17,6 @@
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
     };
-    linglong = {
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:SamLukeYes/linglong-flake";
-    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     rewine = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -85,16 +80,6 @@
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
         ./machines/absolute/configuration.nix
       ];
-
-      test = {
-        # channelName = "gnome";
-        modules = [
-          ./machines/test
-
-          # experimental linglong support
-          inputs.linglong.nixosModules.default
-        ];
-      };
     };
 
     legacyPackages.${system} = import nixpkgs {
