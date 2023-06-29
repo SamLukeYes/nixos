@@ -3,11 +3,11 @@
 {
   programs.xonsh = {
     enable = true;
-    package = pkgs.xonsh.override {
-      extraPackages = ps: [
-        pkgs.yes.xonsh-direnv
-      ];
-    };
+    package = pkgs.xonsh.overrideAttrs (oldAttrs: {
+      propagatedBuildInputs = oldAttrs.propagatedBuildInputs ++ (with pkgs; [
+        yes.xonsh-direnv
+      ]);
+    });
   };
 
   users = {
