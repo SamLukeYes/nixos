@@ -1,0 +1,139 @@
+From ccf70fb5205c3e16a8506bed71f746e854dbf0aa Mon Sep 17 00:00:00 2001
+From: adisbladis <adisbladis@gmail.com>
+Date: Wed, 28 Jun 2023 14:21:45 +1200
+Subject: [PATCH] xonsh: Add wrapper
+
+It is currently not obvious how to install/use xonsh with dependencies and python packages.
+
+This PR implements a wrapper that allows you to construct a custom xonsh environment by using:
+``` nix
+xonsh.override { extraPackages = ps: [ ps.requests ]; }
+```
+---
+ nixos/modules/programs/xonsh.nix |  3 +--
+ pkgs/shells/xonsh/default.nix    | 22 +++++-----------------
+ pkgs/shells/xonsh/wrapper.nix    | 24 ++++++++++++++++++++++++
+ pkgs/top-level/all-packages.nix  |  3 ++-
+ 4 files changed, 32 insertions(+), 20 deletions(-)
+ create mode 100644 pkgs/shells/xonsh/wrapper.nix
+
+diff --git a/nixos/modules/programs/xonsh.nix b/nixos/modules/programs/xonsh.nix
+index 7202ed06c6af2..167c953f5ffd0 100644
+--- a/nixos/modules/programs/xonsh.nix
++++ b/nixos/modules/programs/xonsh.nix
+@@ -28,7 +28,7 @@ in
+         type = types.package;
+         default = pkgs.xonsh;
+         defaultText = literalExpression "pkgs.xonsh";
+-        example = literalExpression "pkgs.xonsh.override { configFile = \"/path/to/xonshrc\"; }";
++        example = literalExpression "pkgs.xonsh.override { extraPackages = ps: [ ps.requests ]; }";
+         description = lib.mdDoc ''
+           xonsh package to use.
+         '';
+@@ -83,4 +83,3 @@ in
+   };
+ 
+ }
+-
+diff --git a/pkgs/shells/xonsh/default.nix b/pkgs/shells/xonsh/default.nix
+index d8dce917120f1..00b5259ae7e63 100644
+--- a/pkgs/shells/xonsh/default.nix
++++ b/pkgs/shells/xonsh/default.nix
+@@ -1,12 +1,12 @@
+ { lib
+ , fetchFromGitHub
+-, python3Packages
++, python3
+ , glibcLocales
+ , coreutils
+ , git
+ }:
+ 
+-python3Packages.buildPythonApplication rec {
++python3.pkgs.buildPythonApplication rec {
+   pname = "xonsh";
+   version = "0.14.0";
+ 
+@@ -29,19 +29,6 @@ python3Packages.buildPythonApplication rec {
+     find scripts -name 'xonsh*' -exec sed -i -e "s|env -S|env|" {} \;
+     find -name "*.xsh" | xargs sed -ie 's|/usr/bin/env|${coreutils}/bin/env|'
+     patchShebangs .
+-
+-    substituteInPlace scripts/xon.sh \
+-      --replace 'python' "${python3Packages.python}/bin/python"
+-
+-  '';
+-
+-  makeWrapperArgs = [
+-    "--prefix PYTHONPATH : ${placeholder "out"}/lib/${python3Packages.python.libPrefix}/site-packages"
+-  ];
+-
+-  postInstall = ''
+-    wrapProgram $out/bin/xonsh \
+-      $makeWrapperArgs
+   '';
+ 
+   disabledTests = [
+@@ -76,9 +63,9 @@ python3Packages.buildPythonApplication rec {
+   '';
+ 
+   nativeCheckInputs = [ glibcLocales git ] ++
+-    (with python3Packages; [ pyte pytestCheckHook pytest-mock pytest-subprocess ]);
++    (with python3.pkgs; [ pyte pytestCheckHook pytest-mock pytest-subprocess ]);
+ 
+-  propagatedBuildInputs = with python3Packages; [ ply prompt-toolkit pygments ];
++  propagatedBuildInputs = with python3.pkgs; [ ply prompt-toolkit pygments ];
+ 
+   meta = with lib; {
+     description = "A Python-ish, BASHwards-compatible shell";
+@@ -90,5 +77,6 @@ python3Packages.buildPythonApplication rec {
+ 
+   passthru = {
+     shellPath = "/bin/xonsh";
++    python = python3;
+   };
+ }
+diff --git a/pkgs/shells/xonsh/wrapper.nix b/pkgs/shells/xonsh/wrapper.nix
+new file mode 100644
+index 0000000000000..f69f1d04897bc
+--- /dev/null
++++ b/pkgs/shells/xonsh/wrapper.nix
+@@ -0,0 +1,24 @@
++{ runCommand
++, xonsh-unwrapped
++, lib
++, extraPackages ? (ps: [ ])
++}:
++
++let
++  xonsh = xonsh-unwrapped;
++  inherit (xonsh.passthru) python;
++
++  pythonEnv = python.withPackages (ps: [
++    (ps.toPythonModule xonsh)
++  ] ++ extraPackages ps);
++
++in
++runCommand "${xonsh.pname}-${xonsh.version}"
++{
++  inherit (xonsh) pname version meta;
++} ''
++  mkdir -p $out/bin
++  for bin in ${lib.getBin xonsh}/bin/*; do
++    ln -s ${pythonEnv}/bin/$(basename "$bin") $out/bin/
++  done
++''
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index 5282d49687755..d0f6397cffee6 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -14717,7 +14717,8 @@ with pkgs;
+ 
+   rush = callPackage ../shells/rush { };
+ 
+-  xonsh = callPackage ../shells/xonsh { };
++  xonsh = callPackage ../shells/xonsh/wrapper.nix { };
++  xonsh-unwrapped = callPackage ../shells/xonsh { };
+ 
+   zsh = callPackage ../shells/zsh { };
+ 

@@ -62,6 +62,7 @@
         patches = [
           # Add nixpkgs patches here
           ./patches/nixos-rebuild-use-nom.patch
+          ./patches/240246.patch
         ];
       };
     };
