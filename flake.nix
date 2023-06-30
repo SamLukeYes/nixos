@@ -49,6 +49,10 @@
   let
     # rp = import ./rp.nix;
     system = "x86_64-linux";
+    channel-patches = [
+      # Add nixpkgs patches here
+      ./patches/nixos-rebuild-use-nom.patch
+    ];
 
   in flake-utils-plus.lib.mkFlake rec {
     inherit self inputs;
@@ -59,10 +63,7 @@
     channels = {
       nixos-unstable = {
         input = nixpkgs;
-        patches = [
-          # Add nixpkgs patches here
-          ./patches/nixos-rebuild-use-nom.patch
-        ];
+        patches = channel-patches;
       };
     };
 
@@ -82,7 +83,9 @@
       ];
     };
 
-    legacyPackages.${system} = import nixpkgs {
+    legacyPackages.${system} = import (
+      flake-utils-plus.lib.patchChannel system nixpkgs channel-patches
+    ) {
       inherit system;
       config = channelsConfig;
       overlays = sharedOverlays;
