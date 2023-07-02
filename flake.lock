@@ -37,24 +37,6 @@
         "type": "github"
       }
     },
-    "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": "nixpkgs-lib"
-      },
-      "locked": {
-        "lastModified": 1687762428,
-        "narHash": "sha256-DIf7mi45PKo+s8dOYF+UlXHzE0Wl/+k3tXUyAoAnoGE=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "37dd7bb15791c86d55c5121740a1887ab55ee836",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -112,32 +94,14 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1688049487,
-        "narHash": "sha256-100g4iaKC9MalDjUW9iN6Jl/OocTDtXdeAj7pEGIRh4=",
+        "lastModified": 1688141540,
+        "narHash": "sha256-xh2aLD8R6gau+O+9h1ad+OAjCAj07lCKsY44+p/bJS8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "4bc72cae107788bf3f24f30db2e2f685c9298dc9",
+        "rev": "4ffc4dc91838df228c8214162c106c24ec8fe03f",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-lib": {
-      "locked": {
-        "dir": "lib",
-        "lastModified": 1685564631,
-        "narHash": "sha256-8ywr3AkblY4++3lIVxmrWZFzac7+f32ZEhH/A8pNscI=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4f53efe34b3a8877ac923b9350c874e3dcd5dc0a",
-        "type": "github"
-      },
-      "original": {
-        "dir": "lib",
         "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
@@ -168,7 +132,6 @@
       "inputs": {
         "archix": "archix",
         "cpupower-gui": "cpupower-gui",
-        "flake-parts": "flake-parts",
         "flake-utils": [
           "archix",
           "xddxdd",
@@ -205,11 +168,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1688112533,
-        "narHash": "sha256-+i6J9sysN23Rft7LMcXcDzlEziYgZ6kJgVe1LNBm4zc=",
+        "lastModified": 1688285302,
+        "narHash": "sha256-fYgkEM2NtfpAGskd+A5RGl+VpFPc3lPoRy5wx8tUcmI=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "89748b94f9f222f7da42e06b2356df8fb8c1ff94",
+        "rev": "a5190a2037bfc905adbaeb774bfb8c646836fdf9",
         "type": "github"
       },
       "original": {
