@@ -14,9 +14,6 @@
     };
     flake-utils.follows = "archix/xddxdd/flake-utils";
     flake-utils-plus.follows = "archix/xddxdd/flake-utils-plus";
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     rewine = {
       inputs.nixpkgs.follows = "nixpkgs";
