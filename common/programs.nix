@@ -16,6 +16,7 @@ let rp = import ../rp.nix; in
     firefox = {
       enable = true;
       languagePacks = [ "zh-CN" ];
+      package = pkgs.firefox-esr-115;
       policies.DisableAppUpdate = true;
     };
 
