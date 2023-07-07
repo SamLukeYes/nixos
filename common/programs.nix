@@ -41,7 +41,14 @@ let rp = import ../rp.nix; in
         [options]
         Color
         ILoveCandy
+
+        [archlinuxcn]
+        Server = https://mirrors.cernet.edu.cn/$repo/$arch
       '';
+      keyrings = with pkgs; [
+        archlinuxcn-keyring
+        archix.archlinux-keyring
+      ];
       mirrors = [
         "https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch"
         "https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch"

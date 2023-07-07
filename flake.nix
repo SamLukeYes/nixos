@@ -8,6 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/archix";
     };
+    archlinuxcn-keyring = {
+      flake = false;
+      url = "github:archlinuxcn/archlinuxcn-keyring";
+    };
     cpupower-gui = {
       flake = false;
       url = "github:vagnum08/cpupower-gui";
@@ -91,6 +95,7 @@
 
     overlays.default = final: prev: {
       archix = inputs.archix.packages.${system};
+      archlinuxcn-keyring = inputs.archlinuxcn-keyring;
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
         patches = [];
