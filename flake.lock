@@ -21,6 +21,22 @@
         "type": "github"
       }
     },
+    "archlinuxcn-keyring": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678921425,
+        "narHash": "sha256-r6BLES62yyYhDRz1lC6EN935AefL1x0FjKh/ee0bp/o=",
+        "owner": "archlinuxcn",
+        "repo": "archlinuxcn-keyring",
+        "rev": "b3de6bdd8eb1a548117792767cff9c0861f35ab1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "archlinuxcn",
+        "repo": "archlinuxcn-keyring",
+        "type": "github"
+      }
+    },
     "cpupower-gui": {
       "flake": false,
       "locked": {
@@ -131,6 +147,7 @@
     "root": {
       "inputs": {
         "archix": "archix",
+        "archlinuxcn-keyring": "archlinuxcn-keyring",
         "cpupower-gui": "cpupower-gui",
         "flake-utils": [
           "archix",
@@ -168,11 +185,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1688630962,
-        "narHash": "sha256-Q5ZOgdzPh/B1mWOXuJh3BF59vm7fNbnuqZKsoMgvvjU=",
+        "lastModified": 1688717385,
+        "narHash": "sha256-Xr3r0fRouaNgAm82fHdsZRoicNHz0IhLxJkwRNG1YEo=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "3f73c114dbf6b9a214d2f88b3bc5caf9507a6610",
+        "rev": "4386b31a12412e4786dcf329e95e4101c06622dc",
         "type": "github"
       },
       "original": {
