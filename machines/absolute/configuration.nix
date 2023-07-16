@@ -6,7 +6,6 @@
   ];
 
   hardware.bluetooth.powerOnBoot = false;
-  networking.hostName = "absolute";
   system.stateVersion = "22.11";
 
   # TODO: add paru modules to archix
