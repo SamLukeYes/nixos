@@ -74,15 +74,20 @@
       channelName = "nixos-unstable";
       modules = [
         inputs.archix.nixosModules.default
-      ];
-    };
-
-    hosts = {
-      absolute.modules = [
         inputs.archix.nixosModules.binfmt
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
         ./machines/absolute/configuration.nix
       ];
+    };
+
+    hosts = rec {
+      gnome.modules = [
+        ./optional/desktop/gnome.nix
+      ];
+      plasma.modules = [
+        ./optional/desktop/plasma.nix
+      ];
+      absolute = plasma;
     };
 
     legacyPackages.${system} = import (

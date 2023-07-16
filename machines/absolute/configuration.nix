@@ -2,7 +2,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../common
-    ../../optional/desktop/gnome.nix
     ../../users/yes
   ];
 
