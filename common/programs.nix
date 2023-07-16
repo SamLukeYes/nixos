@@ -33,6 +33,8 @@ let rp = import ../rp.nix; in
 
     nix-index.enable = true;
 
+    ssh.startAgent = true;
+
     wireshark.enable = true;
 
     # requires archix

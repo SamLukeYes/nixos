@@ -22,7 +22,7 @@
 
     fwupd.enable = true;
 
-    gnome.gnome-keyring.enable = true;
+    # gnome.gnome-keyring.enable = true;
 
     logind.lidSwitch = "ignore";
 

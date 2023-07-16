@@ -107,9 +107,16 @@
         postPatch = ''
           substituteInPlace build-aux/meson/postinstall.py \
             --replace '"systemctl"' '"echo", "Skipping:", "systemctl"'
+          substituteInPlace data/org.rnd2.cpupower_gui.desktop.in.in \
+            --replace "gapplication launch org.rnd2.cpupower_gui" "cpupower-gui"
         '';
       });
       electron = final.yes.lx-music-desktop.electron;
+      fcitx5-with-addons = prev.fcitx5-with-addons.overrideAttrs (old: {
+        buildCommand = old.buildCommand + ''
+          rm $out/$autostart
+        '';
+      });
       flatpak = prev.flatpak.overrideAttrs (old: {
         configureFlags = old.configureFlags ++ [
           "--with-system-fonts-dir=/run/current-system/sw/share/X11/fonts"
