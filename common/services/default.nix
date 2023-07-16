@@ -22,8 +22,7 @@
 
     fwupd.enable = true;
 
-    # Disable the event list of the calendar menu
-    gnome.evolution-data-server.enable = lib.mkForce false;
+    gnome.gnome-keyring.enable = true;
 
     logind.lidSwitch = "ignore";
 
@@ -42,17 +41,6 @@
     xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
-      desktopManager.gnome = {
-        enable = true;
-        extraGSettingsOverrides = ''
-          [org.gnome.desktop.peripherals.touchpad]
-          tap-to-click=true
-        '';
-        extraGSettingsOverridePackages = with pkgs; [
-          gsettings-desktop-schemas
-        ];
-      };
-      displayManager.gdm.enable = true;
     };
   };
 }

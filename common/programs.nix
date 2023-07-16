@@ -13,6 +13,8 @@ let rp = import ../rp.nix; in
 
     command-not-found.enable = false;
 
+    dconf.enable = true;
+
     firefox = {
       enable = true;
       languagePacks = [ "zh-CN" ];
@@ -24,10 +26,7 @@ let rp = import ../rp.nix; in
 
     gnupg.agent.enable = true;
 
-    kdeconnect = {
-      enable = true;
-      package = pkgs.gnomeExtensions.gsconnect;
-    };
+    kdeconnect.enable = true;
 
     nix-index.enable = true;
 
