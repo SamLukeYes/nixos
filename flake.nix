@@ -80,14 +80,13 @@
       ];
     };
 
-    hosts = rec {
-      gnome.modules = [
+    hosts = {
+      absolute-gnome.modules = [
         ./optional/desktop/gnome.nix
       ];
-      plasma.modules = [
+      absolute-plasma.modules = [
         ./optional/desktop/plasma.nix
       ];
-      absolute = plasma;
     };
 
     legacyPackages.${system} = import (
