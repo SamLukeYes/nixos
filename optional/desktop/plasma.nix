@@ -9,11 +9,18 @@
 
     sessionVariables.NIXOS_OZONE_WL = "1";
 
-    systemPackages = with pkgs; [
+    systemPackages = with pkgs; with libsForQt5; [
+      discover
+      filelight
       haruna
+      kwalletmanager
+      ksystemlog
       libreoffice-qt
-      libsForQt5.discover
-      # maliit-keyboard
+      maliit-keyboard
+      partition-manager
+
+      # CLI programs required by Plasma
+      linuxquota
       pciutils
     ];
   };

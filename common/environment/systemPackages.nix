@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     authenticator
     gnome.dconf-editor
+    gnome-frog
     libsForQt5.kdenlive
     obs-studio
     tdesktop

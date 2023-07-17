@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   environment = {
@@ -29,7 +29,6 @@
     systemPackages = with pkgs; [
       adw-gtk3
       celluloid
-      gnome-frog
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
       gnome.nautilus-python
@@ -73,4 +72,7 @@
       displayManager.gdm.enable = true;
     };
   };
+
+  # workaroud for per-user language setting
+  users.defaultUserShell = config.programs.xonsh.package;
 }
