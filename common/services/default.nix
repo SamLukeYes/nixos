@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./flatpak.nix
     ./pipewire.nix
   ];
 
@@ -15,8 +16,6 @@
     cpupower-gui.enable = lib.mkDefault true;
 
     dbus.implementation = "broker";
-
-    flatpak.enable = true;
 
     fstrim.enable = true;
 

@@ -116,11 +116,6 @@
           rm $out/$autostart
         '';
       });
-      flatpak = prev.flatpak.overrideAttrs (old: {
-        configureFlags = old.configureFlags ++ [
-          "--with-system-fonts-dir=/run/current-system/sw/share/X11/fonts"
-        ];
-      });
       libreoffice = final.libreoffice-fresh;
       rewine = inputs.rewine.packages.${system};
       # starship = prev.starship.overrideAttrs (old: {
