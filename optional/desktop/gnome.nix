@@ -27,13 +27,11 @@
     );
 
     systemPackages = with pkgs; [
-      adw-gtk3
       celluloid
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
       gnome.nautilus-python
       libreoffice
-      yaru-theme
 
       # GNOME Shell extensions
       gnomeExtensions.appindicator

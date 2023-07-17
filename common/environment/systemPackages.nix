@@ -44,6 +44,10 @@
     direnv
     nix-direnv
 
+    # themes
+    adw-gtk3
+    yaru-theme
+
     # Out-of-tree packages
     yes.lx-music-desktop
   ];
