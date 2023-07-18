@@ -53,7 +53,8 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/nixos-rebuild-use-nom.patch
-      ./patches/242319.patch
+      ./patches/242319.patch                # namcap
+      ./patches/244168.patch                # pacman
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
