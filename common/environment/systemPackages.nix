@@ -36,6 +36,7 @@
     nix-output-monitor            # frequently used in nix operations
     onedrive                      # required by gnomeExtensions.one-drive-resurrect
     pdftk                         # required by Jasminum
+    sshfs                         # frequently used for file sharing
     starship                      # configured without nix
     texlive.combined.scheme-full  # required by Xournal++ and VSCode LateX Workshop
     wl-clipboard                  # required by WayDroid
