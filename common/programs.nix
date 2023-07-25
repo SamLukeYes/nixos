@@ -26,7 +26,7 @@ let rp = import ../rp.nix; in
 
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "gnome3";
+      # pinentryFlavor = "gnome3";
     };
 
     kdeconnect.enable = true;
