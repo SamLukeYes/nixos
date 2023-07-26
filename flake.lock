@@ -110,11 +110,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1690179384,
-        "narHash": "sha256-+arbgqFTAtoeKtepW9wCnA0njCOyoiDFyl0Q0SBSOtE=",
+        "lastModified": 1690272529,
+        "narHash": "sha256-MakzcKXEdv/I4qJUtq/k/eG+rVmyOZLnYNC2w1mB59Y=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b12803b6d90e2e583429bb79b859ca53c348b39a",
+        "rev": "ef99fa5c5ed624460217c31ac4271cfb5cb2502c",
         "type": "github"
       },
       "original": {
@@ -131,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1690277453,
-        "narHash": "sha256-6fq58DA/FQKsdhnMmTERSu8sodsrtDFdAUlIl6A6d2M=",
+        "lastModified": 1690379612,
+        "narHash": "sha256-0LvxLYOHyDvRio+uaHKOmhfWXtZIomF4kMCLPjzpvOM=",
         "owner": "wineee",
         "repo": "nur-packages",
-        "rev": "154341a98edc337072e0a265452446a10cce877a",
+        "rev": "bf3dbd995a63b9277874d9d350ea313cb3e964a3",
         "type": "github"
       },
       "original": {
@@ -185,11 +185,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1690272508,
-        "narHash": "sha256-AtqYHONbTW9BpmG4wrXeLBim2ZUdr9rf4qnDVj8IPL8=",
+        "lastModified": 1690387699,
+        "narHash": "sha256-ZOA804tkjt//xwzPPbjH24y9kgV0T9P3IB8gZg/7KnM=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "291d98d16d0866007708c9bd07d06c12f3839e60",
+        "rev": "fcb4cb50bc3436797b8c5c479d35e29f88f38064",
         "type": "github"
       },
       "original": {
