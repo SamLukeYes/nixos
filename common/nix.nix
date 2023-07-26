@@ -22,6 +22,7 @@ let rp = import ../rp.nix; in
       keep-outputs = true;
       max-jobs = 3;   # https://github.com/NixOS/nixpkgs/issues/198668
       narinfo-cache-negative-ttl = 300;
+      nix-path = ["nixpkgs=/etc/nix/inputs/nixpkgs"];
       substituters = lib.mkForce [
         "https://mirrors.cernet.edu.cn/nix-channels/store"
         "https://mirror.sjtu.edu.cn/nix-channels/store"
