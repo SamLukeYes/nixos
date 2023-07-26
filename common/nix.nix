@@ -4,6 +4,7 @@ let rp = import ../rp.nix; in
 
 {
   nix = {
+    channel.enable = false;
     gc = {
       automatic = true;
       dates = "weekly";
