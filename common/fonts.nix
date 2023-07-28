@@ -3,7 +3,7 @@
 {
   fonts = {
     fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       (nerdfonts.override { fonts = [ "Noto" ]; })
       noto-fonts-cjk-sans
       powerline-fonts
