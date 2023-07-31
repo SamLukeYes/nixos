@@ -116,7 +116,7 @@
           rm $out/$autostart
         '';
       });
-      libreoffice = final.libreoffice-fresh;
+      # libreoffice = final.libreoffice-fresh;
       rewine = inputs.rewine.packages.${system};
       # starship = prev.starship.overrideAttrs (old: {
       #   src = inputs.starship;
