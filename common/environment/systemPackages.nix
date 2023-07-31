@@ -5,6 +5,7 @@
     authenticator
     gnome.dconf-editor
     gnome-frog
+    gnubg
     obs-studio
     tdesktop
     virt-manager

@@ -1,0 +1,90 @@
+From 2a02a0757956e6539fb8d188be69c8dfae9674ca Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Mon, 31 Jul 2023 11:46:38 +0800
+Subject: [PATCH 1/2] gnubg: 1.06.002 -> 1.07.001
+
+---
+ pkgs/games/gnubg/default.nix | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/pkgs/games/gnubg/default.nix b/pkgs/games/gnubg/default.nix
+index 7276267905290..d658ef57ff845 100644
+--- a/pkgs/games/gnubg/default.nix
++++ b/pkgs/games/gnubg/default.nix
+@@ -1,15 +1,15 @@
+-{ lib, stdenv, fetchurl, pkg-config, glib, python2, gtk2, readline }:
++{ lib, stdenv, fetchurl, pkg-config, glib, python3, gtk2, readline }:
+ 
+ stdenv.mkDerivation rec {
+   pname = "gnubg";
+-  version = "1.06.002";
++  version = "1.07.001";
+ 
+   src = fetchurl {
+-    url = "http://gnubg.org/media/sources/gnubg-release-${version}-sources.tar.gz";
+-    sha256 = "11xwhcli1h12k6rnhhyq4jphzrhfik7i8ah3k32pqw803460n6yf";
++    url = "mirror://gnu/gnubg/gnubg-release-${version}-sources.tar.gz";
++    hash = "sha256-cjmXKUGcrZ8RLDBmoS0AANpFCkVq3XsJTYkVUGnWgh4=";
+   };
+ 
+-  nativeBuildInputs = [ pkg-config python2 glib ];
++  nativeBuildInputs = [ pkg-config python3 glib ];
+ 
+   buildInputs = [ gtk2 readline ];
+ 
+@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
+ 
+   meta = with lib;
+     { description = "World class backgammon application";
+-      homepage = "http://www.gnubg.org/";
++      homepage = "https://www.gnu.org/software/gnubg/";
+       license = licenses.gpl3;
+       maintainers = [ maintainers.ehmry ];
+       platforms = platforms.linux;
+
+From b938d74bf3942df991e8ca4b8bd5b5fe681a2f9d Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Mon, 31 Jul 2023 12:22:08 +0800
+Subject: [PATCH 2/2] gnubg: add desktop item
+
+---
+ pkgs/games/gnubg/default.nix | 15 +++++++++++++--
+ 1 file changed, 13 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/games/gnubg/default.nix b/pkgs/games/gnubg/default.nix
+index d658ef57ff845..84bc7f5df8af0 100644
+--- a/pkgs/games/gnubg/default.nix
++++ b/pkgs/games/gnubg/default.nix
+@@ -1,4 +1,5 @@
+-{ lib, stdenv, fetchurl, pkg-config, glib, python3, gtk2, readline }:
++{ lib, stdenv, fetchurl, pkg-config, glib, python3, gtk2, readline,
++  copyDesktopItems, makeDesktopItem }:
+ 
+ stdenv.mkDerivation rec {
+   pname = "gnubg";
+@@ -9,7 +10,7 @@ stdenv.mkDerivation rec {
+     hash = "sha256-cjmXKUGcrZ8RLDBmoS0AANpFCkVq3XsJTYkVUGnWgh4=";
+   };
+ 
+-  nativeBuildInputs = [ pkg-config python3 glib ];
++  nativeBuildInputs = [ copyDesktopItems pkg-config python3 glib ];
+ 
+   buildInputs = [ gtk2 readline ];
+ 
+@@ -17,6 +18,16 @@ stdenv.mkDerivation rec {
+ 
+   configureFlags = [ "--with-gtk" "--with--board3d" ];
+ 
++  desktopItems = makeDesktopItem {
++    desktopName = "GNU Backgammon";
++    name = pname;
++    genericName = "Backgammon";
++    comment = meta.description;
++    exec = pname;
++    icon = pname;
++    categories = [ "Game" "GTK" "StrategyGame" ];
++  };
++
+   meta = with lib;
+     { description = "World class backgammon application";
+       homepage = "https://www.gnu.org/software/gnubg/";
