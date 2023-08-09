@@ -163,7 +163,6 @@
         "nixpkgs": "nixpkgs",
         "rewine": "rewine",
         "trackers": "trackers",
-        "xournalpp": "xournalpp",
         "yes": "yes"
       }
     },
@@ -218,22 +217,6 @@
       "original": {
         "owner": "xddxdd",
         "repo": "nur-packages",
-        "type": "github"
-      }
-    },
-    "xournalpp": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1691341322,
-        "narHash": "sha256-Xwgan7DJWcIm+YKoOLe8bVEuuR6bmjDTLy5b5sVQvYA=",
-        "owner": "xournalpp",
-        "repo": "xournalpp",
-        "rev": "5ef49b7d8f5ce7e7d32038db3e08adcf211783c6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "xournalpp",
-        "repo": "xournalpp",
         "type": "github"
       }
     },
