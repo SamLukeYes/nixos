@@ -31,10 +31,6 @@
       flake = false;
       url = "github:XIU2/TrackersListCollection";
     };
-    xournalpp = {
-      flake = false;
-      url = "github:xournalpp/xournalpp";
-    };
     yes = {
       flake = false;
       url = "github:SamLukeYes/nix-custom-packages";
@@ -125,11 +121,6 @@
       #   doCheck = false;
       # });
       trackers = inputs.trackers;
-      xournalpp = prev.xournalpp.overrideAttrs (old: {
-        src = inputs.xournalpp;
-        version = "${old.version}+dev";
-        buildInputs = old.buildInputs ++ [ final.alsa-lib ];
-      });
       yes = import inputs.yes { pkgs = prev; };
     };
   };
