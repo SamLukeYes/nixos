@@ -7,6 +7,7 @@
     gnome-frog
     gnubg
     obs-studio
+    shotcut
     tdesktop
     virt-manager
     xournalpp
@@ -29,10 +30,8 @@
     archix.paru                   # frequently used to query AUR packages
     bat                           # frequently used to view text in terminal
     dig                           # must be available without Internet connection
-    ffmpeg-full                   # required by kdenlive
     file                          # frequently used to view executable type
     jre                           # can always be detected by libreoffice
-    mediainfo                     # required by kdenlive
     nix-output-monitor            # frequently used in nix operations
     onedrive                      # required by gnomeExtensions.one-drive-resurrect
     pdftk                         # required by Jasminum
