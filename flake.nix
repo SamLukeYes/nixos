@@ -49,7 +49,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/nixos-rebuild-use-nom.patch
-      ./patches/248167.patch                # vscode
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
