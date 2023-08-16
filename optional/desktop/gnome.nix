@@ -52,6 +52,12 @@
 
   programs.kdeconnect.package = pkgs.gnomeExtensions.gsconnect;
 
+  qt = {
+    enable = true;
+    platformTheme = "gnome";
+    style = "adwaita-dark";
+  };
+
   services = {
     # Disable the event list of the calendar menu
     gnome.evolution-data-server.enable = lib.mkForce false;
