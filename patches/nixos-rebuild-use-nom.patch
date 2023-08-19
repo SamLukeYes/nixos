@@ -26,9 +26,9 @@ index b0a00972eca24..53eb82998980d 100644
    nix_aarch64_linux = fallback.aarch64-linux;
 -  path = lib.makeBinPath [ coreutils gnused gnugrep ];
 +  path = lib.makeBinPath [ coreutils gnused gnugrep nix-output-monitor ];
- 
-   # run some a simple installer tests to make sure nixos-rebuild still works for them
-   passthru.tests = {
+   nativeBuildInputs = [
+       installShellFiles
+   ];
 diff --git a/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh b/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
 index f90da9db3bf87..21d264267b5de 100755
 --- a/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
