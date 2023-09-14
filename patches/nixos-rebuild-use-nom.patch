@@ -1,39 +1,40 @@
-From 449114c6240520433a650079c0b5440d9ecf6156 Mon Sep 17 00:00:00 2001
-From: =?UTF-8?q?Sandro=20J=C3=A4ckel?= <sandro.jaeckel@gmail.com>
-Date: Sun, 4 Sep 2022 13:04:56 +0200
+From 3ef1c68c8734a38ba8e39939e3db0c5b685523ea Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Thu, 14 Sep 2023 14:57:48 +0800
 Subject: [PATCH] nixos-rebuild: pipe through nom
 
+https://github.com/NixOS/nixpkgs/commit/449114c6240520433a650079c0b5440d9ecf6156
 ---
  pkgs/os-specific/linux/nixos-rebuild/default.nix      |  3 ++-
  pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh | 10 +++++-----
  2 files changed, 7 insertions(+), 6 deletions(-)
 
 diff --git a/pkgs/os-specific/linux/nixos-rebuild/default.nix b/pkgs/os-specific/linux/nixos-rebuild/default.nix
-index b0a00972eca24..53eb82998980d 100644
+index c6ec0866791e6..8b8aea0cf9371 100644
 --- a/pkgs/os-specific/linux/nixos-rebuild/default.nix
 +++ b/pkgs/os-specific/linux/nixos-rebuild/default.nix
-@@ -5,6 +5,7 @@
- , gnugrep
+@@ -7,6 +7,7 @@
+ , util-linux
  , nix
  , lib
 +, nix-output-monitor
  , nixosTests
+ , installShellFiles
  }:
- let
-@@ -19,7 +20,7 @@ substituteAll {
+@@ -22,7 +23,7 @@ substituteAll {
    nix_x86_64_linux = fallback.x86_64-linux;
    nix_i686_linux = fallback.i686-linux;
    nix_aarch64_linux = fallback.aarch64-linux;
--  path = lib.makeBinPath [ coreutils gnused gnugrep ];
-+  path = lib.makeBinPath [ coreutils gnused gnugrep nix-output-monitor ];
+-  path = lib.makeBinPath [ coreutils gnused gnugrep jq util-linux ];
++  path = lib.makeBinPath [ coreutils gnused gnugrep jq util-linux nix-output-monitor ];
    nativeBuildInputs = [
-       installShellFiles
+     installShellFiles
    ];
 diff --git a/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh b/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
-index f90da9db3bf87..21d264267b5de 100755
+index 2f89642845e22..f2a4690e7965a 100755
 --- a/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
 +++ b/pkgs/os-specific/linux/nixos-rebuild/nixos-rebuild.sh
-@@ -206,7 +206,7 @@ nixBuild() {
+@@ -210,7 +210,7 @@ nixBuild() {
      logVerbose "Building in legacy (non-flake) mode."
      if [ -z "$buildHost" ]; then
          logVerbose "No --build-host given, running nix-build locally"
@@ -42,7 +43,7 @@ index f90da9db3bf87..21d264267b5de 100755
      else
          logVerbose "buildHost set to \"$buildHost\", running nix-build remotely"
          local instArgs=()
-@@ -254,10 +254,10 @@ nixFlakeBuild() {
+@@ -258,10 +258,10 @@ nixFlakeBuild() {
      logVerbose "Building in flake mode."
      if [[ -z "$buildHost" && -z "$targetHost" && "$action" != switch && "$action" != boot && "$action" != test && "$action" != dry-activate ]]
      then
@@ -55,7 +56,7 @@ index f90da9db3bf87..21d264267b5de 100755
          readlink -f "${tmpDir}/result"
      else
          local attr="$1"
-@@ -389,11 +389,11 @@ trap cleanup EXIT
+@@ -393,11 +393,11 @@ trap cleanup EXIT
  # Re-execute nixos-rebuild from the Nixpkgs tree.
  if [[ -z $_NIXOS_REBUILD_REEXEC && -n $canRun && -z $fast ]]; then
      if [[ -z $flake ]]; then
