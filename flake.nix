@@ -49,7 +49,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/nixos-rebuild-use-nom.patch
-      ./patches/254791.patch                # firefox
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
