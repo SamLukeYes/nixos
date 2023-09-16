@@ -106,13 +106,6 @@
         '';
       });
       electron = final.yes.lx-music-desktop.electron;
-      electron_22 = prev.electron_22.overrideAttrs (old: rec {
-        version = "22.3.24";
-        src = final.fetchurl {
-          url = "https://github.com/electron/electron/releases/download/v${version}/electron-v${version}-linux-x64.zip";
-          hash = "sha256-DEiRL/K8v+fnyA6udrguK6HgPMhywMaBf6pWAVVEft0=";
-        };
-      });
       fcitx5-with-addons = prev.fcitx5-with-addons.overrideAttrs (old: {
         buildCommand = old.buildCommand + ''
           rm $out/$autostart
