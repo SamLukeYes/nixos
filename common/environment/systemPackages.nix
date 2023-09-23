@@ -27,6 +27,7 @@
     ]))
 
     # CLI programs
+    _7zz                          # required by file-roller
     archix.paru                   # frequently used to query AUR packages
     bat                           # frequently used to view text in terminal
     dig                           # must be available without Internet connection
