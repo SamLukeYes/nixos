@@ -95,6 +95,14 @@
     overlays.default = final: prev: {
       archix = inputs.archix.packages.${system};
       archlinuxcn-keyring = inputs.archlinuxcn-keyring;
+      clash-verge = prev.clash-verge.overrideAttrs (old: rec {
+        version = "1.3.7";
+        src = final.fetchurl {
+          url = "https://github.com/zzzgydi/clash-verge/releases/download/v${version}/clash-verge_${version}_amd64.deb";
+          hash = "sha256-+RYfGLa4d5JkLWnlYfhjCOSREVJ4ad/R36eSiNj3GIA=";
+        };
+        postFixup = "ln -s ${final.clash}/bin/clash $out/bin/clash";
+      });
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
         patches = [];
