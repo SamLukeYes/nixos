@@ -19,7 +19,7 @@
     })
 
     ((vscode.override {
-      commandLineArgs = "--touch-events --enable-wayland-ime -n";
+      commandLineArgs = "--touch-events --enable-wayland-ime --disable-gpu-shader-disk-cache -n";
     }).fhsWithPackages (ps: with ps; [
       nil                               # for nix IDE
       pacman                            # add a dummy makepkg.conf to FHS
