@@ -40,6 +40,9 @@
       gnomeExtensions.one-drive-resurrect
       gnomeExtensions.pano
       gnomeExtensions.section-todo-list
+
+      # CLI programs
+      _7zz            # required by file-roller
     ];
   };
 
