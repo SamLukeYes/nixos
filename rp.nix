@@ -1,1 +1,1 @@
-"https://r.zhullyb.top/"
+"https://aya1.eu.org/"
