@@ -8,6 +8,7 @@
       pkgs.gnome-text-editor  # use vscode instead
       gnome-calculator        # use xonsh instead
       gnome-calendar          # broken with my local data
+      pkgs.gnome-console      # use blackbox-terminal instead
       gnome-contacts          # not managing contacts on PC
       gnome-music             # use celluloid instead
       gnome-weather           # ugly as hell
@@ -27,6 +28,7 @@
     );
 
     systemPackages = with pkgs; [
+      blackbox-terminal
       celluloid
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
