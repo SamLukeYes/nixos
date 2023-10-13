@@ -13,7 +13,7 @@
     };
   in {
     # Create an FHS mount to support flatpak host icons/fonts
-    # Should removed after https://github.com/flatpak/flatpak/issues/4692 is fixed
+    # Should remove after https://github.com/flatpak/flatpak/issues/4692 is fixed
     "/usr/share/icons" = mkRoSymBind "/run/current-system/sw/share/icons";
     "/usr/share/fonts" = mkRoSymBind "/run/current-system/sw/share/X11/fonts";
   };
