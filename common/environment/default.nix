@@ -10,6 +10,7 @@
       BROWSER = "${config.programs.firefox.package}/bin/firefox";
       LIBVA_DRIVER_NAME = "iHD";
       MOZ_DBUS_REMOTE = "1";
+      MOZ_ENABLE_WAYLAND = "1";
       MOZ_USE_XINPUT2 = "1";
       QT_QPA_PLATFORM = "wayland;xcb";
       SDL_VIDEODRIVER = "wayland";
