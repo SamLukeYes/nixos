@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     authenticator
+    gimp
     gnome.dconf-editor
     gnome-frog
     gnubg
