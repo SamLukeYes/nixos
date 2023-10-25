@@ -4,6 +4,7 @@
   services.flatpak.enable = true;
 
   # https://github.com/NixOS/nixpkgs/issues/119433#issuecomment-1326957279
+  fonts.fontDir.enable = true;
   system.fsPackages = [ pkgs.bindfs ];
   fileSystems = let
     mkRoSymBind = path: {
