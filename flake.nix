@@ -95,9 +95,6 @@
     overlays.default = final: prev: {
       archix = inputs.archix.packages.${system};
       archlinuxcn-keyring = inputs.archlinuxcn-keyring;
-      clash-verge = prev.clash-verge.overrideAttrs (old: {
-        postFixup = "ln -s ${final.clash}/bin/clash $out/bin/clash";
-      });
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
         patches = [];
