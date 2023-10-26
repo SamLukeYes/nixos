@@ -8,11 +8,11 @@
         "xddxdd": "xddxdd"
       },
       "locked": {
-        "lastModified": 1697536739,
-        "narHash": "sha256-sbi7bE/EsnagIHrYb067HnK8ReHgaLFwJ1GKCb+hJuo=",
+        "lastModified": 1698323243,
+        "narHash": "sha256-4ShNGAUQH7MSoeL/cw2yTS4T46PTnPOglJAxw5O7tmg=",
         "owner": "SamLukeYes",
         "repo": "archix",
-        "rev": "daede815c059a177c3b90c0122c8a3e2ed670722",
+        "rev": "12c8785ed6c093faf97c07c4fca6b0230461c959",
         "type": "github"
       },
       "original": {
@@ -252,11 +252,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1697524498,
-        "narHash": "sha256-mYQn+qruTbNi/FeJmcXBccmnVmzU7NjK7zeBm43P3bI=",
+        "lastModified": 1698300507,
+        "narHash": "sha256-gc8SB65QTAz/oOE9c0oVzc8JlgsnDpCE83STsyGRpi4=",
         "owner": "xddxdd",
         "repo": "nur-packages",
-        "rev": "8769768387210da21d17b1a7fe17b685957dd9f7",
+        "rev": "9cf8c9c11ea63415603151060ce6e2bdaeab9efc",
         "type": "github"
       },
       "original": {
