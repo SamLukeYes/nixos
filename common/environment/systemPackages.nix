@@ -28,6 +28,7 @@
     ]))
 
     # CLI programs
+    archix.devtools               # frequently used to query Arch package sources
     archix.paru                   # frequently used to query AUR packages
     bat                           # frequently used to view text in terminal
     dig                           # must be available without Internet connection
@@ -49,7 +50,7 @@
     adw-gtk3
     yaru-theme
 
-    # Out-of-tree packages
+    # other out-of-tree packages
     yes.lx-music-desktop
   ];
 }
