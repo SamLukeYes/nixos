@@ -21,7 +21,7 @@ let rp = import ../rp.nix; in
       keep-failed = true;
       keep-outputs = true;
       max-jobs = 2;   # https://github.com/NixOS/nixpkgs/issues/198668
-      max-substitution-jobs = 3;
+      # max-substitution-jobs = 3;
       narinfo-cache-negative-ttl = 300;
       nix-path = ["nixpkgs=/etc/nix/inputs/nixpkgs"];
       substituters = lib.mkForce [
