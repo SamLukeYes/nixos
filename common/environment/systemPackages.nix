@@ -6,7 +6,6 @@
     gimp
     gnome.dconf-editor
     gnome-frog
-    gnubg
     obs-studio
     shotcut
     tdesktop
@@ -51,6 +50,7 @@
     yaru-theme
 
     # other out-of-tree packages
+    yes.ludii
     yes.lx-music-desktop
   ];
 }
