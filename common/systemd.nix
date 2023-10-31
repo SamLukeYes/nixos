@@ -40,7 +40,10 @@
           ${pkgs.curl}/bin/curl -LO https://github.com/Mic92/nix-index-database/releases/latest/download/$FILE
           mv -v $FILE files
         '';
-        serviceConfig.Type = "oneshot";
+        serviceConfig = {
+          Restart = "on-failure";
+          Type = "oneshot";
+        };
         startAt = "weekly";
       };
       onedrive.wantedBy = [ "default.target" ];
