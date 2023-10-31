@@ -44,7 +44,6 @@
   # specific keys. Wiki page: https://nixos.wiki/wiki/Flakes#Output_schema
   outputs = { self, nixpkgs, flake-utils-plus, ... }@inputs: 
   let
-    # rp = import ./rp.nix;
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here

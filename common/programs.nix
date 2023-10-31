@@ -1,13 +1,11 @@
-{ pkgs, ... }:
-
-let rp = import ../rp.nix; in
+{ lib, pkgs, ... }:
 
 {
   programs = {
     adb.enable = true;
 
     clash-verge = {
-      enable = true;
+      enable = lib.mkDefault true;
       autoStart = true;
     };
 
@@ -53,8 +51,8 @@ let rp = import ../rp.nix; in
       ];
       mirrors = [
         "https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch"
+        "https://mirrors.cernet.edu.cn/$repo/os/$arch"
         "https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch"
-        "${rp}https://geo.mirror.pkgbuild.com/$repo/os/$arch"
       ];
     };
   };

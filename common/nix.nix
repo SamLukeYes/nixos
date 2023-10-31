@@ -1,6 +1,4 @@
-{ lib, pkgs, ... }:
-
-let rp = import ../rp.nix; in
+{ pkgs, ... }:
 
 {
   nix = {
@@ -24,14 +22,13 @@ let rp = import ../rp.nix; in
       # max-substitution-jobs = 3;
       narinfo-cache-negative-ttl = 300;
       nix-path = ["nixpkgs=/etc/nix/inputs/nixpkgs"];
-      substituters = lib.mkForce [
+      substituters = [
         "https://mirrors.cernet.edu.cn/nix-channels/store"
         "https://mirror.sjtu.edu.cn/nix-channels/store"
         "https://mirrors.bfsu.edu.cn/nix-channels/store"
-        "${rp}https://cache.nixos.org"
-        "${rp}https://rewine.cachix.org"
-        "${rp}https://xddxdd.cachix.org"
-        "${rp}https://cache.garnix.io"
+        "https://rewine.cachix.org"
+        "https://xddxdd.cachix.org"
+        "https://cache.garnix.io"
       ];
       trusted-public-keys = [
         "rewine.cachix.org-1:aOIg9PvwuSefg59gVXXxGIInHQI9fMpskdyya2xO+7I="

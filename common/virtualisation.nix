@@ -15,6 +15,8 @@
     vmVariant = {
       imports = [ "${modulesPath}/virtualisation/qemu-vm.nix" ];
 
+      programs.clash-verge.enable = false;
+
       security = {
         polkit.extraConfig = ''
           polkit.addRule(function(action, subject) {

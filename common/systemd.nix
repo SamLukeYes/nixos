@@ -1,8 +1,6 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
-let
-  rp = import ../rp.nix;
-in {
+{
   systemd = {
     nspawn = (builtins.mapAttrs (name: value: {
       filesConfig.Bind = [ "/dev/dri" ];
@@ -34,25 +32,26 @@ in {
     user.services = {
       cpupower-gui.enable = false;
       nix-index = {
+        environment = config.networking.proxy.envVars;
         script = ''
           FILE=index-x86_64-linux
           mkdir -p ~/.cache/nix-index
           cd ~/.cache/nix-index
-          ${pkgs.curl}/bin/curl -LO ${rp}https://github.com/Mic92/nix-index-database/releases/latest/download/$FILE
+          ${pkgs.curl}/bin/curl -LO https://github.com/Mic92/nix-index-database/releases/latest/download/$FILE
           mv -v $FILE files
         '';
         serviceConfig.Type = "oneshot";
         startAt = "weekly";
       };
       onedrive.wantedBy = [ "default.target" ];
-      ss-ws-local = with pkgs.yes.nodePackages; {
+      ss-ws-local = {
         script = ''
           if [ ! -f ~/.config/shadowsocks-ws/config.json ]; then
             echo "~/.config/shadowsocks-ws/config.json not found. Not starting."
             exit 0
           fi
           cd ~/.config/shadowsocks-ws
-          ${shadowsocks-ws}/bin/ss-ws-local
+          ${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local
         '';
         serviceConfig = {
           Restart = "on-failure";
