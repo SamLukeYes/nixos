@@ -23,7 +23,6 @@
       narinfo-cache-negative-ttl = 300;
       nix-path = ["nixpkgs=/etc/nix/inputs/nixpkgs"];
       substituters = [
-        "https://mirrors.cernet.edu.cn/nix-channels/store"
         "https://mirror.sjtu.edu.cn/nix-channels/store"
         "https://mirrors.bfsu.edu.cn/nix-channels/store"
         "https://rewine.cachix.org"
