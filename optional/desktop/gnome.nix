@@ -18,14 +18,21 @@
       geary                   # use web browser instead
     ];
 
-    sessionVariables.GST_PLUGIN_PATH_1_0 = lib.makeSearchPath "lib/gstreamer-1.0" (
-      with pkgs.gst_all_1; [
-        gst-plugins-bad
-        gst-plugins-good
-        gst-plugins-ugly
-        gst-vaapi
-      ]
-    );
+    sessionVariables = {
+      # Allow apps to detect gstreamer plugins
+      GST_PLUGIN_PATH_1_0 = lib.makeSearchPath "lib/gstreamer-1.0" (
+        with pkgs.gst_all_1; [
+          gst-plugins-bad
+          gst-plugins-good
+          gst-plugins-ugly
+          gst-vaapi
+        ]
+      );
+
+      # This is already set in environment.variables by NixOS modules,
+      # but it doesn't work with xonsh login shell and Qt6
+      QT_WAYLAND_DECORATION = "adwaita";
+    };
 
     systemPackages = with pkgs; [
       blackbox-terminal
@@ -59,8 +66,9 @@
 
   qt = {
     enable = true;
-    platformTheme = "gnome";
+    # platformTheme = "gnome";
     style = "adwaita-dark";
+    waylandDecoration = "adwaita";
   };
 
   services = {

@@ -1,4 +1,4 @@
-{ modulesPath, ... }:
+{ lib, modulesPath, pkgs, ... }:
 
 {
   virtualisation = {
@@ -14,6 +14,8 @@
 
     vmVariant = {
       imports = [ "${modulesPath}/virtualisation/qemu-vm.nix" ];
+
+      networking.hostName = lib.mkForce "test";
 
       programs.clash-verge.enable = false;
 
@@ -36,14 +38,28 @@
             PermitEmptyPasswords = "yes";
           };
         };
+        xserver.displayManager.autoLogin.user = "test";
       };
 
-      users.mutableUsers = false;
+      # system.replaceRuntimeDependencies = [({
+      #   original = pkgs.qt5.qtwayland;
+      #   replacement = pkgs.qtwayland-patched;
+      # })];
+
+      users = {
+        mutableUsers = false;
+        users.test = {
+          isNormalUser = true;
+          extraGroups = [ "wheel" "networkmanager" ];
+          password = "test";
+          shell = pkgs.bashInteractive;
+        };
+      };
 
       virtualisation = {
         cores = 2;
         memorySize = 4096;
-        qemu.options = [ "-device virtio-vga-gl -display sdl,gl=on" ];
+        qemu.options = [ "-device virtio-vga-gl -display gtk,gl=on" ];
       };
     };
   };

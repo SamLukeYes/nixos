@@ -1,0 +1,158 @@
+From 3fcc1dba01eed427de7ac450cd127ce048e7937c Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Wed, 1 Nov 2023 17:15:31 +0800
+Subject: [PATCH 1/2] qadwaitadecorations: init at 0.1.3
+
+---
+ .../qa/qadwaitadecorations/package.nix        | 55 +++++++++++++++++++
+ pkgs/top-level/all-packages.nix               |  9 +++
+ 2 files changed, 64 insertions(+)
+ create mode 100644 pkgs/by-name/qa/qadwaitadecorations/package.nix
+
+diff --git a/pkgs/by-name/qa/qadwaitadecorations/package.nix b/pkgs/by-name/qa/qadwaitadecorations/package.nix
+new file mode 100644
+index 00000000000000..532c83d1d2b204
+--- /dev/null
++++ b/pkgs/by-name/qa/qadwaitadecorations/package.nix
+@@ -0,0 +1,55 @@
++{ lib
++, stdenv
++, fetchFromGitHub
++, cmake
++, qtbase
++, qtsvg
++, qtwayland
++, wayland
++, nix-update-script
++, useQt6 ? false
++
++# Shadows support on Qt5 requires the feature backported from Qt6:
++# https://src.fedoraproject.org/rpms/qt5-qtwayland/blob/rawhide/f/qtwayland-decoration-support-backports-from-qt6.patch
++, qt5ShadowsSupport ? false
++}:
++
++stdenv.mkDerivation (finalAttrs: {
++  pname = "qadwaitadecorations";
++  version = "0.1.3";
++
++  src = fetchFromGitHub {
++    owner = "FedoraQt";
++    repo = "QAdwaitaDecorations";
++    rev = finalAttrs.version;
++    hash = "sha256-9uK2ojukuwzOz/genWiCch4c3pL5qEfyy8ERpFxS8/8=";
++  };
++
++  nativeBuildInputs = [
++    cmake
++  ];
++
++  buildInputs = [
++    qtbase
++    qtsvg
++    qtwayland
++    wayland
++  ];
++
++  dontWrapQtApps = true;
++
++  cmakeFlags = [
++    "-DQT_PLUGINS_DIR=${placeholder "out"}/${qtbase.qtPluginPrefix}"
++  ] ++ lib.optional useQt6 "-DUSE_QT6=true"
++    ++ lib.optional qt5ShadowsSupport "-DHAS_QT6_SUPPORT=true";
++
++  passthru.updateScript = nix-update-script { };
++
++  meta = {
++    description = "Qt Wayland decoration plugin using libadwaita style";
++    homepage = "https://github.com/FedoraQt/QAdwaitaDecorations";
++    license = lib.licenses.lgpl21Plus;
++    maintainers = with lib.maintainers; [ samlukeyes123 ];
++    platforms = lib.platforms.linux;
++  };
++})
+diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
+index bce2f4635b705a..a1698350e8fd3c 100644
+--- a/pkgs/top-level/all-packages.nix
++++ b/pkgs/top-level/all-packages.nix
+@@ -24772,6 +24772,15 @@ with pkgs;
+ 
+   qrupdate = callPackage ../development/libraries/qrupdate { };
+ 
++  qadwaitadecorations = callPackage ../by-name/qa/qadwaitadecorations/package.nix {
++    inherit (qt5) qtbase qtsvg qtwayland;
++  };
++
++  qadwaitadecorations-qt6 = callPackage ../by-name/qa/qadwaitadecorations/package.nix {
++    inherit (qt6) qtbase qtsvg qtwayland;
++    useQt6 = true;
++  };
++
+   qgnomeplatform = libsForQt5.callPackage ../development/libraries/qgnomeplatform { };
+ 
+   qgnomeplatform-qt6 = qt6Packages.callPackage ../development/libraries/qgnomeplatform {
+
+From e1ee1e5040ac27b066b736040df4d8588f3721c6 Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Wed, 1 Nov 2023 17:41:48 +0800
+Subject: [PATCH 2/2] nixos/qt: add waylandDecoration option
+
+---
+ nixos/modules/config/qt.nix | 25 ++++++++++++++++++++++++-
+ 1 file changed, 24 insertions(+), 1 deletion(-)
+
+diff --git a/nixos/modules/config/qt.nix b/nixos/modules/config/qt.nix
+index f82b7ab85a8c3b..a41224eb34058a 100644
+--- a/nixos/modules/config/qt.nix
++++ b/nixos/modules/config/qt.nix
+@@ -29,6 +29,10 @@ let
+ 
+     kvantum = [ libsForQt5.qtstyleplugin-kvantum qt6Packages.qtstyleplugin-kvantum ];
+   };
++
++  waylandDecorationPackages = with pkgs; {
++    adwaita = [ qadwaitadecorations qadwaitadecorations-qt6 ];
++  };
+ in
+ {
+   meta.maintainers = with lib.maintainers; [ romildo thiagokokada ];
+@@ -109,6 +113,23 @@ in
+             [kvantum](https://github.com/tsujan/Kvantum)
+         '';
+       };
++
++      waylandDecoration = lib.mkOption {
++        type = with lib.types; nullOr (enum (lib.attrNames waylandDecorationPackages));
++        default = null;
++        example = "adwaita";
++        relatedPackages = [
++          "qadwaitadecorations"
++          "qadwaitadecorations-qt6"
++        ];
++        description = lib.mdDoc ''
++          Selects the Wayland window decoration to use for Qt applications.
++
++          Currently, the only available option except `null` is
++          - `adwaita`: Use Adwaita-like decorations with
++            [qadwaitadecorations](https://github.com/FedoraQt/QAdwaitaDecorations)
++        '';
++      };
+     };
+   };
+ 
+@@ -136,6 +157,7 @@ in
+     environment.variables = {
+       QT_QPA_PLATFORMTHEME = lib.mkIf (cfg.platformTheme != null) cfg.platformTheme;
+       QT_STYLE_OVERRIDE = lib.mkIf (cfg.style != null) cfg.style;
++      QT_WAYLAND_DECORATION = lib.mkIf (cfg.waylandDecoration != null) cfg.waylandDecoration;
+     };
+ 
+     environment.profileRelativeSessionVariables =
+@@ -149,6 +171,7 @@ in
+ 
+     environment.systemPackages =
+       lib.optionals (cfg.platformTheme != null) (platformPackages.${cfg.platformTheme})
+-      ++ lib.optionals (cfg.style != null) (stylePackages.${cfg.style});
++      ++ lib.optionals (cfg.style != null) (stylePackages.${cfg.style})
++      ++ lib.optionals (cfg.waylandDecoration != null) (waylandDecorationPackages.${cfg.waylandDecoration});
+   };
+ }
