@@ -43,7 +43,7 @@
         ILoveCandy
 
         [archlinuxcn]
-        Server = https://mirror.sjtu.edu.cn/$repo/$arch
+        Server = https://mirror.sjtu.edu.cn/archlinux-cn/$arch
         Server = https://mirrors.bfsu.edu.cn/$repo/$arch
       '';
       keyrings = with pkgs; [
