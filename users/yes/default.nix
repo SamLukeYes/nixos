@@ -25,6 +25,11 @@
       isNormalUser = true;
       shell = config.programs.xonsh.package;
       uid = 1000;
+
+      packages = [(pkgs.makeAutostartItem {
+        name = "firefox";
+        package = config.programs.firefox.package;
+      })];
     };
   };
 }

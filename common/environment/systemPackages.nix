@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -12,11 +12,6 @@
     virt-manager
     xournalpp
     zotero
-
-    (makeAutostartItem {
-      name = "firefox";
-      package = config.programs.firefox.package;
-    })
 
     ((vscode.override {
       commandLineArgs = "--touch-events --enable-wayland-ime --disable-gpu-shader-disk-cache -n";
