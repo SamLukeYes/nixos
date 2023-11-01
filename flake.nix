@@ -112,18 +112,6 @@
         '';
       });
       # libreoffice = final.libreoffice-fresh;
-      # qadwaitadecorations = prev.qadwaitadecorations.override {
-      #   qtwayland = final.qtwayland-patched;
-      #   qt5ShadowsSupport = true;
-      # };
-      # qtwayland-patched = final.qt5.qtwayland.overrideAttrs (old: {
-      #   patches = old.patches ++ [
-      #     (final.fetchpatch {
-      #       url = "https://src.fedoraproject.org/rpms/qt5-qtwayland/raw/rawhide/f/qtwayland-decoration-support-backports-from-qt6.patch";
-      #       hash = "sha256-BmSVhQSJ1IRZujAUbdi9lIM7f59OOQPXctig+w7dri8=";
-      #     })
-      #   ];
-      # });
       rewine = inputs.rewine.packages.${system};
       # starship = prev.starship.overrideAttrs (old: {
       #   src = inputs.starship;

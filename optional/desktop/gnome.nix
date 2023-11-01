@@ -66,7 +66,7 @@
 
   qt = {
     enable = true;
-    # platformTheme = "gnome";
+    platformTheme = "gnome";
     style = "adwaita-dark";
     waylandDecoration = "adwaita";
   };
