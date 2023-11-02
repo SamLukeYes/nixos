@@ -36,10 +36,6 @@
     texlive.combined.scheme-full  # required by Xournal++ and VSCode LateX Workshop
     wl-clipboard                  # required by WayDroid
 
-    # direnv
-    direnv
-    nix-direnv
-
     # themes
     adw-gtk3
     yaru-theme

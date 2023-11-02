@@ -13,6 +13,8 @@
 
     dconf.enable = true;
 
+    direnv.enable = true;
+
     firefox = {
       enable = true;
       languagePacks = [ "zh-CN" ];
