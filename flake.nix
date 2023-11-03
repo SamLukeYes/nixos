@@ -123,10 +123,10 @@
       trackers = inputs.trackers;
       yes = import inputs.yes { pkgs = prev; };
       zotero = prev.zotero.overrideAttrs (old: rec {
-        version = "7.0.0-beta.47%2Bf012a348a";
+        version = "7.0.0-beta.48%2B0cab24fb8";
         src = final.fetchurl {
           url = "https://download.zotero.org/client/beta/${version}/Zotero-${version}_linux-x86_64.tar.bz2";
-          hash = "sha256-zSZRetOMcLbqB+rvdH68lyfcYCcfIpmqQIVnALMVCSQ=";
+          hash = "sha256-IbTCQr32dknmy8aqQe4u6ymlQ+2VNSqHcFZDbV26Wbo=";
         };
         libPath = with final; old.libPath + ":" + lib.makeLibraryPath [
           alsa-lib xorg.libXtst
