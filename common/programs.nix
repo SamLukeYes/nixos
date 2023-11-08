@@ -1,13 +1,8 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs = {
     adb.enable = true;
-
-    clash-verge = {
-      enable = lib.mkDefault true;
-      autoStart = true;
-    };
 
     command-not-found.enable = false;
 

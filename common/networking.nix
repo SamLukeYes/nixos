@@ -1,5 +1,3 @@
-{ config, lib, ... }:
-
 {
   networking = {
     firewall = rec {
@@ -7,7 +5,5 @@
       allowedUDPPorts = allowedTCPPorts;
     };
     networkmanager.enable = true;
-    proxy.default = lib.mkIf
-      config.programs.clash-verge.enable "http://127.0.0.1:7890";
   };
 }

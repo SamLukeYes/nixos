@@ -4,6 +4,7 @@
   imports = [
     ./flatpak.nix
     ./pipewire.nix
+    ./v2raya.nix
   ];
 
   services = {

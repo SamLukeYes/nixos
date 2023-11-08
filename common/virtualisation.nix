@@ -1,4 +1,4 @@
-{ config, lib, modulesPath, pkgs, ... }:
+{ lib, modulesPath, pkgs, ... }:
 
 {
   virtualisation = {
@@ -15,9 +15,10 @@
     vmVariant = {
       imports = [ "${modulesPath}/virtualisation/qemu-vm.nix" ];
 
-      networking.hostName = lib.mkForce "test";
-
-      programs.clash-verge.enable = false;
+      networking = {
+        hostName = lib.mkForce "test";
+        proxy.default = lib.mkForce null;
+      };
 
       security = {
         polkit.extraConfig = ''
