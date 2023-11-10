@@ -46,19 +46,11 @@
       gnomeExtensions.appindicator
       gnomeExtensions.customize-ibus
       gnomeExtensions.freon
-      gnomeExtensions.one-drive-resurrect
       gnomeExtensions.pano
       gnomeExtensions.section-todo-list
 
       # CLI programs
       _7zz            # required by file-roller
-    ];
-  };
-
-  i18n.inputMethod = {
-    enabled = "ibus";
-    ibus.engines = with pkgs.ibus-engines; [
-      libpinyin
     ];
   };
 

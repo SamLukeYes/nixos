@@ -1,7 +1,9 @@
 {
   imports = [
+    ./fileSystems.nix
     ./hardware-configuration.nix
     ../../common
+    ../../optional/apps
     ../../users/yes
   ];
 

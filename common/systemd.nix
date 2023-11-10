@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 
 {
+  # TODO: clean up nspawn config
   systemd = {
     nspawn = (builtins.mapAttrs (name: value: {
       filesConfig.Bind = [ "/dev/dri" ];
@@ -9,7 +10,6 @@
       archriscv = {};
       old-root = {};
     });
-    packages = [ pkgs.onedrive ];
     services = {
       "systemd-nspawn@".serviceConfig.DeviceAllow = [
         "char-drm rwm"
@@ -46,7 +46,6 @@
         };
         startAt = "weekly";
       };
-      onedrive.wantedBy = [ "default.target" ];
       ss-ws-local = {
         script = ''
           if [ ! -f ~/.config/shadowsocks-ws/config.json ]; then
@@ -58,11 +57,11 @@
         '';
         serviceConfig = {
           Restart = "on-failure";
-          RestartSec = 15;
+          RestartSec = 5;
         };
         unitConfig = {
           StartLimitBurst = 5;
-          StartLimitIntervalSec = 120;
+          StartLimitIntervalSec = 60;
         };
         wantedBy = [ "default.target" ];
       };

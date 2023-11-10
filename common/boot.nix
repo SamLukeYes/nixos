@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   boot = {
@@ -18,13 +18,14 @@
     loader = {
       systemd-boot = {
         editor = false;
-        enable = true;
+        enable = lib.mkDefault true;
       };
       efi = {
         canTouchEfiVariables = true;
       };
     };
     plymouth.enable = true;
+    swraid.enable = lib.mkDefault false;
     tmp.cleanOnBoot = true;
   };
 }

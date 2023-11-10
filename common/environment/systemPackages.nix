@@ -5,8 +5,6 @@
     authenticator
     gimp
     gnome.dconf-editor
-    gnome-frog
-    obs-studio
     shotcut
     tdesktop
     virt-manager
@@ -28,11 +26,9 @@
     file                          # frequently used to view executable type
     jre                           # can always be detected by libreoffice
     nix-output-monitor            # frequently used in nix operations
-    onedrive                      # required by gnomeExtensions.one-drive-resurrect
     pdftk                         # required by Jasminum
     sshfs                         # frequently used for file sharing
     starship                      # configured without nix
-    texlive.combined.scheme-full  # required by Xournal++ and VSCode LateX Workshop
     wl-clipboard                  # required by WayDroid
 
     # themes

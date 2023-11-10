@@ -70,19 +70,27 @@
       modules = [
         inputs.archix.nixosModules.default
         inputs.archix.nixosModules.binfmt
-        inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
-        ./machines/absolute/configuration.nix
       ];
     };
 
-    hosts = {
-      absolute-gnome.modules = [
+    hosts = let
+      absolute-modules = [
+        inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
+        ./machines/absolute/configuration.nix
+      ];
+    in {
+      absolute-gnome.modules = absolute-modules ++ [
         ./optional/desktop/gnome.nix
       ];
-      absolute-plasma.modules = [
+      absolute-plasma.modules = absolute-modules ++ [
         ./optional/desktop/plasma.nix
       ];
+      nixos-iso.modules = [
+        ./iso.nix
+      ];
     };
+    
+    iso = self.nixosConfigurations.nixos-iso.config.system.build.isoImage;
 
     legacyPackages.${system} = import (
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches

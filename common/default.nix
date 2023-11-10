@@ -3,7 +3,6 @@
     [
       ./boot.nix
       ./environment
-      ./fileSystems.nix
       ./fonts.nix
       ./i18n.nix
       ./networking.nix
