@@ -1,15 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  programs.xonsh = {
-    enable = true;
-    package = pkgs.xonsh.override {
-      extraPackages = ps: [
-        pkgs.yes.xonsh-direnv
-      ];
-    };
-  };
-
   users = {
     users.yes = {
       description = "Sam L. Yes";

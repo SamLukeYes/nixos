@@ -31,10 +31,6 @@
     starship                      # configured without nix
     wl-clipboard                  # required by WayDroid
 
-    # themes
-    adw-gtk3
-    yaru-theme
-
     # other out-of-tree packages
     yes.ludii
     yes.lx-music-desktop

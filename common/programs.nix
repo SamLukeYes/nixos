@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   programs = {
@@ -24,11 +24,24 @@
       # pinentryFlavor = "gnome3";
     };
 
-    kdeconnect.enable = true;
+    kdeconnect = {
+      enable = true;
+      package = lib.mkIf config.services.xserver.desktopManager.gnome.enable
+        pkgs.gnomeExtensions.gsconnect;
+    };
 
     nix-index.enable = true;
 
     wireshark.enable = true;
+
+    xonsh = {
+      enable = true;
+      package = pkgs.xonsh.override {
+        extraPackages = ps: [
+          pkgs.yes.xonsh-direnv
+        ];
+      };
+    };
 
     # requires archix
     pacman = {

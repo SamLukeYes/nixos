@@ -51,10 +51,12 @@
 
       # CLI programs
       _7zz            # required by file-roller
+
+      # themes
+      adw-gtk3
+      yaru-theme
     ];
   };
-
-  programs.kdeconnect.package = pkgs.gnomeExtensions.gsconnect;
 
   qt = {
     enable = true;
