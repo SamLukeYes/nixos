@@ -131,18 +131,15 @@
       trackers = inputs.trackers;
       yes = import inputs.yes { pkgs = prev; };
       zotero = prev.zotero.overrideAttrs (old: rec {
-        version = "7.0.0-beta.49%2B1bb6722c4";
+        version = "7.0.0-beta.51%2B7c5600913";
         src = final.fetchurl {
           url = "https://download.zotero.org/client/beta/${version}/Zotero-${version}_linux-x86_64.tar.bz2";
-          hash = "sha256-tIbJ++sA3A0TCZNz2CNZYnsdzBpxlkKgOkMbbczRlJw=";
+          hash = "sha256-zJ+jG7zlvWq+WEYOPyMIhqHPfsUe9tn0cbRyibQ7bFw=";
         };
         libPath = with final; old.libPath + ":" + lib.makeLibraryPath [
           alsa-lib xorg.libXtst
         ];
         postPatch = "";
-        meta = old.meta // {
-          knownVulnerabilities = [];
-        };
       });
     };
   };
