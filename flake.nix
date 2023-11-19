@@ -5,7 +5,7 @@
 
   inputs = {
     archix = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/archix";
     };
     archlinuxcn-keyring = {
