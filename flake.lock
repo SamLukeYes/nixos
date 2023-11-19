@@ -2,9 +2,7 @@
   "nodes": {
     "archix": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs",
         "xddxdd": "xddxdd"
       },
       "locked": {
@@ -126,6 +124,22 @@
     },
     "nixpkgs": {
       "locked": {
+        "lastModified": 1699099776,
+        "narHash": "sha256-X09iKJ27mGsGambGfkKzqvw5esP1L/Rf8H3u3fCqIiU=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "85f1ba3e51676fa8cc604a3d863d729026a6b8eb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
         "lastModified": 1700204040,
         "narHash": "sha256-xSVcS5HBYnD3LTer7Y2K8ZQCDCXMa3QUD1MzRjHzuhI=",
         "owner": "NixOS",
@@ -204,7 +218,7 @@
           "flake-utils-plus"
         ],
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "rewine": "rewine",
         "trackers": "trackers",
         "yes": "yes"
@@ -228,11 +242,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1700294848,
-        "narHash": "sha256-5LY1sjbM3zspqUBjzaEsVimN2JQ2DR25sBdSmxqvpgk=",
+        "lastModified": 1700352482,
+        "narHash": "sha256-UY4J56qZi/6PKaxDqzLGtflW7QSp+v02cEQSMbNvv9I=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "9b129b739eab443251b321d1c9fef82580f0112f",
+        "rev": "8b016ab77717926d9e3a46381bab40bfa8169a7a",
         "type": "github"
       },
       "original": {
