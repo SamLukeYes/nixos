@@ -39,8 +39,11 @@
       celluloid
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
-      gnome.nautilus-python
       libreoffice
+
+      # nautilus extensions
+      gnome.nautilus-python
+      nautilus-open-any-terminal
 
       # GNOME Shell extensions
       gnomeExtensions.appindicator
