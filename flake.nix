@@ -49,6 +49,7 @@
       # Add nixpkgs patches here
       ./patches/nixos-rebuild-use-nom.patch
       ./patches/264774.patch  # qadwaitadecorations
+      ./patches/269217.patch  # freon
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
