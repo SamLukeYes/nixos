@@ -7,11 +7,9 @@
       epiphany                # use firefox instead
       pkgs.gnome-text-editor  # use vscode instead
       gnome-calculator        # use xonsh instead
-      gnome-calendar          # broken with my local data
       pkgs.gnome-console      # use blackbox-terminal instead
       gnome-contacts          # not managing contacts on PC
       gnome-music             # use celluloid instead
-      gnome-weather           # ugly as hell
       simple-scan             # no scanner available
       totem                   # use celluloid instead
       evince                  # use web browser for pdf
@@ -70,7 +68,7 @@
 
   services = {
     # Disable the event list of the calendar menu
-    gnome.evolution-data-server.enable = lib.mkForce false;
+    # gnome.evolution-data-server.enable = lib.mkForce false;
 
     xserver = {
       desktopManager.gnome = {
