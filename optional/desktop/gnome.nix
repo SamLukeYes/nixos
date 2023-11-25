@@ -47,7 +47,7 @@
       gnomeExtensions.appindicator
       gnomeExtensions.customize-ibus
       gnomeExtensions.freon
-      # gnomeExtensions.pano
+      gnomeExtensions.pano
       gnomeExtensions.section-todo-list
 
       # CLI programs
