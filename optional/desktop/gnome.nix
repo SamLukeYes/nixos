@@ -27,8 +27,6 @@
         ]
       );
 
-      # This is already set in environment.variables by NixOS modules,
-      # but it doesn't work with xonsh login shell and Qt6
       QT_WAYLAND_DECORATION = "adwaita";
     };
 
@@ -50,6 +48,13 @@
       gnomeExtensions.pano
       gnomeExtensions.section-todo-list
 
+      # Qt plugins
+      adwaita-qt
+      qadwaitadecorations-qt6
+      qgnomeplatform
+      qt6.qtsvg
+      qt6.qtwayland
+
       # CLI programs
       _7zz            # required by file-roller
 
@@ -57,13 +62,6 @@
       adw-gtk3
       yaru-theme
     ];
-  };
-
-  qt = {
-    enable = true;
-    platformTheme = "gnome";
-    style = "adwaita-dark";
-    waylandDecoration = "adwaita";
   };
 
   services = {

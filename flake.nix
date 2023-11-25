@@ -52,7 +52,6 @@
       ./patches/269217.patch  # freon
       ./patches/269588.patch  # pano
       ./patches/269668.patch  # gsconnect
-      ./patches/269789.patch  # onedrivegui
     ];
 
   in flake-utils-plus.lib.mkFlake rec {

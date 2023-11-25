@@ -1,7 +1,7 @@
-From 3fcc1dba01eed427de7ac450cd127ce048e7937c Mon Sep 17 00:00:00 2001
+From fe795f0266a80c09124b63e1be55f3f0a4b5880f Mon Sep 17 00:00:00 2001
 From: SamLukeYes <samlukeyes123@gmail.com>
-Date: Wed, 1 Nov 2023 17:15:31 +0800
-Subject: [PATCH 1/2] qadwaitadecorations: init at 0.1.3
+Date: Sat, 25 Nov 2023 17:13:25 +0800
+Subject: [PATCH] qadwaitadecorations: init at 0.1.3
 
 ---
  .../qa/qadwaitadecorations/package.nix        | 55 +++++++++++++++++++
@@ -90,69 +90,3 @@ index bce2f4635b705a..a1698350e8fd3c 100644
    qgnomeplatform = libsForQt5.callPackage ../development/libraries/qgnomeplatform { };
  
    qgnomeplatform-qt6 = qt6Packages.callPackage ../development/libraries/qgnomeplatform {
-
-From e1ee1e5040ac27b066b736040df4d8588f3721c6 Mon Sep 17 00:00:00 2001
-From: SamLukeYes <samlukeyes123@gmail.com>
-Date: Wed, 1 Nov 2023 17:41:48 +0800
-Subject: [PATCH 2/2] nixos/qt: add waylandDecoration option
-
----
- nixos/modules/config/qt.nix | 25 ++++++++++++++++++++++++-
- 1 file changed, 24 insertions(+), 1 deletion(-)
-
-diff --git a/nixos/modules/config/qt.nix b/nixos/modules/config/qt.nix
-index f82b7ab85a8c3b..a41224eb34058a 100644
---- a/nixos/modules/config/qt.nix
-+++ b/nixos/modules/config/qt.nix
-@@ -29,6 +29,10 @@ let
- 
-     kvantum = [ libsForQt5.qtstyleplugin-kvantum qt6Packages.qtstyleplugin-kvantum ];
-   };
-+
-+  waylandDecorationPackages = with pkgs; {
-+    adwaita = [ qadwaitadecorations qadwaitadecorations-qt6 ];
-+  };
- in
- {
-   meta.maintainers = with lib.maintainers; [ romildo thiagokokada ];
-@@ -109,6 +113,23 @@ in
-             [kvantum](https://github.com/tsujan/Kvantum)
-         '';
-       };
-+
-+      waylandDecoration = lib.mkOption {
-+        type = with lib.types; nullOr (enum (lib.attrNames waylandDecorationPackages));
-+        default = null;
-+        example = "adwaita";
-+        relatedPackages = [
-+          "qadwaitadecorations"
-+          "qadwaitadecorations-qt6"
-+        ];
-+        description = lib.mdDoc ''
-+          Selects the Wayland window decoration to use for Qt applications.
-+
-+          Currently, the only available option except `null` is
-+          - `adwaita`: Use Adwaita-like decorations with
-+            [qadwaitadecorations](https://github.com/FedoraQt/QAdwaitaDecorations)
-+        '';
-+      };
-     };
-   };
- 
-@@ -136,6 +157,7 @@ in
-     environment.variables = {
-       QT_QPA_PLATFORMTHEME = lib.mkIf (cfg.platformTheme != null) cfg.platformTheme;
-       QT_STYLE_OVERRIDE = lib.mkIf (cfg.style != null) cfg.style;
-+      QT_WAYLAND_DECORATION = lib.mkIf (cfg.waylandDecoration != null) cfg.waylandDecoration;
-     };
- 
-     environment.profileRelativeSessionVariables =
-@@ -149,6 +171,7 @@ in
- 
-     environment.systemPackages =
-       lib.optionals (cfg.platformTheme != null) (platformPackages.${cfg.platformTheme})
--      ++ lib.optionals (cfg.style != null) (stylePackages.${cfg.style});
-+      ++ lib.optionals (cfg.style != null) (stylePackages.${cfg.style})
-+      ++ lib.optionals (cfg.waylandDecoration != null) (waylandDecorationPackages.${cfg.waylandDecoration});
-   };
- }
