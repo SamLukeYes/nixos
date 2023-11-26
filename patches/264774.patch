@@ -1,27 +1,26 @@
-From fe795f0266a80c09124b63e1be55f3f0a4b5880f Mon Sep 17 00:00:00 2001
+From 70b618f72ea19a7f2e5fbbcac69757ecf74b0270 Mon Sep 17 00:00:00 2001
 From: SamLukeYes <samlukeyes123@gmail.com>
-Date: Sat, 25 Nov 2023 17:13:25 +0800
+Date: Sun, 26 Nov 2023 15:33:27 +0800
 Subject: [PATCH] qadwaitadecorations: init at 0.1.3
 
 ---
- .../qa/qadwaitadecorations/package.nix        | 55 +++++++++++++++++++
- pkgs/top-level/all-packages.nix               |  9 +++
- 2 files changed, 64 insertions(+)
+ .../qa/qadwaitadecorations/package.nix        | 58 +++++++++++++++++++
+ pkgs/top-level/all-packages.nix               |  4 ++
+ 2 files changed, 62 insertions(+)
  create mode 100644 pkgs/by-name/qa/qadwaitadecorations/package.nix
 
 diff --git a/pkgs/by-name/qa/qadwaitadecorations/package.nix b/pkgs/by-name/qa/qadwaitadecorations/package.nix
 new file mode 100644
-index 00000000000000..532c83d1d2b204
+index 00000000000000..74ba857f03b0cb
 --- /dev/null
 +++ b/pkgs/by-name/qa/qadwaitadecorations/package.nix
-@@ -0,0 +1,55 @@
+@@ -0,0 +1,58 @@
 +{ lib
 +, stdenv
 +, fetchFromGitHub
 +, cmake
-+, qtbase
-+, qtsvg
-+, qtwayland
++, qt5
++, qt6
 +, wayland
 +, nix-update-script
 +, useQt6 ? false
@@ -31,7 +30,11 @@ index 00000000000000..532c83d1d2b204
 +, qt5ShadowsSupport ? false
 +}:
 +
-+stdenv.mkDerivation (finalAttrs: {
++let
++  qt = if useQt6 then qt6 else qt5;
++  qtVersion = if useQt6 then "6" else "5";
++
++in stdenv.mkDerivation (finalAttrs: {
 +  pname = "qadwaitadecorations";
 +  version = "0.1.3";
 +
@@ -46,7 +49,7 @@ index 00000000000000..532c83d1d2b204
 +    cmake
 +  ];
 +
-+  buildInputs = [
++  buildInputs = with qt; [
 +    qtbase
 +    qtsvg
 +    qtwayland
@@ -56,14 +59,14 @@ index 00000000000000..532c83d1d2b204
 +  dontWrapQtApps = true;
 +
 +  cmakeFlags = [
-+    "-DQT_PLUGINS_DIR=${placeholder "out"}/${qtbase.qtPluginPrefix}"
++    "-DQT_PLUGINS_DIR=${placeholder "out"}/${qt.qtbase.qtPluginPrefix}"
 +  ] ++ lib.optional useQt6 "-DUSE_QT6=true"
 +    ++ lib.optional qt5ShadowsSupport "-DHAS_QT6_SUPPORT=true";
 +
 +  passthru.updateScript = nix-update-script { };
 +
 +  meta = {
-+    description = "Qt Wayland decoration plugin using libadwaita style";
++    description = "Qt${qtVersion} Wayland decoration plugin using libadwaita style";
 +    homepage = "https://github.com/FedoraQt/QAdwaitaDecorations";
 +    license = lib.licenses.lgpl21Plus;
 +    maintainers = with lib.maintainers; [ samlukeyes123 ];
@@ -71,19 +74,14 @@ index 00000000000000..532c83d1d2b204
 +  };
 +})
 diff --git a/pkgs/top-level/all-packages.nix b/pkgs/top-level/all-packages.nix
-index bce2f4635b705a..a1698350e8fd3c 100644
+index bce2f4635b705a..b6b2455859a601 100644
 --- a/pkgs/top-level/all-packages.nix
 +++ b/pkgs/top-level/all-packages.nix
-@@ -24772,6 +24772,15 @@ with pkgs;
+@@ -24772,6 +24772,10 @@ with pkgs;
  
    qrupdate = callPackage ../development/libraries/qrupdate { };
  
-+  qadwaitadecorations = callPackage ../by-name/qa/qadwaitadecorations/package.nix {
-+    inherit (qt5) qtbase qtsvg qtwayland;
-+  };
-+
 +  qadwaitadecorations-qt6 = callPackage ../by-name/qa/qadwaitadecorations/package.nix {
-+    inherit (qt6) qtbase qtsvg qtwayland;
 +    useQt6 = true;
 +  };
 +
