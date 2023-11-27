@@ -8,11 +8,11 @@
         "xddxdd": "xddxdd"
       },
       "locked": {
-        "lastModified": 1699874853,
-        "narHash": "sha256-nB+fr19txyCpA2l8fC2G0XjuoLTYQEObx5D7mtLZ+xQ=",
+        "lastModified": 1701066221,
+        "narHash": "sha256-2lE+vW090UzPF0D0G25XUZ9Pz/AD2CYls8IPTz1HzXU=",
         "owner": "SamLukeYes",
         "repo": "archix",
-        "rev": "a5fbe68e76c794f5e4b66f489552c5608a627ffd",
+        "rev": "51e08cc23f4dbf1c3a3fa75e990cfbb554beb68d",
         "type": "github"
       },
       "original": {
@@ -111,11 +111,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1700559156,
-        "narHash": "sha256-gL4epO/qf+wo30JjC3g+b5Bs8UrpxzkhNBBsUYxpw2g=",
+        "lastModified": 1701020860,
+        "narHash": "sha256-NwnRn04C8s+hH+KdVtGmVB1FFNIG7DtPJmQSCBDaET4=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "c3abafb01cd7045dba522af29b625bd1e170c2fb",
+        "rev": "b006ec52fce23b1d57f6ab4a42d7400732e9a0a2",
         "type": "github"
       },
       "original": {
@@ -228,11 +228,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1700957277,
-        "narHash": "sha256-en42U889gBzBX9dcXbM/R00AL7pk30xtA9lXP73onTQ=",
+        "lastModified": 1701043649,
+        "narHash": "sha256-UkxSkM2qGrcWKjcHZbQfCBLD9miw8rXCNEgrjysIyB8=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "16373c4815560f0be10b9b99209b6b98b2e7a021",
+        "rev": "6070d6ab1fe4bab18018196a7393d87f54b0d1c1",
         "type": "github"
       },
       "original": {
@@ -252,11 +252,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1699857961,
-        "narHash": "sha256-55cVukLaD41yF9cmlpkl4buZSZl18H9vcO443R8SBVA=",
+        "lastModified": 1700980527,
+        "narHash": "sha256-Vusf6BQYousPSYXWBX97U+lYaRdBQHwIFef3jc3+avc=",
         "owner": "xddxdd",
         "repo": "nur-packages",
-        "rev": "20c3b74f2ea33be8b483836715ae59e24fa4dba6",
+        "rev": "41278cf373567cf03c1f7adbf4eed000a8b81d5a",
         "type": "github"
       },
       "original": {
