@@ -33,6 +33,7 @@
     systemPackages = with pkgs; [
       blackbox-terminal
       celluloid
+      endeavour
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
       libreoffice
@@ -46,7 +47,6 @@
       gnomeExtensions.customize-ibus
       gnomeExtensions.freon
       gnomeExtensions.pano
-      gnomeExtensions.section-todo-list
 
       # Qt plugins
       adwaita-qt
