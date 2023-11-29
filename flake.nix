@@ -48,9 +48,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/nixos-rebuild-use-nom.patch
-      ./patches/264774.patch  # qadwaitadecorations
-      ./patches/269588.patch  # pano
-      ./patches/269668.patch  # gsconnect
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
