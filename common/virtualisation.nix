@@ -15,6 +15,10 @@
     vmVariant = {
       imports = [ "${modulesPath}/virtualisation/qemu-vm.nix" ];
 
+      environment.systemPackages = with pkgs; [
+        qq
+      ];
+
       networking = {
         hostName = lib.mkForce "test";
         proxy.default = lib.mkForce null;
@@ -42,29 +46,29 @@
         xserver.displayManager.autoLogin.user = "test";
       };
 
-      system.replaceRuntimeDependencies = let
-        qtwayland' = pkgs.qt5.qtwayland.overrideAttrs (old: {
-          patches = old.patches ++ [
-            (pkgs.fetchpatch {
-              url = "https://src.fedoraproject.org/rpms/qt5-qtwayland/raw/rawhide/f/qtwayland-decoration-support-backports-from-qt6.patch";
-              hash = "sha256-BmSVhQSJ1IRZujAUbdi9lIM7f59OOQPXctig+w7dri8=";
-            })
-          ];
-        });
-        qadwaitadecorations' = pkgs.qadwaitadecorations.override {
-          qtwayland = qtwayland';
-          qt5ShadowsSupport = true;
-        };
-      in [
-        {
-          original = pkgs.qt5.qtwayland;
-          replacement = qtwayland';
-        }
-        {
-          original = pkgs.qadwaitadecorations;
-          replacement = qadwaitadecorations';
-        }
-      ];
+      # system.replaceRuntimeDependencies = let
+      #   qtwayland' = pkgs.qt5.qtwayland.overrideAttrs (old: {
+      #     patches = old.patches ++ [
+      #       (pkgs.fetchpatch {
+      #         url = "https://src.fedoraproject.org/rpms/qt5-qtwayland/raw/rawhide/f/qtwayland-decoration-support-backports-from-qt6.patch";
+      #         hash = "sha256-BmSVhQSJ1IRZujAUbdi9lIM7f59OOQPXctig+w7dri8=";
+      #       })
+      #     ];
+      #   });
+      #   qadwaitadecorations' = pkgs.qadwaitadecorations.override {
+      #     qtwayland = qtwayland';
+      #     qt5ShadowsSupport = true;
+      #   };
+      # in [
+      #   {
+      #     original = pkgs.qt5.qtwayland;
+      #     replacement = qtwayland';
+      #   }
+      #   {
+      #     original = pkgs.qadwaitadecorations;
+      #     replacement = qadwaitadecorations';
+      #   }
+      # ];
 
       users = {
         mutableUsers = false;
