@@ -8,11 +8,11 @@
         "xddxdd": "xddxdd"
       },
       "locked": {
-        "lastModified": 1701335943,
-        "narHash": "sha256-vW7wwOkW26XZ7AgziIkVQtv8Nzz+qxqzhApZeOaw0Ak=",
+        "lastModified": 1701506454,
+        "narHash": "sha256-eOd8qWBAJy+xQCyhKaBJB5VjBiMd+ErM9T0azYjJ2iM=",
         "owner": "SamLukeYes",
         "repo": "archix",
-        "rev": "c92c2707016a7efa965ee81cc829deff7f3bdc9f",
+        "rev": "2b0e33ef81649142fc602f2bb35e9002639b1cb9",
         "type": "github"
       },
       "original": {
@@ -228,11 +228,11 @@
     "trackers": {
       "flake": false,
       "locked": {
-        "lastModified": 1701418066,
-        "narHash": "sha256-ZJ7ncJwCedeMTLhhuj1Z9EVp7leEtu22ISjbTRi4Dew=",
+        "lastModified": 1701504467,
+        "narHash": "sha256-V211Fb1oOmOTh1UVh5h9MnBvnSgTIoKiwBqCXra2TQ4=",
         "owner": "XIU2",
         "repo": "TrackersListCollection",
-        "rev": "fcbb32d996466054a9ea5fa3e80f7e8f5debb47f",
+        "rev": "3adad8deb50f4cfebf919a2eb5f0e589863e0640",
         "type": "github"
       },
       "original": {
@@ -252,11 +252,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1701326239,
-        "narHash": "sha256-eyC0WVGcN1pDbcy01selSyOw1ErEbAd9Dp7YDOdjy/0=",
+        "lastModified": 1701499024,
+        "narHash": "sha256-GmWn/qSFihyKXYcxQ/9qIDizdXCpHf9aKi/mOKbEoQI=",
         "owner": "xddxdd",
         "repo": "nur-packages",
-        "rev": "7a6dc452ae391b71712e8852a5dec1fad1f8ac04",
+        "rev": "9f7cefd655a0f748f4107aae8c3187d00bb38529",
         "type": "github"
       },
       "original": {
