@@ -24,7 +24,6 @@
       nix-path = ["nixpkgs=/etc/nix/inputs/nixpkgs"];
       substituters = [
         "https://mirror.sjtu.edu.cn/nix-channels/store"
-        "https://mirrors.bfsu.edu.cn/nix-channels/store"
         "https://cache.garnix.io"
       ];
       trusted-public-keys = [
