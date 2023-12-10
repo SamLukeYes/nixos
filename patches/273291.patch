@@ -1,0 +1,49 @@
+From 1593bc7500efe98e6ece44a9f7a05d02cb0ff727 Mon Sep 17 00:00:00 2001
+From: zzzsyyy <me@zzzsy.top>
+Date: Sun, 10 Dec 2023 15:40:34 +0800
+Subject: [PATCH 1/2] linux_xanmod: 6.1.65 -> 6.1.66
+
+---
+ pkgs/os-specific/linux/kernel/xanmod-kernels.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/os-specific/linux/kernel/xanmod-kernels.nix b/pkgs/os-specific/linux/kernel/xanmod-kernels.nix
+index 92df9c445e60e9..8e225ba64d07fd 100644
+--- a/pkgs/os-specific/linux/kernel/xanmod-kernels.nix
++++ b/pkgs/os-specific/linux/kernel/xanmod-kernels.nix
+@@ -6,8 +6,8 @@ let
+   # NOTE: When updating these, please also take a look at the changes done to
+   # kernel config in the xanmod version commit
+   ltsVariant = {
+-    version = "6.1.65";
+-    hash = "sha256-/KJCUAti/p48KTIvRdGeD4aXfhiBdjZUIKD45Hu2d1g=";
++    version = "6.1.66";
++    hash = "sha256-H3RTbBctvbKdsD1+G7zXVcTFb2NRON6nOzUgUW+zGxs=";
+     variant = "lts";
+   };
+ 
+
+From 4e0e6ef87da5400e8b3fdb445e72f8d122350bde Mon Sep 17 00:00:00 2001
+From: zzzsyyy <me@zzzsy.top>
+Date: Sun, 10 Dec 2023 15:45:11 +0800
+Subject: [PATCH 2/2] linux_xanmod_latest: 6.6.4 -> 6.6.5
+
+---
+ pkgs/os-specific/linux/kernel/xanmod-kernels.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/os-specific/linux/kernel/xanmod-kernels.nix b/pkgs/os-specific/linux/kernel/xanmod-kernels.nix
+index 8e225ba64d07fd..3cad13a68fde3b 100644
+--- a/pkgs/os-specific/linux/kernel/xanmod-kernels.nix
++++ b/pkgs/os-specific/linux/kernel/xanmod-kernels.nix
+@@ -12,8 +12,8 @@ let
+   };
+ 
+   mainVariant = {
+-    version = "6.6.4";
+-    hash = "sha256-f/McwYD/4849GwtHml+AMSF5/gHuDrrlbz8gYZghaw0=";
++    version = "6.6.5";
++    hash = "sha256-lmJ5Gix+CEqIu+cyBeqBq6xLZ94PjhU+6SbzAE0D8SY=";
+     variant = "main";
+   };
+ 
