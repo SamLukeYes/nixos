@@ -10,6 +10,10 @@
       archriscv = {};
       old-root = {};
     });
+    oomd = {
+      enableRootSlice = true;
+      enableUserServices = true;
+    };
     services = {
       "systemd-nspawn@".serviceConfig.DeviceAllow = [
         "char-drm rwm"
