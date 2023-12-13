@@ -49,7 +49,6 @@
       # Add nixpkgs patches here
       ./patches/nixos-rebuild-use-nom.patch
       ./patches/272799.patch    # vscode
-      ./patches/273291.patch    # linux_xanmod
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
