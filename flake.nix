@@ -49,6 +49,7 @@
       # Add nixpkgs patches here
       ./patches/nixos-rebuild-use-nom.patch
       ./patches/272799.patch    # vscode
+      ./patches/274140.patch    # system-monitor-next
     ];
 
   in flake-utils-plus.lib.mkFlake rec {

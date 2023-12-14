@@ -1,0 +1,89 @@
+From 0bd96e4c02effe74e4e513c832bb96f150362d06 Mon Sep 17 00:00:00 2001
+From: Anders Kaseorg <andersk@mit.edu>
+Date: Wed, 13 Dec 2023 20:38:24 -0800
+Subject: [PATCH] gnomeExtensions.system-monitor-next: Patch to fix runtime
+ errors
+
+Signed-off-by: Anders Kaseorg <andersk@mit.edu>
+---
+ .../gnome/extensions/extensionOverrides.nix   |  9 ++++
+ ...tor-next_at_paradoxxx.zero.gmail.com.patch | 50 +++++++++++++++++++
+ 2 files changed, 59 insertions(+)
+ create mode 100644 pkgs/desktops/gnome/extensions/extensionOverridesPatches/system-monitor-next_at_paradoxxx.zero.gmail.com.patch
+
+diff --git a/pkgs/desktops/gnome/extensions/extensionOverrides.nix b/pkgs/desktops/gnome/extensions/extensionOverrides.nix
+index abbeb15f7dcd42..d7848c8c27c627 100644
+--- a/pkgs/desktops/gnome/extensions/extensionOverrides.nix
++++ b/pkgs/desktops/gnome/extensions/extensionOverrides.nix
+@@ -119,6 +119,15 @@ super: lib.trivial.pipe super [
+     ];
+   }))
+ 
++  (patchExtension "system-monitor-next@paradoxxx.zero.gmail.com" (old: {
++    patches = [
++      (substituteAll {
++        src = ./extensionOverridesPatches/system-monitor-next_at_paradoxxx.zero.gmail.com.patch;
++        gtop_path = "${libgtop}/lib/girepository-1.0";
++      })
++    ];
++  }))
++
+   (patchExtension "tophat@fflewddur.github.io" (old: {
+     patches = [
+       (substituteAll {
+diff --git a/pkgs/desktops/gnome/extensions/extensionOverridesPatches/system-monitor-next_at_paradoxxx.zero.gmail.com.patch b/pkgs/desktops/gnome/extensions/extensionOverridesPatches/system-monitor-next_at_paradoxxx.zero.gmail.com.patch
+new file mode 100644
+index 00000000000000..293a4e196afcdc
+--- /dev/null
++++ b/pkgs/desktops/gnome/extensions/extensionOverridesPatches/system-monitor-next_at_paradoxxx.zero.gmail.com.patch
+@@ -0,0 +1,50 @@
++diff --git a/extension.js b/extension.js
++index d314f15..6a1b71f 100644
++--- a/extension.js
+++++ b/extension.js
++@@ -20,6 +20,7 @@
++ 
++ import { Extension, gettext as _ } from "resource:///org/gnome/shell/extensions/extension.js";
++ 
+++import GIRepository from "gi://GIRepository";
++ import Clutter from "gi://Clutter";
++ import GLib from "gi://GLib";
++ import GObject from "gi://GObject";
++@@ -28,7 +29,6 @@ import Gio from "gi://Gio";
++ import Shell from "gi://Shell";
++ import St from "gi://St";
++ import UPowerGlib from "gi://UPowerGlib";
++-import GTop from "gi://GTop";
++ import NM from "gi://NM";
++ 
++ import * as ModalDialog from "resource:///org/gnome/shell/ui/modalDialog.js";
++@@ -41,6 +41,9 @@ import * as PopupMenu from "resource:///org/gnome/shell/ui/popupMenu.js";
++ 
++ import * as Util from "resource:///org/gnome/shell/misc/util.js";
++ 
+++GIRepository.Repository.prepend_search_path('@gtop_path@');
+++const GTop = (await import("gi://GTop")).default;
+++
++ const NetworkManager = NM;
++ const UPower = UPowerGlib;
++ // Copied as of https://gitlab.gnome.org/GNOME/gnome-shell/-/blob/5fa08fe53376f5dca755360bd005a4a51ca78917/js/ui/panel.js#L45
++@@ -463,9 +466,16 @@ const smMountsMonitor = class SystemMonitor_smMountsMonitor {
++     }
++     is_sys_mount(mpath) {
++         let file = Gio.file_new_for_path(mpath);
++-        let info = file.query_info(Gio.FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT,
++-            Gio.FileQueryInfoFlags.NONE, null);
++-        return info.get_attribute_boolean(Gio.FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT);
+++        try {
+++            let info = file.query_info(Gio.FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT,
+++                Gio.FileQueryInfoFlags.NONE, null);
+++            return info.get_attribute_boolean(Gio.FILE_ATTRIBUTE_UNIX_IS_MOUNTPOINT);
+++        } catch (e) {
+++            if (e.matches(Gio.IOErrorEnum, Gio.IOErrorEnum.NOT_FOUND)) {
+++                return false;
+++            }
+++            throw e;
+++        }
++     }
++     is_ro_mount(mount) {
++         // FIXME: running this function after "login after waking from suspend"
