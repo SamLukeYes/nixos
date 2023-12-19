@@ -40,7 +40,7 @@
 
       # nautilus extensions
       gnome.nautilus-python
-      nautilus-open-any-terminal
+      nautilus-open-in-blackbox
 
       # GNOME Shell extensions
       gnomeExtensions.appindicator
