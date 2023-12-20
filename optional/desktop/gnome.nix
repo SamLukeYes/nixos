@@ -56,8 +56,9 @@
       qt6.qtsvg
       qt6.qtwayland
 
-      # CLI programs
-      _7zz            # required by file-roller
+      # CLI programs required by file-roller
+      _7zz
+      binutils
 
       # themes
       adw-gtk3
