@@ -63,6 +63,7 @@
       mirrors = [
         "https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch"
         "https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch"
+        "https://geo.mirror.pkgbuild.com/$repo/os/$arch"
       ];
     };
   };
