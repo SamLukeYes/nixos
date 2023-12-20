@@ -11,7 +11,7 @@
       old-root = {};
     });
     oomd = {
-      enableRootSlice = true;
+      # enableRootSlice = true;
       enableUserServices = true;
     };
     services = {
