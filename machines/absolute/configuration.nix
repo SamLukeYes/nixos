@@ -8,6 +8,12 @@
   ];
 
   hardware.bluetooth.powerOnBoot = false;
+  
+  services.thinkfan = {
+    enable = true;
+    smartSupport = true;
+  };
+
   system.stateVersion = "22.11";
 
   # TODO: add paru modules to archix
