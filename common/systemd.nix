@@ -52,10 +52,6 @@
       };
       ss-ws-local = {
         script = ''
-          if [ ! -f ~/.config/shadowsocks-ws/config.json ]; then
-            echo "~/.config/shadowsocks-ws/config.json not found. Not starting."
-            exit 0
-          fi
           cd ~/.config/shadowsocks-ws
           ${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local
         '';
@@ -64,6 +60,7 @@
           RestartSec = 5;
         };
         unitConfig = {
+          ConditionFileNotEmpty = "%h/.config/shadowsocks-ws/config.json";
           StartLimitBurst = 5;
           StartLimitIntervalSec = 60;
         };
