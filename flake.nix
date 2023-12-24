@@ -128,6 +128,7 @@
         '';
       });
       # libreoffice = final.libreoffice-fresh;
+      nodejs = final.yes.nodePackages.nodejs;
       rewine = inputs.rewine.packages.${system};
       # starship = prev.starship.overrideAttrs (old: {
       #   src = inputs.starship;
