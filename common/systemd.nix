@@ -53,7 +53,7 @@
       ss-ws-local = {
         script = ''
           cd ~/.config/shadowsocks-ws
-          ${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local
+          exec ${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local
         '';
         serviceConfig = {
           Restart = "on-failure";
