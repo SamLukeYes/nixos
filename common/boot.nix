@@ -7,7 +7,7 @@
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback
     ];
-    initrd.verbose = false;
+    initrd.systemd.enable = true;
     kernel.sysctl = {
       "dev.i915.perf_stream_paranoid" = 0;
       "vm.swappiness" = 180;

@@ -48,6 +48,7 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/nixos-rebuild-use-nom.patch
+      ./patches/277695.patch    # plymouth
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
