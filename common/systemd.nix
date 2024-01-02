@@ -12,7 +12,7 @@
     });
     oomd = {
       # enableRootSlice = true;
-      enableUserServices = true;
+      enableUserSlices = true;
     };
     services = {
       "systemd-nspawn@".serviceConfig.DeviceAllow = [
