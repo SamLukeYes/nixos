@@ -10,6 +10,7 @@
     mkRoSymBind = path: {
       device = path;
       fsType = "fuse.bindfs";
+      noCheck = true;
       options = [ "ro" "resolve-symlinks" "x-gvfs-hide" "x-systemd.automount" ];
     };
   in {
