@@ -138,21 +138,7 @@
       # });
       trackers = inputs.trackers;
       yes = import inputs.yes { pkgs = prev; };
-      zotero = prev.zotero.overrideAttrs (old: let
-        version = "7.0.0-beta.54";
-        commit = "6b996d4f9";
-        _version = "${version}%2B${commit}";
-      in {
-        inherit version;
-        src = final.fetchurl {
-          url = "https://download.zotero.org/client/beta/${_version}/Zotero-${_version}_linux-x86_64.tar.bz2";
-          hash = "sha256-U0cSQCY6av1uAndtdJJpMruDBZ/BDtybnbm4ZHvuFmE=";
-        };
-        libPath = with final; old.libPath + ":" + lib.makeLibraryPath [
-          alsa-lib xorg.libXtst
-        ];
-        postPatch = "";
-      });
+      zotero = final.zotero_7;
     };
   };
 }
