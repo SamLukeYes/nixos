@@ -48,6 +48,7 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/nixos-rebuild-use-nom.patch
+      ./patches/284007.patch    # qadwaitadecorations
     ];
 
   in flake-utils-plus.lib.mkFlake rec {

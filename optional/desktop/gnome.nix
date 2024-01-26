@@ -50,10 +50,8 @@
       gnomeExtensions.task-widget
 
       # Qt plugins
-      adwaita-qt
+      qadwaitadecorations
       qadwaitadecorations-qt6
-      qgnomeplatform
-      qt6.qtsvg
       qt6.qtwayland
 
       # CLI programs required by file-roller

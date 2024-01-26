@@ -16,7 +16,9 @@
       imports = [ "${modulesPath}/virtualisation/qemu-vm.nix" ];
 
       environment.systemPackages = with pkgs; [
-        qq
+        qt5ct
+        qt6ct
+        xorg.xeyes
       ];
 
       networking = {
