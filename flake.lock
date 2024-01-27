@@ -193,11 +193,6 @@
         "archix": "archix",
         "archlinuxcn-keyring": "archlinuxcn-keyring",
         "cpupower-gui": "cpupower-gui",
-        "flake-utils": [
-          "archix",
-          "xddxdd",
-          "flake-utils"
-        ],
         "flake-utils-plus": [
           "archix",
           "xddxdd",
