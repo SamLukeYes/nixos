@@ -50,20 +50,22 @@
         };
         startAt = "weekly";
       };
-      ss-ws-local = {
-        script = ''
-          cd ~/.config/shadowsocks-ws
-          exec ${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local
-        '';
+      sslocal = {
         serviceConfig = {
+          ExecStart = "${pkgs.shadowsocks-rust}/bin/sslocal -c %h/.config/shadowsocks/config.json";
+          Restart = "on-failure";
+        };
+        unitConfig.ConditionFileNotEmpty = "%h/.config/shadowsocks-ws/config.json";
+        wantedBy = [ "default.target" ];
+      };
+      ss-ws-local = {
+        serviceConfig = {
+          ExecStart = "${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local";
           Restart = "on-failure";
           RestartSec = 5;
+          WorkingDirectory = "%h/.config/shadowsocks-ws";
         };
-        unitConfig = {
-          ConditionFileNotEmpty = "%h/.config/shadowsocks-ws/config.json";
-          StartLimitBurst = 5;
-          StartLimitIntervalSec = 60;
-        };
+        unitConfig.ConditionFileNotEmpty = "%h/.config/shadowsocks-ws/config.json";
         wantedBy = [ "default.target" ];
       };
     };
