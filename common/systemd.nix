@@ -65,7 +65,11 @@
           RestartSec = 5;
           WorkingDirectory = "%h/.config/shadowsocks-ws";
         };
-        unitConfig.ConditionFileNotEmpty = "%h/.config/shadowsocks-ws/config.json";
+        unitConfig = {
+          ConditionFileNotEmpty = "%h/.config/shadowsocks-ws/config.json";
+          StartLimitBurst = 5;
+          StartLimitIntervalSec = 60;
+        };
         wantedBy = [ "default.target" ];
       };
     };
