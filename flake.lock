@@ -201,7 +201,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "rewine": "rewine",
-        "trackers": "trackers",
         "yes": "yes"
       }
     },
@@ -217,22 +216,6 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
-        "type": "github"
-      }
-    },
-    "trackers": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1706544522,
-        "narHash": "sha256-dvUWVKxsDJ2qKqy5/IRNr2I2IndGjtKKmxWSII/dIPU=",
-        "owner": "XIU2",
-        "repo": "TrackersListCollection",
-        "rev": "49637f9ca399343a28b756a75fbeb1c446bdee4f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "XIU2",
-        "repo": "TrackersListCollection",
         "type": "github"
       }
     },
