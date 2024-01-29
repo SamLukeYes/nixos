@@ -26,10 +26,6 @@
     #   flake = false;
     #   url = "github:starship/starship";
     # };
-    trackers = {
-      flake = false;
-      url = "github:XIU2/TrackersListCollection";
-    };
     yes = {
       flake = false;
       url = "github:SamLukeYes/nix-custom-packages";
@@ -135,7 +131,6 @@
       #   };
       #   doCheck = false;
       # });
-      trackers = inputs.trackers;
       yes = import inputs.yes { pkgs = prev; };
       zotero = final.zotero_7;
     };

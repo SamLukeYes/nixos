@@ -8,12 +8,6 @@
   ];
 
   services = {
-    aria2 = {
-      downloadDir = "/home/aria2";
-      enable = true;
-      extraArguments = "--bt-tracker=${builtins.readFile "${pkgs.trackers}/all_aria2.txt"}";
-    };
-
     cpupower-gui.enable = lib.mkDefault true;
 
     dbus.implementation = "broker";
