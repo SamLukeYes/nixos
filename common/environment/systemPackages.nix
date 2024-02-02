@@ -24,7 +24,8 @@
     dig                           # must be available without Internet connection
     file                          # frequently used to view executable type
     jre                           # can always be detected by libreoffice
-    nix-output-monitor            # frequently used in nix operations
+    nh                            # nix related
+    nix-output-monitor            # nix related
     pdftk                         # required by Jasminum
     sshfs                         # frequently used for file sharing
     starship                      # configured without nix

@@ -42,7 +42,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/nixos-rebuild-use-nom.patch
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
