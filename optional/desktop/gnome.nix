@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   environment = {
@@ -84,7 +84,4 @@
       displayManager.gdm.enable = true;
     };
   };
-
-  # workaroud for per-user language setting
-  users.defaultUserShell = config.programs.xonsh.package;
 }
