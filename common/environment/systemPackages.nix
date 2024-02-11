@@ -33,6 +33,5 @@
 
     # other out-of-tree packages
     yes.ludii
-    yes.lx-music-desktop
   ];
 }

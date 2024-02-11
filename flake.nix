@@ -106,16 +106,6 @@
             --replace "gapplication launch org.rnd2.cpupower_gui" "cpupower-gui"
         '';
       });
-      electron_25-bin = prev.electron_25-bin.overrideAttrs (old: rec {
-        version = "25.9.8";
-        src = final.fetchurl {
-          url = "https://github.com/electron/electron/releases/download/v${version}/electron-v${version}-linux-x64.zip";
-          sha256 = "c77fec4d32d473f75611c76ef46d947da253821a64e48edf70dafb120b434752";
-        };
-        meta = old.meta // {
-          knownVulnerabilities = [];
-        };
-      });
       fcitx5-with-addons = prev.fcitx5-with-addons.overrideAttrs (old: {
         buildCommand = old.buildCommand + ''
           rm $out/$autostart
