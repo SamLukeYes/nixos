@@ -24,6 +24,7 @@
       narinfo-cache-negative-ttl = 300;
       nix-path = ["nixpkgs=/etc/nix/inputs/nixpkgs"];
       substituters = [
+        "https://mirrors.ustc.edu.cn/nix-channels/store"
         "https://mirror.sjtu.edu.cn/nix-channels/store"
         "https://cache.garnix.io"
       ];
