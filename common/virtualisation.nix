@@ -45,7 +45,7 @@
             PermitEmptyPasswords = "yes";
           };
         };
-        xserver.displayManager.autoLogin.user = "test";
+        # xserver.displayManager.autoLogin.user = "test";
       };
 
       # system.replaceRuntimeDependencies = let
@@ -74,6 +74,8 @@
 
       users = {
         mutableUsers = false;
+
+        # test user with default login shell
         users.test = {
           isNormalUser = true;
           extraGroups = [ "wheel" "networkmanager" ];
