@@ -2,17 +2,17 @@
 
 {
   environment = {
-    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/plasma5.nix
-    plasma5.excludePackages = with pkgs.libsForQt5; [
-      elisa                 # use haruna instead
-    ];
+    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/plasma6.nix
+    # plasma6.excludePackages = with pkgs.kdePackages; [
+    #   elisa                 # use haruna instead
+    # ];
 
     sessionVariables.NIXOS_OZONE_WL = "1";
 
-    systemPackages = with pkgs; with libsForQt5; [
+    systemPackages = with pkgs; with kdePackages; [
       discover
       filelight
-      haruna
+      # haruna
       kwalletmanager
       ksystemlog
       libreoffice-qt
@@ -32,13 +32,10 @@
   services = {
     # cpupower-gui.enable = false;
     xserver = {
-      desktopManager.plasma5.enable = true;
+      desktopManager.plasma6.enable = true;
       displayManager.sddm = {
         enable = true;
-        # settings = {
-        #   General.DisplayServer = "wayland";
-        #   Wayland.CompositorCommand = "kwin_wayland";
-        # };
+        wayland.enable = true;
       };
     };
   };
