@@ -12,9 +12,12 @@
       }
       else {
         enabled = "fcitx5";
-        fcitx5.addons = with pkgs; [
-          fcitx5-chinese-addons
-        ];
+        fcitx5 = {
+          addons = with pkgs; [
+            fcitx5-chinese-addons
+          ];
+          waylandFrontend = true;
+        };
       };
     supportedLocales = [
       "en_US.UTF-8/UTF-8"
