@@ -42,6 +42,7 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
+      ./patches/293214.patch
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
