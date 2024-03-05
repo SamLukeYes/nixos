@@ -53,16 +53,16 @@
         ILoveCandy
 
         [archlinuxcn]
-        Server = https://mirror.sjtu.edu.cn/archlinux-cn/$arch
         Server = https://mirrors.bfsu.edu.cn/$repo/$arch
+        Server = https://mirror.sjtu.edu.cn/archlinux-cn/$arch
       '';
       keyrings = with pkgs; [
         archlinuxcn-keyring
         archix.archlinux-keyring
       ];
       mirrors = [
-        "https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch"
         "https://mirrors.bfsu.edu.cn/archlinux/$repo/os/$arch"
+        "https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch"
         "https://geo.mirror.pkgbuild.com/$repo/os/$arch"
       ];
     };
