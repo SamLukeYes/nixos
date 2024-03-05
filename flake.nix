@@ -113,6 +113,11 @@
         '';
       });
       # libreoffice = final.libreoffice-fresh;
+      paru = final.archix.paru.override {
+        paru-unwrapped = final.archix.paru-unwrapped.override {
+          inherit (nixpkgs.legacyPackages.${system}) pacman;
+        };
+      };
       rewine = import inputs.rewine { pkgs = final; };
       # starship = prev.starship.overrideAttrs (old: {
       #   src = inputs.starship;
