@@ -16,7 +16,7 @@
       flake = false;
       url = "github:vagnum08/cpupower-gui";
     };
-    flake-utils-plus.follows = "archix/xddxdd/flake-utils-plus";
+    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     rewine = {
       inputs.nixpkgs.follows = "nixpkgs";
