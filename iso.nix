@@ -14,5 +14,7 @@
 
   networking.proxy.default = lib.mkForce null;
 
+  programs.firefox.package = lib.mkForce pkgs.firefox;
+
   users.defaultUserShell = config.programs.xonsh.package;
 }
