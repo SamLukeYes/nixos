@@ -8,11 +8,11 @@
         "xddxdd": "xddxdd"
       },
       "locked": {
-        "lastModified": 1709632387,
-        "narHash": "sha256-3m2X3pGBQWW1nVkeY/r4MZXXJf48j6XB5uHMUlTdsOc=",
+        "lastModified": 1709644881,
+        "narHash": "sha256-4dxwHXjgKgIvILhWi6UyiV3uJW08la38mzUOAXaEccY=",
         "owner": "SamLukeYes",
         "repo": "archix",
-        "rev": "3614fd880c3b41d9498876ecd9742b74fe268b26",
+        "rev": "5689b6128418dec2030ac9afdabcc49627f32564",
         "type": "github"
       },
       "original": {
