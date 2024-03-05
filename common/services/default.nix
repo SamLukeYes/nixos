@@ -20,6 +20,11 @@
 
     logind.lidSwitch = "ignore";
 
+    mysql = {
+      enable = true;
+      package = pkgs.mysql80;
+    };
+
     power-profiles-daemon.enable = false;
 
     throttled.enable = false;
