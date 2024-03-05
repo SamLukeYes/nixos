@@ -95,7 +95,7 @@
     };
 
     overlays.default = final: prev: {
-      archix = inputs.archix.packages.${system};
+      archix = import inputs.archix { pkgs = final; };
       archlinuxcn-keyring = inputs.archlinuxcn-keyring;
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
@@ -113,7 +113,7 @@
         '';
       });
       # libreoffice = final.libreoffice-fresh;
-      rewine = inputs.rewine.packages.${system};
+      rewine = import inputs.rewine { pkgs = final; };
       # starship = prev.starship.overrideAttrs (old: {
       #   src = inputs.starship;
       #   cargoDeps = final.rustPlatform.importCargoLock {
@@ -121,7 +121,7 @@
       #   };
       #   doCheck = false;
       # });
-      yes = import inputs.yes { pkgs = prev; };
+      yes = import inputs.yes { pkgs = final; };
       zotero = final.zotero_7;
     };
   };
