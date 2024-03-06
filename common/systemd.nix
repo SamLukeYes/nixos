@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+  waitOnline = "${pkgs.networkmanager}/bin/nm-online";
+in
+
 {
   # TODO: clean up nspawn config
   systemd = {
@@ -26,6 +30,7 @@
       nix-index = {
         environment = config.networking.proxy.envVars;
         script = ''
+          ${waitOnline}
           FILE=index-x86_64-linux
           mkdir -p ~/.cache/nix-index
           cd ~/.cache/nix-index
@@ -48,6 +53,7 @@
       };
       ss-ws-local = {
         serviceConfig = {
+          ExecStartPre = waitOnline;
           ExecStart = "${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local";
           Restart = "on-failure";
           RestartSec = 5;
