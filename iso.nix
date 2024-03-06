@@ -6,6 +6,11 @@
     ./common
   ];
 
+  boot = {
+    initrd.systemd.enable = lib.mkForce false;
+    plymouth.enable = lib.mkForce false;
+  };
+
   environment.systemPackages = with pkgs; [
     arch-install-scripts
   ];
