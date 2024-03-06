@@ -16,8 +16,11 @@
       kwalletmanager
       ksystemlog
       libreoffice-qt
-      maliit-keyboard
       partition-manager
+
+      # Maliit
+      maliit-framework
+      maliit-keyboard
 
       # CLI programs required by Plasma
       linuxquota
