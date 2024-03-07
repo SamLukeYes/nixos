@@ -42,7 +42,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/293214.patch
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
@@ -113,11 +112,7 @@
         '';
       });
       # libreoffice = final.libreoffice-fresh;
-      paru = final.archix.paru.override {
-        paru-unwrapped = final.archix.paru-unwrapped.override {
-          inherit (nixpkgs.legacyPackages.${system}) pacman;
-        };
-      };
+      paru = final.archix.paru;
       rewine = import inputs.rewine { pkgs = final; };
       # starship = prev.starship.overrideAttrs (old: {
       #   src = inputs.starship;
