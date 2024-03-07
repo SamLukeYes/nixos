@@ -46,7 +46,10 @@
 
   in flake-utils-plus.lib.mkFlake rec {
     inherit self inputs;
-    channelsConfig.allowUnfree = true;
+    channelsConfig = {
+      allowUnfree = true;
+      android_sdk.accept_license = true;
+    };
     sharedOverlays = [ self.overlays.default ];
     supportedSystems = [ system ];
 
@@ -94,6 +97,8 @@
     };
 
     overlays.default = final: prev: {
+      androidPkgs = final.androidenv.androidPkgs_9_0;
+      android-tools = final.androidPkgs.androidsdk;
       archix = import inputs.archix { pkgs = final; };
       archlinuxcn-keyring = inputs.archlinuxcn-keyring;
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {

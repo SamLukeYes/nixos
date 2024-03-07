@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./androidsdk.nix
     ./onedrive.nix
   ];
 

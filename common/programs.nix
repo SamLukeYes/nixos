@@ -2,8 +2,6 @@
 
 {
   programs = {
-    adb.enable = true;
-
     command-not-found.enable = false;
 
     dconf.enable = true;
