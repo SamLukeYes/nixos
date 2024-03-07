@@ -22,6 +22,8 @@
       # pinentryFlavor = "gnome3";
     };
 
+    java.enable = true;
+
     kdeconnect = {
       enable = true;
       package = lib.mkIf config.services.xserver.desktopManager.gnome.enable

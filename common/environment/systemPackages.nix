@@ -22,7 +22,6 @@
     bat                           # frequently used to view text in terminal
     dig                           # must be available without Internet connection
     file                          # frequently used to view executable type
-    jre                           # can always be detected by libreoffice
     nh                            # nix related
     nix-output-monitor            # nix related
     paru                          # frequently used to query AUR packages
