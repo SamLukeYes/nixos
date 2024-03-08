@@ -1,0 +1,54 @@
+From 4e47b73ab00dcf07e6c4a6ea13b5932cd19b952e Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Sat, 9 Mar 2024 01:44:11 +0800
+Subject: [PATCH 1/2] xonsh: 0.14.4 -> 0.15.1
+
+---
+ pkgs/by-name/xo/xonsh/unwrapped.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
+index fcc46c5b677029..e5b55efbf344b2 100644
+--- a/pkgs/by-name/xo/xonsh/unwrapped.nix
++++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
+@@ -9,7 +9,7 @@
+ 
+ let
+   pname = "xonsh";
+-  version = "0.14.4";
++  version = "0.15.1";
+ in
+ python3.pkgs.buildPythonApplication {
+   inherit pname version;
+@@ -21,7 +21,7 @@ python3.pkgs.buildPythonApplication {
+     owner = "xonsh";
+     repo = "xonsh";
+     rev = "refs/tags/${version}";
+-    hash = "sha256-7qOEc4RSdOO059LietKnrxY7cy9MfgmfJjdqZZ5ENLU=";
++    hash = "sha256-mHOCkUGiSSPmkIQ4tgRZIaCTLgnx39SMwug5EIx/jrU=";
+   };
+ 
+   nativeBuildInputs = with python3.pkgs; [
+
+From 113ccc6da1262904afa8d602c0f69d9b67d9575c Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Sat, 9 Mar 2024 01:51:19 +0800
+Subject: [PATCH 2/2] xonsh: set dontWrapPythonPrograms
+
+---
+ pkgs/by-name/xo/xonsh/unwrapped.nix | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
+index e5b55efbf344b2..b0115dc247c411 100644
+--- a/pkgs/by-name/xo/xonsh/unwrapped.nix
++++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
+@@ -90,6 +90,8 @@ python3.pkgs.buildPythonApplication {
+     export HOME=$TMPDIR
+   '';
+ 
++  dontWrapPythonPrograms = true;
++
+   passthru = {
+     shellPath = "/bin/xonsh";
+     python = python3; # To the wrapper
