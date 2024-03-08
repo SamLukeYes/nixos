@@ -126,6 +126,12 @@
       #   };
       #   doCheck = false;
       # });
+      scrcpy = prev.scrcpy.overrideAttrs (old: {
+        postInstall = old.postInstall + ''
+          sed -i 's/Exec=.*/Exec=scrcpy -dSw/' $out/share/applications/scrcpy.desktop
+          rm -v $out/share/applications/scrcpy-console.desktop
+        '';
+      });
       yes = import inputs.yes { pkgs = final; };
       zotero = final.zotero_7;
     };
