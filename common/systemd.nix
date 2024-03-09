@@ -14,10 +14,10 @@ in
       archriscv = {};
       old-root = {};
     });
-    oomd = {
-      # enableRootSlice = true;
-      enableUserSlices = true;
-    };
+    # oomd = {
+    #   # enableRootSlice = true;
+    #   enableUserSlices = true;
+    # };
     services = {
       "systemd-nspawn@".serviceConfig.DeviceAllow = [
         "char-drm rwm"

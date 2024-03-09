@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./earlyoom.nix
     ./flatpak.nix
     ./pipewire.nix
     ./v2raya.nix
