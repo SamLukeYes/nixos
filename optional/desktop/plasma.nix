@@ -7,7 +7,7 @@
     #   elisa                 # use haruna instead
     # ];
 
-    sessionVariables.NIXOS_OZONE_WL = "1";
+    variables.NIXOS_OZONE_WL = "1";
 
     systemPackages = with pkgs; with kdePackages; [
       discover
