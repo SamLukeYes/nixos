@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     authenticator
     gimp
+    gnome.dconf-editor
     shotcut
     tdesktop
     virt-manager
