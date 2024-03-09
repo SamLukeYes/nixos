@@ -8,7 +8,8 @@
       pkgs.gnome-text-editor  # use vscode instead
       gnome-calculator        # use xonsh instead
       pkgs.gnome-console      # use blackbox-terminal instead
-      gnome-contacts          # not managing contacts on PC
+      gnome-contacts          # useless without syncing with google services
+      gnome-maps              # use online maps instead
       gnome-music             # use celluloid instead
       simple-scan             # no scanner available
       totem                   # use celluloid instead
