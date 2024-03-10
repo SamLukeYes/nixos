@@ -21,6 +21,7 @@
 
     # CLI programs
     bat                           # frequently used to view text in terminal
+    conda                         # manage python env
     dig                           # must be available without Internet connection
     file                          # frequently used to view executable type
     nh                            # nix related
