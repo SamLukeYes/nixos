@@ -30,7 +30,6 @@
     pdftk                         # required by Jasminum
     sshfs                         # frequently used for file sharing
     starship                      # configured without nix
-    wl-clipboard                  # required by WayDroid
 
     # other out-of-tree packages
     yes.ludii
