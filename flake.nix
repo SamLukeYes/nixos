@@ -42,7 +42,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/xonsh-avoid-double-wrap.patch
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
