@@ -2,7 +2,7 @@
 
 {
   environment = {
-    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/plasma6.nix
+    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/desktop-managers/plasma6.nix
     # plasma6.excludePackages = with pkgs.kdePackages; [
     #   elisa                 # use haruna instead
     # ];
@@ -34,8 +34,8 @@
 
   services = {
     # cpupower-gui.enable = false;
+    desktopManager.plasma6.enable = true;
     xserver = {
-      desktopManager.plasma6.enable = true;
       displayManager.sddm = {
         enable = true;
         wayland.enable = true;
