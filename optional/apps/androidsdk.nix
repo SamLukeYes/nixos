@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+# { pkgs, ... }:
 
 {
-  environment.systemPackages = [ pkgs.scrcpy ];
+  # environment.systemPackages = [ pkgs.scrcpy ];
 
   programs = {
     adb.enable = true;
