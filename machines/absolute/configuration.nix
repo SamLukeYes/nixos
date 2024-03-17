@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ../../common
     ../../optional/apps
+    ../../optional/oci-containers/zentao.nix
     ../../users/yes
   ];
 
