@@ -32,6 +32,7 @@
     starship                      # configured without nix
 
     # other out-of-tree packages
+    yes.iptux
     yes.ludii
   ];
 }
