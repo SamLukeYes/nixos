@@ -17,6 +17,7 @@
       nil                               # for nix IDE
       pacman                            # add a dummy makepkg.conf to FHS
       python3Packages.python-lsp-server # for xonsh IDE
+      xclip                             # for Office Viewer Markdown Editor
     ]))
 
     # CLI programs
