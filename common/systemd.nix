@@ -43,24 +43,28 @@ in
         };
         startAt = "weekly";
       };
-      sslocal = {
+      sslocal = let
+        configFile = "%h/.config/shadowsocks/config.json";
+      in {
         serviceConfig = {
-          ExecStart = "${pkgs.shadowsocks-rust}/bin/sslocal -c %h/.config/shadowsocks/config.json";
+          ExecStart = "${pkgs.shadowsocks-rust}/bin/sslocal -c ${configFile}";
           Restart = "on-failure";
         };
-        unitConfig.ConditionFileNotEmpty = "%h/.config/shadowsocks-ws/config.json";
+        unitConfig.ConditionFileNotEmpty = configFile;
         wantedBy = [ "default.target" ];
       };
-      ss-ws-local = {
+      ss-ws-local = let
+        configDir = "%h/.config/shadowsocks-ws";
+      in {
         serviceConfig = {
           ExecStartPre = waitOnline;
           ExecStart = "${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local";
           Restart = "on-failure";
           RestartSec = 5;
-          WorkingDirectory = "%h/.config/shadowsocks-ws";
+          WorkingDirectory = configDir;
         };
         unitConfig = {
-          ConditionFileNotEmpty = "%h/.config/shadowsocks-ws/config.json";
+          ConditionFileNotEmpty = "${configDir}/config.json";
           StartLimitBurst = 5;
           StartLimitIntervalSec = 60;
         };
