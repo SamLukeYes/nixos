@@ -1,0 +1,29 @@
+From 7e538bd643a9b11909cd94ec1070cec2e4bf5200 Mon Sep 17 00:00:00 2001
+From: "R. Ryantm" <ryantm-bot@ryantm.com>
+Date: Thu, 21 Mar 2024 09:16:11 +0000
+Subject: [PATCH] qadwaitadecorations-qt6: 0.1.4 -> 0.1.5
+
+---
+ pkgs/by-name/qa/qadwaitadecorations/package.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/by-name/qa/qadwaitadecorations/package.nix b/pkgs/by-name/qa/qadwaitadecorations/package.nix
+index def921a3f6d002..1949373f2d1c8a 100644
+--- a/pkgs/by-name/qa/qadwaitadecorations/package.nix
++++ b/pkgs/by-name/qa/qadwaitadecorations/package.nix
+@@ -19,13 +19,13 @@ let
+ 
+ in stdenv.mkDerivation (finalAttrs: {
+   pname = "qadwaitadecorations";
+-  version = "0.1.4";
++  version = "0.1.5";
+ 
+   src = fetchFromGitHub {
+     owner = "FedoraQt";
+     repo = "QAdwaitaDecorations";
+     rev = finalAttrs.version;
+-    hash = "sha256-vG6nK+9hUX0ZxNFz5ZA/EC1rSFTGl5rDTBlsraRlrTU=";
++    hash = "sha256-aqjm93tmBfDkmce1WG5xx8MCDCvo6AOrRHArj/+Ko9E=";
+   };
+ 
+   nativeBuildInputs = [
