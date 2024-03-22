@@ -5,6 +5,7 @@
     authenticator
     gimp
     gnome.dconf-editor
+    rustdesk-flutter
     shotcut
     tdesktop
     virt-manager
