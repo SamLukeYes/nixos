@@ -5,6 +5,7 @@
     authenticator
     gimp
     gnome.dconf-editor
+    pot
     rustdesk-flutter
     shotcut
     tdesktop
