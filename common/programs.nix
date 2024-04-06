@@ -32,7 +32,10 @@
 
     nix-index.enable = true;
 
-    wireshark.enable = true;
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+    };
 
     xonsh = {
       enable = true;
