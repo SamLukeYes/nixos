@@ -5,6 +5,7 @@
     ./earlyoom.nix
     ./flatpak.nix
     ./pipewire.nix
+    ./tomcat.nix
     ./v2raya.nix
   ];
 

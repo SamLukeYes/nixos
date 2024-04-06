@@ -1,7 +1,7 @@
 { ... }:
 
 let
-  httpPort = 8080;
+  httpPort = 81;
 
   # TODO: automatically create this dir with proper permission
   dataDir = "/var/lib/zentao";
