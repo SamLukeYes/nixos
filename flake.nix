@@ -42,7 +42,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/fix-xonsh.patch
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
