@@ -111,11 +111,6 @@
             --replace "gapplication launch org.rnd2.cpupower_gui" "cpupower-gui"
         '';
       });
-      fcitx5-with-addons = prev.fcitx5-with-addons.overrideAttrs (old: {
-        buildCommand = old.buildCommand + ''
-          rm $out/$autostart
-        '';
-      });
       # libreoffice = final.libreoffice-fresh;
       paru = final.archix.paru;
       rewine = import inputs.rewine { pkgs = final; };
