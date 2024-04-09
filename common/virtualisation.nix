@@ -39,14 +39,17 @@
 
       services = {
         cpupower-gui.enable = false;
-        openssh = {
-          enable = true;
-          settings = {
-            PermitEmptyPasswords = "yes";
-          };
-        };
+        # openssh = {
+        #   enable = true;
+        #   settings = {
+        #     PermitEmptyPasswords = "yes";
+        #   };
+        # };
+        thinkfan.enable = lib.mkForce false;
         # xserver.displayManager.autoLogin.user = "test";
       };
+
+      systemd.services.podman-zentao.enable = false;
 
       # system.replaceRuntimeDependencies = let
       #   qtwayland' = pkgs.qt5.qtwayland.overrideAttrs (old: {
