@@ -39,12 +39,13 @@
 
       services = {
         cpupower-gui.enable = false;
-        # openssh = {
-        #   enable = true;
-        #   settings = {
-        #     PermitEmptyPasswords = "yes";
-        #   };
-        # };
+        journald.storage = "volatile";
+        openssh = {
+          enable = true;
+          # settings = {
+          #   PermitEmptyPasswords = "yes";
+          # };
+        };
         thinkfan.enable = lib.mkForce false;
         # xserver.displayManager.autoLogin.user = "test";
       };
@@ -89,6 +90,7 @@
 
       virtualisation = {
         cores = 2;
+        diskSize = 8192;
         memorySize = 4096;
         qemu.options = [ "-device virtio-vga-gl -display gtk,gl=on" ];
       };
