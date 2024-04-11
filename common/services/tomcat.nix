@@ -1,9 +1,7 @@
-let
-  port = 8080;
-in {
-  networking.firewall = {
-    allowedTCPPorts = [ port ];
-    allowedUDPPorts = [ port ];
+{
+  networking.firewall = rec {
+    allowedTCPPorts = [ 8080 8081 ];
+    allowedUDPPorts = allowedTCPPorts;
   };
   services.tomcat.enable = true;
 }
