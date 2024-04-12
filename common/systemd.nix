@@ -71,5 +71,9 @@ in
         wantedBy = [ "default.target" ];
       };
     };
+
+    tmpfiles.rules = [
+      "z /sys/kernel/notes 0400 root root"
+    ];
   };
 }
