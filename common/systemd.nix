@@ -59,7 +59,7 @@ in
         serviceConfig = {
           ExecStartPre = waitOnline;
           ExecStart = "${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local";
-          Restart = "on-failure";
+          Restart = "always";
           RestartSec = 5;
           WorkingDirectory = configDir;
         };
