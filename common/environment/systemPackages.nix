@@ -34,6 +34,7 @@
     pdftk                         # required by Jasminum
     sshfs                         # frequently used for file sharing
     starship                      # configured without nix
+    subversion                    # version control system
 
     # other out-of-tree packages
     yes.iptux
