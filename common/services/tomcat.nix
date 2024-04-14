@@ -3,5 +3,8 @@
     allowedTCPPorts = [ 8080 8081 ];
     allowedUDPPorts = allowedTCPPorts;
   };
-  services.tomcat.enable = true;
+  services.tomcat = {
+    enable = true;
+    webapps = [];
+  };
 }
