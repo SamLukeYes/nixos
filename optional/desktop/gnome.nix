@@ -46,7 +46,6 @@
       # GNOME Shell extensions
       gnomeExtensions.appindicator
       gnomeExtensions.customize-ibus
-      gnomeExtensions.lunar-calendar
       gnomeExtensions.pano
       gnomeExtensions.system-monitor-next
       gnomeExtensions.task-widget
