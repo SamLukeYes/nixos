@@ -50,8 +50,6 @@
         # xserver.displayManager.autoLogin.user = "test";
       };
 
-      systemd.services.podman-zentao.enable = false;
-
       # system.replaceRuntimeDependencies = let
       #   qtwayland' = pkgs.qt5.qtwayland.overrideAttrs (old: {
       #     patches = old.patches ++ [
