@@ -39,5 +39,6 @@
     # other out-of-tree packages
     yes.iptux
     yes.ludii
+    yes.wechat-devtools
   ];
 }
