@@ -302,11 +302,11 @@
     "yes": {
       "flake": false,
       "locked": {
-        "lastModified": 1713148503,
-        "narHash": "sha256-gfOqJaxMmswCwq/B3sbsj/QfnVHTv2QVksoCmgH5TWk=",
+        "lastModified": 1713343890,
+        "narHash": "sha256-bC8v49H+xH0NX7jIU1K08xJc5I79BAuFT1H44ltb7LI=",
         "owner": "SamLukeYes",
         "repo": "nix-custom-packages",
-        "rev": "9d59db577d299d73bfa900e1f6521754146afbd5",
+        "rev": "a99201e7597b1c6b11a5e4568e0818b656e6dfbb",
         "type": "github"
       },
       "original": {
