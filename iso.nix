@@ -21,5 +21,7 @@
 
   programs.firefox.package = lib.mkForce pkgs.firefox;
 
+  security.sudo-rs.enable = lib.mkForce false;
+
   users.defaultUserShell = config.programs.xonsh.package;
 }
