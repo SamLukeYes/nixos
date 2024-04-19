@@ -29,7 +29,6 @@
     dig                           # must be available without Internet connection
     file                          # frequently used to view executable type
     nh                            # nix related
-    nix-output-monitor            # nix related
     paru                          # frequently used to query AUR packages
     pdftk                         # required by Jasminum
     sshfs                         # frequently used for file sharing
