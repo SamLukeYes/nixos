@@ -35,11 +35,9 @@
   services = {
     # cpupower-gui.enable = false;
     desktopManager.plasma6.enable = true;
-    xserver = {
-      displayManager.sddm = {
-        enable = true;
-        wayland.enable = true;
-      };
+    displayManager.sddm = {
+      enable = true;
+      wayland.enable = true;
     };
   };
 }
