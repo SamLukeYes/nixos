@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     authenticator
+    charles
     gimp
     gnome.dconf-editor
     pods
