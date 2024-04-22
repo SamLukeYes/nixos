@@ -10,7 +10,6 @@
     rustdesk-flutter
     shotcut
     tdesktop
-    virt-manager
     xournalpp
     zotero
 

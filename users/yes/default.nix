@@ -7,7 +7,6 @@
       extraGroups = [
         "adbusers"
         "aria2"
-        "libvirtd"
         "networkmanager"
         "wheel"
         "wireshark"

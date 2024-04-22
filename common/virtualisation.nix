@@ -2,14 +2,21 @@
 
 {
   virtualisation = {
-    libvirtd = {
-      enable = true;
-    };
     podman = {
       enable = true;
       autoPrune.enable = true;
       dockerCompat = true;
     };
+
+    virtualbox.host = {
+      enable = true;
+      enableKvm = true;
+
+      # required by enableKvm for now
+      addNetworkInterface = false;
+      enableHardening = false;
+    };
+
     waydroid.enable = true;
 
     vmVariant = {
