@@ -13,6 +13,7 @@
       discover
       filelight
       # haruna
+      krita
       kwalletmanager
       ksystemlog
       libreoffice-qt

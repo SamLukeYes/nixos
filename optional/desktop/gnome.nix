@@ -35,6 +35,7 @@
       blackbox-terminal
       celluloid
       endeavour
+      gimp
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
       libreoffice
