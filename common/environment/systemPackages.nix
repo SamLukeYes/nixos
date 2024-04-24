@@ -5,7 +5,6 @@
     authenticator
     charles
     gnome.dconf-editor
-    pods
     pot
     rustdesk-flutter
     shotcut
