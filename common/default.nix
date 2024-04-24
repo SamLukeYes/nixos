@@ -8,7 +8,6 @@
       ./networking.nix
       ./nix.nix
       ./programs.nix
-      ./security.nix
       ./services
       ./systemd.nix
       ./virtualisation.nix

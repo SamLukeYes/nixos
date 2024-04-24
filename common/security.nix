@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  security.sudo-rs = {
+  security.sudo = {
     enable = true;
     execWheelOnly = true;
   };

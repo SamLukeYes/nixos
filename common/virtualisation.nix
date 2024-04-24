@@ -41,7 +41,7 @@
             }
           });
         '';
-        sudo-rs.wheelNeedsPassword = false;
+        sudo.wheelNeedsPassword = false;
       };
 
       services = {
