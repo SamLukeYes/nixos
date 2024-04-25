@@ -8,21 +8,32 @@ in
   # TODO: clean up nspawn config
   systemd = {
     nspawn = (builtins.mapAttrs (name: value: {
-      filesConfig.Bind = [ "/dev/dri" ];
+      filesConfig = {
+        Bind = [
+          "/dev/dri"
+          # "/dev/shm"
+          "/dev/snd"
+        ];
+        BindReadOnly = [
+          # "/run/user/1000/bus"
+          "/tmp/.X11-unix"
+        ];
+      };
       networkConfig.Private = false;
     }) {
+      archlinux = {};
       archriscv = {};
-      old-root = {};
     });
-    # oomd = {
-    #   # enableRootSlice = true;
-    #   enableUserSlices = true;
-    # };
+    targets.machines.wants = [ "systemd-nspawn@archlinux.service" ];
     services = {
-      "systemd-nspawn@".serviceConfig.DeviceAllow = [
-        "char-drm rwm"
-        "/dev/dri rw"
-      ];
+      "systemd-nspawn@" = {
+        serviceConfig.DeviceAllow = [
+          "char-drm rwm"
+          "/dev/dri rw"
+          # "/dev/shm rw"
+          "/dev/snd rw"
+        ];
+      };
       cpupower-gui.enable = false;
     };
     user.services = {
@@ -42,6 +53,14 @@ in
           Type = "oneshot";
         };
         startAt = "weekly";
+      };
+      pulse-server = {
+        after = [ "pipewire-pulse.service" ];
+        serviceConfig = {
+          ExecStart = "${pkgs.pulseaudio}/bin/pactl load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
+          Type = "oneshot";
+        };
+        wantedBy = [ "default.target" ];
       };
       sslocal = let
         configFile = "%h/.config/shadowsocks/config.json";
@@ -67,6 +86,15 @@ in
           ConditionFileNotEmpty = "${configDir}/config.json";
           StartLimitBurst = 5;
           StartLimitIntervalSec = 60;
+        };
+        wantedBy = [ "default.target" ];
+      };
+      xhost = {
+        path = [ pkgs.xorg.xhost ];
+        serviceConfig = {
+          ExecStart = "xhost +local:";
+          ExecStop = "xhost -local:";
+          RemainAfterExit = true;
         };
         wantedBy = [ "default.target" ];
       };
