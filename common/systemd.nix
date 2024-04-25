@@ -58,7 +58,8 @@ in
         after = [ "pipewire-pulse.service" ];
         serviceConfig = {
           ExecStart = "${pkgs.pulseaudio}/bin/pactl load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
-          Type = "oneshot";
+          ExecStop = "${pkgs.pulseaudio}/bin/pactl unload-module module-native-protocol-tcp";
+          RemainAfterExit = true;
         };
         wantedBy = [ "default.target" ];
       };
@@ -90,10 +91,9 @@ in
         wantedBy = [ "default.target" ];
       };
       xhost = {
-        path = [ pkgs.xorg.xhost ];
         serviceConfig = {
-          ExecStart = "xhost +local:";
-          ExecStop = "xhost -local:";
+          ExecStart = "${pkgs.xorg.xhost}/bin/xhost +local:";
+          ExecStop = "${pkgs.xorg.xhost}/bin/xhost -local:";
           RemainAfterExit = true;
         };
         wantedBy = [ "default.target" ];
