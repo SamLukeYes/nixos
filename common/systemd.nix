@@ -60,6 +60,8 @@ in
           ExecStart = "${pkgs.pulseaudio}/bin/pactl load-module module-native-protocol-tcp auth-ip-acl=127.0.0.1";
           ExecStop = "${pkgs.pulseaudio}/bin/pactl unload-module module-native-protocol-tcp";
           RemainAfterExit = true;
+          Restart = "on-failure";
+          RestartSec = 5;
         };
         wantedBy = [ "default.target" ];
       };
@@ -95,6 +97,8 @@ in
           ExecStart = "${pkgs.xorg.xhost}/bin/xhost +local:";
           ExecStop = "${pkgs.xorg.xhost}/bin/xhost -local:";
           RemainAfterExit = true;
+          Restart = "on-failure";
+          RestartSec = 5;
         };
         wantedBy = [ "default.target" ];
       };
