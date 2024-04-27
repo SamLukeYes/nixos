@@ -9,6 +9,7 @@
     rustdesk-flutter
     shotcut
     tdesktop
+    xmind
     xournalpp
     zotero
 
