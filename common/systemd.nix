@@ -6,9 +6,7 @@ in
 
 {
   systemd = {
-    services = {
-      cpupower-gui.enable = false;
-    };
+    services.cpupower-gui.enable = false;
 
     user.services = {
       cpupower-gui.enable = false;
@@ -65,6 +63,7 @@ in
     oomd = {
       enableSystemSlice = true;
       enableUserSlices = true;
+      extraConfig.DefaultMemoryPressureDurationSec = "10s";
     };
 
     slices = {
