@@ -9,6 +9,7 @@ in
     services = {
       cpupower-gui.enable = false;
     };
+
     user.services = {
       cpupower-gui.enable = false;
       nix-index = {
@@ -59,5 +60,19 @@ in
     tmpfiles.rules = [
       "z /sys/kernel/notes 0400 root root"
     ];
+
+    # https://yhndnzj.com/2022/04/28/systemd-oomd-basic-usage/
+    oomd = {
+      enableSystemSlice = true;
+      enableUserSlices = true;
+    };
+
+    slices = {
+      "-".sliceConfig.ManagedOOMSwap = "kill";
+      machine.sliceConfig = {
+        ManagedOOMMemoryPressure = "kill";
+        ManagedOOMMemoryPressureLimit = "50%";
+      };
+    };
   };
 }
