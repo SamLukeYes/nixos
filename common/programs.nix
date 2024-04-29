@@ -30,8 +30,6 @@
         pkgs.gnomeExtensions.gsconnect;
     };
 
-    nix-index.enable = true;
-
     wireshark = {
       enable = true;
       package = pkgs.wireshark;
@@ -69,5 +67,8 @@
         "https://geo.mirror.pkgbuild.com/$repo/os/$arch"
       ];
     };
+
+    # requires nix-index-database
+    nix-index-database.comma.enable = true;
   };
 }

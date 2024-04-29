@@ -5,7 +5,10 @@
 
   inputs = {
     archix = {
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        xddxdd.follows = "xddxdd";
+      };
       url = "github:SamLukeYes/archix";
     };
     archlinuxcn-keyring = {
@@ -17,15 +20,22 @@
       url = "github:vagnum08/cpupower-gui";
     };
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    nix-index-database = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nix-index-database";
+    };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     rewine = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:wineee/nur-packages";
     };
-    # starship = {
-    #   flake = false;
-    #   url = "github:starship/starship";
-    # };
+    xddxdd = {
+      inputs = {
+        nix-index-database.follows = "nix-index-database";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:xddxdd/nur-packages";
+    };
     yes = {
       flake = false;
       url = "github:SamLukeYes/nix-custom-packages";
@@ -66,6 +76,7 @@
       modules = [
         inputs.archix.nixosModules.default
         inputs.archix.nixosModules.binfmt
+        inputs.nix-index-database.nixosModules.nix-index
       ];
     };
 
@@ -111,16 +122,8 @@
             --replace "gapplication launch org.rnd2.cpupower_gui" "cpupower-gui"
         '';
       });
-      # libreoffice = final.libreoffice-fresh;
       paru = final.archix.paru;
       rewine = import inputs.rewine { pkgs = final; };
-      # starship = prev.starship.overrideAttrs (old: {
-      #   src = inputs.starship;
-      #   cargoDeps = final.rustPlatform.importCargoLock {
-      #     lockFile = "${inputs.starship}/Cargo.lock";
-      #   };
-      #   doCheck = false;
-      # });
       yes = import inputs.yes { pkgs = final; };
       zotero = final.zotero_7;
     };
