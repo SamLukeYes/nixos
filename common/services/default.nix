@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -17,7 +17,16 @@
 
     fwupd.enable = true;
 
-    # gnome.gnome-keyring.enable = true;
+    jenkins = {
+      enable = true;
+      packages = with config; [
+        nix.package
+        programs.git.package
+        programs.java.package
+        programs.ssh.package
+      ];
+      port = 8083;
+    };
 
     logind.lidSwitch = "ignore";
 

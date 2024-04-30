@@ -1,15 +1,6 @@
 { config, lib, ... }:
 
 {
-  # Open more ports for testing
-  networking.firewall = rec {
-    allowedTCPPortRanges = [{
-      from = 8080;
-      to = 8083;
-    }];
-    allowedUDPPortRanges = allowedTCPPortRanges;
-  };
-
   services.tomcat = {
     enable = true;
     webapps = [];

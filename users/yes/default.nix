@@ -1,6 +1,7 @@
 { config, ... }:
 
 {
+  services.jenkins.user = "yes";
   users = {
     users.yes = {
       description = "Sam L. Yes";
