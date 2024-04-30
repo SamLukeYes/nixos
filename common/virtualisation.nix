@@ -20,7 +20,10 @@
     waydroid.enable = true;
 
     vmVariant = {
-      imports = [ "${modulesPath}/virtualisation/qemu-vm.nix" ];
+      imports = [
+        "${modulesPath}/virtualisation/qemu-vm.nix"
+        ./services/earlyoom.nix
+      ];
 
       environment.systemPackages = with pkgs; [
         qt5ct
