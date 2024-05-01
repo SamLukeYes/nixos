@@ -61,29 +61,7 @@
         # xserver.displayManager.autoLogin.user = "test";
       };
 
-      # system.replaceRuntimeDependencies = let
-      #   qtwayland' = pkgs.qt5.qtwayland.overrideAttrs (old: {
-      #     patches = old.patches ++ [
-      #       (pkgs.fetchpatch {
-      #         url = "https://src.fedoraproject.org/rpms/qt5-qtwayland/raw/rawhide/f/qtwayland-decoration-support-backports-from-qt6.patch";
-      #         hash = "sha256-BmSVhQSJ1IRZujAUbdi9lIM7f59OOQPXctig+w7dri8=";
-      #       })
-      #     ];
-      #   });
-      #   qadwaitadecorations' = pkgs.qadwaitadecorations.override {
-      #     qtwayland = qtwayland';
-      #     qt5ShadowsSupport = true;
-      #   };
-      # in [
-      #   {
-      #     original = pkgs.qt5.qtwayland;
-      #     replacement = qtwayland';
-      #   }
-      #   {
-      #     original = pkgs.qadwaitadecorations;
-      #     replacement = qadwaitadecorations';
-      #   }
-      # ];
+      systemd.targets.machines.enable = false;
 
       users = {
         mutableUsers = false;
