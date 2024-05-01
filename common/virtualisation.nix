@@ -22,8 +22,9 @@
     vmVariant = {
       imports = [
         "${modulesPath}/virtualisation/qemu-vm.nix"
-        ./services/earlyoom.nix
       ];
+
+      boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
       environment.systemPackages = with pkgs; [
         qt5ct
