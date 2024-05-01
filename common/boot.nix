@@ -13,7 +13,7 @@
       "vm.swappiness" = 180;
       "vm.page-cluster" = 0;
     };
-    kernelPackages = pkgs.linuxPackages_xanmod;
+    # kernelPackages = pkgs.linuxPackages_xanmod;
     kernelParams = [ "quiet" "udev.log_level=3" ];
     loader = {
       systemd-boot = {
