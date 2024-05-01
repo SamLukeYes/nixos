@@ -42,20 +42,5 @@ in
     tmpfiles.rules = [
       "z /sys/kernel/notes 0400 root root"
     ];
-
-    # https://yhndnzj.com/2022/04/28/systemd-oomd-basic-usage/
-    oomd = {
-      enableSystemSlice = true;
-      enableUserSlices = true;
-      extraConfig.DefaultMemoryPressureDurationSec = "10s";
-    };
-
-    slices = {
-      "-".sliceConfig.ManagedOOMSwap = "kill";
-      machine.sliceConfig = {
-        ManagedOOMMemoryPressure = "kill";
-        ManagedOOMMemoryPressureLimit = "50%";
-      };
-    };
   };
 }
