@@ -29,7 +29,7 @@
         Bind = [
           "/dev/dri"
           # "/dev/shm"
-          "/dev/snd"
+          # "/dev/snd"
         ];
         BindReadOnly = [
           "/etc/resolv.conf"
@@ -50,7 +50,7 @@
         "char-drm rwm"
         "/dev/dri rw"
         # "/dev/shm rw"
-        "/dev/snd rw"
+        # "/dev/snd rw"
       ];
     };
 
