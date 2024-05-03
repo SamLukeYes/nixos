@@ -76,11 +76,11 @@
         "nixpkgs-lib": "nixpkgs-lib"
       },
       "locked": {
-        "lastModified": 1714606777,
-        "narHash": "sha256-bMkNmAXLj8iyTvxaaD/StcLSadbj1chPcJOjtuVnLmA=",
+        "lastModified": 1714641030,
+        "narHash": "sha256-yzcRNDoyVP7+SCNX0wmuDju1NUCt8Dz9+lyUXEI0dbI=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "4d34ce6412bc450b1d4208c953dc97c7fc764f1a",
+        "rev": "e5d10a24b66c3ea8f150e47dfdb0416ab7c3390e",
         "type": "github"
       },
       "original": {
@@ -196,20 +196,14 @@
     },
     "nixpkgs-lib": {
       "locked": {
-        "dir": "lib",
-        "lastModified": 1714253743,
-        "narHash": "sha256-mdTQw2XlariysyScCv2tTE45QSU9v/ezLcHJ22f0Nxc=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "58a1abdbae3217ca6b702f03d3b35125d88a2994",
-        "type": "github"
+        "lastModified": 1714640452,
+        "narHash": "sha256-QBx10+k6JWz6u7VsohfSw8g8hjdBZEf8CFzXH1/1Z94=",
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/50eb7ecf4cd0a5756d7275c8ba36790e5bd53e33.tar.gz"
       },
       "original": {
-        "dir": "lib",
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
+        "type": "tarball",
+        "url": "https://github.com/NixOS/nixpkgs/archive/50eb7ecf4cd0a5756d7275c8ba36790e5bd53e33.tar.gz"
       }
     },
     "nvfetcher": {
@@ -311,11 +305,11 @@
         "nvfetcher": "nvfetcher"
       },
       "locked": {
-        "lastModified": 1714642409,
-        "narHash": "sha256-wZg8tRbi5En2n/Y93G+0XDYNuJHdOZkR7SDT1+G0SsI=",
+        "lastModified": 1714717367,
+        "narHash": "sha256-JqXl22gk7p4UHXrNgc0JKMSr8whcKjDekcWHcGlgrXI=",
         "owner": "xddxdd",
         "repo": "nur-packages",
-        "rev": "7d6a0875550c5022f68d94597b20127f3c75626e",
+        "rev": "c7c56c8c9457a2b7cd89b5ed8409a60b933d8319",
         "type": "github"
       },
       "original": {
@@ -327,11 +321,11 @@
     "yes": {
       "flake": false,
       "locked": {
-        "lastModified": 1714136616,
-        "narHash": "sha256-u5rglZ7c5/HOQadiQwkl9OIj6ofsv0mQVAiN07tm8Gg=",
+        "lastModified": 1714728303,
+        "narHash": "sha256-ECEpLLBk2YP0Oce2tdfoLjOMfPUseqQLi7i7kA72byw=",
         "owner": "SamLukeYes",
         "repo": "nix-custom-packages",
-        "rev": "63c8673d5830989fc07b5a312fabbee19dcfe858",
+        "rev": "308ae957263acaf0ead051aefaef7af2991b3fc0",
         "type": "github"
       },
       "original": {
