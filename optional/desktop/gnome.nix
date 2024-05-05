@@ -47,7 +47,6 @@
       # GNOME Shell extensions
       gnomeExtensions.appindicator
       gnomeExtensions.customize-ibus
-      gnomeExtensions.pano
       gnomeExtensions.system-monitor-next
       gnomeExtensions.task-widget
 
@@ -65,6 +64,8 @@
       yaru-theme
     ];
   };
+
+  programs.gpaste.enable = true;
 
   qt.enable = true;
 
