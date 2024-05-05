@@ -10,7 +10,8 @@
     ];
     fontconfig.defaultFonts = {
       sansSerif = [
-        "Microsoft YaHei UI"
+        "Cantarell"
+        "Noto Sans CJK SC"
       ];
       monospace = [
         "NotoMono Nerd Font Mono"
