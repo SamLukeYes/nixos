@@ -13,6 +13,12 @@
     xournalpp
     zotero
 
+    seafile-client
+    (makeAutostartItem {
+      name = "seafile";
+      package = seafile-client;
+    })
+
     ((vscode.override {
       commandLineArgs = "--touch-events --enable-wayland-ime --disable-gpu-shader-disk-cache -n";
     }).fhsWithPackages (ps: with ps; [

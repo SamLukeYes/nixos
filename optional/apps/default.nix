@@ -3,7 +3,6 @@
 {
   imports = [
     ./androidsdk.nix
-    ./onedrive.nix
   ];
 
   environment.systemPackages = with pkgs; [
