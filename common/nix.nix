@@ -22,7 +22,6 @@
       max-jobs = 2;   # https://github.com/NixOS/nixpkgs/issues/198668
       max-substitution-jobs = 5;
       narinfo-cache-negative-ttl = 300;
-      nix-path = ["nixpkgs=/etc/nix/inputs/nixpkgs"];
       substituters = [
         "https://mirrors.ustc.edu.cn/nix-channels/store"
         "https://mirror.sjtu.edu.cn/nix-channels/store"
@@ -41,5 +40,8 @@
     generateNixPathFromInputs = true;
     generateRegistryFromInputs = true;
     linkInputs = true;
+
+    # Workaround: flake-utils-plus overrides nix.nixPath
+    settings.nix-path = ["nixpkgs=/etc/nix/inputs/nixpkgs"];
   };
 }
