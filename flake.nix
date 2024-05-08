@@ -52,7 +52,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/308853.patch    # gsconnect
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
