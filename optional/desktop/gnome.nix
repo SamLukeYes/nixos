@@ -38,6 +38,7 @@
       gimp
       gnome.gnome-sound-recorder
       gnome.gnome-tweaks
+      gnome-firmware
       libreoffice
 
       # nautilus extensions
