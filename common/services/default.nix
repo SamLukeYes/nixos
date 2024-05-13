@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   imports = [
@@ -16,17 +16,6 @@
     fstrim.enable = true;
 
     fwupd.enable = true;
-
-    jenkins = {
-      enable = true;
-      packages = with config; [
-        nix.package
-        programs.git.package
-        programs.java.package
-        programs.ssh.package
-      ];
-      port = 8083;
-    };
 
     logind.lidSwitch = "ignore";
 

@@ -30,11 +30,6 @@
         pkgs.gnomeExtensions.gsconnect;
     };
 
-    wireshark = {
-      enable = true;
-      package = pkgs.wireshark;
-    };
-
     xonsh = {
       enable = true;
       package = pkgs.xonsh.override {
