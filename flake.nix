@@ -75,13 +75,13 @@
       channelName = "nixos-unstable";
       modules = [
         inputs.archix.nixosModules.default
-        inputs.archix.nixosModules.binfmt
         inputs.nix-index-database.nixosModules.nix-index
       ];
     };
 
     hosts = let
       absolute-modules = [
+        inputs.archix.nixosModules.binfmt
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
         ./machines/absolute/configuration.nix
       ];
@@ -97,7 +97,7 @@
       ];
     };
     
-    iso = self.nixosConfigurations.nixos-iso.config.system.build.isoImage;
+    defaultPackage.${system} = self.nixosConfigurations.nixos-iso.config.system.build.isoImage;
 
     legacyPackages.${system} = import (
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches

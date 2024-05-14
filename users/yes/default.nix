@@ -34,6 +34,14 @@
       isNormalUser = true;
       shell = config.programs.xonsh.package;
       uid = 1000;
+
+      packages = with pkgs; [
+        seafile-client
+        (makeAutostartItem {
+          name = "seafile";
+          package = seafile-client;
+        })
+      ];
     };
   };
 }

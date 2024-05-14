@@ -19,7 +19,7 @@
 
   networking.proxy.default = lib.mkForce null;
 
-  programs.firefox.package = lib.mkForce pkgs.firefox;
+  programs.firefox.enable = lib.mkForce false;
 
   security.sudo-rs.enable = lib.mkForce false;
 

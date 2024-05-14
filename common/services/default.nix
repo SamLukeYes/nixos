@@ -4,7 +4,6 @@
   imports = [
     ./earlyoom.nix
     ./pipewire.nix
-    ./tomcat.nix
     ./v2raya.nix
   ];
 
@@ -18,11 +17,6 @@
     fwupd.enable = true;
 
     logind.lidSwitch = "ignore";
-
-    mysql = {
-      enable = true;
-      package = pkgs.mysql80;
-    };
 
     power-profiles-daemon.enable = false;
 

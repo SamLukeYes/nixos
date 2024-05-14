@@ -14,6 +14,7 @@
       MOZ_USE_XINPUT2 = "1";
       QT_QPA_PLATFORM = "wayland;xcb";
       SDL_VIDEODRIVER = "wayland";
+      SHELL_TYPE = "prompt_toolkit";
       TZ = "/etc/localtime";
     };
   };
