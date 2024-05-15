@@ -34,6 +34,7 @@
         "xddxdd.cachix.org-1:ay1HJyNDYmlSwj5NXQG065C8LfoqqKaTNCyzeixGjf8="
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
+      trusted-users = [ "root" "@wheel" ];
     };
 
     # requires flake-utils-plus
