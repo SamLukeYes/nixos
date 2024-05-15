@@ -10,7 +10,7 @@
 
       allowedTCPPortRanges = [{
         from = 8080;
-        to = 8083;
+        to = 8089;
       }];
       allowedUDPPortRanges = allowedTCPPortRanges;
     };
