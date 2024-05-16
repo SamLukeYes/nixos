@@ -15,6 +15,7 @@
     conda                         # manage python env
     dig                           # must be available without Internet connection
     file                          # frequently used to view executable type
+    lsof                          # view port usage
     nix-tree                      # frequently used to inspect space usage
     paru                          # frequently used to query AUR packages
     sshfs                         # frequently used for file sharing
