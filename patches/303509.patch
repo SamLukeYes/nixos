@@ -1,0 +1,40 @@
+From e60160a16b57e59d61f890f9368730675151461c Mon Sep 17 00:00:00 2001
+From: 500InternalError <ll525525@outlook.com>
+Date: Fri, 12 Apr 2024 09:49:17 +0800
+Subject: [PATCH] nixos/ibus: allow using the wayland frontend instead of the
+ ibus one
+
+---
+ nixos/modules/i18n/input-method/ibus.nix | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/nixos/modules/i18n/input-method/ibus.nix b/nixos/modules/i18n/input-method/ibus.nix
+index a81ce828b13db7..5e898017dc9238 100644
+--- a/nixos/modules/i18n/input-method/ibus.nix
++++ b/nixos/modules/i18n/input-method/ibus.nix
+@@ -44,6 +44,13 @@ in
+           in
+             lib.mdDoc "Enabled IBus engines. Available engines are: ${engines}.";
+       };
++      waylandFrontend = mkOption {
++        type = types.bool;
++        default = false;
++        description = lib.mdDoc ''
++          Use the Wayland input method frontend.
++        '';
++      };
+       panel = mkOption {
+         type = with types; nullOr path;
+         default = null;
+@@ -70,9 +77,10 @@ in
+     ];
+ 
+     environment.variables = {
++      XMODIFIERS = "@im=ibus";
++    } // lib.optionalAttrs (!cfg.waylandFrontend) {
+       GTK_IM_MODULE = "ibus";
+       QT_IM_MODULE = "ibus";
+-      XMODIFIERS = "@im=ibus";
+     };
+ 
+     xdg.portal.extraPortals = mkIf config.xdg.portal.enable [

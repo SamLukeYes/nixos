@@ -5,9 +5,12 @@
     # defaultLocale = "zh_CN.UTF-8";
     inputMethod = {
       enabled = "ibus";
-      ibus.engines = with pkgs.ibus-engines; [
-        libpinyin
-      ];
+      ibus = {
+        engines = with pkgs.ibus-engines; [
+          libpinyin
+        ];
+        waylandFrontend = true;
+      };
     };
     supportedLocales = [
       "en_US.UTF-8/UTF-8"

@@ -1,0 +1,24 @@
+From f303b593a283d631f2ff57d57b406e2820ac432b Mon Sep 17 00:00:00 2001
+From: Julius Michaelis <gitter@liftm.de>
+Date: Thu, 16 May 2024 16:15:52 +0900
+Subject: [PATCH] nixos/firefox: fix use of listToAttrs
+
+Broken in #304773
+Fixes #312098
+---
+ nixos/modules/programs/firefox.nix | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/nixos/modules/programs/firefox.nix b/nixos/modules/programs/firefox.nix
+index f698c3999dc1fb..7e0dec57d2dac1 100644
+--- a/nixos/modules/programs/firefox.nix
++++ b/nixos/modules/programs/firefox.nix
+@@ -287,7 +287,7 @@ in
+         (_: value: { Value = value; Status = cfg.preferencesStatus; })
+         cfg.preferences);
+       ExtensionSettings = builtins.listToAttrs (builtins.map
+-        (lang: builtins.nameValuePair
++        (lang: lib.attrsets.nameValuePair
+           "langpack-${lang}@firefox.mozilla.org"
+           {
+             installation_mode = "normal_installed";

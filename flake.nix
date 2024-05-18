@@ -52,6 +52,9 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
+      ./patches/303509.patch    # ibus
+      ./patches/309236.patch    # fsck
+      ./patches/312144.patch    # firefox
     ];
 
   in flake-utils-plus.lib.mkFlake rec {

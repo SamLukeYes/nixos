@@ -1,0 +1,63 @@
+From 4871a4e0daaaedfac0b8a5685f35605a67ac07e2 Mon Sep 17 00:00:00 2001
+From: Will Fancher <elvishjerricco@gmail.com>
+Date: Sun, 5 May 2024 06:01:03 -0400
+Subject: [PATCH 1/2] nixos/systemd-stage-1: Fix fsck.xfs needing bash's sh
+ symlink
+
+---
+ nixos/modules/system/boot/systemd/initrd.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/nixos/modules/system/boot/systemd/initrd.nix b/nixos/modules/system/boot/systemd/initrd.nix
+index cc32b2a15e7ce3..6107a2594baf8f 100644
+--- a/nixos/modules/system/boot/systemd/initrd.nix
++++ b/nixos/modules/system/boot/systemd/initrd.nix
+@@ -473,8 +473,8 @@ in {
+         "${cfg.package.util-linux}/bin/umount"
+         "${cfg.package.util-linux}/bin/sulogin"
+ 
+-        # required for script services
+-        "${pkgs.runtimeShell}"
++        # required for script services, and some tools like xfs still want the sh symlink
++        "${pkgs.bash}/bin"
+ 
+         # so NSS can look up usernames
+         "${pkgs.glibc}/lib/libnss_files.so.2"
+
+From da635f35de3f9a471112a63f49fcb3c00e5bd334 Mon Sep 17 00:00:00 2001
+From: Will Fancher <elvishjerricco@gmail.com>
+Date: Sun, 5 May 2024 06:41:28 -0400
+Subject: [PATCH 2/2] nixos/systemd-stage-1: Enable LVM installer test
+
+---
+ nixos/tests/installer-systemd-stage-1.nix | 2 +-
+ nixos/tests/installer.nix                 | 3 +++
+ 2 files changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/nixos/tests/installer-systemd-stage-1.nix b/nixos/tests/installer-systemd-stage-1.nix
+index 1dd55dada042a2..00205f94177186 100644
+--- a/nixos/tests/installer-systemd-stage-1.nix
++++ b/nixos/tests/installer-systemd-stage-1.nix
+@@ -19,7 +19,7 @@
+     luksroot
+     luksroot-format1
+     luksroot-format2
+-    # lvm
++    lvm
+     separateBoot
+     separateBootFat
+     separateBootZfs
+diff --git a/nixos/tests/installer.nix b/nixos/tests/installer.nix
+index 7e835041eb39fd..fce2a11b5bf184 100644
+--- a/nixos/tests/installer.nix
++++ b/nixos/tests/installer.nix
+@@ -975,6 +975,9 @@ in {
+           "mount LABEL=nixos /mnt",
+       )
+     '';
++    extraConfig = optionalString systemdStage1 ''
++      boot.initrd.services.lvm.enable = true;
++    '';
+   };
+ 
+   # Boot off an encrypted root partition with the default LUKS header format
