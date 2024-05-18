@@ -8,7 +8,7 @@
       dates = "weekly";
       options = "--delete-older-than 3d";
     };
-    package = pkgs.nix;   # avoid using nixUnstable
+    package = pkgs.lix;
     settings = {
       auto-optimise-store = true;
       download-attempts = 3;
