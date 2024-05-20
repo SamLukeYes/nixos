@@ -57,7 +57,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/303509.patch    # ibus
-      ./patches/309236.patch    # fsck
     ];
 
   in flake-utils-plus.lib.mkFlake rec {
