@@ -4,6 +4,10 @@
   description = "My NixOS configuration";
 
   inputs = {
+    angrr = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:linyinfeng/angrr";
+    };
     archix = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -62,7 +66,10 @@
       allowUnfree = true;
       android_sdk.accept_license = true;
     };
-    sharedOverlays = [ self.overlays.default ];
+    sharedOverlays = [
+      inputs.angrr.overlays.default
+      self.overlays.default
+    ];
     supportedSystems = [ system ];
 
     channels = {
@@ -76,6 +83,7 @@
       inherit system;
       channelName = "nixos-unstable";
       modules = [
+        inputs.angrr.nixosModules.angrr
         inputs.archix.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
       ];
