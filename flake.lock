@@ -11,11 +11,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1716135442,
-        "narHash": "sha256-99Kpt36Oz/xh6oYbSH1JP9DBOzjRpzqXlm2RsYD6hM8=",
+        "lastModified": 1716221946,
+        "narHash": "sha256-IJEJtwHaQzdDON8QeuQ9Pb9/uFO0q1vmc4MVyziPK+k=",
         "owner": "linyinfeng",
         "repo": "angrr",
-        "rev": "83240b9684f0fb93efb7fb02368528cce97ad562",
+        "rev": "92499349634c436c15dae8e9161626727733985b",
         "type": "github"
       },
       "original": {
@@ -34,11 +34,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1716002440,
-        "narHash": "sha256-WQ688KRQxnbjkh8rR8m0qt52B/QAVOM0vYFoAd2qxSs=",
+        "lastModified": 1716252935,
+        "narHash": "sha256-IuAzSqCtjKzgUCoQ9CcB4Ka8JIWGPzXJiJr8VgHHA18=",
         "owner": "SamLukeYes",
         "repo": "archix",
-        "rev": "25dc44435c672ce93838e2903b56c1072339c833",
+        "rev": "002f82772c1f8529f8b32b464468530eac896bab",
         "type": "github"
       },
       "original": {
@@ -87,11 +87,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1716080827,
-        "narHash": "sha256-2R9LBCR8TlMuK4Md9ELwPVuwRQWI3pAh7Nj9e318Hk4=",
+        "lastModified": 1716156051,
+        "narHash": "sha256-TjUX7WWRcrhuUxDHsR8pDR2N7jitqZehgCVSy3kBeS8=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "a7146b04405d93b24a1bac76d93270787872c8be",
+        "rev": "7443df1c478947bf96a2e699209f53b2db26209d",
         "type": "github"
       },
       "original": {
