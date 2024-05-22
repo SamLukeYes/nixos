@@ -6,6 +6,7 @@
     homeBinInPath = true;
 
     variables = {
+      ANDROID_SDK_ROOT = "${pkgs.androidPkgs.androidsdk}/libexec/android-sdk";
       BASH_COMPLETIONS = ["${pkgs.bash-completion}/share/bash-completion/bash_completion"];
       BROWSER = lib.getExe config.programs.firefox.package;
       LIBVA_DRIVER_NAME = "iHD";
