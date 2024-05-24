@@ -1,6 +1,6 @@
 {
   services.angrr = {
     enable = true;
-    period = "1month";
+    period = "2weeks";
   };
 }
