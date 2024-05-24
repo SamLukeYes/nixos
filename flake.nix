@@ -58,6 +58,8 @@
       # Add nixpkgs patches here
       ./patches/303509.patch    # ibus
     ];
+    nixpkgs-patched =
+      flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
 
   in flake-utils-plus.lib.mkFlake rec {
     inherit self inputs;
@@ -85,6 +87,7 @@
         inputs.angrr.nixosModules.angrr
         inputs.archix.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
+        { nix.settings.nix-path = ["nixpkgs=${nixpkgs-patched}"]; }
       ];
     };
 
@@ -106,11 +109,10 @@
       ];
     };
     
-    defaultPackage.${system} = self.nixosConfigurations.nixos-iso.config.system.build.isoImage;
+    defaultPackage.${system} =
+      self.nixosConfigurations.nixos-iso.config.system.build.isoImage;
 
-    legacyPackages.${system} = import (
-      flake-utils-plus.lib.patchChannel system nixpkgs channel-patches
-    ) {
+    legacyPackages.${system} = import nixpkgs-patched {
       inherit system;
       config = channelsConfig;
       overlays = sharedOverlays;

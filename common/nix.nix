@@ -43,8 +43,5 @@
     generateNixPathFromInputs = true;
     generateRegistryFromInputs = true;
     linkInputs = true;
-
-    # Workaround: flake-utils-plus overrides nix.nixPath
-    settings.nix-path = ["nixpkgs=/etc/nix/inputs/nixpkgs"];
   };
 }
