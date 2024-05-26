@@ -57,6 +57,7 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/303509.patch    # ibus
+      ./patches/314728.patch    # xonsh
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;

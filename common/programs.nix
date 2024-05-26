@@ -30,9 +30,14 @@
 
     xonsh = {
       enable = true;
-      package = pkgs.xonsh.override {
+      package = let 
+        python3 = pkgs.python3;
+        python3Packages = python3.pkgs;
+        xonsh = pkgs.xonsh.override { inherit python3Packages; };
+      in xonsh.wrapper.override {
+        inherit xonsh;
         extraPackages = ps: [
-          pkgs.yes.xonsh-direnv
+          (pkgs.yes.xonsh-direnv.override { inherit python3; })
         ];
       };
     };
