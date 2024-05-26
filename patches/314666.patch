@@ -1,0 +1,32 @@
+From 092ca8d1cff1543fd9e6f2bff29f9e136eed053f Mon Sep 17 00:00:00 2001
+From: Thomas Gerbet <thomas@gerbet.me>
+Date: Sat, 25 May 2024 21:34:20 +0200
+Subject: [PATCH] gnome.gnome-remote-desktop: 46.1 -> 46.2
+
+Fixes CVE-2024-5148.
+https://security.opensuse.org/2024/05/22/gnome-remote-desktop-system-dbus.html
+
+Changes:
+https://gitlab.gnome.org/GNOME/gnome-remote-desktop/-/blob/46.2/NEWS?ref_type=tags
+---
+ pkgs/desktops/gnome/core/gnome-remote-desktop/default.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/desktops/gnome/core/gnome-remote-desktop/default.nix b/pkgs/desktops/gnome/core/gnome-remote-desktop/default.nix
+index abd6d2102679ae..e7a70f2369e413 100644
+--- a/pkgs/desktops/gnome/core/gnome-remote-desktop/default.nix
++++ b/pkgs/desktops/gnome/core/gnome-remote-desktop/default.nix
+@@ -30,11 +30,11 @@
+ 
+ stdenv.mkDerivation rec {
+   pname = "gnome-remote-desktop";
+-  version = "46.1";
++  version = "46.2";
+ 
+   src = fetchurl {
+     url = "mirror://gnome/sources/${pname}/${lib.versions.major version}/${pname}-${version}.tar.xz";
+-    hash = "sha256-fGKkKB/fqVIhEK/7910JlzA18q3H+kV3UR1zMYa+to8=";
++    hash = "sha256-l0Q+r/5LGmliaIakHSXL6ywUjT/tQ9khFcG30g1SOKs=";
+   };
+ 
+   nativeBuildInputs = [
