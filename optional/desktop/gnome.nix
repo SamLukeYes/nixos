@@ -49,6 +49,7 @@
       gnomeExtensions.appindicator
       gnomeExtensions.customize-ibus
       gnomeExtensions.freon
+      gnomeExtensions.system-monitor
       gnomeExtensions.task-widget
 
       # Qt plugins
