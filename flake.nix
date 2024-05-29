@@ -57,7 +57,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/303509.patch    # ibus
-      ./patches/314666.patch    # CVE-2024-5148
       ./patches/314728.patch    # xonsh
     ];
     nixpkgs-patched =
