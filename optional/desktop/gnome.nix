@@ -4,6 +4,7 @@
   environment = {
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/gnome.nix
     gnome.excludePackages = with pkgs.gnome; [
+      gnome-shell-extensions  # use the standalone versions of these extensions
       epiphany                # use firefox instead
       pkgs.gnome-text-editor  # use vscode instead
       gnome-calculator        # use xonsh instead
@@ -49,6 +50,7 @@
       gnomeExtensions.appindicator
       gnomeExtensions.customize-ibus
       gnomeExtensions.freon
+      gnomeExtensions.places-status-indicator
       gnomeExtensions.system-monitor
       gnomeExtensions.task-widget
 
