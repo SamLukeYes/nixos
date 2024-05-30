@@ -57,7 +57,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/303509.patch    # ibus
-      ./patches/310143.patch    # system-monitor
       ./patches/314728.patch    # xonsh
     ];
     nixpkgs-patched =
