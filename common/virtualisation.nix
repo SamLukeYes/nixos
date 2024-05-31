@@ -15,7 +15,7 @@
         "${modulesPath}/virtualisation/qemu-vm.nix"
       ];
 
-      boot.kernelPackages = pkgs.linuxPackages_xanmod;
+      # boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
       environment.systemPackages = with pkgs; [
         qt5ct
