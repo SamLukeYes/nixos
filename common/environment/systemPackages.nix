@@ -5,7 +5,6 @@
     authenticator
     gnome.dconf-editor
     pot
-    shotcut
     tdesktop
     xournalpp
     zotero
