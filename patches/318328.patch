@@ -1,0 +1,125 @@
+From cd762544780dcfa947c25402022e1e22c495d232 Mon Sep 17 00:00:00 2001
+From: Doron Behar <doron.behar@gmail.com>
+Date: Sat, 8 Jun 2024 20:40:06 +0300
+Subject: [PATCH] gnomeExtensions.easyScreenCast: 1.7.1 -> 1.9.0
+
+Diff: https://github.com/EasyScreenCast/EasyScreenCast/compare/1.7.1...1.9.0
+---
+ .../extensions/EasyScreenCast/default.nix     |  5 +-
+ .../EasyScreenCast/fix-gi-path.patch          | 63 +++++++++++++------
+ 2 files changed, 45 insertions(+), 23 deletions(-)
+
+diff --git a/pkgs/desktops/gnome/extensions/EasyScreenCast/default.nix b/pkgs/desktops/gnome/extensions/EasyScreenCast/default.nix
+index e6bcc1b411d5c6..ea371ae6efd8f1 100644
+--- a/pkgs/desktops/gnome/extensions/EasyScreenCast/default.nix
++++ b/pkgs/desktops/gnome/extensions/EasyScreenCast/default.nix
+@@ -2,13 +2,13 @@
+ 
+ stdenv.mkDerivation (finalAttrs: {
+   pname = "gnome-shell-extension-EasyScreenCast";
+-  version = "1.7.1";
++  version = "1.9.0";
+ 
+   src = fetchFromGitHub {
+     owner = "EasyScreenCast";
+     repo = "EasyScreenCast";
+     rev = finalAttrs.version;
+-    hash = "sha256-G7wdRFA0qL+6inVRLAmKoP0E0IOyvlmQIUwbDv/DbLI=";
++    hash = "sha256-rRRMFAdWseTxW6W194TE3yNlnpPX7gLViLPLQW6zuSI=";
+   };
+ 
+   patches = [
+@@ -32,6 +32,5 @@ stdenv.mkDerivation (finalAttrs: {
+     license = licenses.gpl3Plus;
+     maintainers = with maintainers; [ doronbehar ];
+     platforms = platforms.linux;
+-    broken = true;
+   };
+ })
+diff --git a/pkgs/desktops/gnome/extensions/EasyScreenCast/fix-gi-path.patch b/pkgs/desktops/gnome/extensions/EasyScreenCast/fix-gi-path.patch
+index 4ea048ba79bf29..b47d2b52a7d78f 100644
+--- a/pkgs/desktops/gnome/extensions/EasyScreenCast/fix-gi-path.patch
++++ b/pkgs/desktops/gnome/extensions/EasyScreenCast/fix-gi-path.patch
+@@ -1,19 +1,32 @@
+-diff --git a/prefs.js b/prefs.js
+-index 97b85a3..2fc6539 100644
+---- a/prefs.js
+-+++ b/prefs.js
+-@@ -14,8 +14,8 @@
++diff --git i/extension.js w/extension.js
++index c151057..1b6dfc3 100644
++--- i/extension.js
+++++ w/extension.js
++@@ -717,7 +717,7 @@ const EasyScreenCastIndicator = GObject.registerClass({
++             Lib.TalkativeLog('-*-execute post command');
++ 
++             // launch cmd after registration
++-            const tmpCmd = `/usr/bin/sh -c "${this._settings.getOption('s', Settings.POST_CMD_SETTING_KEY)}"`;
+++            const tmpCmd = `/bin/sh -c "${this._settings.getOption('s', Settings.POST_CMD_SETTING_KEY)}"`;
++ 
++             const mapObj = {
++                 _fpath: pathFile,
++diff --git i/prefs.js w/prefs.js
++index e0dd1a2..9dcb87a 100644
++--- i/prefs.js
+++++ w/prefs.js
++@@ -13,8 +13,8 @@
+  'use strict';
+  
+- const GIRepository = imports.gi.GIRepository;
++ import GIRepository from 'gi://GIRepository';
+ -GIRepository.Repository.prepend_search_path('/usr/lib64/gnome-shell');
+ -GIRepository.Repository.prepend_library_path('/usr/lib64/gnome-shell');
+ +GIRepository.Repository.prepend_search_path('@gnomeShell@/lib/gnome-shell');
+ +GIRepository.Repository.prepend_library_path('@gnomeShell@/lib/gnome-shell');
+  
+- const GObject = imports.gi.GObject;
+- const Gio = imports.gi.Gio;
+-@@ -746,7 +746,7 @@ const EasyScreenCastSettingsWidget = GObject.registerClass({
++ import Adw from 'gi://Adw';
++ import GObject from 'gi://GObject';
++@@ -713,7 +713,7 @@ const EasyScreenCastSettingsWidget = GObject.registerClass({
+                  Lib.TalkativeLog('-^-NOT SET xdg-user video');
+  
+                  ctx.CtrlExe.Execute(
+@@ -22,19 +35,29 @@ index 97b85a3..2fc6539 100644
+                      true,
+                      (success, out) => {
+                          Lib.TalkativeLog(`-^-CALLBACK sync S: ${success} out: ${out}`);
+-diff --git a/utilaudio.js b/utilaudio.js
+-index 957eda2..84af241 100644
+---- a/utilaudio.js
+-+++ b/utilaudio.js
+-@@ -15,10 +15,7 @@
+- 
+- const GObject = imports.gi.GObject;
+- const GIRepository = imports.gi.GIRepository;
++@@ -883,7 +883,7 @@ const EasyScreenCastSettingsWidget = GObject.registerClass({
++                 );
++ 
++                 ctx.CtrlExe.Execute(
++-                    'journalctl /usr/bin/gnome-shell --since "15 min ago" --output=cat --no-pager',
+++                    'journalctl @gnomeShell@/bin/.gnome-shell-wrapped --since "15 min ago" --output=cat --no-pager',
++                     false,
++                     success => {
++                         Lib.TalkativeLog(`-^-CALLBACK async S= ${success}`);
++diff --git i/utilaudio.js w/utilaudio.js
++index b07e181..ed7d3ba 100644
++--- i/utilaudio.js
+++++ w/utilaudio.js
++@@ -14,10 +14,8 @@
++ 
++ import GObject from 'gi://GObject';
++ import GIRepository from 'gi://GIRepository';
+ -GIRepository.Repository.prepend_search_path('/usr/lib/gnome-shell');
+ -GIRepository.Repository.prepend_library_path('/usr/lib/gnome-shell');
+ -GIRepository.Repository.prepend_search_path('/usr/lib64/gnome-shell');
+ -GIRepository.Repository.prepend_library_path('/usr/lib64/gnome-shell');
+-+GIRepository.Repository.prepend_search_path("@gnomeShell@/lib/gnome-shell");
+- const Gvc = imports.gi.Gvc;
+++GIRepository.Repository.prepend_search_path('@gnomeShell@/lib/gnome-shell');
+++GIRepository.Repository.prepend_library_path('@gnomeShell@/lib/gnome-shell');
++ import Gvc from 'gi://Gvc';
+  
+- const ExtensionUtils = imports.misc.extensionUtils;
++ import * as Lib from './convenience.js';

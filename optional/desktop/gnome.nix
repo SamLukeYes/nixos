@@ -49,6 +49,7 @@
       # GNOME Shell extensions
       gnomeExtensions.appindicator
       gnomeExtensions.customize-ibus
+      gnomeExtensions.easyScreenCast
       gnomeExtensions.freon
       gnomeExtensions.places-status-indicator
       gnomeExtensions.system-monitor
