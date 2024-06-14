@@ -5,6 +5,7 @@
     packages = with pkgs; [
       noto-fonts-cjk-sans
       powerline-fonts
+      source-han-serif
     ];
     fontconfig.defaultFonts = {
       sansSerif = [
