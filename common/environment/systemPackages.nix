@@ -6,6 +6,7 @@
     gnome.dconf-editor
     pot
     tdesktop
+    wineWow64Packages.full
     xournalpp
     zotero
 
@@ -15,6 +16,7 @@
     dig                           # must be available without Internet connection
     ffmpeg                        # video editing
     file                          # frequently used to view executable type
+    gamescope                     # force resize window
     lsof                          # view port usage
     nix-tree                      # frequently used to inspect space usage
     paru                          # frequently used to query AUR packages
