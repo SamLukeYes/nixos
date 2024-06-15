@@ -9,7 +9,6 @@
         engines = with pkgs.ibus-engines; [
           libpinyin
         ];
-        waylandFrontend = true;
       };
     };
     supportedLocales = [
