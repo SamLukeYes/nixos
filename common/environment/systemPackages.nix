@@ -6,7 +6,7 @@
     gnome.dconf-editor
     pot
     tdesktop
-    wineWow64Packages.full
+    wineWow64Packages.stagingFull
     xournalpp
     zotero
 
