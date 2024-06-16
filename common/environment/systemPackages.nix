@@ -27,5 +27,6 @@
 
     # other out-of-tree packages
     yes.iptux
+    yes.mkxp-z
   ];
 }
