@@ -285,11 +285,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1718459188,
-        "narHash": "sha256-umwY+ivE98n/6EwEtobOlqf1t9VddhPIIZ6rVmFXlHg=",
+        "lastModified": 1718548414,
+        "narHash": "sha256-1obyIuQPR/Kq1j5/i/5EuAfQrDwjYnjCDG8iLtXmBhQ=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "0cd562157274df3783840bdcb0ce6d9c4cf4aa29",
+        "rev": "cde8f7e11f036160b0fd6a9e07dc4c8e4061cf06",
         "type": "github"
       },
       "original": {
@@ -510,11 +510,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1718510543,
-        "narHash": "sha256-vxXLsBxl+Xwz6RixIOspCRCA6Fp6p2iKW+93lZKhrE4=",
+        "lastModified": 1718522865,
+        "narHash": "sha256-oS87z2tQ770+0KC3lL14GWGRPwed1ntnm/Fe3IuPS6c=",
         "owner": "xddxdd",
         "repo": "nur-packages",
-        "rev": "bd8383158022f02ac5c19d38f722d7b7feb48ff1",
+        "rev": "68e11d4baa26e9c7f88409d876cdba6675279f00",
         "type": "github"
       },
       "original": {
@@ -526,11 +526,11 @@
     "yes": {
       "flake": false,
       "locked": {
-        "lastModified": 1718519057,
-        "narHash": "sha256-8UM9KaFUsADqm5kSnDcXc+PmdwLsNn2sU2y71IPUYy0=",
+        "lastModified": 1718545403,
+        "narHash": "sha256-eF4ry8Uu/j6N+BzRf9Fd1uOy1HHuHQrDdhNgzdXFS78=",
         "owner": "SamLukeYes",
         "repo": "nix-custom-packages",
-        "rev": "2bae7d9298e335b206017a3772cd96c424f4e566",
+        "rev": "d1f9a817a3ea2e718100efd71e012385bfc42f42",
         "type": "github"
       },
       "original": {
