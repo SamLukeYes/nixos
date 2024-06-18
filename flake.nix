@@ -119,7 +119,7 @@
     };
 
     overlays.default = final: prev: {
-      androidPkgs = final.androidenv.androidPkgs_9_0;
+      androidPkgs = final.androidenv.androidPkgs;
       android-tools = final.androidPkgs.androidsdk;
       archix = import inputs.archix { pkgs = final; };
       archlinuxcn-keyring = inputs.archlinuxcn-keyring;
