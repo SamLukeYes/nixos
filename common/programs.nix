@@ -30,6 +30,11 @@
 
     xonsh = {
       enable = true;
+
+      config = ''
+        LANG = "zh_CN.UTF-8"
+      '';
+
       package = let 
         python3 = pkgs.python3;
         python3Packages = python3.pkgs;

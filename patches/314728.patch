@@ -1,19 +1,19 @@
-From d4126d247df8e4ae7a308eb8acbbf7a5bbc43e9e Mon Sep 17 00:00:00 2001
+From afc31073a3bb5d61825c51cadc67f75ab4d65ed0 Mon Sep 17 00:00:00 2001
 From: SamLukeYes <samlukeyes123@gmail.com>
-Date: Tue, 11 Jun 2024 16:25:04 +0800
-Subject: [PATCH 1/2] xonsh: 0.15.1 -> 0.16.0-unstable-2024-05-25
+Date: Tue, 18 Jun 2024 22:49:13 +0800
+Subject: [PATCH] xonsh: 0.15.1 -> 0.17.0
 
 Co-authored-by: Anderson Torres <torres.anderson.85@protonmail.com>
 
-Upstream changes: https://github.com/xonsh/xonsh/compare/0.15.1...1613914d507884487251ecafb55e281699931eb8
+Upstream changes: https://github.com/xonsh/xonsh/compare/0.15.1...0.17.0
 ---
  nixos/modules/programs/xonsh.nix    |  13 ++-
- pkgs/by-name/xo/xonsh/package.nix   | 133 ++++++++++++++++++++++++----
- pkgs/by-name/xo/xonsh/unwrapped.nix | 108 ----------------------
+ pkgs/by-name/xo/xonsh/package.nix   | 132 ++++++++++++++++++++++++----
+ pkgs/by-name/xo/xonsh/unwrapped.nix | 108 -----------------------
  pkgs/by-name/xo/xonsh/wrapper.nix   |  25 ++++++
  pkgs/top-level/aliases.nix          |   2 +-
  pkgs/top-level/python-packages.nix  |   4 +
- 6 files changed, 149 insertions(+), 136 deletions(-)
+ 6 files changed, 148 insertions(+), 136 deletions(-)
  delete mode 100644 pkgs/by-name/xo/xonsh/unwrapped.nix
  create mode 100644 pkgs/by-name/xo/xonsh/wrapper.nix
 
@@ -53,10 +53,10 @@ index eed5152ba69a57..6bf18d4ebd89c8 100644
 -
  }
 diff --git a/pkgs/by-name/xo/xonsh/package.nix b/pkgs/by-name/xo/xonsh/package.nix
-index de199ff4bc05c8..7b5f706d510eb9 100644
+index de199ff4bc05c8..45c14cb4f2efe5 100644
 --- a/pkgs/by-name/xo/xonsh/package.nix
 +++ b/pkgs/by-name/xo/xonsh/package.nix
-@@ -1,24 +1,119 @@
+@@ -1,24 +1,118 @@
 -{ lib
 -, callPackage
 -, extraPackages ? (ps: [ ])
@@ -81,16 +81,15 @@ index de199ff4bc05c8..7b5f706d510eb9 100644
 -  ] ++ extraPackages ps);
 +  argset = {
 +    pname = "xonsh";
-+    version = "0.16.0-unstable-2024-05-25";
++    version = "0.17.0";
 +    pyproject = true;
 +
 +    # PyPI package ships incomplete tests
 +    src = fetchFromGitHub {
 +      owner = "xonsh";
 +      repo = "xonsh";
-+      # rev = "refs/tags/${argset.version}";
-+      rev = "1613914d507884487251ecafb55e281699931eb8";
-+      hash = "sha256-CSElfkeQZi8o8H9WSZtCvzfk6qCSGEC9ctkI0sCBcSs=";
++      rev = "refs/tags/${argset.version}";
++      hash = "sha256-9sRY9aetWWXzCFfgdHCBCia48THIJcMxsYMnFR6Xa8A=";
 +    };
 +
 +    nativeBuildInputs = with python3Packages; [
@@ -123,7 +122,6 @@ index de199ff4bc05c8..7b5f706d510eb9 100644
 +      "test_no_command_path_completion"
 +      "test_bsd_man_page_completions"
 +      "test_xonsh_activator"
-+      "test_raise_subproc_error_with_show_traceback"
 +      # fails on non-interactive shells
 +      "test_capture_always"
 +      "test_casting"
@@ -132,6 +130,7 @@ index de199ff4bc05c8..7b5f706d510eb9 100644
 +      "test_man_completion"
 +      "test_vc_get_branch"
 +      "test_bash_and_is_alias_is_only_functional_alias"
++      "test_spec_modifier_alias_output_format"
 +      # flaky tests
 +      "test_script"
 +      "test_alias_stability"
@@ -180,7 +179,7 @@ index de199ff4bc05c8..7b5f706d510eb9 100644
 +      changelog = "https://github.com/xonsh/xonsh/raw/main/CHANGELOG.rst";
 +      license = with lib.licenses; [ bsd3 ];
 +      mainProgram = "xonsh";
-+      maintainers = with lib.maintainers; [ AndersonTorres ];
++      maintainers = with lib.maintainers; [ AndersonTorres samlukeyes123 ];
 +    };
 +  };
  in
@@ -341,7 +340,7 @@ index 00000000000000..1b9637f04dd64f
 +    done
 +  ''
 diff --git a/pkgs/top-level/aliases.nix b/pkgs/top-level/aliases.nix
-index cbb5d593f1ae31..51620aacb17334 100644
+index cbb5d593f1ae31..81b20684f9363c 100644
 --- a/pkgs/top-level/aliases.nix
 +++ b/pkgs/top-level/aliases.nix
 @@ -1398,7 +1398,7 @@ mapAliases ({
@@ -349,7 +348,7 @@ index cbb5d593f1ae31..51620aacb17334 100644
    xineUI = xine-ui; # Added 2021-04-27
    xmlada = gnatPackages.xmlada; # Added 2024-02-25
 -  xonsh-unwrapped = xonsh.passthru.unwrapped;
-+  xonsh-unwrapped = python3Packages.xonsh;
++  xonsh-unwrapped = python3Packages.xonsh; # Added 2024-06-18
    xtrt = throw "xtrt has been removed due to being abandoned"; # Added 2023-05-25
    xulrunner = firefox-unwrapped; # Added 2023-11-03
    xvfb_run = xvfb-run; # Added 2021-05-07
@@ -368,26 +367,3 @@ index 4bcc8ea7d1388d..4768530cc88381 100644
    xpath-expressions = callPackage ../development/python-modules/xpath-expressions { };
  
    xpybutil = callPackage ../development/python-modules/xpybutil { };
-
-From 2faecc10ecd63c7d1bc42bbcc35dcf1c1f3487b6 Mon Sep 17 00:00:00 2001
-From: SamLukeYes <samlukeyes123@gmail.com>
-Date: Tue, 11 Jun 2024 16:25:46 +0800
-Subject: [PATCH 2/2] xonsh: add maintainer samlukeyes123
-
----
- pkgs/by-name/xo/xonsh/package.nix | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/pkgs/by-name/xo/xonsh/package.nix b/pkgs/by-name/xo/xonsh/package.nix
-index 7b5f706d510eb9..4513b30729578f 100644
---- a/pkgs/by-name/xo/xonsh/package.nix
-+++ b/pkgs/by-name/xo/xonsh/package.nix
-@@ -112,7 +112,7 @@ let
-       changelog = "https://github.com/xonsh/xonsh/raw/main/CHANGELOG.rst";
-       license = with lib.licenses; [ bsd3 ];
-       mainProgram = "xonsh";
--      maintainers = with lib.maintainers; [ AndersonTorres ];
-+      maintainers = with lib.maintainers; [ AndersonTorres samlukeyes123 ];
-     };
-   };
- in
