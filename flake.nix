@@ -119,8 +119,6 @@
     };
 
     overlays.default = final: prev: {
-      androidPkgs = final.androidenv.androidPkgs;
-      android-tools = final.androidPkgs.androidsdk;
       archix = import inputs.archix { pkgs = final; };
       archlinuxcn-keyring = inputs.archlinuxcn-keyring;
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
