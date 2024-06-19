@@ -32,7 +32,7 @@
       enable = true;
 
       config = ''
-        LANG = "zh_CN.UTF-8"
+        $LANG = "zh_CN.UTF-8"
       '';
 
       package = let 
