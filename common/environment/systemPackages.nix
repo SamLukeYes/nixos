@@ -5,6 +5,7 @@
     authenticator
     gnome.dconf-editor
     godot_4
+    pixelorama
     pot
     tdesktop
     wineWow64Packages.stagingFull
