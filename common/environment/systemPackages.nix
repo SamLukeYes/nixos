@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     authenticator
     gnome.dconf-editor
+    godot_4
     pot
     tdesktop
     wineWow64Packages.stagingFull
