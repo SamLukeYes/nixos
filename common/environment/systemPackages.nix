@@ -28,7 +28,6 @@
     yt-dlp-light                  # frequently used to download videos
 
     # other out-of-tree packages
-    yes.iptux
     yes.mkxp-z
   ];
 }
