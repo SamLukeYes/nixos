@@ -16,7 +16,7 @@
     bat                           # frequently used to view text in terminal
     conda                         # manage python env
     dig                           # must be available without Internet connection
-    ffmpeg                        # video editing
+    ffmpeg-headless               # video editing
     file                          # frequently used to view executable type
     gamescope                     # force resize window
     lsof                          # view port usage
