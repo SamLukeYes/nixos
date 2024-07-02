@@ -32,6 +32,7 @@
           "/dev/dri"
           # "/dev/shm"
           # "/dev/snd"
+          "/dev/video0"
         ];
         BindReadOnly = [
           "/etc/resolv.conf"
@@ -50,9 +51,11 @@
     services."systemd-nspawn@" = {
       serviceConfig.DeviceAllow = [
         "char-drm rwm"
+        "char-usb_device rwm"
         "/dev/dri rw"
         # "/dev/shm rw"
         # "/dev/snd rw"
+        "/dev/video0 rwm"
       ];
     };
 
