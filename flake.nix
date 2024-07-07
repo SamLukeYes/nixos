@@ -40,6 +40,10 @@
       };
       url = "github:xddxdd/nur-packages";
     };
+    xontribs = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:drmikecrowe/nur-packages";
+    };
     yes = {
       flake = false;
       url = "github:SamLukeYes/nix-custom-packages";
@@ -132,6 +136,7 @@
       });
       paru = final.archix.paru;
       rewine = import inputs.rewine { pkgs = final; };
+      xontribs = import inputs.xontribs { pkgs = final; };
       yes = import inputs.yes { pkgs = final; };
       zotero = final.zotero_7;
     };

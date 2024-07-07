@@ -42,7 +42,7 @@
       in xonsh.wrapper.override {
         inherit xonsh;
         extraPackages = ps: [
-          (pkgs.yes.xonsh-direnv.override { inherit python3; })
+          (pkgs.xontribs.xontrib-direnv.override { inherit python3; })
         ];
       };
     };
