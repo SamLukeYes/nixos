@@ -1,8 +1,8 @@
 { pkgs, ... }:
 
-let
-  waitOnline = "${pkgs.networkmanager}/bin/nm-online";
-in
+# let
+#   waitOnline = "${pkgs.networkmanager}/bin/nm-online";
+# in
 
 {
   systemd = {
@@ -18,23 +18,6 @@ in
           Restart = "on-failure";
         };
         unitConfig.ConditionFileNotEmpty = configFile;
-        wantedBy = [ "default.target" ];
-      };
-      ss-ws-local = let
-        configDir = "%h/.config/shadowsocks-ws";
-      in {
-        serviceConfig = {
-          ExecStartPre = waitOnline;
-          ExecStart = "${pkgs.yes.nodePackages.shadowsocks-ws}/bin/ss-ws-local";
-          Restart = "always";
-          RestartSec = 5;
-          WorkingDirectory = configDir;
-        };
-        unitConfig = {
-          ConditionFileNotEmpty = "${configDir}/config.json";
-          StartLimitBurst = 5;
-          StartLimitIntervalSec = 60;
-        };
         wantedBy = [ "default.target" ];
       };
     };
