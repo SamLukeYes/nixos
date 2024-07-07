@@ -3,7 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     authenticator
-    gnome.dconf-editor
+    dconf-editor
     godot_4
     pixelorama
     pot
