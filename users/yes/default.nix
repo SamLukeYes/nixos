@@ -52,6 +52,5 @@
 
     # required by enableKvm for now
     addNetworkInterface = false;
-    enableHardening = false;
   };
 }
