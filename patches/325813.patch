@@ -1,6 +1,6 @@
-From 316c36855d82eaf8a049b67c1d796de849f4dea0 Mon Sep 17 00:00:00 2001
+From df83a721daa094fc6b15b24e94965821ebd01bec Mon Sep 17 00:00:00 2001
 From: SamLukeYes <samlukeyes123@gmail.com>
-Date: Tue, 9 Jul 2024 19:15:19 +0800
+Date: Tue, 9 Jul 2024 23:37:56 +0800
 Subject: [PATCH] xonsh: fix wrapper
 
 ---
@@ -14,7 +14,7 @@ Subject: [PATCH] xonsh: fix wrapper
  delete mode 100644 pkgs/by-name/xo/xonsh/wrapper.nix
 
 diff --git a/nixos/modules/programs/xonsh.nix b/nixos/modules/programs/xonsh.nix
-index 6bf18d4ebd89c8..d124d3f86c734c 100644
+index 6bf18d4ebd89c8..86bdb4088845fc 100644
 --- a/nixos/modules/programs/xonsh.nix
 +++ b/nixos/modules/programs/xonsh.nix
 @@ -23,7 +23,7 @@ in
@@ -22,12 +22,12 @@ index 6bf18d4ebd89c8..d124d3f86c734c 100644
  
        package = lib.mkPackageOption pkgs "xonsh" {
 -        example = "xonsh.wrapper.override { extraPackages = ps: [ ps.requests ]; }";
-+        example = "xonsh.override { extraPackages = ps: [ ps.requests ]; }";
++        example = "pkgs.xonsh.override { extraPackages = ps: [ ps.requests ]; }";
        };
  
        config = lib.mkOption {
 diff --git a/pkgs/by-name/xo/xonsh/package.nix b/pkgs/by-name/xo/xonsh/package.nix
-index 60b96dd67f24e3..01e83dd15083db 100644
+index 60b96dd67f24e3..2cf2b9241ca491 100644
 --- a/pkgs/by-name/xo/xonsh/package.nix
 +++ b/pkgs/by-name/xo/xonsh/package.nix
 @@ -1,118 +1,24 @@
@@ -152,7 +152,7 @@ index 60b96dd67f24e3..01e83dd15083db 100644
 -    };
 -  };
 +  pythonEnv = python3.withPackages
-+    (ps: [ (ps.xonsh) ] ++ extraPackages ps);
++    (ps: [ ps.xonsh ] ++ extraPackages ps);
 +  xonsh = python3.pkgs.xonsh;
  in
 -python3Packages.buildPythonApplication argset
