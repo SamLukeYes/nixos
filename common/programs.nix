@@ -36,7 +36,7 @@
       '';
 
       package = let 
-        python3 = pkgs.python3;
+        python3 = pkgs.python311;
         python3Packages = python3.pkgs;
         xonsh = pkgs.xonsh.override { inherit python3Packages; };
       in xonsh.wrapper.override {
