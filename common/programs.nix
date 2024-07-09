@@ -35,12 +35,12 @@
         $LANG = "zh_CN.UTF-8"
       '';
 
-      package = let 
-        python3 = pkgs.python311;
-      in pkgs.xonsh.override {
-        inherit python3;
+      package = pkgs.xonsh.override {
+        # python3 = pkgs.python311;
         extraPackages = ps: [
-          (pkgs.xontribs.xontrib-direnv.override { inherit python3; })
+          ps.distro
+          (pkgs.xontribs.xontrib-sh.override { python3 = ps.python; })
+          (pkgs.yes.xonsh-direnv.override { python3 = ps.python; })
         ];
       };
     };
