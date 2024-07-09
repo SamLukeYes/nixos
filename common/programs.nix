@@ -37,10 +37,8 @@
 
       package = let 
         python3 = pkgs.python311;
-        python3Packages = python3.pkgs;
-        xonsh = pkgs.xonsh.override { inherit python3Packages; };
-      in xonsh.wrapper.override {
-        inherit xonsh;
+      in pkgs.xonsh.override {
+        inherit python3;
         extraPackages = ps: [
           (pkgs.xontribs.xontrib-direnv.override { inherit python3; })
         ];
