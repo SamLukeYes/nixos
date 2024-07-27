@@ -4,7 +4,8 @@
   i18n = {
     # defaultLocale = "zh_CN.UTF-8";
     inputMethod = {
-      enabled = "ibus";
+      enable = true;
+      type = "ibus";
       ibus = {
         engines = with pkgs.ibus-engines; [
           libpinyin
