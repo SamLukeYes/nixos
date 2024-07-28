@@ -39,8 +39,8 @@
         # python3 = pkgs.python311;
         extraPackages = ps: [
           ps.distro
-          (pkgs.xontribs.xontrib-sh.override { python3 = ps.python; })
-          (pkgs.yes.xonsh-direnv.override { python3 = ps.python; })
+          (pkgs.xontribs.xontrib-sh.override { inherit (ps) buildPythonPackage; })
+          (pkgs.xontribs.xontrib-direnv.override { inherit (ps) buildPythonPackage; })
         ];
       };
     };
