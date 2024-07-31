@@ -8,8 +8,6 @@
       dockerCompat = true;
     };
 
-    waydroid.enable = true;
-
     vmVariant = {
       imports = [
         "${modulesPath}/virtualisation/qemu-vm.nix"
