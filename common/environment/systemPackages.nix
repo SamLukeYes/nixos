@@ -22,7 +22,6 @@
     lsof                          # view port usage
     nix-tree                      # frequently used to inspect space usage
     paru                          # frequently used to query AUR packages
-    sshfs                         # frequently used for file sharing
     starship                      # configured without nix
     subversion                    # version control system
     yt-dlp-light                  # frequently used to download videos
