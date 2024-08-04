@@ -6,6 +6,7 @@
     ./hardware-configuration.nix
     ../../common
     ../../optional/apps
+    ../../optional/containers
     ../../optional/databases
     ../../optional/fonts
     ../../users/yes
