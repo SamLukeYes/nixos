@@ -61,7 +61,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/325813.patch  # xonsh
-      ./patches/331099.patch  # sequoia-sq
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
