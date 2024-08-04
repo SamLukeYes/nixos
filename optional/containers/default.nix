@@ -1,9 +1,6 @@
-{ pkgs, ... }:
+{ config, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    kubernetes-helm
-  ];
-
   services.k3s.enable = true;
+  systemd.services.k3s.environment = config.networking.proxy.envVars;
 }
