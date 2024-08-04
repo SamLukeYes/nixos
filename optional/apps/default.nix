@@ -6,8 +6,6 @@
   ];
   
   environment.systemPackages = with pkgs; [
-    rustdesk-flutter
-
     ((vscode.override {
       commandLineArgs = "--touch-events --enable-wayland-ime --disable-gpu-shader-disk-cache -n";
     }).fhsWithPackages (ps: with ps; [
