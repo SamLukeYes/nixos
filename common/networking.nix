@@ -7,12 +7,6 @@
         23332   # for lx-music sync
       ];
       allowedUDPPorts = allowedTCPPorts;
-
-      allowedTCPPortRanges = [{
-        from = 8080;
-        to = 8089;
-      }];
-      allowedUDPPortRanges = allowedTCPPortRanges;
     };
     networkmanager.enable = true;
   };
