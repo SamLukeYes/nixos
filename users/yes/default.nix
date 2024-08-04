@@ -9,18 +9,6 @@
     };
   };
 
-  services.jenkins = {
-    enable = true;
-    packages = with config; [
-      nix.package
-      programs.git.package
-      programs.java.package
-      programs.ssh.package
-    ];
-    port = 8083;
-    user = "yes";
-  };
-
   users = {
     users.yes = {
       description = "Sam L. Yes";
