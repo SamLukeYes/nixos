@@ -1,7 +1,7 @@
 From df83a721daa094fc6b15b24e94965821ebd01bec Mon Sep 17 00:00:00 2001
 From: SamLukeYes <samlukeyes123@gmail.com>
 Date: Tue, 9 Jul 2024 23:37:56 +0800
-Subject: [PATCH] xonsh: fix wrapper
+Subject: [PATCH 1/3] xonsh: fix wrapper
 
 ---
  nixos/modules/programs/xonsh.nix    |   2 +-
@@ -14,7 +14,7 @@ Subject: [PATCH] xonsh: fix wrapper
  delete mode 100644 pkgs/by-name/xo/xonsh/wrapper.nix
 
 diff --git a/nixos/modules/programs/xonsh.nix b/nixos/modules/programs/xonsh.nix
-index 6bf18d4ebd89c8..86bdb4088845fc 100644
+index 6bf18d4ebd89c89..86bdb4088845fce 100644
 --- a/nixos/modules/programs/xonsh.nix
 +++ b/nixos/modules/programs/xonsh.nix
 @@ -23,7 +23,7 @@ in
@@ -27,7 +27,7 @@ index 6bf18d4ebd89c8..86bdb4088845fc 100644
  
        config = lib.mkOption {
 diff --git a/pkgs/by-name/xo/xonsh/package.nix b/pkgs/by-name/xo/xonsh/package.nix
-index 60b96dd67f24e3..2cf2b9241ca491 100644
+index 60b96dd67f24e3c..2cf2b9241ca491b 100644
 --- a/pkgs/by-name/xo/xonsh/package.nix
 +++ b/pkgs/by-name/xo/xonsh/package.nix
 @@ -1,118 +1,24 @@
@@ -169,7 +169,7 @@ index 60b96dd67f24e3..2cf2b9241ca491 100644
 +  ''
 diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
 new file mode 100644
-index 00000000000000..5d2ec15cc403fe
+index 000000000000000..5d2ec15cc403feb
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
 @@ -0,0 +1,124 @@
@@ -299,7 +299,7 @@ index 00000000000000..5d2ec15cc403fe
 +pythonPackages.buildPythonPackage argset
 diff --git a/pkgs/by-name/xo/xonsh/wrapper.nix b/pkgs/by-name/xo/xonsh/wrapper.nix
 deleted file mode 100644
-index 1b9637f04dd64f..00000000000000
+index 1b9637f04dd64f3..000000000000000
 --- a/pkgs/by-name/xo/xonsh/wrapper.nix
 +++ /dev/null
 @@ -1,25 +0,0 @@
@@ -329,7 +329,7 @@ index 1b9637f04dd64f..00000000000000
 -    done
 -  ''
 diff --git a/pkgs/top-level/python-packages.nix b/pkgs/top-level/python-packages.nix
-index 39b8b28be828b6..930f9f58f20719 100644
+index 39b8b28be828b6f..930f9f58f20719c 100644
 --- a/pkgs/top-level/python-packages.nix
 +++ b/pkgs/top-level/python-packages.nix
 @@ -17351,9 +17351,7 @@ self: super: with self; {
@@ -343,3 +343,125 @@ index 39b8b28be828b6..930f9f58f20719 100644
  
    xpath-expressions = callPackage ../development/python-modules/xpath-expressions { };
  
+
+From 52e3f9dbf40d7b0c4bfebee96ad021101dde45bc Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes@outlook.com>
+Date: Sat, 20 Jul 2024 02:20:47 +0800
+Subject: [PATCH 2/3] xonsh: remove indefinite article from meta.description
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Co-authored-by: éclairevoyant <848000+eclairevoyant@users.noreply.github.com>
+---
+ pkgs/by-name/xo/xonsh/unwrapped.nix | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
+index 5d2ec15cc403feb..76c90af0a8f487e 100644
+--- a/pkgs/by-name/xo/xonsh/unwrapped.nix
++++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
+@@ -113,7 +113,7 @@ let
+ 
+     meta = {
+       homepage = "https://xon.sh/";
+-      description = "A Python-ish, BASHwards-compatible shell";
++      description = "Python-ish, BASHwards-compatible shell";
+       changelog = "https://github.com/xonsh/xonsh/raw/main/CHANGELOG.rst";
+       license = with lib.licenses; [ bsd3 ];
+       mainProgram = "xonsh";
+
+From 633da8f7a0a05aca42f6cc23e53523e18ce10a4f Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Fri, 9 Aug 2024 22:48:43 +0800
+Subject: [PATCH 3/3] xonsh: 0.17.0 -> 0.18.2
+
+---
+ pkgs/by-name/xo/xonsh/unwrapped.nix | 48 ++++++++++++++++-------------
+ 1 file changed, 26 insertions(+), 22 deletions(-)
+
+diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
+index 76c90af0a8f487e..4b9f6c6e3cfc0f5 100644
+--- a/pkgs/by-name/xo/xonsh/unwrapped.nix
++++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
+@@ -12,7 +12,7 @@ let
+ 
+   argset = {
+     pname = "xonsh";
+-    version = "0.17.0";
++    version = "0.18.2";
+     pyproject = true;
+ 
+     # PyPI package ships incomplete tests
+@@ -20,7 +20,7 @@ let
+       owner = "xonsh";
+       repo = "xonsh";
+       rev = "refs/tags/${argset.version}";
+-      hash = "sha256-9sRY9aetWWXzCFfgdHCBCia48THIJcMxsYMnFR6Xa8A=";
++      hash = "sha256-iTdUu2yGixWwDJICDLfzRcwgGe+xlq2CvxUeSbmDiUU=";
+     };
+ 
+     nativeBuildInputs = with pythonPackages; [
+@@ -28,23 +28,28 @@ let
+       wheel
+     ];
+ 
+-    propagatedBuildInputs = (with pythonPackages; [
+-      ply
+-      prompt-toolkit
+-      pygments
+-    ]);
+-
+-    nativeCheckInputs = [
+-      git
+-      glibcLocales
+-    ] ++ (with pythonPackages; [
+-      pip
+-      pyte
+-      pytest-mock
+-      pytest-subprocess
+-      pytestCheckHook
+-      requests
+-    ]);
++    propagatedBuildInputs = (
++      with pythonPackages;
++      [
++        ply
++        prompt-toolkit
++        pygments
++      ]
++    );
++
++    nativeCheckInputs =
++      [
++        git
++        glibcLocales
++      ]
++      ++ (with pythonPackages; [
++        pip
++        pyte
++        pytest-mock
++        pytest-subprocess
++        pytestCheckHook
++        requests
++      ]);
+ 
+     disabledTests = [
+       # fails on sandbox
+@@ -71,14 +76,13 @@ let
+       "test_subproc_output_format"
+ 
+       # https://github.com/xonsh/xonsh/issues/5569
+-      "test_spec_modifier_alias_output_format"
++      "test_spec_decorator_alias_output_format"
+     ];
+ 
+     disabledTestPaths = [
+       # fails on sandbox
+       "tests/completers/test_command_completers.py"
+-      "tests/test_ptk_highlight.py"
+-      "tests/test_ptk_shell.py"
++      "tests/shell/test_ptk_highlight.py"
+       # fails on non-interactive shells
+       "tests/prompt/test_gitstatus.py"
+       "tests/completers/test_bash_completer.py"
