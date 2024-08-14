@@ -16,6 +16,8 @@
       sqlite                            # allow connection to sqlite database
       xclip                             # for Office Viewer Markdown Editor
     ]))
+
+    wineWow64Packages.stagingFull
     
     # large optional dependencies of GUI applications
     tesseract
