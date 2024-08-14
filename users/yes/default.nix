@@ -15,7 +15,6 @@
       extraGroups = [
         "adbusers"
         "networkmanager"
-        "vboxusers"
         "wheel"
         "wireshark"
       ];
@@ -32,13 +31,5 @@
         })
       ];
     };
-  };
-
-  virtualisation.virtualbox.host = {
-    enable = true;
-    enableKvm = true;
-
-    # required by enableKvm for now
-    addNetworkInterface = false;
   };
 }

@@ -8,6 +8,8 @@
       dockerCompat = true;
     };
 
+    spiceUSBRedirection.enable = true;
+
     vmVariant = {
       imports = [
         "${modulesPath}/virtualisation/qemu-vm.nix"
@@ -69,7 +71,6 @@
         diskSize = 8192;
         memorySize = 4096;
         qemu.options = [ "-device virtio-vga-gl -display gtk,gl=on" ];
-        virtualbox.host.enable = lib.mkForce false;
       };
     };
   };
