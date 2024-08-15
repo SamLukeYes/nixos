@@ -8,6 +8,7 @@
   environment.systemPackages = with pkgs; [
     gnome-frog
     wineWow64Packages.stagingFull
+    zotero
 
     ((vscode.override {
       commandLineArgs = "--touch-events --enable-wayland-ime --disable-gpu-shader-disk-cache -n";

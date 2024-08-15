@@ -8,7 +8,6 @@
     pixelorama
     tdesktop
     xournalpp
-    zotero
 
     # CLI programs
     bat                           # frequently used to view text in terminal
