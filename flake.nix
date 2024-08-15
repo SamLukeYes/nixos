@@ -139,7 +139,6 @@
       rewine = import inputs.rewine { pkgs = final; };
       xontribs = import inputs.xontribs { pkgs = final; };
       yes = import inputs.yes { pkgs = final; };
-      zotero = final.zotero_7;
     };
   };
 }
