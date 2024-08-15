@@ -3,6 +3,7 @@
 {
   imports = [
     ./java
+    ./quickemu.nix
   ];
   
   environment.systemPackages = with pkgs; [

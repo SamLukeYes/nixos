@@ -1,0 +1,312 @@
+From f0a93ab165f60adfe3690a15ffa01c49e321c0a4 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Niklas=20Hamb=C3=BCchen?= <mail@nh2.me>
+Date: Tue, 13 Aug 2024 03:28:11 +0000
+Subject: [PATCH] ceph: Fix build by fully vendoring old cryptography version
+ nix files.
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+With cryptography 42 we can no longer just override the `src`,
+because the derivation for 42 can no longer build version 40.
+
+So revive the old version based on:
+
+    git show d74195bc77c03b6b7aa7c3433205dd518f245ef2~:pkgs/development/python-modules/cryptography/default.nix > pkgs/development/python-modules/cryptography/40.nix
+    git show d74195bc77c03b6b7aa7c3433205dd518f245ef2~:pkgs/development/python-modules/cryptography/vectors.nix > pkgs/development/python-modules/cryptography/vectors-40.nix           │
+
+Also:
+
+* Include a patch for CVE-2024-26130
+* Run `nixfmt` on them.
+---
+ .../python-modules/cryptography/40.nix        | 135 ++++++++++++++++++
+ ...or-CVE-2023-49083-on-cryptography-40.patch |   0
+ .../cryptography/vectors-40.nix               |  36 +++++
+ pkgs/tools/filesystems/ceph/default.nix       |  41 ++----
+ pkgs/top-level/python-packages.nix            |   4 +
+ 5 files changed, 186 insertions(+), 30 deletions(-)
+ create mode 100644 pkgs/development/python-modules/cryptography/40.nix
+ rename pkgs/{tools/filesystems/ceph => development/python-modules/cryptography}/python-cryptography-Cherry-pick-fix-for-CVE-2023-49083-on-cryptography-40.patch (100%)
+ create mode 100644 pkgs/development/python-modules/cryptography/vectors-40.nix
+
+diff --git a/pkgs/development/python-modules/cryptography/40.nix b/pkgs/development/python-modules/cryptography/40.nix
+new file mode 100644
+index 000000000000000..5ad8ef1d4b171c1
+--- /dev/null
++++ b/pkgs/development/python-modules/cryptography/40.nix
+@@ -0,0 +1,135 @@
++# This older version only exists because `ceph` needs it, see its package.
++{
++  lib,
++  stdenv,
++  callPackage,
++  buildPythonPackage,
++  fetchPypi,
++  fetchpatch,
++  rustPlatform,
++  cargo,
++  rustc,
++  setuptoolsRustBuildHook,
++  openssl,
++  Security,
++  isPyPy,
++  cffi,
++  pkg-config,
++  pytestCheckHook,
++  pytest-subtests,
++  pythonOlder,
++  pretend,
++  libiconv,
++  libxcrypt,
++  iso8601,
++  py,
++  pytz,
++  hypothesis,
++}:
++
++let
++  cryptography-vectors = callPackage ./vectors-40.nix { };
++in
++buildPythonPackage rec {
++  pname = "cryptography";
++  version = "40.0.1"; # Also update the hash in vectors.nix
++  format = "setuptools";
++  disabled = pythonOlder "3.6";
++
++  src = fetchPypi {
++    inherit pname version;
++    hash = "sha256-KAPy+LHpX2FEGZJsfm9V2CivxhTKXtYVQ4d65mjMNHI=";
++  };
++
++  cargoDeps = rustPlatform.fetchCargoTarball {
++    inherit src;
++    sourceRoot = "${pname}-${version}/${cargoRoot}";
++    name = "${pname}-${version}";
++    hash = "sha256-gFfDTc2QWBWHBCycVH1dYlCsWQMVcRZfOBIau+njtDU=";
++  };
++
++  # Since Cryptography v40 is quite outdated, we need to backport
++  # security fixes that are only available in newer versions.
++  patches = [
++    # Fix https://nvd.nist.gov/vuln/detail/CVE-2023-49083 which has no upstream backport.
++    # See https://github.com/pyca/cryptography/commit/f09c261ca10a31fe41b1262306db7f8f1da0e48a#diff-f5134bf8f3cf0a5cc8601df55e50697acc866c603a38caff98802bd8e17976c5R1893
++    ./python-cryptography-Cherry-pick-fix-for-CVE-2023-49083-on-cryptography-40.patch
++
++    # Fix https://nvd.nist.gov/vuln/detail/CVE-2024-26130
++    # See https://github.com/pyca/cryptography/commit/97d231672763cdb5959a3b191e692a362f1b9e55
++    (fetchpatch {
++      name = "python-cryptography-CVE-2024-26130-dont-crash-when-a-PKCS-12-key-and-cert-dont-match-mmap-mode.patch";
++      url = "https://github.com/pyca/cryptography/commit/97d231672763cdb5959a3b191e692a362f1b9e55.patch";
++      hash = "sha256-l45NOzOWhHW4nY4OIRpdjYQRvUW8BROGWdpkAtvVn0Y=";
++    })
++  ];
++
++  postPatch = ''
++    substituteInPlace pyproject.toml \
++      --replace "--benchmark-disable" ""
++  '';
++
++  cargoRoot = "src/rust";
++
++  nativeBuildInputs = [
++    rustPlatform.cargoSetupHook
++    setuptoolsRustBuildHook
++    cargo
++    rustc
++    pkg-config
++  ] ++ lib.optionals (!isPyPy) [ cffi ];
++
++  buildInputs =
++    [ openssl ]
++    ++ lib.optionals stdenv.isDarwin [
++      Security
++      libiconv
++    ]
++    ++ lib.optionals (pythonOlder "3.9") [ libxcrypt ];
++
++  propagatedBuildInputs = lib.optionals (!isPyPy) [ cffi ];
++
++  nativeCheckInputs = [
++    cryptography-vectors
++    hypothesis
++    iso8601
++    pretend
++    py
++    pytestCheckHook
++    pytest-subtests
++    pytz
++  ];
++
++  pytestFlagsArray = [ "--disable-pytest-warnings" ];
++
++  disabledTestPaths =
++    [
++      # save compute time by not running benchmarks
++      "tests/bench"
++    ]
++    ++ lib.optionals (stdenv.isDarwin && stdenv.isAarch64) [
++      # aarch64-darwin forbids W+X memory, but this tests depends on it:
++      # * https://cffi.readthedocs.io/en/latest/using.html#callbacks
++      "tests/hazmat/backends/test_openssl_memleak.py"
++    ];
++
++  meta = with lib; {
++    description = "A package which provides cryptographic recipes and primitives";
++    longDescription = ''
++      Cryptography includes both high level recipes and low level interfaces to
++      common cryptographic algorithms such as symmetric ciphers, message
++      digests, and key derivation functions.
++      Our goal is for it to be your "cryptographic standard library". It
++      supports Python 2.7, Python 3.5+, and PyPy 5.4+.
++    '';
++    homepage = "https://github.com/pyca/cryptography";
++    changelog =
++      "https://cryptography.io/en/latest/changelog/#v" + replaceStrings [ "." ] [ "-" ] version;
++    license = with licenses; [
++      asl20
++      bsd3
++      psfl
++    ];
++    maintainers = with maintainers; [ nh2 ];
++  };
++}
+diff --git a/pkgs/tools/filesystems/ceph/python-cryptography-Cherry-pick-fix-for-CVE-2023-49083-on-cryptography-40.patch b/pkgs/development/python-modules/cryptography/python-cryptography-Cherry-pick-fix-for-CVE-2023-49083-on-cryptography-40.patch
+similarity index 100%
+rename from pkgs/tools/filesystems/ceph/python-cryptography-Cherry-pick-fix-for-CVE-2023-49083-on-cryptography-40.patch
+rename to pkgs/development/python-modules/cryptography/python-cryptography-Cherry-pick-fix-for-CVE-2023-49083-on-cryptography-40.patch
+diff --git a/pkgs/development/python-modules/cryptography/vectors-40.nix b/pkgs/development/python-modules/cryptography/vectors-40.nix
+new file mode 100644
+index 000000000000000..f2d57cfdcf82182
+--- /dev/null
++++ b/pkgs/development/python-modules/cryptography/vectors-40.nix
+@@ -0,0 +1,36 @@
++# This older version only exists because `ceph` needs it, see `40.nix`.
++{
++  buildPythonPackage,
++  fetchPypi,
++  lib,
++  cryptography_40,
++}:
++
++buildPythonPackage rec {
++  pname = "cryptography-vectors";
++  # The test vectors must have the same version as the cryptography package
++  inherit (cryptography_40) version;
++  format = "setuptools";
++
++  src = fetchPypi {
++    pname = "cryptography_vectors";
++    inherit version;
++    hash = "sha256-hGBwa1tdDOSoVXHKM4nPiPcAu2oMYTPcn+D1ovW9oEE=";
++  };
++
++  # No tests included
++  doCheck = false;
++
++  pythonImportsCheck = [ "cryptography_vectors" ];
++
++  meta = with lib; {
++    description = "Test vectors for the cryptography package";
++    homepage = "https://cryptography.io/en/latest/development/test-vectors/";
++    # Source: https://github.com/pyca/cryptography/tree/master/vectors;
++    license = with licenses; [
++      asl20
++      bsd3
++    ];
++    maintainers = with maintainers; [ nh2 ];
++  };
++}
+diff --git a/pkgs/tools/filesystems/ceph/default.nix b/pkgs/tools/filesystems/ceph/default.nix
+index 63104692c529aac..073a85bc2410a18 100644
+--- a/pkgs/tools/filesystems/ceph/default.nix
++++ b/pkgs/tools/filesystems/ceph/default.nix
+@@ -171,12 +171,13 @@ let
+   python = python311.override {
+     self = python;
+     packageOverrides = self: super: let
+-      cryptographyOverrideVersion = "40.0.1";
+       bcryptOverrideVersion = "4.0.1";
+     in {
+       # Ceph does not support `bcrypt` > 4.0 yet:
+       # * Upstream issue: https://tracker.ceph.com/issues/63529
+       #   > Python Sub-Interpreter Model Used by ceph-mgr Incompatible With Python Modules Based on PyO3
++      # * Moved to issue: https://tracker.ceph.com/issues/64213
++      #   > MGR modules incompatible with later PyO3 versions - PyO3 modules may only be initialized once per interpreter process
+       bcrypt = super.bcrypt.overridePythonAttrs (old: rec {
+         pname = "bcrypt";
+         version = bcryptOverrideVersion;
+@@ -192,6 +193,7 @@ let
+           hash = "sha256-lDWX69YENZFMu7pyBmavUZaalGvFqbHSHfkwkzmDQaY=";
+         };
+       });
++
+       # Ceph does not support `cryptography` > 40 yet:
+       # * https://github.com/NixOS/nixpkgs/pull/281858#issuecomment-1899358602
+       # * Upstream issue: https://tracker.ceph.com/issues/63529
+@@ -201,35 +203,7 @@ let
+       # this also forces us to pin an older `pyopenssl` because the current one
+       # is not compatible with older `cryptography`, see:
+       #     https://github.com/pyca/pyopenssl/blob/d9752e44127ba36041b045417af8a0bf16ec4f1e/CHANGELOG.rst#2320-2023-05-30
+-      cryptography = super.cryptography.overridePythonAttrs (old: rec {
+-        version = cryptographyOverrideVersion;
+-
+-        src = fetchPypi {
+-          inherit (old) pname;
+-          version = cryptographyOverrideVersion;
+-          hash = "sha256-KAPy+LHpX2FEGZJsfm9V2CivxhTKXtYVQ4d65mjMNHI=";
+-        };
+-
+-        cargoDeps = rustPlatform.fetchCargoTarball {
+-          inherit src;
+-          sourceRoot = let cargoRoot = "src/rust"; in "${old.pname}-${cryptographyOverrideVersion}/${cargoRoot}";
+-          name = "${old.pname}-${cryptographyOverrideVersion}";
+-          hash = "sha256-gFfDTc2QWBWHBCycVH1dYlCsWQMVcRZfOBIau+njtDU=";
+-        };
+-
+-        # Not using the normal `(old.patches or []) ++` pattern here to use
+-        # the overridden package's patches, because current nixpkgs's `cryptography`
+-        # has patches that do not apply on this old version.
+-        patches = [
+-          # Fix https://nvd.nist.gov/vuln/detail/CVE-2023-49083 which has no upstream backport.
+-          # See https://github.com/pyca/cryptography/commit/f09c261ca10a31fe41b1262306db7f8f1da0e48a#diff-f5134bf8f3cf0a5cc8601df55e50697acc866c603a38caff98802bd8e17976c5R1893
+-          ./python-cryptography-Cherry-pick-fix-for-CVE-2023-49083-on-cryptography-40.patch
+-        ];
+-
+-        # Tests would require overriding `cryptography-vectors`, which is not currently
+-        # possible/desired, see: https://github.com/NixOS/nixpkgs/pull/281858#pullrequestreview-1841421866
+-        doCheck = false;
+-      });
++      cryptography = self.cryptography_40;
+ 
+       # This is the most recent version of `pyopenssl` that's still compatible with `cryptography` 40.
+       # See https://github.com/NixOS/nixpkgs/pull/281858#issuecomment-1899358602
+@@ -248,6 +222,13 @@ let
+         ];
+       });
+ 
++
++      fastapi = super.fastapi.overridePythonAttrs (old: rec {
++        # Flaky test:
++        #     ResourceWarning: Unclosed <MemoryObjectSendStream>
++        doCheck = false;
++      });
++
+       # Ceph does not support `kubernetes` >= 19, see:
+       #     https://github.com/NixOS/nixpkgs/pull/281858#issuecomment-1900324090
+       kubernetes = super.kubernetes.overridePythonAttrs (old: rec {
+diff --git a/pkgs/top-level/python-packages.nix b/pkgs/top-level/python-packages.nix
+index facfa2eda2f51b3..0d74b62fbcf7c2f 100644
+--- a/pkgs/top-level/python-packages.nix
++++ b/pkgs/top-level/python-packages.nix
+@@ -2645,6 +2645,10 @@ self: super: with self; {
+   cryptography = callPackage ../development/python-modules/cryptography {
+     inherit (pkgs.darwin.apple_sdk.frameworks) Security;
+   };
++  # This older version is only for `ceph`, you shouldn't use this otherwise:
++  cryptography_40 = callPackage ../development/python-modules/cryptography/40.nix {
++    inherit (pkgs.darwin.apple_sdk.frameworks) Security;
++  };
+ 
+   cryptolyzer = callPackage ../development/python-modules/cryptolyzer { };
+ 
