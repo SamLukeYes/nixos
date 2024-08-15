@@ -6,7 +6,6 @@
     dconf-editor
     godot_4
     pixelorama
-    pot
     tdesktop
     xournalpp
     zotero

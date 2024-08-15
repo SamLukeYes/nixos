@@ -6,6 +6,9 @@
   ];
   
   environment.systemPackages = with pkgs; [
+    gnome-frog
+    wineWow64Packages.stagingFull
+
     ((vscode.override {
       commandLineArgs = "--touch-events --enable-wayland-ime --disable-gpu-shader-disk-cache -n";
     }).fhsWithPackages (ps: with ps; [
@@ -16,11 +19,8 @@
       sqlite                            # allow connection to sqlite database
       xclip                             # for Office Viewer Markdown Editor
     ]))
-
-    wineWow64Packages.stagingFull
     
     # large optional dependencies of GUI applications
-    tesseract
     texlive.combined.scheme-full
   ];
 }
