@@ -1,14 +1,14 @@
 { lib, modulesPath, pkgs, ... }:
 
 {
+  imports = [ ./spice.nix ];
+
   virtualisation = {
     podman = {
       enable = true;
       autoPrune.enable = true;
       dockerCompat = true;
     };
-
-    spiceUSBRedirection.enable = true;
 
     vmVariant = {
       imports = [

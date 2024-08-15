@@ -10,7 +10,7 @@
       ./programs.nix
       ./services
       ./systemd.nix
-      ./virtualisation.nix
+      ./virtualisation
     ];
 
   # Set your time zone.
