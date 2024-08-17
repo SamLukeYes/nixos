@@ -12,6 +12,7 @@
       gnome.gnome-contacts          # useless on PC
       gnome.gnome-maps              # use online maps instead
       gnome.gnome-music             # use celluloid instead
+      gnome.gnome-weather           # use MSN weather instead
       simple-scan                   # no scanner available
       totem                         # use celluloid instead
       evince                        # use web browser for pdf
