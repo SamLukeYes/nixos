@@ -6,10 +6,7 @@
     ./common
   ];
 
-  boot = {
-    initrd.systemd.enable = lib.mkForce false;
-    plymouth.enable = lib.mkForce false;
-  };
+  boot.initrd.systemd.enable = lib.mkForce false;
 
   environment.systemPackages = with pkgs; [
     arch-install-scripts
@@ -20,8 +17,6 @@
   networking.proxy.default = lib.mkForce null;
 
   programs.firefox.enable = lib.mkForce false;
-
-  security.sudo-rs.enable = lib.mkForce false;
 
   users.defaultUserShell = config.programs.xonsh.package;
 }
