@@ -62,6 +62,7 @@
       # Add nixpkgs patches here
       ./patches/325813.patch  # xonsh
       ./patches/334286.patch  # qemu
+      ./patches/335433.patch  # pacman
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
