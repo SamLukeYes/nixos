@@ -8,7 +8,6 @@
   
   environment.systemPackages = with pkgs; [
     gnome-frog
-    wineWow64Packages.stagingFull
     zotero
 
     ((vscode.override {
