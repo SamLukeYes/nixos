@@ -4,8 +4,6 @@
   environment.systemPackages = with pkgs; [
     authenticator
     dconf-editor
-    godot_4
-    pixelorama
     tdesktop
     xournalpp
 
