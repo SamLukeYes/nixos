@@ -4,6 +4,7 @@
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-gnome.nix"
     ./common
+    ./optional/desktop/gnome.nix
   ];
 
   boot.initrd.systemd.enable = lib.mkForce false;
@@ -16,7 +17,7 @@
 
   networking.proxy.default = lib.mkForce null;
 
-  programs.firefox.enable = lib.mkForce false;
+  programs.firefox.package = lib.mkForce pkgs.firefox;
 
   users.defaultUserShell = config.programs.xonsh.package;
 }

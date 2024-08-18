@@ -33,6 +33,7 @@
 
       config = ''
         $LANG = "zh_CN.UTF-8"
+        $SHELL_TYPE = "prompt_toolkit"
       '';
 
       package = pkgs.xonsh.override {
