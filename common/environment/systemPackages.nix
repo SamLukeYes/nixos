@@ -20,7 +20,8 @@
     subversion                    # version control system
     yt-dlp-light                  # frequently used to download videos
 
-    # other out-of-tree packages
+    # out-of-tree packages
+    archix.devtools
     yes.mkxp-z
   ];
 }
