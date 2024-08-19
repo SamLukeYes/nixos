@@ -17,7 +17,10 @@
 
   networking.proxy.default = lib.mkForce null;
 
-  programs.firefox.package = lib.mkForce pkgs.firefox;
+  programs = {
+    firefox.package = lib.mkForce pkgs.firefox;
+    vim.package = pkgs.vim-full;
+  };
 
   users.defaultUserShell = config.programs.xonsh.package;
 }
