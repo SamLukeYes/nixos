@@ -60,8 +60,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/325813.patch  # xonsh
-      ./patches/328180.patch  # paru
       ./patches/334286.patch  # qemu
       ./patches/335433.patch  # pacman
     ];
