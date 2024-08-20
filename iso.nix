@@ -17,10 +17,7 @@
 
   networking.proxy.default = lib.mkForce null;
 
-  programs = {
-    firefox.package = lib.mkForce pkgs.firefox;
-    vim.package = pkgs.vim-full;
-  };
+  programs.firefox.package = lib.mkForce pkgs.firefox;
 
   systemd = {
     additionalUpstreamSystemUnits = [ "systemd-time-wait-sync.service" ];
