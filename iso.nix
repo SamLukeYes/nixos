@@ -22,5 +22,10 @@
     vim.package = pkgs.vim-full;
   };
 
+  systemd = {
+    additionalUpstreamSystemUnits = [ "systemd-time-wait-sync.service" ];
+    services.systemd-time-wait-sync.wantedBy = [ "multi-user.target" ];
+  };
+
   users.defaultUserShell = config.programs.xonsh.package;
 }
