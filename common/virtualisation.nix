@@ -28,6 +28,8 @@
         proxy.default = lib.mkForce null;
       };
 
+      programs.xonsh.config = lib.mkForce "";
+
       security = {
         polkit.extraConfig = ''
           polkit.addRule(function(action, subject) {
