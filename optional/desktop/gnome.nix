@@ -4,15 +4,15 @@
   environment = {
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/gnome.nix
     gnome.excludePackages = with pkgs; [
-      gnome.gnome-shell-extensions  # use the standalone extensions
+      gnome-shell-extensions        # use the standalone extensions
       epiphany                      # use firefox instead
       gnome-text-editor             # use vscode instead
       gnome-calculator              # use xonsh instead
       gnome-console                 # use blackbox-terminal instead
-      gnome.gnome-contacts          # useless on PC
-      gnome.gnome-maps              # use online maps instead
-      gnome.gnome-music             # use celluloid instead
-      gnome.gnome-weather           # use MSN weather instead
+      gnome-contacts                # useless on PC
+      gnome-maps                    # use online maps instead
+      gnome-music                   # use celluloid instead
+      gnome-weather                 # use MSN weather instead
       simple-scan                   # no scanner available
       totem                         # use celluloid instead
       evince                        # use web browser for pdf
@@ -38,8 +38,8 @@
       celluloid
       endeavour
       gimp
-      gnome.gnome-sound-recorder
       gnome-firmware
+      gnome-sound-recorder
       gnome-tweaks
       libreoffice
 
