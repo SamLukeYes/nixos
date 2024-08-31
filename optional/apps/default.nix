@@ -3,6 +3,7 @@
 {
   imports = [
     ./java
+    ./lx-music.nix
     ./quickemu.nix
   ];
   
