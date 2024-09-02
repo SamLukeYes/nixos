@@ -1,0 +1,28 @@
+From 2099712192145dd4678b0fceda74b3b2fc365fdb Mon Sep 17 00:00:00 2001
+From: Benno Bielmeier <nix@bbenno.com>
+Date: Mon, 2 Sep 2024 08:40:31 +0200
+Subject: [PATCH] nixos/services.thinkfan: fix undefined variables
+
+In d9dc50dc1193ad14f8534611f7280fac4a3543d0 the usage of `with lib;` has
+been removed from thinkfan.nix. Unfortunately, adjusting the check line
+and its usage of the functions all,id,zipListsWith has not been updated
+resulting in evaluation errors complaining about "undefined variable".
+
+rel: #208242
+---
+ nixos/modules/services/hardware/thinkfan.nix | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/nixos/modules/services/hardware/thinkfan.nix b/nixos/modules/services/hardware/thinkfan.nix
+index 9dd4c543421198..9733fbe5aa15ec 100644
+--- a/nixos/modules/services/hardware/thinkfan.nix
++++ b/nixos/modules/services/hardware/thinkfan.nix
+@@ -12,7 +12,7 @@ let
+       tuple = ts: lib.mkOptionType {
+         name = "tuple";
+         merge = lib.mergeOneOption;
+-        check = xs: all id (zipListsWith (t: x: t.check x) ts xs);
++        check = xs: lib.all lib.id (lib.zipListsWith (t: x: t.check x) ts xs);
+         description = "tuple of" + lib.concatMapStrings (t: " (${t.description})") ts;
+       };
+       level = ints.unsigned;
