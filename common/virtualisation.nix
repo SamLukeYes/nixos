@@ -9,7 +9,6 @@
     };
 
     spiceUSBRedirection.enable = true;
-    waydroid.enable = true;
 
     vmVariant = {
       imports = [
