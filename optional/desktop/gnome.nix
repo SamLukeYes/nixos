@@ -90,7 +90,7 @@
         '';
         extraGSettingsOverridePackages = with pkgs; [
           gsettings-desktop-schemas
-          gnome.mutter
+          mutter
         ];
       };
       displayManager.gdm.enable = true;
