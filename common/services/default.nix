@@ -4,7 +4,6 @@
   imports = [
     ./angrr.nix
     ./earlyoom.nix
-    ./pipewire.nix
     ./v2raya.nix
   ];
 
