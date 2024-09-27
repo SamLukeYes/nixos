@@ -8,6 +8,8 @@
   ];
 
   services = {
+    avahi.enable = false;
+
     cpupower-gui.enable = lib.mkDefault true;
 
     dbus.implementation = "broker";
