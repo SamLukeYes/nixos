@@ -66,7 +66,6 @@
       binutils
 
       # themes
-      adw-gtk3
       yaru-theme
     ];
   };
