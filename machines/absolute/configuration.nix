@@ -31,20 +31,16 @@
       filesConfig = {
         Bind = [
           "/dev/dri"
-          # "/dev/shm"
-          # "/dev/snd"
           "/dev/video0"
         ];
         BindReadOnly = [
           "/etc/resolv.conf"
-          # "/run/user/1000/bus"
           "/tmp/.X11-unix"
         ];
       };
       networkConfig.Private = false;
     }) {
       archlinux = {};
-      archriscv = {};
     });
 
     targets.machines.wants = [ "systemd-nspawn@archlinux.service" ];
@@ -54,8 +50,6 @@
         "char-drm rwm"
         "char-usb_device rwm"
         "/dev/dri rw"
-        # "/dev/shm rw"
-        # "/dev/snd rw"
         "/dev/video0 rwm"
       ];
     };

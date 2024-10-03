@@ -11,7 +11,6 @@
     archix = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        xddxdd.follows = "xddxdd";
       };
       url = "github:SamLukeYes/archix";
     };
@@ -32,13 +31,6 @@
     rewine = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:wineee/nur-packages";
-    };
-    xddxdd = {
-      inputs = {
-        nix-index-database.follows = "nix-index-database";
-        nixpkgs.follows = "nixpkgs";
-      };
-      url = "github:xddxdd/nur-packages";
     };
     xontribs = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -96,7 +88,6 @@
 
     hosts = let
       absolute-modules = [
-        inputs.archix.nixosModules.binfmt
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
         ./machines/absolute/configuration.nix
       ];
