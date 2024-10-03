@@ -27,14 +27,12 @@
         "https://mirror.sjtu.edu.cn/nix-channels/store"
         "https://linyinfeng.cachix.org"
         "https://rewine.cachix.org"
-        "https://xddxdd.cachix.org"
         "https://xonsh-xontribs.cachix.org"
         "https://cache.garnix.io"
       ];
       trusted-public-keys = [
         "linyinfeng.cachix.org-1:sPYQXcNrnCf7Vr7T0YmjXz5dMZ7aOKG3EqLja0xr9MM="
         "rewine.cachix.org-1:aOIg9PvwuSefg59gVXXxGIInHQI9fMpskdyya2xO+7I="
-        "xddxdd.cachix.org-1:ay1HJyNDYmlSwj5NXQG065C8LfoqqKaTNCyzeixGjf8="
         "xonsh-xontribs.cachix.org-1:LgP0Eb1miAJqjjhDvNafSrzBQ1HEtfNl39kKtgF5LBQ="
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
