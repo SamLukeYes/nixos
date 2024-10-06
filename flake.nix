@@ -23,6 +23,10 @@
       url = "github:vagnum08/cpupower-gui";
     };
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+    nightly = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/flake-firefox-nightly";
+    };
     nix-index-database = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-index-database";
@@ -90,6 +94,7 @@
       absolute-modules = [
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
         ./machines/absolute/configuration.nix
+        { programs.firefox.package = inputs.nightly.packages.${system}.firefox-nightly-bin; }
       ];
     in {
       absolute-gnome.modules = absolute-modules ++ [
