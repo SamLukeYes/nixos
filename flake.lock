@@ -11,11 +11,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1728058904,
-        "narHash": "sha256-n83lEb/mt2wUzOj5RHsvS62wZhwpxB+nf6TZDfUIsvA=",
+        "lastModified": 1728145211,
+        "narHash": "sha256-y6WbR3KcnNBkKtX1v7wfmbo2dO7lX1fMoQxsu7uAzOY=",
         "owner": "linyinfeng",
         "repo": "angrr",
-        "rev": "28cdb0434c2a66f6dd11280330a0ec7db6464d31",
+        "rev": "3936eb30270c0c457fbad460d246bf80194108f7",
         "type": "github"
       },
       "original": {
@@ -57,6 +57,22 @@
       "original": {
         "owner": "archlinuxcn",
         "repo": "archlinuxcn-keyring",
+        "type": "github"
+      }
+    },
+    "cachix": {
+      "locked": {
+        "lastModified": 1635350005,
+        "narHash": "sha256-tAMJnUwfaDEB2aa31jGcu7R7bzGELM9noc91L2PbVjg=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "1c1f5649bb9c1b0d98637c8c365228f57126f361",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-20.09",
+        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -103,6 +119,21 @@
       },
       "original": {
         "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_2": {
+      "locked": {
+        "lastModified": 1717312683,
+        "narHash": "sha256-FrlieJH50AuvagamEvWMIE6D2OAnERuDboFDYAED/dE=",
+        "owner": "nix-community",
+        "repo": "flake-compat",
+        "rev": "38fd3954cf65ce6faf3d0d45cd26059e059f07ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
         "repo": "flake-compat",
         "type": "github"
       }
@@ -164,6 +195,83 @@
         "type": "github"
       }
     },
+    "flake-utils_2": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1726560853,
+        "narHash": "sha256-X6rJYSESBVr3hBoH0WbKE5KvhPU5bloyZ2L4K60/fPQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "c1dfcf08411b08f6b8615f7d8971a2bfa81d5e8a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "lib-aggregate": {
+      "inputs": {
+        "flake-utils": "flake-utils_2",
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1727710043,
+        "narHash": "sha256-NpTnTg8oOVvntlTi/t8BUe5msrMmkiZFiOW22fc7B+g=",
+        "owner": "nix-community",
+        "repo": "lib-aggregate",
+        "rev": "d03a5f88a345d26ca13918071d42dcc960233183",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "lib-aggregate",
+        "type": "github"
+      }
+    },
+    "mozilla": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704373101,
+        "narHash": "sha256-+gi59LRWRQmwROrmE1E2b3mtocwueCQqZ60CwLG+gbg=",
+        "owner": "mozilla",
+        "repo": "nixpkgs-mozilla",
+        "rev": "9b11a87c0cc54e308fa83aac5b4ee1816d5418a2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mozilla",
+        "repo": "nixpkgs-mozilla",
+        "type": "github"
+      }
+    },
+    "nightly": {
+      "inputs": {
+        "cachix": "cachix",
+        "flake-compat": "flake-compat_2",
+        "lib-aggregate": "lib-aggregate",
+        "mozilla": "mozilla",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1728177566,
+        "narHash": "sha256-NJrLg1eYdng3RktHpaLutI1i5Eui8MbYFpYlosjX8JY=",
+        "owner": "nix-community",
+        "repo": "flake-firefox-nightly",
+        "rev": "ff531089406332c942f359775d48632f28144b00",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "flake-firefox-nightly",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -171,11 +279,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1727658919,
-        "narHash": "sha256-YAePt2GldkkRJ08LvZNHcuS6shIVStj+K+1DZN3gbnM=",
+        "lastModified": 1728185226,
+        "narHash": "sha256-W+wWyNjFywVfFrbErXhGwgO2HlR0yMHqd1doEEbW9yw=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "f9fdf8285690a351e8998f1e703ebdf9cdf51dee",
+        "rev": "0f7169d3ec7ef1477af6e39731e67a1dc7a9f6e7",
         "type": "github"
       },
       "original": {
@@ -215,6 +323,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib": {
+      "locked": {
+        "lastModified": 1727571693,
+        "narHash": "sha256-b7sFVeqMtz8xntCL3tBY3O8suTg5PeF53LTL3eCcKyc=",
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "rev": "bb58a3bf239e03fca9d51062e2fe028a4ea5a3d1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nixpkgs.lib",
+        "type": "github"
+      }
+    },
     "rewine": {
       "inputs": {
         "nixpkgs": [
@@ -242,6 +365,7 @@
         "archlinuxcn-keyring": "archlinuxcn-keyring",
         "cpupower-gui": "cpupower-gui",
         "flake-utils-plus": "flake-utils-plus",
+        "nightly": "nightly",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
@@ -251,6 +375,21 @@
       }
     },
     "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
