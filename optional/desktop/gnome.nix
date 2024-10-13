@@ -34,7 +34,6 @@
     };
 
     systemPackages = with pkgs; [
-      blackbox-terminal
       celluloid
       endeavour
       gimp
@@ -42,6 +41,7 @@
       gnome-sound-recorder
       gnome-tweaks
       libreoffice
+      roxterm
 
       # nautilus extensions
       nautilus-open-in-blackbox
