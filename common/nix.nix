@@ -8,7 +8,7 @@
       dates = "weekly";
       options = "--delete-older-than 3d";
     };
-    package = pkgs.lix;
+    package = pkgs.nix;
     settings = {
       auto-optimise-store = true;
       download-attempts = 3;
