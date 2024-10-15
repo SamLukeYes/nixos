@@ -13,7 +13,7 @@
       auto-optimise-store = true;
       download-attempts = 3;
       experimental-features = [
-        "flakes" "nix-command" "repl-flake"
+        "flakes" "nix-command"
       ];
       fallback = true;
       flake-registry = "";
