@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     authenticator
+    czkawka
     dconf-editor
     tdesktop
     xournalpp
