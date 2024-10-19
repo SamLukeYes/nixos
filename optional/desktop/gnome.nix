@@ -44,8 +44,13 @@
       roxterm
 
       # nautilus extensions
-      nautilus-open-in-blackbox
       nautilus-python
+      (runCommand "nautilus-open-roxterm" { } ''
+        mkdir -p $out/share/nautilus-python/extensions
+        sed 's|"gnome-terminal"|"roxterm"|g' \
+          ${nautilus-python.doc}/share/doc/nautilus-python/examples/open-terminal.py \
+          > $out/share/nautilus-python/extensions/open-roxterm.py
+      '')
 
       # GNOME Shell extensions
       gnomeExtensions.appindicator
