@@ -30,6 +30,7 @@
     paru                          # frequently used to query AUR packages
     starship                      # configured without nix
     subversion                    # version control system
+    waypipe                       # wayland support for containerized apps
     yt-dlp-light                  # frequently used to download videos
 
     # out-of-tree packages
