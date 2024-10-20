@@ -35,7 +35,6 @@
 
     systemPackages = with pkgs; [
       celluloid
-      endeavour
       gimp
       gnome-firmware
       gnome-sound-recorder
@@ -59,7 +58,7 @@
       gnomeExtensions.freon
       gnomeExtensions.places-status-indicator
       gnomeExtensions.system-monitor
-      gnomeExtensions.task-widget
+      gnomeExtensions.todotxt
 
       # Qt plugins
       qadwaitadecorations
