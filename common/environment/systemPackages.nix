@@ -34,7 +34,7 @@
     yt-dlp-light                  # frequently used to download videos
 
     # out-of-tree packages
-    archix.devtools
-    yes.mkxp-z
+    archix.devtools               # required by paru
+    yes.mkxp-z                    # required by MadoTAS
   ];
 }
