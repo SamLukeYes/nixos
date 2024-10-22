@@ -1,0 +1,49 @@
+From 444f7cd73b0034bac3d4ebd2f2dbbf65d69b4dd3 Mon Sep 17 00:00:00 2001
+From: Andrew Marshall <andrew@johnandrewmarshall.com>
+Date: Mon, 21 Oct 2024 11:30:56 -0400
+Subject: [PATCH] tlp: remove all `/usr/` prefixes to fix install dirs
+
+TLP v1.7.0 [changed][1] more directories to be prefixed under `/usr/`,
+which we do not want (see also [this Nixpkgs issue][2]). We already were
+removing these prefixes for some (but not all) paths. To reduce the
+chances of breaking in the future (and clarify why these are being set),
+replace all of them uniformly.
+
+[1]: https://github.com/linrunner/TLP/commit/d0d1231960bb790d1efd39427ab299e57edeb069
+[2]: https://github.com/NixOS/nixpkgs/issues/349759
+---
+ pkgs/tools/misc/tlp/default.nix | 14 ++++----------
+ 1 file changed, 4 insertions(+), 10 deletions(-)
+
+diff --git a/pkgs/tools/misc/tlp/default.nix b/pkgs/tools/misc/tlp/default.nix
+index 8c2e3a9b7949d..b70476166fc2f 100644
+--- a/pkgs/tools/misc/tlp/default.nix
++++ b/pkgs/tools/misc/tlp/default.nix
+@@ -39,6 +39,10 @@
+     ./patches/0002-reintroduce-tlp-sleep-service.patch
+   ];
+ 
++  postPatch = ''
++    substituteInPlace Makefile --replace-fail ' ?= /usr/' ' ?= /'
++  '';
++
+   buildInputs = [ perl ];
+   nativeBuildInputs = [ makeWrapper ];
+ 
+@@ -55,16 +59,6 @@
+     "TLP_WITH_SYSTEMD=1"
+ 
+     "DESTDIR=${placeholder "out"}"
+-    "TLP_BATD=/share/tlp/bat.d"
+-    "TLP_BIN=/bin"
+-    "TLP_CONFDEF=/share/tlp/defaults.conf"
+-    "TLP_CONFREN=/share/tlp/rename.conf"
+-    "TLP_FLIB=/share/tlp/func.d"
+-    "TLP_MAN=/share/man"
+-    "TLP_META=/share/metainfo"
+-    "TLP_SBIN=/sbin"
+-    "TLP_SHCPL=/share/bash-completion/completions"
+-    "TLP_TLIB=/share/tlp"
+   ];
+ 
+   installTargets = [ "install-tlp" "install-man" ]
