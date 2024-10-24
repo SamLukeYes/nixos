@@ -58,7 +58,6 @@
       # Add nixpkgs patches here
       ./patches/350152.patch  # todo.txt
       ./patches/350249.patch  # arch-install-scripts
-      ./patches/350268.patch  # tlp
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
