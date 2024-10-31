@@ -95,7 +95,7 @@
       absolute-modules = [
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
         ./machines/absolute/configuration.nix
-        { programs.firefox.package = inputs.nightly.packages.${system}.firefox-nightly-bin; }
+        { programs.firefox.package = inputs.nightly.packages.${system}.firefox-beta-bin; }
       ];
     in {
       absolute-gnome.modules = absolute-modules ++ [
