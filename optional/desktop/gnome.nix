@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   environment = {
@@ -21,14 +21,7 @@
 
     variables = {
       # Allow apps to detect gstreamer plugins
-      GST_PLUGIN_PATH_1_0 = lib.makeSearchPath "lib/gstreamer-1.0" (
-        with pkgs.gst_all_1; [
-          gst-plugins-bad
-          gst-plugins-good
-          gst-plugins-ugly
-          gst-vaapi
-        ]
-      );
+      GST_PLUGIN_PATH_1_0 = ["/run/current-system/sw/lib/gstreamer-1.0"];
 
       QT_WAYLAND_DECORATION = "adwaita";
     };
@@ -59,6 +52,12 @@
       gnomeExtensions.places-status-indicator
       gnomeExtensions.system-monitor
       gnomeExtensions.todotxt
+
+      # GStreamer plugins
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-plugins-good
+      gst_all_1.gst-plugins-ugly
+      gst_all_1.gst-vaapi
 
       # Qt plugins
       qadwaitadecorations
