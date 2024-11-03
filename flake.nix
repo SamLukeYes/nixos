@@ -122,6 +122,14 @@
     overlays.default = final: prev: {
       archix = import inputs.archix { pkgs = final; };
       archlinuxcn-keyring = inputs.archlinuxcn-keyring;
+      celluloid = prev.celluloid.overrideAttrs (old: {
+        src = final.fetchFromGitHub {
+          owner = "celluloid-player";
+          repo = "celluloid";
+          rev = "efc1e4e6c33b7a6684090ffa20bf75a070171cf6";
+          hash = "sha256-8mmfLhHUDQyGaTPuFGqhNmwRo0LpIkTNdZIaIGCKds8=";
+        };
+      });
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
         patches = [];
