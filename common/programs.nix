@@ -11,7 +11,7 @@
     firefox = {
       enable = true;
       languagePacks = [ "zh-CN" ];
-      package = pkgs.firefox-devedition;
+      package = pkgs.firefox-beta;
       policies.DisableAppUpdate = true;
     };
 
