@@ -65,8 +65,8 @@
       qt6.qtwayland
 
       # CLI programs required by file-roller
-      _7zz
       binutils
+      p7zip
 
       # themes
       yaru-theme
