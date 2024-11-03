@@ -2,7 +2,8 @@
 
 {
   environment.systemPackages = with pkgs; [
-    lx-music-desktop
+    # Install in container until its electron version is updated
+    # lx-music-desktop
   ];
 
   networking.firewall.allowedTCPPorts = [ 23332 ];
