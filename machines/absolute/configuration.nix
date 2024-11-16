@@ -14,13 +14,20 @@
 
   hardware.bluetooth.powerOnBoot = false;
   
-  services.thinkfan = {
-    enable = true;
-    smartSupport = true;
-    levels = [
-      ["level auto" 0 60]
-      [7 59 32767]
-    ];
+  services = {
+    thinkfan = {
+      enable = true;
+      smartSupport = true;
+      levels = [
+        ["level auto" 0 60]
+        [7 59 32767]
+      ];
+    };
+
+    tlp.settings = {
+      START_CHARGE_THRESH_BAT0 = 60;
+      STOP_CHARGE_THRESH_BAT0 = 80;
+    };
   };
 
   system.stateVersion = "22.11";
