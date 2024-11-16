@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config,pkgs, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -17,7 +17,10 @@
       pacman                            # add a dummy makepkg.conf to FHS
       python3Packages.python-lsp-server # for xonsh IDE
       xclip                             # for Office Viewer Markdown Editor
-    ]))
+    ]
+    # https://github.com/NixOS/nixpkgs/issues/356340
+    ++ lib.optional config.services.xserver.desktopManager.gnome.enable gnome-shell
+  ))
 
     # CLI programs
     bat                           # frequently used to view text in terminal
