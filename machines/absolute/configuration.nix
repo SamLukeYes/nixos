@@ -30,6 +30,11 @@
     };
   };
 
+  swapDevices = [{
+    device = "/var/swapfile";
+    size = 16 * 1024;
+  }];
+
   system.stateVersion = "22.11";
 
   # systemd-nspawn

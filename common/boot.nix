@@ -6,10 +6,9 @@
       v4l2loopback      
     ];
     initrd.systemd.enable = true;
+    kernelParams = lib.optional (!config.zramSwap.enable) "zswap.enabled=1";
     kernel.sysctl = {
       "dev.i915.perf_stream_paranoid" = 0;
-      "vm.swappiness" = 180;
-      "vm.page-cluster" = 0;
     };
     loader = {
       systemd-boot = {

@@ -17,7 +17,5 @@
   time.timeZone = "Asia/Shanghai";
 
   xdg.portal.xdgOpenUsePortal = true;
-
-  zramSwap.enable = true;
 }
 

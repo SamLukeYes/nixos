@@ -8,8 +8,8 @@
 
     # devtools optimizations
     "/var/lib/archbuild" = {
-      device = "/home/archbuild.img";
-      options = [ "compress=zstd" "autodefrag" ];
+      fsType = "tmpfs";
+      options = [ "size=15G" ];
     };
     "/var/lib/aurbuild" = {
       fsType = "tmpfs";
