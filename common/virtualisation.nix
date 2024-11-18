@@ -54,6 +54,8 @@
         # xserver.displayManager.autoLogin.user = "test";
       };
 
+      swapDevices = lib.mkForce [];
+
       systemd.targets.machines.enable = false;
 
       users = {
