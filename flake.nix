@@ -84,7 +84,7 @@
         inputs.angrr.nixosModules.angrr
         inputs.archix.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
-        { nix.settings.nix-path = ["nixpkgs=${nixpkgs-patched}"]; }
+        { environment.etc."nix/inputs/nixpkgs-patched".source = nixpkgs-patched; }
       ];
     };
 
