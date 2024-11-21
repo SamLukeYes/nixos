@@ -1,0 +1,28 @@
+From 5d844bc5c66a9406a08ffb31b993da4644a4d1a2 Mon Sep 17 00:00:00 2001
+From: "R. Ryantm" <ryantm-bot@ryantm.com>
+Date: Thu, 21 Nov 2024 00:43:32 +0000
+Subject: [PATCH] waagent: 2.11.1.12 -> 2.12.0.2
+
+---
+ pkgs/by-name/wa/waagent/package.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/by-name/wa/waagent/package.nix b/pkgs/by-name/wa/waagent/package.nix
+index 8f5085ca9e03a..cbfbc9e026dac 100644
+--- a/pkgs/by-name/wa/waagent/package.nix
++++ b/pkgs/by-name/wa/waagent/package.nix
+@@ -12,12 +12,12 @@ let
+ in
+ python.pkgs.buildPythonApplication rec {
+   pname = "waagent";
+-  version = "2.11.1.12";
++  version = "2.12.0.2";
+   src = fetchFromGitHub {
+     owner = "Azure";
+     repo = "WALinuxAgent";
+     rev = "refs/tags/v${version}";
+-    hash = "sha256-1MaPjz9hWb/kJxuyJAUWPk065vpSyx2jq1ZSlDB4yFo=";
++    hash = "sha256-pp54J3x/+hkG4p7X1cojupdhjc0pyKcBRnE5ejd5ZpU=";
+   };
+   patches = [
+     # Suppress the following error when waagent tries to configure sshd:
