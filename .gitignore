@@ -3,3 +3,5 @@ cachix.nix
 TODO.txt
 *.in
 update.sh
+result
+nixos-iso/
