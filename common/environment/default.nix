@@ -2,7 +2,12 @@
 
 {
   imports = [ ./systemPackages.nix ];
+
   environment = {
+    extraSetup = lib.optionalString (!config.services.printing.enable) ''
+      rm $out/share/applications/cups.desktop
+    '';
+
     homeBinInPath = true;
 
     variables = {
