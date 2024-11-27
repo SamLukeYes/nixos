@@ -53,7 +53,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/350152.patch  # todo.txt
-      ./patches/357728.patch  # waagent
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
