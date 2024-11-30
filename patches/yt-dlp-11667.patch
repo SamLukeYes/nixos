@@ -1,0 +1,312 @@
+From e92dcf0077bc1c243dae9e96a3591d27af77524b Mon Sep 17 00:00:00 2001
+From: grqx_wsl <173253225+grqx@users.noreply.github.com>
+Date: Thu, 28 Nov 2024 22:28:41 +1300
+Subject: [PATCH 1/7] [ie/bilibili] provide fallback for playinfo extraction
+
+---
+ yt_dlp/extractor/bilibili.py | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/yt_dlp/extractor/bilibili.py b/yt_dlp/extractor/bilibili.py
+index 02ea67707fcd..7de609a6ced3 100644
+--- a/yt_dlp/extractor/bilibili.py
++++ b/yt_dlp/extractor/bilibili.py
+@@ -644,7 +644,8 @@ def _real_extract(self, url):
+             video_data = initial_state['videoInfo']
+         else:
+             play_info_obj = self._search_json(
+-                r'window\.__playinfo__\s*=', webpage, 'play info', video_id, fatal=False)
++                r'window\.__playinfo__\s*=', webpage, 'play info', video_id, default=None)
++            play_info = None
+             if not play_info_obj:
+                 if traverse_obj(initial_state, ('error', 'trueCode')) == -403:
+                     self.raise_login_required()
+@@ -652,7 +653,9 @@ def _real_extract(self, url):
+                     raise ExtractorError(
+                         'This video may be deleted or geo-restricted. '
+                         'You might want to try a VPN or a proxy server (with --proxy)', expected=True)
+-            play_info = traverse_obj(play_info_obj, ('data', {dict}))
++                play_info = self._download_playinfo(video_id, initial_state['cid'], headers=headers)
++            else:
++                play_info = traverse_obj(play_info_obj, ('data', {dict}))
+             if not play_info:
+                 if traverse_obj(play_info_obj, 'code') == 87007:
+                     toast = get_element_by_class('tips-toast', webpage) or ''
+
+From 1248528409d8531476753cceb4d873e1bb74c7ea Mon Sep 17 00:00:00 2001
+From: N/Ame <173015200+grqz@users.noreply.github.com>
+Date: Fri, 29 Nov 2024 00:38:49 +1300
+Subject: [PATCH 2/7] use bvid
+
+---
+ yt_dlp/extractor/bilibili.py | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/yt_dlp/extractor/bilibili.py b/yt_dlp/extractor/bilibili.py
+index 7de609a6ced3..84104a965e99 100644
+--- a/yt_dlp/extractor/bilibili.py
++++ b/yt_dlp/extractor/bilibili.py
+@@ -653,7 +653,8 @@ def _real_extract(self, url):
+                     raise ExtractorError(
+                         'This video may be deleted or geo-restricted. '
+                         'You might want to try a VPN or a proxy server (with --proxy)', expected=True)
+-                play_info = self._download_playinfo(video_id, initial_state['cid'], headers=headers)
++                play_info = self._download_playinfo(traverse_obj(initial_state, ('videoData', 'bvid'), default=video_id),
++                                                    initial_state['cid'], headers=headers)
+             else:
+                 play_info = traverse_obj(play_info_obj, ('data', {dict}))
+             if not play_info:
+
+From 1446558e027cd3c3fdae7bc0cc79b167774b337b Mon Sep 17 00:00:00 2001
+From: grqx_termux <zenithwzj@gmail.com>
+Date: Fri, 29 Nov 2024 00:45:25 +1300
+Subject: [PATCH 3/7] make bvid extraction fatal
+
+---
+ yt_dlp/extractor/bilibili.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/yt_dlp/extractor/bilibili.py b/yt_dlp/extractor/bilibili.py
+index 84104a965e99..71e2dbdd08e6 100644
+--- a/yt_dlp/extractor/bilibili.py
++++ b/yt_dlp/extractor/bilibili.py
+@@ -653,7 +653,7 @@ def _real_extract(self, url):
+                     raise ExtractorError(
+                         'This video may be deleted or geo-restricted. '
+                         'You might want to try a VPN or a proxy server (with --proxy)', expected=True)
+-                play_info = self._download_playinfo(traverse_obj(initial_state, ('videoData', 'bvid'), default=video_id),
++                play_info = self._download_playinfo(initial_state['videoData']['bvid'],
+                                                     initial_state['cid'], headers=headers)
+             else:
+                 play_info = traverse_obj(play_info_obj, ('data', {dict}))
+
+From e52921f1e921fc158229288989ea01173ad5d243 Mon Sep 17 00:00:00 2001
+From: grqx_wsl <173253225+grqx@users.noreply.github.com>
+Date: Sat, 30 Nov 2024 13:39:13 +1300
+Subject: [PATCH 4/7] only download play_info once for p1 in anthologies
+
+---
+ yt_dlp/extractor/bilibili.py | 12 ++++--------
+ 1 file changed, 4 insertions(+), 8 deletions(-)
+
+diff --git a/yt_dlp/extractor/bilibili.py b/yt_dlp/extractor/bilibili.py
+index 71e2dbdd08e6..808d6c53fb60 100644
+--- a/yt_dlp/extractor/bilibili.py
++++ b/yt_dlp/extractor/bilibili.py
+@@ -640,12 +640,12 @@ def _real_extract(self, url):
+ 
+         initial_state = self._search_json(r'window\.__INITIAL_STATE__\s*=', webpage, 'initial state', video_id)
+         is_festival = 'videoData' not in initial_state
++        play_info = None
+         if is_festival:
+             video_data = initial_state['videoInfo']
+         else:
+             play_info_obj = self._search_json(
+                 r'window\.__playinfo__\s*=', webpage, 'play info', video_id, default=None)
+-            play_info = None
+             if not play_info_obj:
+                 if traverse_obj(initial_state, ('error', 'trueCode')) == -403:
+                     self.raise_login_required()
+@@ -653,11 +653,7 @@ def _real_extract(self, url):
+                     raise ExtractorError(
+                         'This video may be deleted or geo-restricted. '
+                         'You might want to try a VPN or a proxy server (with --proxy)', expected=True)
+-                play_info = self._download_playinfo(initial_state['videoData']['bvid'],
+-                                                    initial_state['cid'], headers=headers)
+-            else:
+-                play_info = traverse_obj(play_info_obj, ('data', {dict}))
+-            if not play_info:
++            elif not (play_info := traverse_obj(play_info_obj, ('data', {dict}))):
+                 if traverse_obj(play_info_obj, 'code') == 87007:
+                     toast = get_element_by_class('tips-toast', webpage) or ''
+                     msg = clean_html(
+@@ -694,9 +690,9 @@ def _real_extract(self, url):
+         cid = traverse_obj(video_data, ('pages', part_id - 1, 'cid')) if part_id else video_data.get('cid')
+ 
+         festival_info = {}
+-        if is_festival:
++        if not play_info:
+             play_info = self._download_playinfo(video_id, cid, headers=headers)
+-
++        if is_festival:
+             festival_info = traverse_obj(initial_state, {
+                 'uploader': ('videoInfo', 'upName'),
+                 'uploader_id': ('videoInfo', 'upMid', {str_or_none}),
+
+From 9b1bf7400d144d3b1b46188d3a9bcba189499e9d Mon Sep 17 00:00:00 2001
+From: grqx_wsl <173253225+grqx@users.noreply.github.com>
+Date: Sat, 30 Nov 2024 21:45:25 +1300
+Subject: [PATCH 5/7] [ie/bilibili] better error handling, fix supporter-only
+ video detection
+
+---
+ yt_dlp/extractor/bilibili.py | 60 +++++++++++++++++++++---------------
+ 1 file changed, 35 insertions(+), 25 deletions(-)
+
+diff --git a/yt_dlp/extractor/bilibili.py b/yt_dlp/extractor/bilibili.py
+index 808d6c53fb60..7517d77c2953 100644
+--- a/yt_dlp/extractor/bilibili.py
++++ b/yt_dlp/extractor/bilibili.py
+@@ -18,7 +18,6 @@
+     InAdvancePagedList,
+     OnDemandPagedList,
+     bool_or_none,
+-    clean_html,
+     determine_ext,
+     filter_dict,
+     float_or_none,
+@@ -165,14 +164,18 @@ def _sign_wbi(self, params, video_id):
+         params['w_rid'] = hashlib.md5(f'{query}{self._get_wbi_key(video_id)}'.encode()).hexdigest()
+         return params
+ 
+-    def _download_playinfo(self, bvid, cid, headers=None, qn=None):
++    def _download_playinfo(self, bvid, cid, headers=None, fatal=True, qn=None):
+         params = {'bvid': bvid, 'cid': cid, 'fnval': 4048}
+         if qn:
+             params['qn'] = qn
+-        return self._download_json(
++        play_info_obj = self._download_json(
+             'https://api.bilibili.com/x/player/wbi/playurl', bvid,
+-            query=self._sign_wbi(params, bvid), headers=headers,
+-            note=f'Downloading video formats for cid {cid} {qn or ""}')['data']
++            query=self._sign_wbi(params, bvid), headers=headers, fatal=fatal,
++            note=f'Downloading video formats for cid {cid} {qn or ""}')
++        if fatal:
++            return play_info_obj['data']
++        else:
++            return play_info_obj.get('data')
+ 
+     def json2srt(self, json_data):
+         srt_data = ''
+@@ -640,30 +643,18 @@ def _real_extract(self, url):
+ 
+         initial_state = self._search_json(r'window\.__INITIAL_STATE__\s*=', webpage, 'initial state', video_id)
+         is_festival = 'videoData' not in initial_state
+-        play_info = None
+         if is_festival:
+             video_data = initial_state['videoInfo']
+         else:
+-            play_info_obj = self._search_json(
+-                r'window\.__playinfo__\s*=', webpage, 'play info', video_id, default=None)
+-            if not play_info_obj:
+-                if traverse_obj(initial_state, ('error', 'trueCode')) == -403:
+-                    self.raise_login_required()
+-                if traverse_obj(initial_state, ('error', 'trueCode')) == -404:
+-                    raise ExtractorError(
+-                        'This video may be deleted or geo-restricted. '
+-                        'You might want to try a VPN or a proxy server (with --proxy)', expected=True)
+-            elif not (play_info := traverse_obj(play_info_obj, ('data', {dict}))):
+-                if traverse_obj(play_info_obj, 'code') == 87007:
+-                    toast = get_element_by_class('tips-toast', webpage) or ''
+-                    msg = clean_html(
+-                        f'{get_element_by_class("belongs-to", toast) or ""}，'
+-                        + (get_element_by_class('level', toast) or ''))
+-                    raise ExtractorError(
+-                        f'This is a supporter-only video: {msg}. {self._login_hint()}', expected=True)
+-                raise ExtractorError('Failed to extract play info')
+             video_data = initial_state['videoData']
+ 
++        if traverse_obj(initial_state, ('error', 'trueCode')) == -403:
++            self.raise_login_required()
++        if traverse_obj(initial_state, ('error', 'trueCode')) == -404:
++            raise ExtractorError(
++                'This video may be deleted or geo-restricted. '
++                'You might want to try a VPN or a proxy server (with --proxy)', expected=True)
++
+         video_id, title = video_data['bvid'], video_data.get('title')
+ 
+         # Bilibili anthologies are similar to playlists but all videos share the same video ID as the anthology itself.
+@@ -690,8 +681,27 @@ def _real_extract(self, url):
+         cid = traverse_obj(video_data, ('pages', part_id - 1, 'cid')) if part_id else video_data.get('cid')
+ 
+         festival_info = {}
++        play_info = (
++            traverse_obj(
++                self._search_json(
++                    r'window\.__playinfo__\s*=', webpage, 'play info', video_id, default=None),
++                ('data', {dict}))
++            or self._download_playinfo(video_id, cid, headers=headers, fatal=False))
+         if not play_info:
+-            play_info = self._download_playinfo(video_id, cid, headers=headers)
++            raise ExtractorError('Failed to extract play info')
++
++        if video_data.get('is_upower_exclusive'):
++            # Supporter only, also indicated by
++            # `not traverse_obj(play_info, ('support_formats', ..., 'codecs'))`
++            # Ref: https://github.com/ytdl-org/youtube-dl/issues/32722#issuecomment-1950045012
++            high_level = traverse_obj(initial_state, ('elecFullInfo', 'show_info', 'high_level'))
++            # Should we inline the title and the subtitle?
++            support_title = traverse_obj(high_level, 'title', default='')
++            support_sub_title = traverse_obj(high_level, 'sub_title', default='')
++            msg = f'{support_title}，{support_sub_title}'
++            raise ExtractorError(
++                f'This is a supporter-only video: {msg}. {self._login_hint()}', expected=True)
++
+         if is_festival:
+             festival_info = traverse_obj(initial_state, {
+                 'uploader': ('videoInfo', 'upName'),
+
+From b7c7a1630ce50ecc1494fc269e465dac24319018 Mon Sep 17 00:00:00 2001
+From: grqx_wsl <173253225+grqx@users.noreply.github.com>
+Date: Sat, 30 Nov 2024 21:48:27 +1300
+Subject: [PATCH 6/7] move festival_info down for readability
+
+---
+ yt_dlp/extractor/bilibili.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/yt_dlp/extractor/bilibili.py b/yt_dlp/extractor/bilibili.py
+index 7517d77c2953..93646b322a7a 100644
+--- a/yt_dlp/extractor/bilibili.py
++++ b/yt_dlp/extractor/bilibili.py
+@@ -680,7 +680,6 @@ def _real_extract(self, url):
+         old_video_id = format_field(aid, None, f'%s_part{part_id or 1}')
+         cid = traverse_obj(video_data, ('pages', part_id - 1, 'cid')) if part_id else video_data.get('cid')
+ 
+-        festival_info = {}
+         play_info = (
+             traverse_obj(
+                 self._search_json(
+@@ -702,6 +701,7 @@ def _real_extract(self, url):
+             raise ExtractorError(
+                 f'This is a supporter-only video: {msg}. {self._login_hint()}', expected=True)
+ 
++        festival_info = {}
+         if is_festival:
+             festival_info = traverse_obj(initial_state, {
+                 'uploader': ('videoInfo', 'upName'),
+
+From 314145548a69df8ea8135048ad04b6c69cb40638 Mon Sep 17 00:00:00 2001
+From: grqx_wsl <173253225+grqx@users.noreply.github.com>
+Date: Sat, 30 Nov 2024 21:54:28 +1300
+Subject: [PATCH 7/7] line length
+
+---
+ yt_dlp/extractor/bilibili.py | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/yt_dlp/extractor/bilibili.py b/yt_dlp/extractor/bilibili.py
+index 93646b322a7a..6f798e06441d 100644
+--- a/yt_dlp/extractor/bilibili.py
++++ b/yt_dlp/extractor/bilibili.py
+@@ -690,16 +690,16 @@ def _real_extract(self, url):
+             raise ExtractorError('Failed to extract play info')
+ 
+         if video_data.get('is_upower_exclusive'):
+-            # Supporter only, also indicated by
++            # Supporter-only, also indicated by
+             # `not traverse_obj(play_info, ('support_formats', ..., 'codecs'))`
+             # Ref: https://github.com/ytdl-org/youtube-dl/issues/32722#issuecomment-1950045012
+             high_level = traverse_obj(initial_state, ('elecFullInfo', 'show_info', 'high_level'))
+             # Should we inline the title and the subtitle?
+             support_title = traverse_obj(high_level, 'title', default='')
+-            support_sub_title = traverse_obj(high_level, 'sub_title', default='')
+-            msg = f'{support_title}，{support_sub_title}'
++            support_subtitle = traverse_obj(high_level, 'sub_title', default='')
+             raise ExtractorError(
+-                f'This is a supporter-only video: {msg}. {self._login_hint()}', expected=True)
++                f'This is a supporter-only video: {support_title}，{support_subtitle}. '
++                f'{self._login_hint()}', expected=True)
+ 
+         festival_info = {}
+         if is_festival:
