@@ -3,7 +3,7 @@
 {
   fonts = {
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "Noto" ]; })
+      nerd-fonts.noto
       rewine.ttf-ms-win10
     ];
 
