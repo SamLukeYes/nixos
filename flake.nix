@@ -137,9 +137,6 @@
       rewine = import inputs.rewine { pkgs = final; };
       xontribs = import inputs.xontribs { pkgs = final; };
       yes = import inputs.yes { pkgs = final; };
-      yt-dlp = prev.yt-dlp.overrideAttrs (old: {
-        patches = [ ./patches/yt-dlp-11667.patch ];
-      });
     };
   };
 }
