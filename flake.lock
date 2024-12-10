@@ -11,11 +11,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1733761493,
-        "narHash": "sha256-Pk7p48Re5r2d7d/cw/JGxwPdjQ+pmQC35nOjFdU/Z0I=",
+        "lastModified": 1733847848,
+        "narHash": "sha256-OYeUiAJh+YO/Iu3o1mZCMV4nb3dp04c5PjVFISFX6v4=",
         "owner": "linyinfeng",
         "repo": "angrr",
-        "rev": "c0d56e8d22b382c89a96326a701a383d49279060",
+        "rev": "3658d0fc99002759ac7c335b35a2838dd9528e44",
         "type": "github"
       },
       "original": {
@@ -31,11 +31,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733239102,
-        "narHash": "sha256-XD+PK0rNXZ6310eD/Xtur97MaJ33fjybLFIyRkA5OTI=",
+        "lastModified": 1733849744,
+        "narHash": "sha256-wJZW/8BqCl0vDxBPm6XKFC9Z4Lix3Nkb6q4lwCtw/4Q=",
         "owner": "SamLukeYes",
         "repo": "archix",
-        "rev": "2b277ab5fab99f08df0c63d30c9d9606610bd1d9",
+        "rev": "957e73a37ab048dc121a12307132b823d649aa86",
         "type": "github"
       },
       "original": {
@@ -273,11 +273,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1733662930,
-        "narHash": "sha256-9qOp6jNdezzLMxwwXaXZWPXosHbNqno+f7Ii/xftqZ8=",
+        "lastModified": 1733761991,
+        "narHash": "sha256-s4DalCDepD22jtKL5Nw6f4LP5UwoMcPzPZgHWjAfqbQ=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "357cda84af1d74626afb7fb3bc12d6957167cda9",
+        "rev": "0ce9d149d99bc383d1f2d85f31f6ebd146e46085",
         "type": "github"
       },
       "original": {
