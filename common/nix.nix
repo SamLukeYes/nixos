@@ -11,6 +11,7 @@
     package = pkgs.nix;
     settings = {
       auto-optimise-store = true;
+      builders-use-substitutes = true;
       download-attempts = 3;
       experimental-features = [
         "flakes" "nix-command"
