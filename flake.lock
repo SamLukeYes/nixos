@@ -246,8 +246,29 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "rewine": "rewine",
+        "shimeji": "shimeji",
         "xontribs": "xontribs",
         "yes": "yes"
+      }
+    },
+    "shimeji": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1734183867,
+        "narHash": "sha256-TECIef+ZpiZ/ZmgrQHCyqOoCMHTb8ye0Ruvowf3B91U=",
+        "owner": "SamLukeYes",
+        "repo": "Shimeji-Desktop",
+        "rev": "3118f8ef0276d86f4b024498ef58c21f1cf8c2e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SamLukeYes",
+        "repo": "Shimeji-Desktop",
+        "type": "github"
       }
     },
     "systems": {

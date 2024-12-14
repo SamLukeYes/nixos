@@ -32,6 +32,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:wineee/nur-packages";
     };
+    shimeji = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:SamLukeYes/Shimeji-Desktop";
+    };
     xontribs = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:drmikecrowe/nur-packages";
@@ -135,6 +139,7 @@
         '';
       });
       rewine = import inputs.rewine { pkgs = final; };
+      shimeji = inputs.shimeji.packages.${system};
       xontribs = import inputs.xontribs { pkgs = final; };
       yes = import inputs.yes { pkgs = final; };
     };
