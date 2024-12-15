@@ -17,8 +17,10 @@
   };
 
   users = {
+    groups.yes = {};
     users.yes = {
       description = "Sam L. Yes";
+      group = "yes";
       extraGroups = [
         "adbusers"
         "networkmanager"

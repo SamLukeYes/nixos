@@ -95,6 +95,6 @@
   programs.pacman.conf.extraConfig = ''
     [SamLukeYes]
     SigLevel = Never
-    Server = file:///home/yes/paru-repo
+    Server = file:///old-root/home/yes/paru-repo
   '';
 }
