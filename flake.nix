@@ -28,10 +28,6 @@
       url = "github:nix-community/nix-index-database";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    rewine = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:wineee/nur-packages";
-    };
     shimeji = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/Shimeji-Desktop";
@@ -138,7 +134,6 @@
             --replace "gapplication launch org.rnd2.cpupower_gui" "cpupower-gui"
         '';
       });
-      rewine = import inputs.rewine { pkgs = final; };
       shimeji = inputs.shimeji.packages.${system};
       xontribs = import inputs.xontribs { pkgs = final; };
       yes = import inputs.yes { pkgs = final; };
