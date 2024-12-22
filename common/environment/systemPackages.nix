@@ -31,6 +31,7 @@
     lsof                          # view port usage
     nix-tree                      # frequently used to inspect space usage
     paru                          # frequently used to query AUR packages
+    sqlite                        # to fix nix database in case of corruption
     starship                      # configured without nix
     subversion                    # version control system
     waypipe                       # wayland support for containerized apps
