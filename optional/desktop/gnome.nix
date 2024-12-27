@@ -39,18 +39,18 @@
       nautilus-python
       (runCommand "nautilus-open-roxterm" { } ''
         mkdir -p $out/share/nautilus-python/extensions
-        sed 's|"gnome-terminal"|"roxterm"|g' \
+        substitute \
           ${nautilus-python.doc}/share/doc/nautilus-python/examples/open-terminal.py \
-          > $out/share/nautilus-python/extensions/open-roxterm.py
+          $out/share/nautilus-python/extensions/open-roxterm.py \
+          --replace-fail 'os.system("gnome-terminal")' 'import subprocess; subprocess.Popen(["roxterm"])'
       '')
 
       # GNOME Shell extensions
       gnomeExtensions.appindicator
       gnomeExtensions.customize-ibus
       gnomeExtensions.easyScreenCast
-      gnomeExtensions.freon
       gnomeExtensions.places-status-indicator
-      gnomeExtensions.system-monitor
+      gnomeExtensions.system-monitor-next
       gnomeExtensions.todotxt
 
       # GStreamer plugins
