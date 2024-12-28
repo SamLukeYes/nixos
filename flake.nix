@@ -116,6 +116,7 @@
     overlays.default = final: prev: {
       archix = import inputs.archix { pkgs = final; };
       archlinuxcn-keyring = inputs.archlinuxcn-keyring;
+
       celluloid = prev.celluloid.overrideAttrs (old: {
         src = final.fetchFromGitHub {
           owner = "celluloid-player";
@@ -124,6 +125,7 @@
           hash = "sha256-8mmfLhHUDQyGaTPuFGqhNmwRo0LpIkTNdZIaIGCKds8=";
         };
       });
+
       cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
         src = inputs.cpupower-gui;
         patches = [];
@@ -134,9 +136,14 @@
             --replace "gapplication launch org.rnd2.cpupower_gui" "cpupower-gui"
         '';
       });
+
+      # https://github.com/NixOS/nixpkgs/issues/359723
       quickemu = prev.quickemu.override {
-        qemu_full = final.qemu;
+        qemu_full = final.qemu_kvm.override {
+          smbdSupport = true;
+        };
       };
+
       shimeji = inputs.shimeji.packages.${system};
       xontribs = import inputs.xontribs { pkgs = final; };
       yes = import inputs.yes { pkgs = final; };
