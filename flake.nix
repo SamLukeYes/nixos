@@ -134,9 +134,17 @@
             --replace "gapplication launch org.rnd2.cpupower_gui" "cpupower-gui"
         '';
       });
+      quickemu = prev.quickemu.override {
+        qemu_full = final.qemu;
+      };
       shimeji = inputs.shimeji.packages.${system};
       xontribs = import inputs.xontribs { pkgs = final; };
       yes = import inputs.yes { pkgs = final; };
+      
+      # https://github.com/NixOS/nixpkgs/issues/368680
+      zsync = prev.zsync.override {
+        stdenv = final.clangStdenv;
+      };
     };
   };
 }
