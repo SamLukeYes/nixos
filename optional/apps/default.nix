@@ -9,7 +9,6 @@
   
   environment.systemPackages = with pkgs; [
     gnome-frog
-    wineWow64Packages.stagingFull
     zotero
     
     # large optional dependencies of GUI applications
