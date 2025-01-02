@@ -17,7 +17,7 @@
   };
 
   users = {
-    groups.yes = {};
+    groups.yes.gid = 1000;
     users.yes = {
       description = "Sam L. Yes";
       group = "yes";
