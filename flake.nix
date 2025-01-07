@@ -40,6 +40,10 @@
       flake = false;
       url = "github:SamLukeYes/nix-custom-packages";
     };
+    zzzsyyy = {
+      flake = false;  # too many dependencies, but I only want their overlay
+      url = "github:zzzsyyy/flakes";
+    };
 
     # nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -64,6 +68,7 @@
       android_sdk.accept_license = true;
     };
     sharedOverlays = [
+      (import "${inputs.zzzsyyy}/overlays/mutter.nix")
       inputs.angrr.overlays.default
       self.overlays.default
     ];
