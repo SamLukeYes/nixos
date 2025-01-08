@@ -9,6 +9,7 @@
   
   environment.systemPackages = with pkgs; [
     gnome-frog
+    upscayl
     zotero
     
     # large optional dependencies of GUI applications
