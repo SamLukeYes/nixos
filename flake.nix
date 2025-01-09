@@ -56,7 +56,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/350152.patch  # todo.txt
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
@@ -141,6 +140,18 @@
             --replace "gapplication launch org.rnd2.cpupower_gui" "cpupower-gui"
         '';
       });
+
+      # https://github.com/NixOS/nixpkgs/pull/350152
+      gnomeExtensions = prev.gnomeExtensions // {
+        todotxt = prev.gnomeExtensions.todotxt.overrideAttrs (old: {
+          postPatch = ''
+            for js in libs/*.js; do
+              substituteInPlace $js \
+                --replace-quiet "import Clutter from 'gi://Clutter'" "imports.gi.GIRepository.Repository.prepend_search_path('${final.mutter.passthru.libdir}'); const Clutter = (await import('gi://Clutter')).default"
+            done
+          '';
+        });
+      };
 
       shimeji = inputs.shimeji.packages.${system};
       xontribs = import inputs.xontribs { pkgs = final; };
