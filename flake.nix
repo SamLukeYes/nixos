@@ -142,13 +142,6 @@
         '';
       });
 
-      # https://github.com/NixOS/nixpkgs/issues/359723
-      quickemu = prev.quickemu.override {
-        qemu_full = final.qemu_kvm.override {
-          smbdSupport = true;
-        };
-      };
-
       shimeji = inputs.shimeji.packages.${system};
       xontribs = import inputs.xontribs { pkgs = final; };
       yes = import inputs.yes { pkgs = final; };
