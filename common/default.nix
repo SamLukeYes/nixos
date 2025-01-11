@@ -13,6 +13,8 @@
       ./virtualisation.nix
     ];
 
+  system.rebuild.enableNg = true;
+
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
 
