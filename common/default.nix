@@ -5,13 +5,14 @@
       ./environment
       ./fonts.nix
       ./i18n.nix
-      ./networking.nix
       ./nix.nix
       ./programs.nix
       ./services
       ./systemd.nix
       ./virtualisation.nix
     ];
+
+  networking.networkmanager.enable = true;
 
   system.rebuild.enableNg = true;
 
