@@ -61,10 +61,17 @@
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
 
   in flake-utils-plus.lib.mkFlake rec {
+    inherit (nixpkgs) lib;
     inherit self inputs;
     channelsConfig = {
-      allowUnfree = true;
-      android_sdk.accept_license = true;
+      allowlistedLicenses = with lib.licenses; [
+        cc-by-nc-nd-40
+      ];
+      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+        "charles"
+        "code"
+        "vscode"
+      ];
     };
     sharedOverlays = [
       (import "${inputs.zzzsyyy}/overlays/mutter.nix")
