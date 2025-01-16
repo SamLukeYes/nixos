@@ -6,6 +6,7 @@
     czkawka
     dconf-editor
     tdesktop
+    upscaler
     xournalpp
 
     ((vscode.override {
