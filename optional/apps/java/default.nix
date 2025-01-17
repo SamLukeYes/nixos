@@ -3,7 +3,6 @@
 {
   environment.systemPackages = with pkgs; [
     charles
-    yes.ludii
 
     # CLI tools
     pdftk                         # required by Jasminum

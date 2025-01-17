@@ -39,6 +39,5 @@
 
     # out-of-tree packages
     archix.devtools               # required by paru
-    yes.mkxp-z                    # required by MadoTAS
   ];
 }

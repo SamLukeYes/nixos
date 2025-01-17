@@ -36,10 +36,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:drmikecrowe/nur-packages";
     };
-    yes = {
-      flake = false;
-      url = "github:SamLukeYes/nix-custom-packages";
-    };
     zzzsyyy = {
       flake = false;  # too many dependencies, but I only want their overlay
       url = "github:zzzsyyy/flakes";
@@ -162,7 +158,6 @@
 
       shimeji = inputs.shimeji.packages.${system};
       xontribs = import inputs.xontribs { pkgs = final; };
-      yes = import inputs.yes { pkgs = final; };
     };
   };
 }
