@@ -156,6 +156,7 @@
         });
       };
 
+      jdk = final.jetbrains.jdk;
       shimeji = inputs.shimeji.packages.${system};
       xontribs = import inputs.xontribs { pkgs = final; };
     };

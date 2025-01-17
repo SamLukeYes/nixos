@@ -2,7 +2,7 @@
 
 {
   environment.systemPackages = with pkgs; [
-    charles
+    (charles.override { jdk11 = config.programs.java.package; })
 
     # CLI tools
     pdftk                         # required by Jasminum
