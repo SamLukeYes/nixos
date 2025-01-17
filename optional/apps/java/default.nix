@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    ./tomcat.nix
-  ];
-
   environment.systemPackages = with pkgs; [
     charles
     yes.ludii
