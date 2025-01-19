@@ -1,0 +1,50 @@
+From 00df8d1bcbcc2231c38711d28707a468ed912afe Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Sun, 19 Jan 2025 18:29:44 +0800
+Subject: [PATCH] xonsh: 0.19.0 -> 0.19.1, use nix-update-script
+
+---
+ pkgs/by-name/xo/xonsh/unwrapped.nix | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
+index b98d12137850b..93544f928fd6d 100644
+--- a/pkgs/by-name/xo/xonsh/unwrapped.nix
++++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
+@@ -3,8 +3,8 @@
+   coreutils,
+   fetchFromGitHub,
+   git,
+-  gitUpdater,
+   glibcLocales,
++  nix-update-script,
+   pythonPackages,
+ }:
+ 
+@@ -12,7 +12,7 @@ let
+ 
+   argset = {
+     pname = "xonsh";
+-    version = "0.19.0";
++    version = "0.19.1";
+     pyproject = true;
+ 
+     # PyPI package ships incomplete tests
+@@ -20,7 +20,7 @@ let
+       owner = "xonsh";
+       repo = "xonsh";
+       rev = "refs/tags/${argset.version}";
+-      hash = "sha256-rt402MKnhjC/AYz9Rm6B5RkivcVxveVW2rM/nT/xcNo=";
++      hash = "sha256-20egNKlJjJO1wdy1anApz0ADBnaHPUSqhfrsPe3QQIs=";
+     };
+ 
+     nativeBuildInputs = with pythonPackages; [
+@@ -112,7 +112,7 @@ let
+       shellPath = "/bin/xonsh";
+       python = pythonPackages.python; # To the wrapper
+       wrapper = throw "The top-level xonsh package is now wrapped. Use it directly.";
+-      updateScript = gitUpdater { };
++      updateScript = nix-update-script { };
+     };
+ 
+     meta = {

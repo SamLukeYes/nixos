@@ -52,6 +52,7 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
+      ./patches/375009.patch  # xonsh
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
