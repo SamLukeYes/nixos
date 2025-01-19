@@ -61,9 +61,6 @@
     inherit (nixpkgs) lib;
     inherit self inputs;
     channelsConfig = {
-      allowlistedLicenses = with lib.licenses; [
-        cc-by-nc-nd-40
-      ];
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "charles"
         "code"
