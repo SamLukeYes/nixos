@@ -26,6 +26,8 @@
       substituters = [
         "https://mirrors.ustc.edu.cn/nix-channels/store"
         "https://mirror.sjtu.edu.cn/nix-channels/store"
+      ];
+      extra-substituters = [
         "https://linyinfeng.cachix.org"
         "https://nix-community.cachix.org"
         "https://xonsh-xontribs.cachix.org"
