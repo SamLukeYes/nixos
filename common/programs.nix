@@ -37,14 +37,10 @@
         $SHELL_TYPE = "best"
       '';
 
-      package = pkgs.xonsh.override {
-        # python3 = pkgs.python311;
-        extraPackages = ps: [
-          ps.distro
-          (pkgs.xontribs.xontrib-sh.override { inherit (ps) buildPythonPackage; })
-          (pkgs.xontribs.xontrib-direnv.override { inherit (ps) buildPythonPackage; })
-        ];
-      };
+      extraPackages = ps: with ps; [
+        distro
+        xonsh.xontribs.xonsh-direnv
+      ];
     };
 
     # requires archix

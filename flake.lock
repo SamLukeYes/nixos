@@ -226,7 +226,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "shimeji": "shimeji",
-        "xontribs": "xontribs",
         "zzzsyyy": "zzzsyyy"
       }
     },
@@ -283,26 +282,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "xontribs": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1730284032,
-        "narHash": "sha256-nj86rRYKLKv+s3yXFlLfvLBsEV49vCWgSBbzLhBg+bI=",
-        "owner": "drmikecrowe",
-        "repo": "nur-packages",
-        "rev": "9c28cb904891432013bdf3d32234b82c53f735f1",
-        "type": "github"
-      },
-      "original": {
-        "owner": "drmikecrowe",
-        "repo": "nur-packages",
         "type": "github"
       }
     },

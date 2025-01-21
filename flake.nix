@@ -32,10 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/Shimeji-Desktop";
     };
-    xontribs = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:drmikecrowe/nur-packages";
-    };
     zzzsyyy = {
       flake = false;  # too many dependencies, but I only want their overlay
       url = "github:zzzsyyy/flakes";
@@ -53,6 +49,7 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/375009.patch  # xonsh
+      ./patches/354733.patch  # xontribs
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
@@ -156,7 +153,6 @@
 
       jdk = final.jetbrains.jdk-no-jcef;
       shimeji = inputs.shimeji.packages.${system};
-      xontribs = import inputs.xontribs { pkgs = final; };
     };
   };
 }
