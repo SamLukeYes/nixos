@@ -1,3 +1,5 @@
+{ lib, ... }:
+
 {
   imports =
     [
@@ -14,9 +16,10 @@
 
   networking.networkmanager.enable = true;
 
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+
   system.rebuild.enableNg = true;
 
-  # Set your time zone.
   time.timeZone = "Asia/Shanghai";
 
   xdg.portal.xdgOpenUsePortal = true;
