@@ -26,11 +26,20 @@
         "networkmanager"
         "wheel"
         "wireshark"
+        "vboxusers"
       ];
       initialHashedPassword = "";
       isNormalUser = true;
       shell = config.programs.xonsh.package;
       uid = 1000;
     };
+  };
+
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+
+    enableKvm = true;
+    addNetworkInterface = false;
   };
 }
