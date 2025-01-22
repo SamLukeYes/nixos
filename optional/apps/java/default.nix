@@ -11,4 +11,12 @@
     else [ shimeji.default ]);
 
   programs.java.enable = true;
+
+  virtualisation.virtualbox.host = {
+    enable = true;
+    enableExtensionPack = true;
+
+    enableKvm = true;
+    addNetworkInterface = false;
+  };
 }

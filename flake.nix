@@ -57,6 +57,9 @@
     inherit (nixpkgs) lib;
     inherit self inputs;
     channelsConfig = {
+      allowlistedLicenses = with lib.licenses; [
+        virtualbox-puel
+      ];
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
         "charles"
         "code"

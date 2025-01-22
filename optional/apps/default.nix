@@ -4,7 +4,6 @@
   imports = [
     ./java
     ./lx-music.nix
-    ./quickemu.nix
   ];
   
   environment.systemPackages = with pkgs; [
