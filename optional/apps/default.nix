@@ -3,7 +3,6 @@
 {
   imports = [
     ./java
-    ./lx-music.nix
   ];
   
   environment.systemPackages = with pkgs; [
