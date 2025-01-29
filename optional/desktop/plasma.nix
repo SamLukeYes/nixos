@@ -16,7 +16,7 @@
       krita
       kwalletmanager
       ksystemlog
-      libreoffice-qt
+      libreoffice-qt6
       partition-manager
 
       # Maliit
