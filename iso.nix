@@ -26,4 +26,6 @@
   };
 
   users.defaultUserShell = config.programs.xonsh.package;
+
+  zramSwap.enable = true;
 }
