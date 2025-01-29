@@ -4,7 +4,6 @@
   imports = [
     ./angrr.nix
     ./earlyoom.nix
-    ./v2raya.nix
   ];
 
   services = {

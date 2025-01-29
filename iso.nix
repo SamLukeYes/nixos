@@ -9,8 +9,9 @@
 
   boot.initrd.systemd.enable = lib.mkForce false;
 
-  environment.systemPackages = with pkgs; [
-    arch-install-scripts
+  environment.systemPackages = [
+    config.services.mihomo.package
+    pkgs.arch-install-scripts
   ];
 
   isoImage.squashfsCompression = "zstd";

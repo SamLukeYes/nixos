@@ -1,21 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  programs = {
-    adb.enable = true;
-    wireshark = {
-      enable = true;
-      package = pkgs.wireshark;
-    };
-  };
-
-  services.syncthing = {
-    enable = true;
-    openDefaultPorts = true;
-    user = "yes";
-    dataDir = "/home/yes";
-  };
-
   users = {
     groups.yes.gid = 1000;
     users.yes = {
@@ -33,6 +18,37 @@
       shell = config.programs.xonsh.package;
       uid = 1000;
     };
+  };
+
+  networking.proxy.default = "http://127.0.0.1:7890";
+
+  programs = {
+    adb.enable = true;
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+    };
+  };
+
+  services = {
+    mihomo = {
+      enable = true;
+      configFile = "${config.users.users.yes.home}/Private/proxies/Clash.yaml";
+      webui = pkgs.metacubexd;
+    };
+
+    syncthing = {
+      enable = true;
+      openDefaultPorts = true;
+      user = "yes";
+      dataDir = config.users.users.yes.home;
+    };
+  };
+
+  systemd.services.mihomo.serviceConfig = {
+    Restart = "on-failure";
+    RestartStep = 5;
+    RestartMaxDelaySec = "1min";
   };
 
   virtualisation.virtualbox.host = {
