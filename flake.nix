@@ -4,41 +4,48 @@
   description = "My NixOS configuration";
 
   inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
     angrr = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:linyinfeng/angrr";
     };
+
     archix = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
       };
       url = "github:SamLukeYes/archix";
     };
+
     archlinuxcn-keyring = {
       flake = false;
       url = "github:archlinuxcn/archlinuxcn-keyring";
     };
+
     cpupower-gui = {
       flake = false;
       url = "github:vagnum08/cpupower-gui";
     };
+
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+
+    mutter-performance = {
+      flake = false;
+      url = "git+https://aur.archlinux.org/mutter-performance.git/?ref=master";
+    };
+
     nix-index-database = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-index-database";
     };
+
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+
     shimeji = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SamLukeYes/Shimeji-Desktop";
     };
-    zzzsyyy = {
-      flake = false;  # too many dependencies, but I only want their overlay
-      url = "github:zzzsyyy/flakes";
-    };
-
-    # nixpkgs
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -67,7 +74,6 @@
       ];
     };
     sharedOverlays = [
-      (import "${inputs.zzzsyyy}/overlays/mutter.nix")
       inputs.angrr.overlays.default
       self.overlays.default
     ];
@@ -154,6 +160,14 @@
       };
 
       jdk = final.jetbrains.jdk-no-jcef;
+
+      mutter = prev.mutter.overrideAttrs (old: {
+        patches = (old.patches or []) ++ [
+          "${inputs.mutter-performance}/mr1441.patch"
+          "${inputs.mutter-performance}/mr3751.patch"
+        ];
+      });
+
       shimeji = inputs.shimeji.packages.${system};
     };
   };

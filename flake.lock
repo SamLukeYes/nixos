@@ -164,6 +164,23 @@
         "type": "github"
       }
     },
+    "mutter-performance": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1736938833,
+        "narHash": "sha256-j4eiXVVqJ7OF2LanW2QEFdAiaOOxBB3Z9umCihoKHjI=",
+        "ref": "master",
+        "rev": "0b6cd14baa171db46aa7552d0e165617f82d6d89",
+        "revCount": 275,
+        "type": "git",
+        "url": "https://aur.archlinux.org/mutter-performance.git/"
+      },
+      "original": {
+        "ref": "master",
+        "type": "git",
+        "url": "https://aur.archlinux.org/mutter-performance.git/"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -222,11 +239,11 @@
         "archlinuxcn-keyring": "archlinuxcn-keyring",
         "cpupower-gui": "cpupower-gui",
         "flake-utils-plus": "flake-utils-plus",
+        "mutter-performance": "mutter-performance",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
-        "shimeji": "shimeji",
-        "zzzsyyy": "zzzsyyy"
+        "shimeji": "shimeji"
       }
     },
     "shimeji": {
@@ -282,22 +299,6 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "zzzsyyy": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1735363581,
-        "narHash": "sha256-+5qtqfwae1nPWW0hxssKF5fDuR6pcCT6Ah5RSCmmV04=",
-        "owner": "zzzsyyy",
-        "repo": "flakes",
-        "rev": "f7038bf9b2e68ef622e9384bbffda78cffa82a37",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zzzsyyy",
-        "repo": "flakes",
         "type": "github"
       }
     }
