@@ -19,6 +19,8 @@
 
     logind.lidSwitch = "ignore";
 
+    ollama.enable = true;
+
     power-profiles-daemon.enable = false;
 
     throttled.enable = false;
