@@ -5,3 +5,4 @@ TODO.txt
 update.sh
 result
 nixos-iso/
+*.qcow2

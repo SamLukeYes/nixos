@@ -8,20 +8,17 @@
       dockerCompat = true;
     };
 
-    spiceUSBRedirection.enable = true;
-
     vmVariant = {
       imports = [
         "${modulesPath}/virtualisation/qemu-vm.nix"
       ];
 
-      # boot.kernelPackages = pkgs.linuxPackages_xanmod;
-
-      environment.systemPackages = with pkgs; [
-        qt5ct
-        qt6ct
-        xorg.xeyes
-      ];
+      environment = {
+        etc."xonsh/xonshrc".text = lib.mkForce "";
+        systemPackages = with pkgs; [
+          xorg.xeyes
+        ];
+      };
 
       networking = {
         hostName = lib.mkForce "test";
@@ -44,14 +41,9 @@
       services = {
         cpupower-gui.enable = false;
         journald.storage = "volatile";
-        openssh = {
-          enable = true;
-          # settings = {
-          #   PermitEmptyPasswords = "yes";
-          # };
-        };
+        mihomo.enable = lib.mkForce false;
+        openssh.enable = true;
         thinkfan.enable = lib.mkForce false;
-        # xserver.displayManager.autoLogin.user = "test";
       };
 
       swapDevices = lib.mkForce [];
@@ -74,7 +66,7 @@
         cores = 2;
         diskSize = 8192;
         memorySize = 4096;
-        qemu.options = [ "-device virtio-vga-gl -display gtk,gl=on" ];
+        qemu.options = [ "-device virtio-vga-gl -display sdl,gl=on" ];
       };
     };
   };
