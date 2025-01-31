@@ -1,7 +1,7 @@
-From ea8734d719ca2a4c28379412df84363303772180 Mon Sep 17 00:00:00 2001
+From 38c02521e20f1de8355730d53d331bea1842461f Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:22:26 -0500
-Subject: [PATCH 01/13] nixos/xonsh: support extra packages
+Subject: [PATCH 01/14] nixos/xonsh: support extra packages
 
 ---
  nixos/modules/programs/xonsh.nix | 21 ++++++++++++++++++---
@@ -57,10 +57,10 @@ index 86bdb4088845f..ed7f3593d79d1 100644
    };
  }
 
-From f39b0d85b9948e069e5ee4e4a561e9908832a2d1 Mon Sep 17 00:00:00 2001
+From db289d3d8dd1975945559e88d27a359989d3ddfd Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:23:55 -0500
-Subject: [PATCH 02/13] xonsh: format
+Subject: [PATCH 02/14] xonsh: format
 
 ---
  pkgs/by-name/xo/xonsh/package.nix | 13 ++++++++-----
@@ -94,71 +94,339 @@ index 2cf2b9241ca49..63857655409cf 100644
    ''
      mkdir -p $out/bin
 
-From 344acd3b0b49baa53e20fda7c6f84c20c5fa238e Mon Sep 17 00:00:00 2001
+From b6fa8f4bf1c7f4c8bffb50e9b4e166adcc9ad07f Mon Sep 17 00:00:00 2001
+From: Infinidoge <infinidoge@inx.moe>
+Date: Thu, 30 Jan 2025 13:22:03 -0500
+Subject: [PATCH 03/14] xonsh: refactor to remove pythonPackages
+
+---
+ pkgs/by-name/xo/xonsh/unwrapped.nix | 247 ++++++++++++++--------------
+ 1 file changed, 128 insertions(+), 119 deletions(-)
+
+diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
+index 93544f928fd6d..47edeb76a9a08 100644
+--- a/pkgs/by-name/xo/xonsh/unwrapped.nix
++++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
+@@ -1,128 +1,137 @@
+ {
+   lib,
+-  coreutils,
++  buildPythonPackage,
+   fetchFromGitHub,
++
++  setuptools,
++  wheel,
++  ply,
++  prompt-toolkit,
++  pygments,
++
+   git,
+   glibcLocales,
++  pip,
++  pyte,
++  pytest-mock,
++  pytest-subprocess,
++  pytestCheckHook,
++  requests,
++
++  coreutils,
++
+   nix-update-script,
+-  pythonPackages,
++  python,
++  callPackage,
+ }:
+ 
+-let
+-
+-  argset = {
+-    pname = "xonsh";
+-    version = "0.19.1";
+-    pyproject = true;
+-
+-    # PyPI package ships incomplete tests
+-    src = fetchFromGitHub {
+-      owner = "xonsh";
+-      repo = "xonsh";
+-      rev = "refs/tags/${argset.version}";
+-      hash = "sha256-20egNKlJjJO1wdy1anApz0ADBnaHPUSqhfrsPe3QQIs=";
+-    };
+-
+-    nativeBuildInputs = with pythonPackages; [
+-      setuptools
+-      wheel
+-    ];
+-
+-    propagatedBuildInputs = (
+-      with pythonPackages;
+-      [
+-        ply
+-        prompt-toolkit
+-        pygments
+-      ]
+-    );
+-
+-    nativeCheckInputs =
+-      [
+-        git
+-        glibcLocales
+-      ]
+-      ++ (with pythonPackages; [
+-        pip
+-        pyte
+-        pytest-mock
+-        pytest-subprocess
+-        pytestCheckHook
+-        requests
+-      ]);
+-
+-    disabledTests = [
+-      # fails on sandbox
+-      "test_colorize_file"
+-      "test_loading_correctly"
+-      "test_no_command_path_completion"
+-      "test_bsd_man_page_completions"
+-      "test_xonsh_activator"
+-
+-      # fails on non-interactive shells
+-      "test_capture_always"
+-      "test_casting"
+-      "test_command_pipeline_capture"
+-      "test_dirty_working_directory"
+-      "test_man_completion"
+-      "test_vc_get_branch"
+-      "test_bash_and_is_alias_is_only_functional_alias"
+-
+-      # flaky tests
+-      "test_script"
+-      "test_alias_stability"
+-      "test_alias_stability_exception"
+-      "test_complete_import"
+-      "test_subproc_output_format"
+-
+-      # https://github.com/xonsh/xonsh/issues/5569
+-      "test_spec_decorator_alias_output_format"
+-    ];
+-
+-    disabledTestPaths = [
+-      # fails on sandbox
+-      "tests/completers/test_command_completers.py"
+-      "tests/shell/test_ptk_highlight.py"
+-      # fails on non-interactive shells
+-      "tests/prompt/test_gitstatus.py"
+-      "tests/completers/test_bash_completer.py"
+-    ];
+-
+-    # https://github.com/NixOS/nixpkgs/issues/248978
+-    dontWrapPythonPrograms = true;
+-
+-    env.LC_ALL = "en_US.UTF-8";
+-
+-    postPatch = ''
+-      sed -i -e 's|/bin/ls|${lib.getExe' coreutils "ls"}|' tests/test_execer.py
+-      sed -i -e 's|SHELL=xonsh|SHELL=$out/bin/xonsh|' tests/test_integrations.py
+-
+-      for script in tests/test_integrations.py scripts/xon.sh $(find -name "*.xsh"); do
+-        sed -i -e 's|/usr/bin/env|${lib.getExe' coreutils "env"}|' $script
+-      done
+-      patchShebangs .
+-    '';
+-
+-    preCheck = ''
+-      export HOME=$TMPDIR
+-      export PATH=$out/bin:$PATH
+-    '';
+-
+-    passthru = {
+-      shellPath = "/bin/xonsh";
+-      python = pythonPackages.python; # To the wrapper
+-      wrapper = throw "The top-level xonsh package is now wrapped. Use it directly.";
+-      updateScript = nix-update-script { };
+-    };
+-
+-    meta = {
+-      homepage = "https://xon.sh/";
+-      description = "Python-ish, BASHwards-compatible shell";
+-      changelog = "https://github.com/xonsh/xonsh/raw/main/CHANGELOG.rst";
+-      license = with lib.licenses; [ bsd3 ];
+-      mainProgram = "xonsh";
+-      maintainers = with lib.maintainers; [ samlukeyes123 ];
+-    };
++buildPythonPackage rec {
++  pname = "xonsh";
++  version = "0.19.1";
++  pyproject = true;
++
++  # PyPI package ships incomplete tests
++  src = fetchFromGitHub {
++    owner = "xonsh";
++    repo = "xonsh";
++    tag = version;
++    hash = "sha256-20egNKlJjJO1wdy1anApz0ADBnaHPUSqhfrsPe3QQIs=";
++  };
++
++  nativeBuildInputs = [
++    setuptools
++    wheel
++  ];
++
++  propagatedBuildInputs = [
++    ply
++    prompt-toolkit
++    pygments
++  ];
++
++  nativeCheckInputs = [
++    git
++    glibcLocales
++    pip
++    pyte
++    pytest-mock
++    pytest-subprocess
++    pytestCheckHook
++    requests
++  ];
++
++  disabledTests = [
++    # fails on sandbox
++    "test_bsd_man_page_completions"
++    "test_colorize_file"
++    "test_loading_correctly"
++    "test_no_command_path_completion"
++    "test_repath_backslash"
++    "test_xonsh_activator"
++
++    # fails on non-interactive shells
++    "test_bash_and_is_alias_is_only_functional_alias"
++    "test_capture_always"
++    "test_casting"
++    "test_command_pipeline_capture"
++    "test_dirty_working_directory"
++    "test_man_completion"
++    "test_vc_get_branch"
++
++    # flaky tests
++    "test_alias_stability"
++    "test_alias_stability_exception"
++    "test_complete_import"
++    "test_script"
++    "test_subproc_output_format"
++
++    # https://github.com/xonsh/xonsh/issues/5569
++    "test_spec_decorator_alias_output_format"
++  ];
++
++  disabledTestPaths = [
++    # fails on sandbox
++    "tests/completers/test_command_completers.py"
++    "tests/shell/test_ptk_highlight.py"
++
++    # fails on non-interactive shells
++    "tests/prompt/test_gitstatus.py"
++    "tests/completers/test_bash_completer.py"
++  ];
++
++  # https://github.com/NixOS/nixpkgs/issues/248978
++  dontWrapPythonPrograms = true;
++
++  env.LC_ALL = "en_US.UTF-8";
++
++  postPatch = ''
++    sed -i -e 's|/bin/ls|${lib.getExe' coreutils "ls"}|' tests/test_execer.py
++    sed -i -e 's|SHELL=xonsh|SHELL=$out/bin/xonsh|' tests/test_integrations.py
++
++    for script in tests/test_integrations.py scripts/xon.sh $(find -name "*.xsh"); do
++      sed -i -e 's|/usr/bin/env|${lib.getExe' coreutils "env"}|' $script
++    done
++    patchShebangs .
++  '';
++
++  preCheck = ''
++    export HOME=$(mktemp -d)
++    export PATH=$out/bin:$PATH
++  '';
++
++  passthru = {
++    inherit python;
++    shellPath = "/bin/xonsh";
++    wrapper = throw "The top-level xonsh package is now wrapped. Use it directly.";
++    updateScript = nix-update-script { };
++  };
++
++  meta = {
++    homepage = "https://xon.sh/";
++    description = "Python-ish, BASHwards-compatible shell";
++    changelog = "https://github.com/xonsh/xonsh/raw/main/CHANGELOG.rst";
++    license = with lib.licenses; [ bsd3 ];
++    mainProgram = "xonsh";
++    maintainers = with lib.maintainers; [ samlukeyes123 ];
+   };
+-in
+-pythonPackages.buildPythonPackage argset
++}
+
+From e99265c287a185720b49e0b6fed4db6c2c291894 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:25:40 -0500
-Subject: [PATCH 03/13] xonsh.xontribs: init empty package set
+Subject: [PATCH 04/14] xonsh.xontribs: init empty package set
 
 ---
  pkgs/by-name/xo/xonsh/unwrapped.nix        | 1 +
- pkgs/by-name/xo/xonsh/xontribs/default.nix | 8 ++++++++
- 2 files changed, 9 insertions(+)
+ pkgs/by-name/xo/xonsh/xontribs/default.nix | 5 +++++
+ 2 files changed, 6 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
-index 93544f928fd6d..b612958038441 100644
+index 47edeb76a9a08..04c701a5cdd52 100644
 --- a/pkgs/by-name/xo/xonsh/unwrapped.nix
 +++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
-@@ -113,6 +113,7 @@ let
-       python = pythonPackages.python; # To the wrapper
-       wrapper = throw "The top-level xonsh package is now wrapped. Use it directly.";
-       updateScript = nix-update-script { };
-+      xontribs = import ./xontribs { inherit pythonPackages; };
-     };
+@@ -124,6 +124,7 @@ buildPythonPackage rec {
+     shellPath = "/bin/xonsh";
+     wrapper = throw "The top-level xonsh package is now wrapped. Use it directly.";
+     updateScript = nix-update-script { };
++    xontribs = import ./xontribs { inherit callPackage; };
+   };
  
-     meta = {
+   meta = {
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
 new file mode 100644
-index 0000000000000..2020b01b3baba
+index 0000000000000..162a5bdf52f4d
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -0,0 +1,8 @@
+@@ -0,0 +1,5 @@
 +{
-+  pythonPackages,
++  callPackage,
 +}:
-+let
-+  inherit (pythonPackages) callPackage;
-+in
 +{
 +}
 
-From a85832a26cfaf013502849321ee30e52c5c08f26 Mon Sep 17 00:00:00 2001
+From fbfa8d2947222845c0fa97220e2312aa20ef9511 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:28:29 -0500
-Subject: [PATCH 04/13] xonsh.xontribs.xonsh-direnv: init at 1.6.5
+Subject: [PATCH 05/14] xonsh.xontribs.xonsh-direnv: init at 1.6.5
 
 ---
  pkgs/by-name/xo/xonsh/xontribs/default.nix    |  1 +
- .../xonsh/xontribs/xonsh-direnv/default.nix   | 35 +++++++++++++++++++
- 2 files changed, 36 insertions(+)
+ .../xonsh/xontribs/xonsh-direnv/default.nix   | 39 +++++++++++++++++++
+ 2 files changed, 40 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/xonsh-direnv/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-index 2020b01b3baba..30440919c6325 100644
+index 162a5bdf52f4d..db2719a2b8b89 100644
 --- a/pkgs/by-name/xo/xonsh/xontribs/default.nix
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -5,4 +5,5 @@ let
-   inherit (pythonPackages) callPackage;
- in
+@@ -2,4 +2,5 @@
+   callPackage,
+ }:
  {
 +  xonsh-direnv = callPackage ./xonsh-direnv { };
  }
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/xonsh-direnv/default.nix b/pkgs/by-name/xo/xonsh/xontribs/xonsh-direnv/default.nix
 new file mode 100644
-index 0000000000000..245abdf218769
+index 0000000000000..e4122feb09fe3
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/xonsh-direnv/default.nix
-@@ -0,0 +1,35 @@
+@@ -0,0 +1,39 @@
 +{
 +  lib,
 +  buildPythonPackage,
@@ -166,6 +434,7 @@ index 0000000000000..245abdf218769
 +
 +  setuptools,
 +  direnv,
++  nix-update-script,
 +}:
 +
 +buildPythonPackage rec {
@@ -187,41 +456,44 @@ index 0000000000000..245abdf218769
 +    direnv
 +  ];
 +
++  passthru.updateScript = nix-update-script { };
++
 +  meta = {
 +    description = "Direnv support for Xonsh";
 +    homepage = "https://github.com/74th/xonsh-direnv/";
++    changelog = "https://github.com/74th/xonsh-direnv/releases/tag/${version}";
 +    license = lib.licenses.mit;
 +    maintainers = with lib.maintainers; [ greg ];
 +  };
 +}
 
-From 0371b876d6fa7a430cebcbd957035b61d7ce1445 Mon Sep 17 00:00:00 2001
+From f99ced0772a120eec1635d19b23cc9bfb36ce1c1 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:30:32 -0500
-Subject: [PATCH 05/13] xonsh.xontribs.xontrib-abbrevs: init at 0.1.0
+Subject: [PATCH 06/14] xonsh.xontribs.xontrib-abbrevs: init at 0.1.0
 
 ---
  pkgs/by-name/xo/xonsh/xontribs/default.nix    |  1 +
- .../xontribs/xontrib-abbrevs/default.nix      | 56 +++++++++++++++++++
- 2 files changed, 57 insertions(+)
+ .../xontribs/xontrib-abbrevs/default.nix      | 60 +++++++++++++++++++
+ 2 files changed, 61 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/xontrib-abbrevs/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-index 30440919c6325..bb73170ac1282 100644
+index db2719a2b8b89..c40e2c67412c6 100644
 --- a/pkgs/by-name/xo/xonsh/xontribs/default.nix
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -6,4 +6,5 @@ let
- in
+@@ -3,4 +3,5 @@
+ }:
  {
    xonsh-direnv = callPackage ./xonsh-direnv { };
 +  xontrib-abbrevs = callPackage ./xontrib-abbrevs { };
  }
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/xontrib-abbrevs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/xontrib-abbrevs/default.nix
 new file mode 100644
-index 0000000000000..341378ddc0db1
+index 0000000000000..675205fe94a4c
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/xontrib-abbrevs/default.nix
-@@ -0,0 +1,56 @@
+@@ -0,0 +1,60 @@
 +{
 +  lib,
 +  buildPythonPackage,
@@ -233,6 +505,7 @@ index 0000000000000..341378ddc0db1
 +  prompt-toolkit,
 +  pytestCheckHook,
 +  xonsh,
++  nix-update-script,
 +}:
 +
 +buildPythonPackage rec {
@@ -249,7 +522,7 @@ index 0000000000000..341378ddc0db1
 +
 +  prePatch = ''
 +    substituteInPlace pyproject.toml \
-+      --replace-fail '"xonsh>=0.12.5", ' ""
++      --replace-fail '"xonsh>=0.17", ' ""
 +  '';
 +
 +  build-system = [
@@ -266,35 +539,38 @@ index 0000000000000..341378ddc0db1
 +    export HOME=$(mktemp -d)
 +  '';
 +
-+  checkInputs = [
++  nativeCheckInputs = [
 +    pytestCheckHook
 +    xonsh
 +  ];
 +
-+  meta = with lib; {
-+    description = "Command abbreviations. This expands input words as you type.";
++  passthru.updateScript = nix-update-script { };
++
++  meta = {
++    description = "Command abbreviations for Xonsh";
 +    homepage = "https://github.com/xonsh/xontrib-abbrevs";
-+    license = licenses.mit;
-+    maintainers = [ maintainers.greg ];
++    changelog = "https://github.com/xonsh/xontrib-apprevs/releases/tag/v${version}";
++    license = lib.licenses.mit;
++    maintainers = with lib.maintainers; [ greg ];
 +  };
 +}
 
-From 8ecaaae64fe161f396ba3de408f304dffd9337e2 Mon Sep 17 00:00:00 2001
+From c541733b7f40290f4a1c93ee5b1d65890773c5a6 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:31:04 -0500
-Subject: [PATCH 06/13] xonsh.xontribs.xontrib-bashisms: init at 0.0.5
+Subject: [PATCH 07/14] xonsh.xontribs.xontrib-bashisms: init at 0.0.5
 
 ---
  pkgs/by-name/xo/xonsh/xontribs/default.nix    |  1 +
- .../xontribs/xontrib-bashisms/default.nix     | 47 +++++++++++++++++++
- 2 files changed, 48 insertions(+)
+ .../xontribs/xontrib-bashisms/default.nix     | 50 +++++++++++++++++++
+ 2 files changed, 51 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/xontrib-bashisms/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-index bb73170ac1282..e74a52fe25826 100644
+index c40e2c67412c6..57b19bd769bda 100644
 --- a/pkgs/by-name/xo/xonsh/xontribs/default.nix
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -7,4 +7,5 @@ in
+@@ -4,4 +4,5 @@
  {
    xonsh-direnv = callPackage ./xonsh-direnv { };
    xontrib-abbrevs = callPackage ./xontrib-abbrevs { };
@@ -302,10 +578,10 @@ index bb73170ac1282..e74a52fe25826 100644
  }
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/xontrib-bashisms/default.nix b/pkgs/by-name/xo/xonsh/xontribs/xontrib-bashisms/default.nix
 new file mode 100644
-index 0000000000000..fbbb1827c5273
+index 0000000000000..cb53957799cf8
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/xontrib-bashisms/default.nix
-@@ -0,0 +1,47 @@
+@@ -0,0 +1,50 @@
 +{
 +  lib,
 +  buildPythonPackage,
@@ -314,6 +590,7 @@ index 0000000000000..fbbb1827c5273
 +  setuptools,
 +  pytestCheckHook,
 +  xonsh,
++  nix-update-script,
 +}:
 +
 +buildPythonPackage rec {
@@ -346,30 +623,32 @@ index 0000000000000..fbbb1827c5273
 +    xonsh
 +  ];
 +
++  passthru.updateScript = nix-update-script { };
++
 +  meta = {
-+    description = "Bash-like interactive mode extensions for the xonsh shell. ";
++    description = "Bash-like interactive mode extensions for the xonsh shell";
 +    homepage = "https://github.com/xonsh/xontrib-bashisms";
 +    license = lib.licenses.mit;
 +    maintainers = with lib.maintainers; [ greg ];
 +  };
 +}
 
-From 1b8ff87b61996e273f71b0b08dd49d55f17f98b7 Mon Sep 17 00:00:00 2001
+From ea5a55abfb2ca191f1deb1dd8eea163205dc100d Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:31:40 -0500
-Subject: [PATCH 07/13] xonsh.xontribs.xontrib-debug-tools: init at 0.0.1
+Subject: [PATCH 08/14] xonsh.xontribs.xontrib-debug-tools: init at 0.0.1
 
 ---
  pkgs/by-name/xo/xonsh/xontribs/default.nix    |  1 +
- .../xontribs/xontrib-debug-tools/default.nix  | 42 +++++++++++++++++++
- 2 files changed, 43 insertions(+)
+ .../xontribs/xontrib-debug-tools/default.nix  | 50 +++++++++++++++++++
+ 2 files changed, 51 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/xontrib-debug-tools/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-index e74a52fe25826..c9d80e56111fd 100644
+index 57b19bd769bda..d2b54e0de4469 100644
 --- a/pkgs/by-name/xo/xonsh/xontribs/default.nix
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -8,4 +8,5 @@ in
+@@ -5,4 +5,5 @@
    xonsh-direnv = callPackage ./xonsh-direnv { };
    xontrib-abbrevs = callPackage ./xontrib-abbrevs { };
    xontrib-bashisms = callPackage ./xontrib-bashisms { };
@@ -377,17 +656,19 @@ index e74a52fe25826..c9d80e56111fd 100644
  }
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/xontrib-debug-tools/default.nix b/pkgs/by-name/xo/xonsh/xontribs/xontrib-debug-tools/default.nix
 new file mode 100644
-index 0000000000000..12b7b3313529d
+index 0000000000000..44a2315d886cd
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/xontrib-debug-tools/default.nix
-@@ -0,0 +1,42 @@
+@@ -0,0 +1,50 @@
 +{
 +  lib,
 +  buildPythonPackage,
 +  fetchFromGitHub,
 +
++  setuptools,
 +  pytestCheckHook,
 +  xonsh,
++  nix-update-script,
 +}:
 +
 +buildPythonPackage rec {
@@ -407,39 +688,45 @@ index 0000000000000..12b7b3313529d
 +      --replace-fail '"xonsh>=0.12.5"' ""
 +  '';
 +
++  build-system = [
++    setuptools
++  ];
++
 +  preCheck = ''
 +    export HOME=$(mktemp -d)
 +  '';
 +
-+  checkInputs = [
++  nativeCheckInputs = [
 +    pytestCheckHook
 +    xonsh
 +  ];
 +
++  passthru.updateScript = nix-update-script { };
++
 +  meta = {
-+    description = "Debug tools for xonsh shell.";
++    description = "Debug tools for xonsh shell";
 +    homepage = "https://github.com/xonsh/xontrib-debug-tools";
 +    license = lib.licenses.mit;
 +    maintainers = with lib.maintainers; [ greg ];
 +  };
 +}
 
-From 49e3686064ce5ba067c58859422c607ab9bb558f Mon Sep 17 00:00:00 2001
+From 97bf8e4250e68dbd46566ca152ebd4fb149242c0 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:32:08 -0500
-Subject: [PATCH 08/13] xonsh.xontribs.xontrib-distributed: init at 0.0.4
+Subject: [PATCH 09/14] xonsh.xontribs.xontrib-distributed: init at 0.0.4
 
 ---
  pkgs/by-name/xo/xonsh/xontribs/default.nix    |  1 +
- .../xontribs/xontrib-distributed/default.nix  | 51 +++++++++++++++++++
- 2 files changed, 52 insertions(+)
+ .../xontribs/xontrib-distributed/default.nix  | 58 +++++++++++++++++++
+ 2 files changed, 59 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/xontrib-distributed/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-index c9d80e56111fd..fcadbc73ae28a 100644
+index d2b54e0de4469..64e84a357fa8a 100644
 --- a/pkgs/by-name/xo/xonsh/xontribs/default.nix
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -9,4 +9,5 @@ in
+@@ -6,4 +6,5 @@
    xontrib-abbrevs = callPackage ./xontrib-abbrevs { };
    xontrib-bashisms = callPackage ./xontrib-bashisms { };
    xontrib-debug-tools = callPackage ./xontrib-debug-tools { };
@@ -447,10 +734,10 @@ index c9d80e56111fd..fcadbc73ae28a 100644
  }
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/xontrib-distributed/default.nix b/pkgs/by-name/xo/xonsh/xontribs/xontrib-distributed/default.nix
 new file mode 100644
-index 0000000000000..4f3dc318bba30
+index 0000000000000..38c7fde87e808
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/xontrib-distributed/default.nix
-@@ -0,0 +1,51 @@
+@@ -0,0 +1,58 @@
 +{
 +  lib,
 +  buildPythonPackage,
@@ -460,6 +747,7 @@ index 0000000000000..4f3dc318bba30
 +  distributed,
 +  pytestCheckHook,
 +  xonsh,
++  nix-update-script,
 +}:
 +
 +buildPythonPackage rec {
@@ -487,13 +775,19 @@ index 0000000000000..4f3dc318bba30
 +    distributed
 +  ];
 +
-+  # v0.0.4 has no tests associated with it
++  # As of v0.0.4 has no tests that get run by pytest
 +  doCheck = false;
 +
-+  checkInputs = [
++  preCheck = ''
++    export HOME=$(mktemp -d)
++  '';
++
++  nativeCheckInputs = [
 +    pytestCheckHook
 +    xonsh
 +  ];
++
++  passthru.updateScript = nix-update-script { };
 +
 +  meta = {
 +    description = "Dask Distributed integration for Xonsh";
@@ -503,22 +797,22 @@ index 0000000000000..4f3dc318bba30
 +  };
 +}
 
-From c5f8fd5a0a15bc4dc5f5641056c91da4ad26cfd7 Mon Sep 17 00:00:00 2001
+From 88d1c5e163ac8eafb3cc701695c026f0aee4d939 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:32:43 -0500
-Subject: [PATCH 09/13] xonsh.xontribs.xontrib-fish-completer: init at 0.0.1
+Subject: [PATCH 10/14] xonsh.xontribs.xontrib-fish-completer: init at 0.0.1
 
 ---
  pkgs/by-name/xo/xonsh/xontribs/default.nix    |  1 +
- .../xontrib-fish-completer/default.nix        | 48 +++++++++++++++++++
- 2 files changed, 49 insertions(+)
+ .../xontrib-fish-completer/default.nix        | 52 +++++++++++++++++++
+ 2 files changed, 53 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/xontrib-fish-completer/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-index fcadbc73ae28a..baea33bca42e7 100644
+index 64e84a357fa8a..4d06e9dd50395 100644
 --- a/pkgs/by-name/xo/xonsh/xontribs/default.nix
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -10,4 +10,5 @@ in
+@@ -7,4 +7,5 @@
    xontrib-bashisms = callPackage ./xontrib-bashisms { };
    xontrib-debug-tools = callPackage ./xontrib-debug-tools { };
    xontrib-distributed = callPackage ./xontrib-distributed { };
@@ -526,18 +820,20 @@ index fcadbc73ae28a..baea33bca42e7 100644
  }
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/xontrib-fish-completer/default.nix b/pkgs/by-name/xo/xonsh/xontribs/xontrib-fish-completer/default.nix
 new file mode 100644
-index 0000000000000..b585079faafff
+index 0000000000000..1c572c81568cd
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/xontrib-fish-completer/default.nix
-@@ -0,0 +1,48 @@
+@@ -0,0 +1,52 @@
 +{
 +  lib,
 +  buildPythonPackage,
 +  fetchFromGitHub,
 +
++  setuptools,
 +  pytestCheckHook,
 +  pytest-subprocess,
 +  xonsh,
++  nix-update-script,
 +}:
 +
 +buildPythonPackage rec {
@@ -557,19 +853,21 @@ index 0000000000000..b585079faafff
 +      --replace-fail '"xonsh>=0.12.5"' ""
 +  '';
 +
++  build-system = [
++    setuptools
++  ];
++
 +  preCheck = ''
 +    export HOME=$(mktemp -d)
 +  '';
 +
-+  disabledTests = [
-+    "test_interpreter"
-+  ];
-+
-+  checkInputs = [
++  nativeCheckInputs = [
 +    pytestCheckHook
 +    pytest-subprocess
 +    xonsh
 +  ];
++
++  passthru.updateScript = nix-update-script { };
 +
 +  meta = {
 +    description = "Populate rich completions using fish and remove the default bash based completer";
@@ -579,22 +877,22 @@ index 0000000000000..b585079faafff
 +  };
 +}
 
-From 2817e51f13cfb26667baf7e6313cec94ce44a1fe Mon Sep 17 00:00:00 2001
+From 9b3fb7e621b2e8591540c7925b44a07f122d185b Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:06 -0500
-Subject: [PATCH 10/13] xonsh.xontribs.xontrib-jedi: init at 0.1.1
+Subject: [PATCH 11/14] xonsh.xontribs.xontrib-jedi: init at 0.1.1
 
 ---
  pkgs/by-name/xo/xonsh/xontribs/default.nix    |  1 +
- .../xonsh/xontribs/xontrib-jedi/default.nix   | 54 +++++++++++++++++++
- 2 files changed, 55 insertions(+)
+ .../xonsh/xontribs/xontrib-jedi/default.nix   | 58 +++++++++++++++++++
+ 2 files changed, 59 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/xontrib-jedi/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-index baea33bca42e7..fc0909bf41a4d 100644
+index 4d06e9dd50395..d8464131eee2c 100644
 --- a/pkgs/by-name/xo/xonsh/xontribs/default.nix
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -11,4 +11,5 @@ in
+@@ -8,4 +8,5 @@
    xontrib-debug-tools = callPackage ./xontrib-debug-tools { };
    xontrib-distributed = callPackage ./xontrib-distributed { };
    xontrib-fish-completer = callPackage ./xontrib-fish-completer { };
@@ -602,10 +900,10 @@ index baea33bca42e7..fc0909bf41a4d 100644
  }
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/xontrib-jedi/default.nix b/pkgs/by-name/xo/xonsh/xontribs/xontrib-jedi/default.nix
 new file mode 100644
-index 0000000000000..62b6dd4a1661a
+index 0000000000000..ed86b06e3e8db
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/xontrib-jedi/default.nix
-@@ -0,0 +1,54 @@
+@@ -0,0 +1,58 @@
 +{
 +  lib,
 +  buildPythonPackage,
@@ -615,6 +913,7 @@ index 0000000000000..62b6dd4a1661a
 +  jedi,
 +  pytestCheckHook,
 +  xonsh,
++  nix-update-script,
 +}:
 +
 +buildPythonPackage rec {
@@ -631,7 +930,7 @@ index 0000000000000..62b6dd4a1661a
 +
 +  prePatch = ''
 +    substituteInPlace pyproject.toml \
-+      --replace-fail 'xonsh = ">=0.12"' ""
++      --replace-fail 'xonsh = ">=0.17"' ""
 +  '';
 +
 +  build-system = [
@@ -648,35 +947,38 @@ index 0000000000000..62b6dd4a1661a
 +      --replace-fail "/usr/bin" "${jedi}/bin"
 +  '';
 +
-+  checkInputs = [
++  nativeCheckInputs = [
 +    pytestCheckHook
 +    xonsh
 +  ];
 +
++  passthru.updateScript = nix-update-script { };
++
 +  meta = {
 +    description = "Xonsh Python mode completions using jedi";
 +    homepage = "https://github.com/xonsh/xontrib-jedi";
++    changelog = "https://github.com/xonsh/xontrib-jedi.releases/tag/${version}";
 +    license = lib.licenses.mit;
 +    maintainers = with lib.maintainers; [ greg ];
 +  };
 +}
 
-From fd60b5509a326d7fc02c7c8a00cccc05d447d802 Mon Sep 17 00:00:00 2001
+From d3375243588844e61af4106b3f0fa56132f8d0b0 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:24 -0500
-Subject: [PATCH 11/13] xonsh.xontribs.xontrib-jupyter: init at 0.3.2
+Subject: [PATCH 12/14] xonsh.xontribs.xontrib-jupyter: init at 0.3.2
 
 ---
  pkgs/by-name/xo/xonsh/xontribs/default.nix    |  1 +
- .../xontribs/xontrib-jupyter/default.nix      | 55 +++++++++++++++++++
- 2 files changed, 56 insertions(+)
+ .../xontribs/xontrib-jupyter/default.nix      | 59 +++++++++++++++++++
+ 2 files changed, 60 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/xontrib-jupyter/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-index fc0909bf41a4d..01eb352951049 100644
+index d8464131eee2c..0ad20b9cbab84 100644
 --- a/pkgs/by-name/xo/xonsh/xontribs/default.nix
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -12,4 +12,5 @@ in
+@@ -9,4 +9,5 @@
    xontrib-distributed = callPackage ./xontrib-distributed { };
    xontrib-fish-completer = callPackage ./xontrib-fish-completer { };
    xontrib-jedi = callPackage ./xontrib-jedi { };
@@ -684,10 +986,10 @@ index fc0909bf41a4d..01eb352951049 100644
  }
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/xontrib-jupyter/default.nix b/pkgs/by-name/xo/xonsh/xontribs/xontrib-jupyter/default.nix
 new file mode 100644
-index 0000000000000..89fc2c80ec5bc
+index 0000000000000..41eee5de78505
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/xontrib-jupyter/default.nix
-@@ -0,0 +1,55 @@
+@@ -0,0 +1,59 @@
 +{
 +  lib,
 +  buildPythonPackage,
@@ -697,6 +999,7 @@ index 0000000000000..89fc2c80ec5bc
 +  jupyter-client,
 +  pytestCheckHook,
 +  xonsh,
++  nix-update-script,
 +}:
 +
 +buildPythonPackage rec {
@@ -731,35 +1034,38 @@ index 0000000000000..89fc2c80ec5bc
 +    export HOME=$(mktemp -d)
 +  '';
 +
-+  checkInputs = [
++  nativeCheckInputs = [
 +    pytestCheckHook
 +    xonsh
 +  ];
 +
++  passthru.updateScript = nix-update-script { };
++
 +  meta = {
-+    description = "Xonsh jupyter kernel allows to run Xonsh shell code in Jupyter, JupyterLab, Euporia, etc.";
++    description = "Xonsh jupyter kernel allows to run Xonsh shell code in Jupyter, JupyterLab, Euporia, etc";
 +    homepage = "https://github.com/xonsh/xontrib-jupyter";
++    changelog = "https://github.com/xonsh/xontrib-jupyter/releases/tag/v${version}";
 +    license = lib.licenses.mit;
 +    maintainers = with lib.maintainers; [ greg ];
 +  };
 +}
 
-From 7adb7d1abe416fbedb31ee2ed149e3bf2b15fe45 Mon Sep 17 00:00:00 2001
+From 6dcf8d4ab0eaa1940581321cab758fc141c1491c Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:39 -0500
-Subject: [PATCH 12/13] xonsh.xontribs.xontrib-vox: init at 0.0.1
+Subject: [PATCH 13/14] xonsh.xontribs.xontrib-vox: init at 0.0.1
 
 ---
  pkgs/by-name/xo/xonsh/xontribs/default.nix    |  1 +
- .../xo/xonsh/xontribs/xontrib-vox/default.nix | 53 +++++++++++++++++++
- 2 files changed, 54 insertions(+)
+ .../xo/xonsh/xontribs/xontrib-vox/default.nix | 62 +++++++++++++++++++
+ 2 files changed, 63 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/xontrib-vox/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-index 01eb352951049..e0832f238d690 100644
+index 0ad20b9cbab84..38e1a697f36ff 100644
 --- a/pkgs/by-name/xo/xonsh/xontribs/default.nix
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -13,4 +13,5 @@ in
+@@ -10,4 +10,5 @@
    xontrib-fish-completer = callPackage ./xontrib-fish-completer { };
    xontrib-jedi = callPackage ./xontrib-jedi { };
    xontrib-jupyter = callPackage ./xontrib-jupyter { };
@@ -767,19 +1073,21 @@ index 01eb352951049..e0832f238d690 100644
  }
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/xontrib-vox/default.nix b/pkgs/by-name/xo/xonsh/xontribs/xontrib-vox/default.nix
 new file mode 100644
-index 0000000000000..02057bb6dd629
+index 0000000000000..2637570f71c9a
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/xontrib-vox/default.nix
-@@ -0,0 +1,53 @@
+@@ -0,0 +1,62 @@
 +{
 +  lib,
 +  buildPythonPackage,
 +  fetchFromGitHub,
 +
++  setuptools,
 +  virtualenv,
 +  pytestCheckHook,
 +  pytest-subprocess,
 +  xonsh,
++  nix-update-script,
 +}:
 +
 +buildPythonPackage rec {
@@ -799,6 +1107,10 @@ index 0000000000000..02057bb6dd629
 +      --replace-fail '"xonsh>=0.12.5"' ""
 +  '';
 +
++  build-system = [
++    setuptools
++  ];
++
 +  preCheck = ''
 +    export HOME=$(mktemp -d)
 +  '';
@@ -814,8 +1126,11 @@ index 0000000000000..02057bb6dd629
 +  ];
 +
 +  disabledTests = [
++    # Monkeypatch in test fails, preventing test from running
 +    "test_interpreter"
 +  ];
++
++  passthru.updateScript = nix-update-script { };
 +
 +  meta = {
 +    description = "Python virtual environment manager for the xonsh shell";
@@ -825,23 +1140,23 @@ index 0000000000000..02057bb6dd629
 +  };
 +}
 
-From 84db42ddff4ad05656fada3daa3698cc6c3e4ce6 Mon Sep 17 00:00:00 2001
+From a1711ccc3fc3c7f9f874de9344ffdbbc93a3f308 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:54 -0500
-Subject: [PATCH 13/13] xonsh.xontribs.xontrib-whole-word-jumping: init at
+Subject: [PATCH 14/14] xonsh.xontribs.xontrib-whole-word-jumping: init at
  0.0.1
 
 ---
  pkgs/by-name/xo/xonsh/xontribs/default.nix    |  1 +
- .../xontrib-whole-word-jumping/default.nix    | 42 +++++++++++++++++++
- 2 files changed, 43 insertions(+)
+ .../xontrib-whole-word-jumping/default.nix    | 50 +++++++++++++++++++
+ 2 files changed, 51 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/xontrib-whole-word-jumping/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/default.nix b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-index e0832f238d690..bcc0463483e0a 100644
+index 38e1a697f36ff..fd0b211e6d7b7 100644
 --- a/pkgs/by-name/xo/xonsh/xontribs/default.nix
 +++ b/pkgs/by-name/xo/xonsh/xontribs/default.nix
-@@ -14,4 +14,5 @@ in
+@@ -11,4 +11,5 @@
    xontrib-jedi = callPackage ./xontrib-jedi { };
    xontrib-jupyter = callPackage ./xontrib-jupyter { };
    xontrib-vox = callPackage ./xontrib-vox { };
@@ -849,17 +1164,19 @@ index e0832f238d690..bcc0463483e0a 100644
  }
 diff --git a/pkgs/by-name/xo/xonsh/xontribs/xontrib-whole-word-jumping/default.nix b/pkgs/by-name/xo/xonsh/xontribs/xontrib-whole-word-jumping/default.nix
 new file mode 100644
-index 0000000000000..0e755619c71c7
+index 0000000000000..efa756b9d1512
 --- /dev/null
 +++ b/pkgs/by-name/xo/xonsh/xontribs/xontrib-whole-word-jumping/default.nix
-@@ -0,0 +1,42 @@
+@@ -0,0 +1,50 @@
 +{
 +  lib,
 +  buildPythonPackage,
 +  fetchFromGitHub,
 +
++  setuptools,
 +  pytestCheckHook,
 +  xonsh,
++  nix-update-script,
 +}:
 +
 +buildPythonPackage rec {
@@ -879,14 +1196,20 @@ index 0000000000000..0e755619c71c7
 +      --replace-fail '"xonsh>=0.12.5", ' ""
 +  '';
 +
++  build-system = [
++    setuptools
++  ];
++
 +  preCheck = ''
 +    export HOME=$(mktemp -d)
 +  '';
 +
-+  checkInputs = [
++  nativeCheckInputs = [
 +    pytestCheckHook
 +    xonsh
 +  ];
++
++  passthru.updateScript = nix-update-script { };
 +
 +  meta = {
 +    description = "Additional keyboard navigation for interactive xonsh shells";
