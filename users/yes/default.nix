@@ -55,7 +55,8 @@
     enable = true;
     enableExtensionPack = true;
 
-    enableKvm = true;
+    # Toggle kvm support in case virtualbox doesn't build
+    # enableKvm = true;
     addNetworkInterface = false;
   };
 }
