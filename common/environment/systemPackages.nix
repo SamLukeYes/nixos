@@ -10,7 +10,7 @@
     xournalpp
 
     ((vscode.override {
-      commandLineArgs = "--touch-events --enable-wayland-ime --disable-gpu-shader-disk-cache -n";
+      commandLineArgs = "--touch-events=true";
     }).fhsWithPackages (ps: with ps; [
       libGL                             # required by conda env
     ]
