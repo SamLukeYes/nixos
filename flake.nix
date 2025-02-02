@@ -56,7 +56,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/354733.patch  # xontribs
-      ./patches/370869.patch  # build hooks
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
