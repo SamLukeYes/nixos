@@ -21,6 +21,10 @@
       QT_QPA_PLATFORM = "wayland;xcb";
       SDL_VIDEODRIVER = "wayland";
       TZ = "/etc/localtime";
+
+      # use wayland ime
+      GTK_IM_MODULE = lib.mkForce "";
+      QT_IM_MODULE = lib.mkForce "";
     };
   };
 }
