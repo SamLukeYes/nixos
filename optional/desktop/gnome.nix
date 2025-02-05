@@ -31,6 +31,7 @@
       gimp
       gnome-firmware
       gnome-sound-recorder
+      gnome-tweaks
       libreoffice
       refine
       roxterm
