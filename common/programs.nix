@@ -33,6 +33,10 @@
       config = ''
         $LANG = "zh_CN.UTF-8"
 
+        if __xonsh__.env.get("WAYLAND_DISPLAY"):
+            $GTK_IM_MODULE = ""
+            $QT_IM_MODULE = ""
+
         # TODO: this shouldn't be necessary
         $SHELL_TYPE = "best"
       '';

@@ -36,6 +36,7 @@
     xserver = {
       enable = true;
       excludePackages = [ pkgs.xterm ];
+      windowManager.icewm.enable = true;
     };
   };
 }
