@@ -1,4 +1,4 @@
-From 0a35ea111c201df3731d44fd72a95c541d538fb1 Mon Sep 17 00:00:00 2001
+From 1cb2c7dd3d6fbbc10b115efa682e4784a53c2c88 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:22:26 -0500
 Subject: [PATCH 01/14] nixos/xonsh: support extra packages
@@ -57,7 +57,7 @@ index 86bdb4088845f..ed7f3593d79d1 100644
    };
  }
 
-From 03ad60fbc118a91b84b6035dc293ae064a2c2533 Mon Sep 17 00:00:00 2001
+From 477720e594faae50e32645b7b4c6c1edf858a635 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:23:55 -0500
 Subject: [PATCH 02/14] xonsh: format
@@ -94,21 +94,21 @@ index 2cf2b9241ca49..63857655409cf 100644
    ''
      mkdir -p $out/bin
 
-From 31f63180e76e7873aad58504d9e3dce9393b508c Mon Sep 17 00:00:00 2001
+From 52ad3a4e65bf9239e45ccffdfdb623efdf1b3fbe Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Thu, 30 Jan 2025 13:22:03 -0500
 Subject: [PATCH 03/14] xonsh: rewrite with callPackage and new
  buildPythonPackage
 
 ---
- pkgs/by-name/xo/xonsh/unwrapped.nix | 250 +++++++++++++++-------------
- 1 file changed, 131 insertions(+), 119 deletions(-)
+ pkgs/by-name/xo/xonsh/unwrapped.nix | 247 ++++++++++++++--------------
+ 1 file changed, 126 insertions(+), 121 deletions(-)
 
 diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
-index 93544f928fd6d..084b6c816bab4 100644
+index 3992262d873cc..677b2f49b2d2c 100644
 --- a/pkgs/by-name/xo/xonsh/unwrapped.nix
 +++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
-@@ -1,128 +1,140 @@
+@@ -1,130 +1,135 @@
  {
    lib,
 -  coreutils,
@@ -116,14 +116,13 @@ index 93544f928fd6d..084b6c816bab4 100644
    fetchFromGitHub,
 +
 +  setuptools,
-+  wheel,
 +  ply,
 +  prompt-toolkit,
 +  pygments,
 +
 +  addBinToPathHook,
 +  writableTmpDirAsHomeHook,
-   git,
+   gitMinimal,
    glibcLocales,
 +  pip,
 +  pyte,
@@ -136,8 +135,9 @@ index 93544f928fd6d..084b6c816bab4 100644
 +
    nix-update-script,
 -  pythonPackages,
+-  addBinToPathHook,
+-  writableTmpDirAsHomeHook,
 +  python,
-+  callPackage,
  }:
  
 -let
@@ -151,7 +151,7 @@ index 93544f928fd6d..084b6c816bab4 100644
 -    src = fetchFromGitHub {
 -      owner = "xonsh";
 -      repo = "xonsh";
--      rev = "refs/tags/${argset.version}";
+-      tag = argset.version;
 -      hash = "sha256-20egNKlJjJO1wdy1anApz0ADBnaHPUSqhfrsPe3QQIs=";
 -    };
 -
@@ -171,8 +171,10 @@ index 93544f928fd6d..084b6c816bab4 100644
 -
 -    nativeCheckInputs =
 -      [
--        git
+-        addBinToPathHook
+-        gitMinimal
 -        glibcLocales
+-        writableTmpDirAsHomeHook
 -      ]
 -      ++ (with pythonPackages; [
 -        pip
@@ -209,6 +211,9 @@ index 93544f928fd6d..084b6c816bab4 100644
 -
 -      # https://github.com/xonsh/xonsh/issues/5569
 -      "test_spec_decorator_alias_output_format"
+-
+-      # Broken test
+-      "test_repath_backslash"
 -    ];
 -
 -    disabledTestPaths = [
@@ -233,11 +238,6 @@ index 93544f928fd6d..084b6c816bab4 100644
 -        sed -i -e 's|/usr/bin/env|${lib.getExe' coreutils "env"}|' $script
 -      done
 -      patchShebangs .
--    '';
--
--    preCheck = ''
--      export HOME=$TMPDIR
--      export PATH=$out/bin:$PATH
 -    '';
 -
 -    passthru = {
@@ -281,7 +281,7 @@ index 93544f928fd6d..084b6c816bab4 100644
 +  nativeCheckInputs = [
 +    addBinToPathHook
 +    writableTmpDirAsHomeHook
-+    git
++    gitMinimal
 +    glibcLocales
 +    pip
 +    pyte
@@ -297,7 +297,6 @@ index 93544f928fd6d..084b6c816bab4 100644
 +    "test_colorize_file"
 +    "test_loading_correctly"
 +    "test_no_command_path_completion"
-+    "test_repath_backslash"
 +    "test_xonsh_activator"
 +
 +    # fails on non-interactive shells
@@ -315,6 +314,9 @@ index 93544f928fd6d..084b6c816bab4 100644
 +    "test_complete_import"
 +    "test_script"
 +    "test_subproc_output_format"
++
++    # broken tests
++    "test_repath_backslash"
 +
 +    # https://github.com/xonsh/xonsh/issues/5569
 +    "test_spec_decorator_alias_output_format"
@@ -345,11 +347,6 @@ index 93544f928fd6d..084b6c816bab4 100644
 +    patchShebangs .
 +  '';
 +
-+  preCheck = ''
-+    export HOME=$(mktemp -d)
-+    export PATH=$out/bin:$PATH
-+  '';
-+
 +  passthru = {
 +    inherit python;
 +    shellPath = "/bin/xonsh";
@@ -369,22 +366,30 @@ index 93544f928fd6d..084b6c816bab4 100644
 -pythonPackages.buildPythonPackage argset
 +}
 
-From 7f186d7c108079106ca73d59d19d8cc7f2d52ba2 Mon Sep 17 00:00:00 2001
+From b4a82d57c90f71972a706540ed14ad4b999fb99e Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:25:40 -0500
 Subject: [PATCH 04/14] xonsh.xontribs: init empty package set
 
 ---
- pkgs/by-name/xo/xonsh/unwrapped.nix        | 1 +
+ pkgs/by-name/xo/xonsh/unwrapped.nix        | 2 ++
  pkgs/by-name/xo/xonsh/xontribs/default.nix | 5 +++++
- 2 files changed, 6 insertions(+)
+ 2 files changed, 7 insertions(+)
  create mode 100644 pkgs/by-name/xo/xonsh/xontribs/default.nix
 
 diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
-index 084b6c816bab4..3dd460647cacf 100644
+index 677b2f49b2d2c..3e7686d340c21 100644
 --- a/pkgs/by-name/xo/xonsh/unwrapped.nix
 +++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
-@@ -127,6 +127,7 @@ buildPythonPackage rec {
+@@ -23,6 +23,7 @@
+ 
+   nix-update-script,
+   python,
++  callPackage,
+ }:
+ 
+ buildPythonPackage rec {
+@@ -122,6 +123,7 @@ buildPythonPackage rec {
      shellPath = "/bin/xonsh";
      wrapper = throw "The top-level xonsh package is now wrapped. Use it directly.";
      updateScript = nix-update-script { };
@@ -404,7 +409,7 @@ index 0000000000000..162a5bdf52f4d
 +{
 +}
 
-From 5effecce28822e8d00341ea82c0de0e04f214fa7 Mon Sep 17 00:00:00 2001
+From 9c7f1617274093687f94a7fff9abf03a08dd7da9 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:28:29 -0500
 Subject: [PATCH 05/14] xonsh.xontribs.xonsh-direnv: init at 1.6.5
@@ -471,7 +476,7 @@ index 0000000000000..e4122feb09fe3
 +  };
 +}
 
-From 4e66a0ca584029abd96cc571897108fb386189f2 Mon Sep 17 00:00:00 2001
+From 99b241b85af5b17b7d536f67c34784c4212e9a6b Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:30:32 -0500
 Subject: [PATCH 06/14] xonsh.xontribs.xontrib-abbrevs: init at 0.1.0
@@ -557,7 +562,7 @@ index 0000000000000..d276a84fbf9c7
 +  };
 +}
 
-From 4a14e0fe878802b3203b43fbd7f0e27680e35a25 Mon Sep 17 00:00:00 2001
+From a651c13cd8451b4cd492698f321a440d779b1d11 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:31:04 -0500
 Subject: [PATCH 07/14] xonsh.xontribs.xontrib-bashisms: init at 0.0.5
@@ -633,7 +638,7 @@ index 0000000000000..9247a1f225a4a
 +  };
 +}
 
-From c2a9988b64edb28da603538135fff5552550a5c3 Mon Sep 17 00:00:00 2001
+From 341d042d4b5dcff2744b989101faa54677a839a8 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:31:40 -0500
 Subject: [PATCH 08/14] xonsh.xontribs.xontrib-debug-tools: init at 0.0.1
@@ -709,7 +714,7 @@ index 0000000000000..dbe3e01a79614
 +  };
 +}
 
-From 4e6d93e8e30483eb1b8485bcaf0397c3ebb4cf06 Mon Sep 17 00:00:00 2001
+From 2b3e80a19fc4181014f8387b1a4d45d2fc1a555c Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:32:08 -0500
 Subject: [PATCH 09/14] xonsh.xontribs.xontrib-distributed: init at 0.0.4
@@ -793,7 +798,7 @@ index 0000000000000..7ae42069f3669
 +  };
 +}
 
-From 56046da9465624415d4dbf68d8edb4161375857c Mon Sep 17 00:00:00 2001
+From 54c2405b665f5fc5776833135e8e81bbad759987 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:32:43 -0500
 Subject: [PATCH 10/14] xonsh.xontribs.xontrib-fish-completer: init at 0.0.1
@@ -871,7 +876,7 @@ index 0000000000000..71a9beacaf820
 +  };
 +}
 
-From 1dcf3406c92f920a5ea59a00b199bd4cce3bf564 Mon Sep 17 00:00:00 2001
+From d9670c0df54bd5d9764fe581bc2a3f5c8fa977ba Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:06 -0500
 Subject: [PATCH 11/14] xonsh.xontribs.xontrib-jedi: init at 0.1.1
@@ -958,7 +963,7 @@ index 0000000000000..a6ae8f5e23ddd
 +  };
 +}
 
-From 95007f99a685401395815331837ec0045d7b17b7 Mon Sep 17 00:00:00 2001
+From 58d21d15d89741a58c2b22095309542d680a3806 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:24 -0500
 Subject: [PATCH 12/14] xonsh.xontribs.xontrib-jupyter: init at 0.3.2
@@ -1043,7 +1048,7 @@ index 0000000000000..a4ff04bba4e23
 +  };
 +}
 
-From cb641991c96c97e26d8d8a435e2d16ae8e71ebf7 Mon Sep 17 00:00:00 2001
+From 20b37d591b81034de9759c3adba508a6740fbb82 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:39 -0500
 Subject: [PATCH 13/14] xonsh.xontribs.xontrib-vox: init at 0.0.1
@@ -1131,7 +1136,7 @@ index 0000000000000..9a191be8e5cf5
 +  };
 +}
 
-From 46ddfa091454a1ba78930cc9264e9343de7a9673 Mon Sep 17 00:00:00 2001
+From 3b6f1d5f8fd1e766b4a50531ef1b8fdc8bc94cdb Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:54 -0500
 Subject: [PATCH 14/14] xonsh.xontribs.xontrib-whole-word-jumping: init at
