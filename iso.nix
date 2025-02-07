@@ -27,7 +27,5 @@
     services.systemd-time-wait-sync.wantedBy = [ "multi-user.target" ];
   };
 
-  users.defaultUserShell = config.programs.xonsh.package;
-
   zramSwap.enable = true;
 }
