@@ -20,6 +20,8 @@
 
   programs.firefox.package = lib.mkForce pkgs.firefox;
 
+  services.displayManager.sddm.enable = lib.mkForce false;
+
   systemd = {
     additionalUpstreamSystemUnits = [ "systemd-time-wait-sync.service" ];
     services.systemd-time-wait-sync.wantedBy = [ "multi-user.target" ];
