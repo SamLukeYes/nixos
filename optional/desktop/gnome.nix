@@ -1,6 +1,13 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    # ../dm/gdm.nix
+
+    # https://discourse.nixos.org/t/gnome-session-no-longer-launch-on-wayland/59908/8
+    ../dm/sddm.nix
+  ];
+
   environment = {
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/gnome.nix
     gnome.excludePackages = with pkgs; [
@@ -96,13 +103,6 @@
           mutter
         ];
       };
-      displayManager.gdm.enable = true;
     };
-  };
-
-  # https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-  systemd.services = {
-    "autovt@tty1".enable = false;
-    "getty@tty1".enable = false;
   };
 }

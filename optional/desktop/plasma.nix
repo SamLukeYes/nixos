@@ -1,6 +1,10 @@
 { pkgs, ... }:
 
 {
+  imports = [
+    ../dm/sddm.nix
+  ];
+
   environment = {
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/desktop-managers/plasma6.nix
     # plasma6.excludePackages = with pkgs.kdePackages; [
@@ -36,9 +40,5 @@
   services = {
     # cpupower-gui.enable = false;
     desktopManager.plasma6.enable = true;
-    displayManager.sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
   };
 }
