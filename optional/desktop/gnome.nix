@@ -15,7 +15,7 @@
       epiphany                      # use firefox instead
       gnome-text-editor             # use vscode instead
       gnome-calculator              # use xonsh instead
-      gnome-console                 # use blackbox-terminal instead
+      gnome-console                 # use roxterm instead
       gnome-contacts                # useless on PC
       gnome-maps                    # use online maps instead
       gnome-music                   # use celluloid instead
@@ -35,11 +35,9 @@
 
     systemPackages = with pkgs; [
       celluloid
-      gimp
       gnome-firmware
       gnome-sound-recorder
       gnome-tweaks
-      libreoffice
       refine
       roxterm
 
@@ -104,5 +102,12 @@
         ];
       };
     };
+  };
+
+  users.persistence = {
+    directories = [
+      ".config/gsconnect"
+      ".config/roxterm.sourceforge.net"
+    ];
   };
 }

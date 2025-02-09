@@ -1,7 +1,10 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ ./systemPackages.nix ];
+  imports = [
+    ./python.nix
+    ./systemPackages.nix
+  ];
 
   environment = {
     extraSetup = lib.optionalString (!config.services.printing.enable) ''

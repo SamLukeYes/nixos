@@ -1,11 +1,11 @@
 { config, pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    (charles.override { jdk11 = config.programs.java.package; })
+  imports = [
+    ./charles.nix
+  ];
 
-    # CLI tools
-    pdftk                         # required by Jasminum
+  environment.systemPackages = with pkgs; [
   ] ++ (if config.services.xserver.desktopManager.gnome.enable
     then [ shimeji.fhs4gnome ]
     else [ shimeji.default ]);

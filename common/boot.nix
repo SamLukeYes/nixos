@@ -5,7 +5,6 @@
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback      
     ];
-    initrd.systemd.enable = true;
     kernelParams =
       lib.optional (!config.zramSwap.enable) "zswap.enabled=1"
       # https://github.com/NixOS/nixpkgs/issues/363887

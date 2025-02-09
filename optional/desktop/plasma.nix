@@ -1,5 +1,7 @@
 { pkgs, ... }:
 
+# This file is unmaintained. Only keep it in case I need it one day.
+
 {
   imports = [
     ../dm/sddm.nix
@@ -20,7 +22,6 @@
       krita
       kwalletmanager
       ksystemlog
-      libreoffice-qt6
       partition-manager
 
       # Maliit
@@ -38,7 +39,6 @@
   # security.pam.services.sddm.enableGnomeKeyring = true;
 
   services = {
-    # cpupower-gui.enable = false;
     desktopManager.plasma6.enable = true;
   };
 }

@@ -1,10 +1,15 @@
+{ ... }:
+
 {
   fileSystems = {
     "/" = {
       device = "/dev/disk/by-label/root";
       fsType = "xfs";
     };
-    "/home".device = "/dev/disk/by-label/data";
+    "/persistent/home" = {
+      device = "/dev/disk/by-label/data";
+      neededForBoot = true;
+    };
 
     # devtools optimizations
     "/var/lib/archbuild" = {

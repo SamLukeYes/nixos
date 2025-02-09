@@ -60,22 +60,6 @@
         "type": "github"
       }
     },
-    "cpupower-gui": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1691760724,
-        "narHash": "sha256-Hr1o5WP5MdOb126RJFhwpjVvtfG7F7bZzusdIYeDPSk=",
-        "owner": "vagnum08",
-        "repo": "cpupower-gui",
-        "rev": "b44a19834662d236450e7c2259d2daf3915df597",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vagnum08",
-        "repo": "cpupower-gui",
-        "type": "github"
-      }
-    },
     "crane": {
       "locked": {
         "lastModified": 1738652123,
@@ -164,6 +148,21 @@
         "type": "github"
       }
     },
+    "impermanence": {
+      "locked": {
+        "lastModified": 1737831083,
+        "narHash": "sha256-LJggUHbpyeDvNagTUrdhe/pRVp4pnS6wVKALS782gRI=",
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "rev": "4b3e914cdf97a5b536a889e939fb2fd2b043a170",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "impermanence",
+        "type": "github"
+      }
+    },
     "mutter-performance": {
       "flake": false,
       "locked": {
@@ -237,8 +236,8 @@
         "angrr": "angrr",
         "archix": "archix",
         "archlinuxcn-keyring": "archlinuxcn-keyring",
-        "cpupower-gui": "cpupower-gui",
         "flake-utils-plus": "flake-utils-plus",
+        "impermanence": "impermanence",
         "mutter-performance": "mutter-performance",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",

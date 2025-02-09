@@ -23,12 +23,9 @@
       url = "github:archlinuxcn/archlinuxcn-keyring";
     };
 
-    cpupower-gui = {
-      flake = false;
-      url = "github:vagnum08/cpupower-gui";
-    };
-
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
+
+    impermanence.url = "github:nix-community/impermanence";
 
     mutter-performance = {
       flake = false;
@@ -89,11 +86,16 @@
     hostDefaults = {
       inherit system;
       channelName = "nixos-unstable";
+      specialArgs = { inherit inputs; };
       modules = [
         inputs.angrr.nixosModules.angrr
         inputs.archix.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
+
         { environment.etc."nix/inputs/nixpkgs-patched".source = nixpkgs-patched; }
+
+        inputs.impermanence.nixosModules.impermanence
+        self.nixosModules.impermanent-users
       ];
     };
 
@@ -136,17 +138,6 @@
         };
       });
 
-      cpupower-gui = prev.cpupower-gui.overrideAttrs (old: {
-        src = inputs.cpupower-gui;
-        patches = [];
-        postPatch = ''
-          substituteInPlace build-aux/meson/postinstall.py \
-            --replace '"systemctl"' '"echo", "Skipping:", "systemctl"'
-          substituteInPlace data/org.rnd2.cpupower_gui.desktop.in.in \
-            --replace "gapplication launch org.rnd2.cpupower_gui" "cpupower-gui"
-        '';
-      });
-
       # https://github.com/NixOS/nixpkgs/pull/350152
       gnomeExtensions = prev.gnomeExtensions // {
         todotxt = prev.gnomeExtensions.todotxt.overrideAttrs (old: {
@@ -170,5 +161,7 @@
 
       shimeji = inputs.shimeji.packages.${system};
     };
+
+    nixosModules.impermanent-users = import ./modules/impermanent-users.nix;
   };
 }

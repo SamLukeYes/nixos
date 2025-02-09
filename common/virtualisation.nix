@@ -39,7 +39,6 @@
       };
 
       services = {
-        cpupower-gui.enable = false;
         journald.storage = "volatile";
         mihomo.enable = lib.mkForce false;
         openssh.enable = true;
