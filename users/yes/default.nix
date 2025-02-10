@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   gid = 1000;
@@ -26,7 +26,8 @@ in
     };
   };
 
-  networking.proxy.default = "http://127.0.0.1:7890";
+  networking.proxy.default = lib.mkIf config.services.mihomo.enable
+    "http://127.0.0.1:7890";
 
   programs = {
     adb.enable = true;
@@ -38,7 +39,7 @@ in
 
   services = {
     mihomo = {
-      enable = true;
+      enable = lib.mkDefault true;
       configFile =
         "${config.users.users.yes.home}/Private/proxies/Clash.yaml";
       webui = pkgs.metacubexd;
@@ -68,50 +69,53 @@ in
   };
 
   # impermanence
-  environment.persistence."/persistent".users.yes = {
-    directories = config.users.persistence.directories ++ [
-      "bin"
-      "git-repos"
-      "nix-build"
-      "nixos"
+  environment.persistence."/persistent" = {
+    # hideMounts = true;
+    users.yes = {
+      directories = config.users.persistence.directories ++ [
+        "bin"
+        "git-repos"
+        "nix-build"
+        "nixos"
 
-      ".local/share"
-      ".local/state"
-      { directory = ".ssh"; mode = "0700"; }
+        ".local/share"
+        ".local/state"
+        { directory = ".ssh"; mode = "0700"; }
 
-      # adb
-      ".android"
+        # adb
+        ".android"
 
-      # syncthing
-      ".config/syncthing"
-      "apk"
-      "DCIM"
-      "Documents"
-      "KernelFlasher"
-      "Music"
-      "Pictures"
-      "PopCap Games"
-      "Private"
-      "Public"
-      "Sync"
-      "Videos"
+        # syncthing
+        ".config/syncthing"
+        "apk"
+        "DCIM"
+        "Documents"
+        "KernelFlasher"
+        "Music"
+        "Pictures"
+        "PopCap Games"
+        "Private"
+        "Public"
+        "Sync"
+        "Videos"
 
-      # virtualbox
-      "VirtualBox VMs"
-      ".config/VirtualBox"
+        # virtualbox
+        "VirtualBox VMs"
+        ".config/VirtualBox"
 
-      # vscode extensions
-      ".continue"
-      ".m2"
-      ".vscode"  # I only see extensions here
+        # vscode extensions
+        ".continue"
+        ".m2"
+        ".vscode"  # I only see extensions here
 
-      # wireshark
-      ".config/wireshark"
-    ];
+        # wireshark
+        ".config/wireshark"
+      ];
 
-    files = config.users.persistence.files ++ [
-      ".config/user-dirs.dirs"
-    ];
+      files = config.users.persistence.files ++ [
+        ".config/user-dirs.dirs"
+      ];
+    };
   };
 
   fileSystems."/home/yes" = {

@@ -1,11 +1,8 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   imports = [
-    # ../dm/gdm.nix
-
-    # https://discourse.nixos.org/t/gnome-session-no-longer-launch-on-wayland/59908/8
-    ../dm/sddm.nix
+    ../dm/gdm.nix
   ];
 
   environment = {
@@ -104,21 +101,20 @@
     };
   };
 
-  specialisation.gdm-test = {
-    inheritParentConfig = true;
-    configuration = {
-      imports = [ ../dm/gdm.nix ];
-      services.displayManager.sddm.enable = lib.mkForce false;
-      environment = {
-        persistence = lib.mkForce {};
-      };
-    };
+  # https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
+  systemd.services = {
+    "autovt@tty1".enable = false;
+    "getty@tty1".enable = false;
   };
 
   users.persistence = {
     directories = [
       ".config/gsconnect"
       ".config/roxterm.sourceforge.net"
+    ];
+    files = [
+      # TODO: make this work
+      # ".config/gtk-3.0/bookmarks"
     ];
   };
 }
