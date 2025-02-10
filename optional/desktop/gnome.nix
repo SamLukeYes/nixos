@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   imports = [
@@ -100,6 +100,17 @@
           gsettings-desktop-schemas
           mutter
         ];
+      };
+    };
+  };
+
+  specialisation.gdm-test = {
+    inheritParentConfig = true;
+    configuration = {
+      imports = [ ../dm/gdm.nix ];
+      services.displayManager.sddm.enable = lib.mkForce false;
+      environment = {
+        persistence = lib.mkForce {};
       };
     };
   };
