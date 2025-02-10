@@ -1,12 +1,26 @@
-From 1cb2c7dd3d6fbbc10b115efa682e4784a53c2c88 Mon Sep 17 00:00:00 2001
+From f05513f3af282cdbb7c79fbce78dfcd6a1b2334e Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:22:26 -0500
 Subject: [PATCH 01/14] nixos/xonsh: support extra packages
 
 ---
- nixos/modules/programs/xonsh.nix | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+ .../manual/release-notes/rl-2505.section.md   |  2 ++
+ nixos/modules/programs/xonsh.nix              | 21 ++++++++++++++++---
+ 2 files changed, 20 insertions(+), 3 deletions(-)
 
+diff --git a/nixos/doc/manual/release-notes/rl-2505.section.md b/nixos/doc/manual/release-notes/rl-2505.section.md
+index d5549ef98beef..b72db6032de24 100644
+--- a/nixos/doc/manual/release-notes/rl-2505.section.md
++++ b/nixos/doc/manual/release-notes/rl-2505.section.md
+@@ -348,6 +348,8 @@
+ 
+ - `borgmatic` has been updated from 1.8.14 to 1.9.5, please check the [upstream changelog](https://projects.torsion.org/borgmatic-collective/borgmatic/releases) for more details, especially for a few possibly breaking changes noted in the [1.9.0 changelog](https://projects.torsion.org/borgmatic-collective/borgmatic/releases/tag/1.9.0).
+ 
++- `programs.xonsh.package` now gets overrided internally with `extraPackages` to support `programs.xonsh.extraPackages`. See `programs.xonsh.extraPackages` for more details.
++
+ - `nodePackages.ganache` has been removed, as the package has been deprecated by upstream.
+ 
+ - `virtualisation.azure.agent` option provided by `azure-agent.nix` is replaced by `services.waagent`, and will be removed in a future release.
 diff --git a/nixos/modules/programs/xonsh.nix b/nixos/modules/programs/xonsh.nix
 index 86bdb4088845f..ed7f3593d79d1 100644
 --- a/nixos/modules/programs/xonsh.nix
@@ -57,7 +71,7 @@ index 86bdb4088845f..ed7f3593d79d1 100644
    };
  }
 
-From 477720e594faae50e32645b7b4c6c1edf858a635 Mon Sep 17 00:00:00 2001
+From f6706283e81d05a907d5ca00539f8bd454a66a84 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:23:55 -0500
 Subject: [PATCH 02/14] xonsh: format
@@ -94,7 +108,7 @@ index 2cf2b9241ca49..63857655409cf 100644
    ''
      mkdir -p $out/bin
 
-From 52ad3a4e65bf9239e45ccffdfdb623efdf1b3fbe Mon Sep 17 00:00:00 2001
+From a229520681acc90fd74805598fb64a698c1b2702 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Thu, 30 Jan 2025 13:22:03 -0500
 Subject: [PATCH 03/14] xonsh: rewrite with callPackage and new
@@ -366,7 +380,7 @@ index 3992262d873cc..677b2f49b2d2c 100644
 -pythonPackages.buildPythonPackage argset
 +}
 
-From b4a82d57c90f71972a706540ed14ad4b999fb99e Mon Sep 17 00:00:00 2001
+From c922aecbc36187a48b82a57316c56c1f6e16f5f5 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:25:40 -0500
 Subject: [PATCH 04/14] xonsh.xontribs: init empty package set
@@ -409,7 +423,7 @@ index 0000000000000..162a5bdf52f4d
 +{
 +}
 
-From 9c7f1617274093687f94a7fff9abf03a08dd7da9 Mon Sep 17 00:00:00 2001
+From 92a755c010899f094f3140cae1bc5e3a5d0d17d8 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:28:29 -0500
 Subject: [PATCH 05/14] xonsh.xontribs.xonsh-direnv: init at 1.6.5
@@ -476,7 +490,7 @@ index 0000000000000..e4122feb09fe3
 +  };
 +}
 
-From 99b241b85af5b17b7d536f67c34784c4212e9a6b Mon Sep 17 00:00:00 2001
+From e23facf8739d9738c6904e0475b08ef735714bb5 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:30:32 -0500
 Subject: [PATCH 06/14] xonsh.xontribs.xontrib-abbrevs: init at 0.1.0
@@ -562,7 +576,7 @@ index 0000000000000..d276a84fbf9c7
 +  };
 +}
 
-From a651c13cd8451b4cd492698f321a440d779b1d11 Mon Sep 17 00:00:00 2001
+From 9c6b94bb313be8c4ce4c7ce7bb19cb916aa3e0f7 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:31:04 -0500
 Subject: [PATCH 07/14] xonsh.xontribs.xontrib-bashisms: init at 0.0.5
@@ -638,7 +652,7 @@ index 0000000000000..9247a1f225a4a
 +  };
 +}
 
-From 341d042d4b5dcff2744b989101faa54677a839a8 Mon Sep 17 00:00:00 2001
+From bc10963f94090f17eaa1400d61087842dfd0fefb Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:31:40 -0500
 Subject: [PATCH 08/14] xonsh.xontribs.xontrib-debug-tools: init at 0.0.1
@@ -714,7 +728,7 @@ index 0000000000000..dbe3e01a79614
 +  };
 +}
 
-From 2b3e80a19fc4181014f8387b1a4d45d2fc1a555c Mon Sep 17 00:00:00 2001
+From d508833e365603020eafd4265b90c6b8bf3b5b8e Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:32:08 -0500
 Subject: [PATCH 09/14] xonsh.xontribs.xontrib-distributed: init at 0.0.4
@@ -798,7 +812,7 @@ index 0000000000000..7ae42069f3669
 +  };
 +}
 
-From 54c2405b665f5fc5776833135e8e81bbad759987 Mon Sep 17 00:00:00 2001
+From cb78105719eabede7c07206e6c8ac8fca3539e88 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:32:43 -0500
 Subject: [PATCH 10/14] xonsh.xontribs.xontrib-fish-completer: init at 0.0.1
@@ -876,7 +890,7 @@ index 0000000000000..71a9beacaf820
 +  };
 +}
 
-From d9670c0df54bd5d9764fe581bc2a3f5c8fa977ba Mon Sep 17 00:00:00 2001
+From afeae08331f80ee83959223803bea28ae6bc0b72 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:06 -0500
 Subject: [PATCH 11/14] xonsh.xontribs.xontrib-jedi: init at 0.1.1
@@ -963,7 +977,7 @@ index 0000000000000..a6ae8f5e23ddd
 +  };
 +}
 
-From 58d21d15d89741a58c2b22095309542d680a3806 Mon Sep 17 00:00:00 2001
+From 6453547e820676c7eb0d3d7debdd4f2bb7093bd4 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:24 -0500
 Subject: [PATCH 12/14] xonsh.xontribs.xontrib-jupyter: init at 0.3.2
@@ -1048,7 +1062,7 @@ index 0000000000000..a4ff04bba4e23
 +  };
 +}
 
-From 20b37d591b81034de9759c3adba508a6740fbb82 Mon Sep 17 00:00:00 2001
+From a09d941ad719afe76c1924dcd95127d1dafc777b Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:39 -0500
 Subject: [PATCH 13/14] xonsh.xontribs.xontrib-vox: init at 0.0.1
@@ -1136,7 +1150,7 @@ index 0000000000000..9a191be8e5cf5
 +  };
 +}
 
-From 3b6f1d5f8fd1e766b4a50531ef1b8fdc8bc94cdb Mon Sep 17 00:00:00 2001
+From 65fa4335a0c93be788831b30cf0b161e3c46cc21 Mon Sep 17 00:00:00 2001
 From: Infinidoge <infinidoge@inx.moe>
 Date: Tue, 12 Nov 2024 09:33:54 -0500
 Subject: [PATCH 14/14] xonsh.xontribs.xontrib-whole-word-jumping: init at
