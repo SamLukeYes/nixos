@@ -4,6 +4,7 @@
   imports = [
     ./angrr.nix
     ./earlyoom.nix
+    ./fwupd.nix
   ];
 
   services = {
@@ -12,8 +13,6 @@
     dbus.implementation = "broker";
 
     fstrim.enable = true;
-
-    fwupd.enable = true;
 
     logind.lidSwitch = "ignore";
 

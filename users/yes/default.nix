@@ -70,7 +70,6 @@ in
 
   # impermanence
   environment.persistence."/persistent" = {
-    # hideMounts = true;
     users.yes = {
       directories = config.users.persistence.directories ++ [
         "bin"
@@ -116,15 +115,5 @@ in
         ".config/user-dirs.dirs"
       ];
     };
-  };
-
-  fileSystems."/home/yes" = {
-    fsType = "tmpfs";
-    neededForBoot = true;  # required, or persistent files won't show up
-    options = [
-      "mode=700"
-      "gid=${toString gid}"
-      "uid=${toString uid}"
-    ];
   };
 }

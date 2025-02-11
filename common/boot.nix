@@ -22,6 +22,5 @@
       };
     };
     swraid.enable = lib.mkDefault false;
-    tmp.cleanOnBoot = true;
   };
 }

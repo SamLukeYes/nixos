@@ -2,12 +2,6 @@
 
 {
   virtualisation = {
-    podman = {
-      enable = true;
-      autoPrune.enable = true;
-      dockerCompat = true;
-    };
-
     vmVariant = {
       imports = [
         "${modulesPath}/virtualisation/qemu-vm.nix"

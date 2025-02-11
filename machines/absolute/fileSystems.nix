@@ -2,23 +2,26 @@
 
 {
   fileSystems = {
-    "/" = {
+    "/boot".device = "/dev/disk/by-label/SYSTEM";
+    "/persistent" = {
       device = "/dev/disk/by-label/root";
       fsType = "xfs";
+      neededForBoot = true;
     };
     "/persistent/home" = {
       device = "/dev/disk/by-label/data";
       neededForBoot = true;
     };
-
-    # devtools optimizations
-    "/var/lib/archbuild" = {
-      fsType = "tmpfs";
-      options = [ "size=15G" ];
-    };
-    "/var/lib/aurbuild" = {
-      fsType = "tmpfs";
-      options = [ "size=15G" ];
-    };
   };
+
+  swapDevices = [{
+    device = "/persistent/var/swapfile";
+    size = 16 * 1024;
+  }];
+
+  boot.tmp.cleanOnBoot = true;
+  environment.persistence."/persistent".directories = [
+    "/tmp"
+    "/var/lib/bluetooth"
+  ];
 }

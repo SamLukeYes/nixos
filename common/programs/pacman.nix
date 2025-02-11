@@ -1,11 +1,6 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = with pkgs; [
-    archix.devtools
-    paru
-  ];
-
   programs.pacman = {
     autoSync.enable = true;
     confMode = "0644";
@@ -27,6 +22,20 @@
       "https://mirror.sjtu.edu.cn/archlinux/$repo/os/$arch"
       "https://geo.mirror.pkgbuild.com/$repo/os/$arch"
     ];
+  };
+
+  environment = {
+    systemPackages = with pkgs; [
+      archix.devtools
+      paru
+    ];
+
+    persistence."/persistent" = {
+      directories = [
+        "/var/cache/pacman"
+        "/var/log/pacman"
+      ];
+    };
   };
 
   users.persistence.directories = [
