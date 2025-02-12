@@ -13,6 +13,6 @@
 
   fileSystems."/" = {
     fsType = "tmpfs";
-    options = [ "size=90%" ];
+    options = [ "size=90%" "mode=755" ];
   };
 }

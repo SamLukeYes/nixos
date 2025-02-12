@@ -2,7 +2,13 @@
 
 {
   fileSystems = {
-    "/boot".device = "/dev/disk/by-label/SYSTEM";
+    "/boot" = {
+      device = "/dev/disk/by-label/SYSTEM";
+      options = [
+        # https://github.com/nix-community/disko/issues/527
+        "umask=0077"
+      ];
+    };
     "/persistent" = {
       device = "/dev/disk/by-label/root";
       fsType = "xfs";
@@ -19,9 +25,7 @@
     size = 16 * 1024;
   }];
 
-  boot.tmp.cleanOnBoot = true;
   environment.persistence."/persistent".directories = [
-    "/tmp"
     "/var/lib/bluetooth"
   ];
 }
