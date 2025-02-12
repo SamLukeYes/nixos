@@ -109,6 +109,7 @@
 
   users.persistence = {
     directories = [
+      ".cache/tracker3"
       ".config/gsconnect"
       ".config/roxterm.sourceforge.net"
     ];

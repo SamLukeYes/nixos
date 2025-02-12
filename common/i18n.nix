@@ -17,4 +17,8 @@
       "zh_CN.UTF-8/UTF-8"
     ];
   };
+
+  users.persistence.directories = [
+    ".cache/ibus/libpinyin"
+  ];
 }

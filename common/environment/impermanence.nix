@@ -2,6 +2,7 @@
 
 {
   environment.persistence."/persistent" = {
+    # hideMounts = true;
     directories = [
       "/etc"
       "/nix"
