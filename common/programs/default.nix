@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./audacity.nix
     ./czkawka.nix
     ./dconf.nix
     ./firefox.nix
