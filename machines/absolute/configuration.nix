@@ -7,6 +7,7 @@
     ../../common
     ../../optional/apps
     ../../optional/containers
+    ../../optional/desktop/gnome.nix
     ../../optional/fonts
     ../../users/yes
   ];

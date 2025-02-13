@@ -99,17 +99,10 @@
       ];
     };
 
-    hosts = let
-      absolute-modules = [
+    hosts =  {
+      absolute.modules = [
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
         ./machines/absolute/configuration.nix
-      ];
-    in {
-      absolute-gnome.modules = absolute-modules ++ [
-        ./optional/desktop/gnome.nix
-      ];
-      absolute-plasma.modules = absolute-modules ++ [
-        ./optional/desktop/plasma.nix
       ];
       nixos-iso.modules = [
         ./iso.nix
