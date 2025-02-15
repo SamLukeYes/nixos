@@ -1,0 +1,31 @@
+From 248a9288ca5bfd184e7afcf4007a35cfb3523afa Mon Sep 17 00:00:00 2001
+From: Artur Manuel <amad@atl.tools>
+Date: Sat, 15 Feb 2025 04:48:20 +0000
+Subject: [PATCH] xonsh: 0.19.1 -> 0.19.2
+
+---
+ pkgs/by-name/xo/xonsh/unwrapped.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/by-name/xo/xonsh/unwrapped.nix b/pkgs/by-name/xo/xonsh/unwrapped.nix
+index 3e7686d340c21..236562e8065fb 100644
+--- a/pkgs/by-name/xo/xonsh/unwrapped.nix
++++ b/pkgs/by-name/xo/xonsh/unwrapped.nix
+@@ -28,7 +28,7 @@
+ 
+ buildPythonPackage rec {
+   pname = "xonsh";
+-  version = "0.19.1";
++  version = "0.19.2";
+   pyproject = true;
+ 
+   # PyPI package ships incomplete tests
+@@ -36,7 +36,7 @@ buildPythonPackage rec {
+     owner = "xonsh";
+     repo = "xonsh";
+     tag = version;
+-    hash = "sha256-20egNKlJjJO1wdy1anApz0ADBnaHPUSqhfrsPe3QQIs=";
++    hash = "sha256-h5WK/7PZQKHajiaj3BTHLeW4TYhSB/IV0eRZPCSD6qg=";
+   };
+ 
+   build-system = [
