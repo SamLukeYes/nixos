@@ -16,7 +16,6 @@
     };
     "/persistent/home" = {
       device = "/dev/disk/by-label/data";
-      neededForBoot = true;
     };
   };
 
