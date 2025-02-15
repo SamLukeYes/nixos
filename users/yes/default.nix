@@ -68,8 +68,7 @@ in
     addNetworkInterface = false;
   };
 
-  # impermanence
-  environment.persistence."/persistent" = {
+  preservation.preserveAt."/persistent" = {
     users.yes = {
       directories = config.users.persistence.directories ++ [
         "bin"

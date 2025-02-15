@@ -25,8 +25,6 @@
 
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
-    impermanence.url = "github:nix-community/impermanence";
-
     mutter-performance = {
       flake = false;
       url = "git+https://aur.archlinux.org/mutter-performance.git/?ref=master";
@@ -38,6 +36,9 @@
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+
+    # https://github.com/nix-community/preservation/pull/12
+    preservation.url = "github:Sporif/preservation/user-paths";
 
     shimeji = {
       inputs.nixpkgs.follows = "nixpkgs";
@@ -94,7 +95,7 @@
 
         { environment.etc."nix/inputs/nixpkgs-patched".source = nixpkgs-patched; }
 
-        inputs.impermanence.nixosModules.impermanence
+        inputs.preservation.nixosModules.preservation
         self.nixosModules.impermanent-users
       ];
     };

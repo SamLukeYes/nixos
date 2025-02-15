@@ -7,7 +7,7 @@
     dockerCompat = true;
   };
 
-  environment.persistence."/persistent".directories = [
+  preservation.preserveAt."/persistent".directories = [
     "/var/lib/containers"
   ];
 }

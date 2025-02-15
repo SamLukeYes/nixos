@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./impermanence.nix
     ./python.nix
     ./systemPackages.nix
   ];

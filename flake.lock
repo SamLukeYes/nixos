@@ -148,21 +148,6 @@
         "type": "github"
       }
     },
-    "impermanence": {
-      "locked": {
-        "lastModified": 1737831083,
-        "narHash": "sha256-LJggUHbpyeDvNagTUrdhe/pRVp4pnS6wVKALS782gRI=",
-        "owner": "nix-community",
-        "repo": "impermanence",
-        "rev": "4b3e914cdf97a5b536a889e939fb2fd2b043a170",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "impermanence",
-        "type": "github"
-      }
-    },
     "mutter-performance": {
       "flake": false,
       "locked": {
@@ -231,17 +216,33 @@
         "type": "github"
       }
     },
+    "preservation": {
+      "locked": {
+        "lastModified": 1738708474,
+        "narHash": "sha256-oDQM9/3dsiwNZW7Pl2586gbRK7bx08DctxQkMgra+9k=",
+        "owner": "Sporif",
+        "repo": "preservation",
+        "rev": "2d53e88842ee5810ea3ec4f8dcec913aeaf2839d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sporif",
+        "ref": "user-paths",
+        "repo": "preservation",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "angrr": "angrr",
         "archix": "archix",
         "archlinuxcn-keyring": "archlinuxcn-keyring",
         "flake-utils-plus": "flake-utils-plus",
-        "impermanence": "impermanence",
         "mutter-performance": "mutter-performance",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
+        "preservation": "preservation",
         "shimeji": "shimeji"
       }
     },

@@ -3,7 +3,7 @@
 {
   networking.networkmanager.enable = true;
 
-  environment.persistence."/persistent" = {
+  preservation.preserveAt."/persistent" = {
     directories = [
       "/var/lib/NetworkManager"
     ];

@@ -8,6 +8,7 @@
       ./fonts.nix
       ./i18n.nix
       ./nix.nix
+      ./preservation.nix
       ./programs
       ./services
       ./systemd.nix

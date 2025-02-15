@@ -3,7 +3,7 @@
 {
   services.fwupd.enable = true;
 
-  environment.persistence."/persistent".directories = [
+  preservation.preserveAt."/persistent".directories = [
     "/var/lib/fwupd"
   ];
 }

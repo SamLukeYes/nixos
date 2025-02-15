@@ -29,13 +29,13 @@
       archix.devtools
       paru
     ];
+  };
 
-    persistence."/persistent" = {
-      directories = [
-        "/var/cache/pacman"
-        "/var/log/pacman"
-      ];
-    };
+  preservation.preserveAt."/persistent" = {
+    directories = [
+      "/var/cache/pacman"
+      "/var/log/pacman"
+    ];
   };
 
   users.persistence.directories = [

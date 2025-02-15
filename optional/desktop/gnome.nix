@@ -111,11 +111,8 @@
     directories = [
       ".cache/tracker3"
       ".config/gsconnect"
+      ".config/gtk-3.0"  # nautilus bookmarks
       ".config/roxterm.sourceforge.net"
-    ];
-    files = [
-      # TODO: make this work
-      # ".config/gtk-3.0/bookmarks"
     ];
   };
 }

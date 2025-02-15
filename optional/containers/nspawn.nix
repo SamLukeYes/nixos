@@ -55,7 +55,7 @@
     };
   };
 
-  environment.persistence."/persistent".directories = [
+  preservation.preserveAt."/persistent".directories = [
     "/old-root"
     "/var/lib/machines"
   ];

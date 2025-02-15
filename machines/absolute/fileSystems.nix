@@ -25,7 +25,7 @@
     size = 16 * 1024;
   }];
 
-  environment.persistence."/persistent".directories = [
+  preservation.preserveAt."/persistent".directories = [
     "/var/lib/bluetooth"
   ];
 }
