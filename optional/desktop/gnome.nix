@@ -34,7 +34,6 @@
       celluloid
       gnome-firmware
       gnome-sound-recorder
-      gnome-tweaks
       refine
       roxterm
 
