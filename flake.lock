@@ -253,11 +253,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1737276873,
-        "narHash": "sha256-RW7TQ/GuuiEi0C347JxOip7c++hNbgsGqAJ00S4tMHM=",
+        "lastModified": 1739612861,
+        "narHash": "sha256-ZM/6odel+ZBO8nUWV1EyzLTIS9282kwguk1gXtcXZUk=",
         "owner": "SamLukeYes",
         "repo": "Shimeji-Desktop",
-        "rev": "5cbb1bfb1113bc89a7f419e4976f16829e0ebe53",
+        "rev": "1ee8981d42d944b9add52758f7668796fe3219dd",
         "type": "github"
       },
       "original": {
