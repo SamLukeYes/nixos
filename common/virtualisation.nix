@@ -33,6 +33,7 @@
       };
 
       services = {
+        angrr.enable = lib.mkForce false;
         journald.storage = "volatile";
         mihomo.enable = lib.mkForce false;
         openssh.enable = true;
