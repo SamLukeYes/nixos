@@ -12,6 +12,7 @@
         { directory = "/var/lib/nixos"; inInitrd = true; }
         { directory = "/var/lib/private"; inInitrd = true; }
         "/var/log/journal"
+        "/root/.ssh"
       ];
     };
   };
