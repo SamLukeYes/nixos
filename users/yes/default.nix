@@ -71,7 +71,6 @@ in
   preservation.preserveAt."/persistent" = {
     users.yes = {
       directories = config.users.persistence.directories ++ [
-        "bin"
         "git-repos"
         "nix-build"
         "nixos"

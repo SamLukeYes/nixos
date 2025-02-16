@@ -11,8 +11,6 @@
       rm $out/share/applications/cups.desktop
     '';
 
-    homeBinInPath = true;
-
     variables = {
       BASH_COMPLETIONS = ["${pkgs.bash-completion}/share/bash-completion/bash_completion"];
       BROWSER = lib.getExe config.programs.firefox.package;
