@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   imports = [
@@ -8,10 +8,13 @@
   environment = {
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/gnome.nix
     gnome.excludePackages = with pkgs; [
+      adwaita-icon-theme            # use yaru instead
       gnome-shell-extensions        # use the standalone extensions
+      baobab                        # use czkawka instead
       epiphany                      # use firefox instead
       gnome-text-editor             # use vscode instead
       gnome-calculator              # use xonsh instead
+      gnome-calendar                # not syncing calendar to PC
       gnome-console                 # use roxterm instead
       gnome-contacts                # useless on PC
       gnome-maps                    # use online maps instead
@@ -81,7 +84,7 @@
 
   services = {
     # Disable the event list of the calendar menu
-    # gnome.evolution-data-server.enable = lib.mkForce false;
+    gnome.evolution-data-server.enable = lib.mkForce false;
 
     xserver = {
       desktopManager.gnome = {
@@ -109,9 +112,17 @@
   users.persistence = {
     directories = [
       ".cache/tracker3"
+
       ".config/gsconnect"
       ".config/gtk-3.0"  # nautilus bookmarks
       ".config/roxterm.sourceforge.net"
+
+      ".local/share/gnome-remote-desktop"
+      ".local/share/gpaste"
+      ".local/share/keyrings"
+      ".local/share/nautilus"
+      ".local/share/org.gnome.SoundRecorder"
+      ".local/share/todo.txt"
     ];
   };
 }

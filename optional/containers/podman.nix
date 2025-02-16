@@ -10,4 +10,8 @@
   preservation.preserveAt."/persistent".directories = [
     "/var/lib/containers"
   ];
+
+  users.persistence.directories = [
+    ".local/share/containers"
+  ];
 }

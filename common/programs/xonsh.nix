@@ -32,6 +32,7 @@
   users.persistence = {
     directories = [
       ".config/xonsh"
+      ".local/share/xonsh"
     ];
     files = [
       ".config/starship.toml"

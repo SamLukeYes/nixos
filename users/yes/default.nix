@@ -75,9 +75,12 @@ in
         "nix-build"
         "nixos"
 
-        ".local/share"
-        ".local/state"
         { directory = ".ssh"; mode = "0700"; }
+        ".local/state"
+
+        ".local/share/applications"
+        ".local/share/backgrounds"
+        ".local/share/icons"
 
         # adb
         ".android"
@@ -104,6 +107,7 @@ in
         ".continue"
         ".m2"
         ".vscode"  # I only see extensions here
+        ".local/share/vscode-sqltools"
 
         # wireshark
         ".config/wireshark"

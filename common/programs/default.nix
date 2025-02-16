@@ -3,8 +3,11 @@
 {
   imports = [
     ./audacity.nix
+    ./authenticator.nix
     ./czkawka.nix
     ./dconf.nix
+    ./direnv.nix
+    ./fastfetch.nix
     ./firefox.nix
     ./gimp.nix
     ./git.nix
@@ -12,6 +15,7 @@
     ./libreoffice.nix
     ./nodejs.nix
     ./pacman.nix
+    ./telegram.nix
     ./vscode.nix
     ./xonsh.nix
     ./xournalpp.nix
@@ -19,8 +23,6 @@
 
   programs = {
     command-not-found.enable = false;
-
-    direnv.enable = true;
 
     kdeconnect = {
       enable = true;
