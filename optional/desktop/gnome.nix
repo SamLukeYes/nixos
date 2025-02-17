@@ -122,7 +122,7 @@
       ".local/share/keyrings"
       ".local/share/nautilus"
       ".local/share/org.gnome.SoundRecorder"
-      ".local/share/todo.txt"
+      { directory = ".local/share/todo.txt"; how = "symlink"; }
     ];
   };
 }

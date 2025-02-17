@@ -4,6 +4,6 @@
   environment.systemPackages = [ pkgs.fastfetch ];
 
   users.persistence.directories = [
-    ".local/share/fastfetch"
+    { directory = ".local/share/fastfetch"; how = "symlink"; }
   ];
 }
