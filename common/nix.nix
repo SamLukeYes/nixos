@@ -3,7 +3,6 @@
 {
   nix = {
     channel.enable = false;
-    distributedBuilds = true;
     gc = {
       automatic = true;
       dates = "weekly";
