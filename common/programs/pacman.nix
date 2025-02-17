@@ -34,7 +34,7 @@
   preservation.preserveAt."/persistent" = {
     directories = [
       "/var/cache/pacman"
-      "/var/log/pacman"
+      "/var/lib/pacman"
     ];
   };
 
