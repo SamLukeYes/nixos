@@ -15,6 +15,7 @@
     ./libreoffice.nix
     ./nodejs.nix
     ./pacman.nix
+    ./pixi.nix
     ./telegram.nix
     ./vscode.nix
     ./xonsh.nix

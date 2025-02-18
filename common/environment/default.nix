@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./python.nix
     ./systemPackages.nix
     ./trash.nix
   ];
