@@ -8,9 +8,7 @@
   environment = {
     # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/gnome.nix
     gnome.excludePackages = with pkgs; [
-      adwaita-icon-theme            # use yaru instead
       gnome-shell-extensions        # use the standalone extensions
-      baobab                        # use czkawka instead
       epiphany                      # use firefox instead
       gnome-text-editor             # use vscode instead
       gnome-calculator              # use xonsh instead
