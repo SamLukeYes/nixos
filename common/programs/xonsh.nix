@@ -21,7 +21,6 @@
 
     extraPackages = ps: with ps; [
       distro
-      xonsh.xontribs.xonsh-direnv
     ];
   };
 

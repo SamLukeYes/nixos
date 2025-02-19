@@ -1,0 +1,29 @@
+diff --git a/nixos/modules/programs/direnv.nix b/nixos/modules/programs/direnv.nix
+index f127e959ef01..df6d2cecf1c3 100644
+--- a/nixos/modules/programs/direnv.nix
++++ b/nixos/modules/programs/direnv.nix
+@@ -34,6 +34,9 @@ in
+     enableFishIntegration = enabledOption ''
+       Fish integration
+     '';
++    enableXonshIntegration = enabledOption ''
++      Xonsh integration
++    '';
+ 
+     direnvrcExtra = lib.mkOption {
+       type = lib.types.lines;
+@@ -94,6 +97,14 @@ in
+          ${lib.getExe cfg.package} hook fish | source
+         end
+       '';
++
++      xonsh = lib.mkIf cfg.enableXonshIntegration {
++        extraPackages = ps: [ ps.xonsh.xontribs.xonsh-direnv ];
++        config = ''
++          if ${if cfg.loadInNixShell then "True" else "any(map(lambda s: s.startswith('/nix/store'), __xonsh__.env.get('PATH')))"}:
++              xontrib load direnv
++        '';
++      };
+     };
+ 
+     environment = {
