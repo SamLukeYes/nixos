@@ -1,5 +1,14 @@
+From 9c22fc4730e46dee3500a455fa85544ed0acf526 Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Thu, 20 Feb 2025 22:19:01 +0800
+Subject: [PATCH] nixos/direnv: add xonsh integration
+
+---
+ nixos/modules/programs/direnv.nix | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
 diff --git a/nixos/modules/programs/direnv.nix b/nixos/modules/programs/direnv.nix
-index f127e959ef01..df6d2cecf1c3 100644
+index f127e959ef01b..751e279b47bc2 100644
 --- a/nixos/modules/programs/direnv.nix
 +++ b/nixos/modules/programs/direnv.nix
 @@ -34,6 +34,9 @@ in
@@ -12,7 +21,7 @@ index f127e959ef01..df6d2cecf1c3 100644
  
      direnvrcExtra = lib.mkOption {
        type = lib.types.lines;
-@@ -94,6 +97,14 @@ in
+@@ -94,6 +97,19 @@ in
           ${lib.getExe cfg.package} hook fish | source
          end
        '';
@@ -20,7 +29,12 @@ index f127e959ef01..df6d2cecf1c3 100644
 +      xonsh = lib.mkIf cfg.enableXonshIntegration {
 +        extraPackages = ps: [ ps.xonsh.xontribs.xonsh-direnv ];
 +        config = ''
-+          if ${if cfg.loadInNixShell then "True" else "any(map(lambda s: s.startswith('/nix/store'), __xonsh__.env.get('PATH')))"}:
++          if ${
++            if cfg.loadInNixShell then
++              "True"
++            else
++              "not any(map(lambda s: s.startswith('/nix/store'), __xonsh__.env.get('PATH')))"
++          }:
 +              xontrib load direnv
 +        '';
 +      };
