@@ -8,7 +8,7 @@
     ];
     fontconfig.defaultFonts = {
       sansSerif = [
-        "Cantarell"
+        "DejaVu Sans"
         "Noto Sans CJK SC"
       ];
       monospace = [
