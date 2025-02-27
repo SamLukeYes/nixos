@@ -24,9 +24,12 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    starship
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      starship
+    ];
+    variables.BASH_COMPLETIONS = ["${pkgs.bash-completion}/share/bash-completion/bash_completion"];
+  };
 
   users.persistence = {
     directories = [
