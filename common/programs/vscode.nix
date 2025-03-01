@@ -5,7 +5,11 @@
     ((pkgs.vscode.override {
         commandLineArgs = "--touch-events=true";
       }).fhsWithPackages (ps: with ps; [
-        libGL                             # required by conda env
+        libGL  # required by conda env
+
+        # for debugging upstream Shimeji-Desktop
+        xorg.libX11
+        xorg.libXrender
       ]
       # https://github.com/NixOS/nixpkgs/issues/356340
       ++ lib.optional
