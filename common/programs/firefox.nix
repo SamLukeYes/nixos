@@ -1,13 +1,13 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.firefox = {
     enable = true;
     languagePacks = [ "zh-CN" ];
-    policies.DisableAppUpdate = true;
+    package = pkgs.librewolf;
   };
 
   users.persistence.directories = [
-    ".mozilla"
+    ".librewolf"
   ];
 }
