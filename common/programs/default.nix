@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ ... }:
 
 {
   imports = [
@@ -24,13 +24,6 @@
 
   programs = {
     command-not-found.enable = false;
-
-    kdeconnect = {
-      enable = true;
-      package = lib.mkIf
-        config.services.xserver.desktopManager.gnome.enable
-        pkgs.gnomeExtensions.gsconnect;
-    };
 
     # requires nix-index-database
     nix-index-database.comma.enable = true;
