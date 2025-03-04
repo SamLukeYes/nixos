@@ -6,7 +6,7 @@
     languagePacks = [ "zh-CN" ];
     package = pkgs.librewolf;
     policies = {
-      DisableAppUpdate = true;
+      DisableFirefoxAccounts = false;
       DisablePocket = true;
       DisableTelemetry = true;
     };
