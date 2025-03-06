@@ -5,6 +5,7 @@
     ./angrr.nix
     ./earlyoom.nix
     ./fwupd.nix
+    ./syncthing.nix
   ];
 
   services = {

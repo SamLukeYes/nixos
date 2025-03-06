@@ -44,13 +44,6 @@ in
         "${config.users.users.yes.home}/Private/proxies/Clash.yaml";
       webui = pkgs.metacubexd;
     };
-
-    syncthing = {
-      enable = true;
-      openDefaultPorts = true;
-      user = "yes";
-      dataDir = config.users.users.yes.home;
-    };
   };
 
   systemd.services.mihomo.serviceConfig = {
@@ -86,7 +79,6 @@ in
         ".android"
 
         # syncthing
-        ".config/syncthing"
         "apk"
         "DCIM"
         "Documents"
