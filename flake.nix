@@ -25,11 +25,6 @@
 
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
-    mutter-performance = {
-      flake = false;
-      url = "git+https://aur.archlinux.org/mutter-performance.git/?ref=master";
-    };
-
     nix-index-database = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-index-database";
@@ -146,13 +141,6 @@
       };
 
       jdk = final.jetbrains.jdk-no-jcef;
-
-      mutter = prev.mutter.overrideAttrs (old: {
-        patches = (old.patches or []) ++ [
-          "${inputs.mutter-performance}/mr1441.patch"
-          "${inputs.mutter-performance}/mr3751.patch"
-        ];
-      });
 
       shimeji = inputs.shimeji.packages.${system};
     };

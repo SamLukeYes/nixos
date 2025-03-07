@@ -148,23 +148,6 @@
         "type": "github"
       }
     },
-    "mutter-performance": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1736938833,
-        "narHash": "sha256-j4eiXVVqJ7OF2LanW2QEFdAiaOOxBB3Z9umCihoKHjI=",
-        "ref": "master",
-        "rev": "0b6cd14baa171db46aa7552d0e165617f82d6d89",
-        "revCount": 275,
-        "type": "git",
-        "url": "https://aur.archlinux.org/mutter-performance.git/"
-      },
-      "original": {
-        "ref": "master",
-        "type": "git",
-        "url": "https://aur.archlinux.org/mutter-performance.git/"
-      }
-    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -238,7 +221,6 @@
         "archix": "archix",
         "archlinuxcn-keyring": "archlinuxcn-keyring",
         "flake-utils-plus": "flake-utils-plus",
-        "mutter-performance": "mutter-performance",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

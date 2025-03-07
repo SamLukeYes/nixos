@@ -3,7 +3,7 @@
 {
   environment.systemPackages = [
     ((pkgs.vscode.override {
-        commandLineArgs = "--touch-events=true";
+        commandLineArgs = "--touch-events=true --wayland-text-input-version=3";
       }).fhsWithPackages (ps: with ps; [
         libGL  # required by conda env
 
