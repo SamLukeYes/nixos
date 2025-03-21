@@ -1,4 +1,4 @@
-{ lib, modulesPath, pkgs, ... }:
+{ config, lib, modulesPath, pkgs, ... }:
 
 {
   virtualisation = {
@@ -16,7 +16,7 @@
 
       networking = {
         hostName = lib.mkForce "test";
-        proxy.default = lib.mkForce null;
+        proxy.default = lib.mkIf config.services.mihomo.enable "http://10.0.2.2:7890";
       };
 
       programs.xonsh.config = lib.mkForce "";
