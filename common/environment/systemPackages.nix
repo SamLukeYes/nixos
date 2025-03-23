@@ -5,7 +5,6 @@
     upscaler
 
     # CLI programs
-    bat  # frequently used to view text in terminal
     dig  # must be available without Internet connection
     ffmpeg-headless  # video editing
     file  # frequently used to view executable type

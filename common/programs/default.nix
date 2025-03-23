@@ -23,6 +23,8 @@
   ];
 
   programs = {
+    bat.enable = true;
+
     command-not-found.enable = false;
 
     # requires nix-index-database
