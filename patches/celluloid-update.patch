@@ -1,0 +1,53 @@
+From bcaa717100b1d5db73fd7fa9e57f228b28e63787 Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Sat, 5 Apr 2025 21:59:44 +0800
+Subject: [PATCH 1/2] celluloid: 0.27 -> 0.28
+
+---
+ pkgs/by-name/ce/celluloid/package.nix | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/pkgs/by-name/ce/celluloid/package.nix b/pkgs/by-name/ce/celluloid/package.nix
+index 67d17f6b1266f6..ac9297de7012b9 100644
+--- a/pkgs/by-name/ce/celluloid/package.nix
++++ b/pkgs/by-name/ce/celluloid/package.nix
+@@ -22,13 +22,13 @@
+ 
+ stdenv.mkDerivation (finalAttrs: {
+   pname = "celluloid";
+-  version = "0.27";
++  version = "0.28";
+ 
+   src = fetchFromGitHub {
+     owner = "celluloid-player";
+     repo = "celluloid";
+-    rev = "v${finalAttrs.version}";
+-    hash = "sha256-zuYt7taIb4w3NIszUpnSYvLIdYQH492tBwhLa6IgWDw=";
++    tag = "v${finalAttrs.version}";
++    hash = "sha256-72t8AVBDvvyf91zR/uXwT/PvNucyjUQFpQUQ5wnekXw=";
+   };
+ 
+   nativeBuildInputs = [
+
+From 9bb85472914f9252ac05aa2f3c0a5f7421390888 Mon Sep 17 00:00:00 2001
+From: SamLukeYes <samlukeyes123@gmail.com>
+Date: Sat, 5 Apr 2025 22:02:43 +0800
+Subject: [PATCH 2/2] celluloid: add maintainer
+
+---
+ pkgs/by-name/ce/celluloid/package.nix | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pkgs/by-name/ce/celluloid/package.nix b/pkgs/by-name/ce/celluloid/package.nix
+index ac9297de7012b9..132cc461ccbcad 100644
+--- a/pkgs/by-name/ce/celluloid/package.nix
++++ b/pkgs/by-name/ce/celluloid/package.nix
+@@ -77,7 +77,7 @@ stdenv.mkDerivation (finalAttrs: {
+     changelog = "https://github.com/celluloid-player/celluloid/releases/tag/${finalAttrs.src.rev}";
+     license = lib.licenses.gpl3Plus;
+     mainProgram = "celluloid";
+-    maintainers = with lib.maintainers; [ ];
++    maintainers = with lib.maintainers; [ samlukeyes123 ];
+     platforms = lib.platforms.linux;
+   };
+ })
