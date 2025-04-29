@@ -1,0 +1,46 @@
+From bb4ba2ab1c9135561db8b5db202ce0d288f100bf Mon Sep 17 00:00:00 2001
+From: cswimr <seaswimmerthefsh@gmail.com>
+Date: Mon, 28 Apr 2025 01:51:37 -0500
+Subject: [PATCH] starship: add xonsh shell configuration
+
+---
+ nixos/doc/manual/release-notes/rl-2505.section.md |  2 ++
+ nixos/modules/programs/starship.nix               | 12 ++++++++++++
+ 2 files changed, 14 insertions(+)
+
+diff --git a/nixos/doc/manual/release-notes/rl-2505.section.md b/nixos/doc/manual/release-notes/rl-2505.section.md
+index bfc3ad7dde6a92..23854e6fc2a14a 100644
+--- a/nixos/doc/manual/release-notes/rl-2505.section.md
++++ b/nixos/doc/manual/release-notes/rl-2505.section.md
+@@ -542,6 +542,8 @@
+ 
+ - `bind.cacheNetworks` now only controls access for recursive queries, where it previously controlled access for all queries.
+ 
++- The [Starship](https://starship.rs) module now automatically loads the starship prompt when using [`xonsh`](https://xon.sh).
++
+ - [`services.mongodb.enableAuth`](#opt-services.mongodb.enableAuth) now uses the newer [mongosh](https://github.com/mongodb-js/mongosh) shell instead of the legacy shell to configure the initial superuser. You can configure the mongosh package to use through the [`services.mongodb.mongoshPackage`](#opt-services.mongodb.mongoshPackage) option.
+ 
+ - There is a new set of NixOS test tools for testing virtual Wi-Fi networks in many different topologies. See the {option}`services.vwifi` module, {option}`services.kismet` NixOS test, and [manual](https://nixos.org/manual/nixpkgs/unstable/#sec-nixos-test-wifi) for documentation and examples.
+diff --git a/nixos/modules/programs/starship.nix b/nixos/modules/programs/starship.nix
+index 044054c5452f55..e606f776ab8183 100644
+--- a/nixos/modules/programs/starship.nix
++++ b/nixos/modules/programs/starship.nix
+@@ -158,6 +158,18 @@ in
+         eval "$(${cfg.package}/bin/starship init zsh)"
+       fi
+     '';
++
++    # use `config` instead of `${initOption}` because `programs.xonsh` doesn't have `shellInit` or `promptInit`
++    programs.xonsh.config = ''
++      if $TERM != "dumb":
++        # don't set STARSHIP_CONFIG automatically if there's a user-specified
++        # config file.  starship appears to use a hardcoded config location
++        # rather than one inside an XDG folder:
++        # https://github.com/starship/starship/blob/686bda1706e5b409129e6694639477a0f8a3f01b/src/configure.rs#L651
++        if not `$HOME/.config/starship.toml`:
++          $STARSHIP_CONFIG = ('${settingsFile}')
++        execx($(${cfg.package}/bin/starship init xonsh))
++    '';
+   };
+ 
+   meta.maintainers = pkgs.starship.meta.maintainers;

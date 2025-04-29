@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 
 {
   programs.xonsh = {
@@ -24,19 +24,12 @@
     ];
   };
 
-  environment = {
-    systemPackages = with pkgs; [
-      starship
-    ];
-  };
-
   users.persistence = {
     directories = [
       ".config/xonsh"
       ".local/share/xonsh"
     ];
     files = [
-      ".config/starship.toml"
       ".xonshrc"
     ];
   };

@@ -29,5 +29,33 @@
 
     # requires nix-index-database
     nix-index-database.comma.enable = true;
+
+    starship = {
+      enable = true;
+      settings = {
+        battery.display = [
+          {
+            style = "bold red";
+            threshold = 40;
+          }
+          {
+            style = "bold yellow";
+            threshold = 50;
+          }
+          {
+            style = "bold green";
+            threshold = 100;
+          }
+        ];
+        line_break.disabled = true;
+        package.disabled = true;
+        shlvl.disabled = false;
+        status.disabled = false;
+        time = {
+          disabled = false;
+          format = "🕙$time($style) ";
+        };
+      };
+    };
   };
 }

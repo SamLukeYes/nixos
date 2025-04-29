@@ -12,7 +12,6 @@
     nix-tree  # frequently used to inspect space usage
     python3Packages.python-lsp-server  # for VSCode xonsh IDE
     sqlite  # to fix nix database in case of corruption
-    starship  # configured without nix
     trashy  # trash across filesystems
     waypipe  # wayland support for containerized apps
     wl-clipboard-x11  # for VSCode Office Viewer Markdown Editor
