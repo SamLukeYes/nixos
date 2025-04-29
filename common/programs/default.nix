@@ -49,6 +49,7 @@
         ];
         line_break.disabled = true;
         package.disabled = true;
+        shell.disabled = false;
         shlvl.disabled = false;
         status.disabled = false;
         time = {
