@@ -48,6 +48,7 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
+      ./patches/celluloid-update.patch
       ./patches/starship-xonsh.patch
     ];
     nixpkgs-patched =
