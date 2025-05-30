@@ -34,11 +34,6 @@
 
     # https://github.com/nix-community/preservation/pull/12
     preservation.url = "github:Sporif/preservation/user-paths";
-
-    shimeji = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:SamLukeYes/Shimeji-Desktop";
-    };
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
@@ -130,8 +125,10 @@
       };
 
       jdk = final.jetbrains.jdk-no-jcef;
-
-      shimeji = inputs.shimeji.packages.${system};
+      
+    } // lib.packagesFromDirectoryRecursive {
+      inherit (final) callPackage;
+      directory = ./pkgs;
     };
 
     nixosModules.impermanent-users = import ./modules/impermanent-users.nix;

@@ -16,6 +16,7 @@
     ./nodejs.nix
     ./pacman.nix
     ./pixi.nix
+    ./shijima.nix
     ./telegram.nix
     ./vscode.nix
     ./xonsh.nix
