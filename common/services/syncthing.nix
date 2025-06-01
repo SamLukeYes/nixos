@@ -11,7 +11,7 @@
 
   environment.systemPackages = [
     pkgs.syncthing
-  ] ++ lib.optional config.services.xserver.desktopManager.gnome.enable
+  ] ++ lib.optional config.services.desktopManager.gnome.enable
     pkgs.gnomeExtensions.syncthing-indicator;
 
   users.persistence.directories = [

@@ -13,7 +13,7 @@
       ]
       # https://github.com/NixOS/nixpkgs/issues/356340
       ++ lib.optional
-        config.services.xserver.desktopManager.gnome.enable gnome-shell
+        config.services.desktopManager.gnome.enable gnome-shell
     ))
   ];
 

@@ -85,20 +85,18 @@
     # Disable the event list of the calendar menu
     gnome.evolution-data-server.enable = lib.mkForce false;
 
-    xserver = {
-      desktopManager.gnome = {
-        enable = true;
-        extraGSettingsOverrides = ''
-          [org.gnome.desktop.peripherals.touchpad]
-          tap-to-click=true
-          [org.gnome.mutter]
-          experimental-features=['scale-monitor-framebuffer']
-        '';
-        extraGSettingsOverridePackages = with pkgs; [
-          gsettings-desktop-schemas
-          mutter
-        ];
-      };
+    desktopManager.gnome = {
+      enable = true;
+      extraGSettingsOverrides = ''
+        [org.gnome.desktop.peripherals.touchpad]
+        tap-to-click=true
+        [org.gnome.mutter]
+        experimental-features=['scale-monitor-framebuffer']
+      '';
+      extraGSettingsOverridePackages = with pkgs; [
+        gsettings-desktop-schemas
+        mutter
+      ];
     };
   };
 
