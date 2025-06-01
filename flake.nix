@@ -55,7 +55,6 @@
         virtualbox-puel
       ];
       allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "charles"
         "code"
         "vscode"
       ];
@@ -123,9 +122,6 @@
           '';
         });
       };
-
-      jdk = final.jetbrains.jdk-no-jcef;
-      
     } // lib.packagesFromDirectoryRecursive {
       inherit (final) callPackage;
       directory = ./pkgs;
