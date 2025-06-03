@@ -16,13 +16,22 @@ stdenv.mkDerivation rec {
   pname = "shijima-qt";
   version = "0.1.0";
 
-  src = fetchFromGitHub {
+  src = (fetchFromGitHub {
     owner = "pixelomer";
     repo = "Shijima-Qt";
     rev = "v${version}";
     hash = "sha256-/oyFKkzhEW1+VbJyEmUw6s1m83edQ1lNYDlF5gQR9s4=";
     fetchSubmodules = true;
-  };
+  })
+  
+  # https://github.com/NixOS/nixpkgs/issues/195117#issuecomment-1410398050
+  .overrideAttrs (oldAttrs: {
+    env = oldAttrs.env or { } // {
+      GIT_CONFIG_COUNT = 1;
+      GIT_CONFIG_KEY_0 = "url.https://github.com/.insteadOf";
+      GIT_CONFIG_VALUE_0 = "git@github.com:";
+    };
+  });
 
   nativeBuildInputs = [
     cmake
