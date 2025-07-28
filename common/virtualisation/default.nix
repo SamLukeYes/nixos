@@ -1,6 +1,8 @@
 { config, lib, modulesPath, pkgs, ... }:
 
 {
+  imports = [ ./waydroid.nix ];
+
   virtualisation = {
     vmVariant = {
       imports = [

@@ -12,7 +12,7 @@
       ./programs
       ./services
       ./systemd.nix
-      ./virtualisation.nix
+      ./virtualisation
     ];
 
   networking.networkmanager.enable = true;
