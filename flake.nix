@@ -43,6 +43,7 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
+      ./patches/audacity-fix.patch
       ./patches/waydroid-helper-fix.patch
     ];
     nixpkgs-patched =
