@@ -44,7 +44,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/audacity-fix.patch
-      ./patches/waydroid-helper-fix.patch
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
