@@ -52,6 +52,7 @@
       # GNOME Shell extensions
       gnomeExtensions.appindicator
       gnomeExtensions.customize-ibus
+      gnomeExtensions.ddterm
       gnomeExtensions.easyScreenCast
       gnomeExtensions.places-status-indicator
       gnomeExtensions.system-monitor-next
