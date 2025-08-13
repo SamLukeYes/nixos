@@ -32,8 +32,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    # https://github.com/nix-community/preservation/pull/12
-    preservation.url = "github:Sporif/preservation/user-paths";
+    preservation.url = "github:nix-community/preservation/default-user-ownership";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own

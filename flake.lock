@@ -201,16 +201,16 @@
     },
     "preservation": {
       "locked": {
-        "lastModified": 1738708474,
-        "narHash": "sha256-oDQM9/3dsiwNZW7Pl2586gbRK7bx08DctxQkMgra+9k=",
-        "owner": "Sporif",
+        "lastModified": 1754755809,
+        "narHash": "sha256-DVDbeAg158ENqqRCesLE66reVcRoTZKd4OU0Vud6r/Q=",
+        "owner": "nix-community",
         "repo": "preservation",
-        "rev": "2d53e88842ee5810ea3ec4f8dcec913aeaf2839d",
+        "rev": "e9376d0e5b44007bdb0338dbf4f3f7e4dd7f3f85",
         "type": "github"
       },
       "original": {
-        "owner": "Sporif",
-        "ref": "user-paths",
+        "owner": "nix-community",
+        "ref": "default-user-ownership",
         "repo": "preservation",
         "type": "github"
       }
