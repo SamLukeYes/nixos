@@ -14,7 +14,6 @@
       gnome-text-editor             # use vscode instead
       gnome-calculator              # use xonsh instead
       gnome-calendar                # not syncing calendar to PC
-      gnome-console                 # use roxterm instead
       gnome-contacts                # useless on PC
       gnome-maps                    # use online maps instead
       gnome-music                   # use celluloid instead
@@ -37,17 +36,9 @@
       gnome-firmware
       gnome-sound-recorder
       refine
-      roxterm
 
       # nautilus extensions
       nautilus-python
-      (runCommand "nautilus-open-roxterm" { } ''
-        mkdir -p $out/share/nautilus-python/extensions
-        substitute \
-          ${nautilus-python.doc}/share/doc/nautilus-python/examples/open-terminal.py \
-          $out/share/nautilus-python/extensions/open-roxterm.py \
-          --replace-fail 'os.system("gnome-terminal")' 'import subprocess; subprocess.Popen(["roxterm"])'
-      '')
 
       # GNOME Shell extensions
       gnomeExtensions.appindicator
