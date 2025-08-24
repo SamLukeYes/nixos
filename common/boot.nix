@@ -7,8 +7,16 @@
     ];
     kernelParams =
       lib.optional (!config.zramSwap.enable) "zswap.enabled=1"
-      # https://github.com/NixOS/nixpkgs/issues/363887
-      ++ lib.optional (with config.virtualisation.virtualbox.host; enable && !enableKvm) "kvm.enable_virt_at_load=0";
+      ++ lib.optionals config.virtualisation.virtualbox.host.enable
+        (if config.virtualisation.virtualbox.host.enableKvm
+        then [
+          # https://github.com/cyberus-technology/virtualbox-kvm#known-issues-and-limitations
+          "split_lock_detect=off"
+        ]
+        else [
+          # https://github.com/NixOS/nixpkgs/issues/363887
+          "kvm.enable_virt_at_load=0"
+        ]);
     kernel.sysctl = {
       "dev.i915.perf_stream_paranoid" = 0;
     };
