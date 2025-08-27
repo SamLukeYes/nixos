@@ -15,7 +15,7 @@
 
     fstrim.enable = true;
 
-    logind.lidSwitch = "ignore";
+    logind.settings.Login.HandleLidSwitch = "ignore";
 
     ollama.enable = true;
 
