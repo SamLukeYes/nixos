@@ -2,9 +2,6 @@
 
 {
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [
-      v4l2loopback      
-    ];
     kernelParams =
       lib.optional (!config.zramSwap.enable) "zswap.enabled=1"
       ++ lib.optionals config.virtualisation.virtualbox.host.enable
