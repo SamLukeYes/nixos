@@ -32,7 +32,7 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
 
-    preservation.url = "github:nix-community/preservation/default-user-ownership";
+    preservation.url = "github:nix-community/preservation";
   };
 
   # Outputs can be anything, but the wiki + some commands define their own
