@@ -98,7 +98,6 @@
 
       ".config/gsconnect"
       ".config/gtk-3.0"  # nautilus bookmarks
-      ".config/roxterm.sourceforge.net"
 
       ".local/share/gnome-remote-desktop"
       ".local/share/gpaste"
