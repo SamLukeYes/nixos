@@ -1,8 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox-esr;
     languagePacks = [ "zh-CN" ];
     policies = {
       DisableFirefoxAccounts = false;
