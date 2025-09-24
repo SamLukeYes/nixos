@@ -1,9 +1,18 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.git.enable = true;
 
-  users.persistence.files = [
-    ".gitconfig"
+  environment.systemPackages = with pkgs; [
+    gh
   ];
+
+  users.persistence = {
+    directories = [
+      ".config/gh"
+    ];
+    files = [
+      ".gitconfig"
+    ];
+  };
 }
