@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
-  environment.systemPackages = [ pkgs.gimp3 ];
+  environment.systemPackages = lib.mkAfter [ pkgs.gimp3 ];
 
   users.persistence.directories = [
     ".config/GIMP"
