@@ -86,7 +86,6 @@ in
         "apk"
         "DCIM"
         "Documents"
-        "KernelFlasher"
         "Music"
         "Pictures"
         "PopCap Games"
