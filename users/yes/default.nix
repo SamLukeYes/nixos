@@ -83,6 +83,7 @@ in
         ".android"
 
         # syncthing
+        ".shortcuts"
         "apk"
         "DCIM"
         "Documents"
@@ -109,6 +110,7 @@ in
       ];
 
       files = config.users.persistence.files ++ [
+        ".config/mimeapps.list"
         ".config/user-dirs.dirs"
       ];
     };
