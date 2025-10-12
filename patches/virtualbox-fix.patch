@@ -1,0 +1,25 @@
+From 1a41cc3687c5aedbb6464c897e900e9724570a11 Mon Sep 17 00:00:00 2001
+From: Aaron Andersen <aaron@fosslib.net>
+Date: Fri, 10 Oct 2025 21:44:23 -0400
+Subject: [PATCH] virtualbox: fix curl 8.16 upgrade breakage
+
+---
+ pkgs/applications/virtualization/virtualbox/default.nix | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/pkgs/applications/virtualization/virtualbox/default.nix b/pkgs/applications/virtualization/virtualbox/default.nix
+index f8f4c285cd1571..f61db1225a89fa 100644
+--- a/pkgs/applications/virtualization/virtualbox/default.nix
++++ b/pkgs/applications/virtualization/virtualbox/default.nix
+@@ -260,6 +260,11 @@ stdenv.mkDerivation (finalAttrs: {
+       ./qt-dependency-paths.patch
+       # https://github.com/NixOS/nixpkgs/issues/123851
+       ./fix-audio-driver-loading.patch
++      # curl 8.16 upgrade breakage
++      (fetchpatch {
++        url = "https://salsa.debian.org/pkg-virtualbox-team/virtualbox/-/raw/dbf9a6ef75380ebd2705df0198c6ac8073d0b4cb/debian/patches/new-curl.patch";
++        hash = "sha256-WWnCWdXlJo9jTr8yXA0NxcDQBScryuu/53wyX0rhszk=";
++      })
+     ];
+ 
+   postPatch = ''

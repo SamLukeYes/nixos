@@ -50,6 +50,8 @@ stdenv.mkDerivation rec {
 
   hardeningDisable = [ "fortify" ];
 
+  env.CMAKE_POLICY_VERSION_MINIMUM = "3.5";
+
   buildInputs = [
     bzip2
     libarchive
