@@ -1,0 +1,583 @@
+From 1439a850c605ca7cd4c8243a42c84a13f5357e2b Mon Sep 17 00:00:00 2001
+From: Gaetan Lepage <gaetan@glepage.com>
+Date: Tue, 21 Oct 2025 07:25:50 +0000
+Subject: [PATCH 01/10] python3Packages.mercantile: cleanup
+
+---
+ .../python-modules/mercantile/default.nix     | 61 +++++++++++++++++--
+ 1 file changed, 55 insertions(+), 6 deletions(-)
+
+diff --git a/pkgs/development/python-modules/mercantile/default.nix b/pkgs/development/python-modules/mercantile/default.nix
+index 9d8f59cbef964..3d8485817d09d 100644
+--- a/pkgs/development/python-modules/mercantile/default.nix
++++ b/pkgs/development/python-modules/mercantile/default.nix
+@@ -2,7 +2,14 @@
+   lib,
+   buildPythonPackage,
+   fetchFromGitHub,
++
++  # build-system
++  setuptools,
++
++  # dependencies
+   click,
++
++  # tests
+   pytestCheckHook,
+   hypothesis,
+ }:
+@@ -10,27 +17,69 @@
+ buildPythonPackage rec {
+   pname = "mercantile";
+   version = "1.2.1";
+-  format = "setuptools";
++  pyproject = true;
+ 
+   src = fetchFromGitHub {
+     owner = "mapbox";
+     repo = "mercantile";
+-    rev = version;
++    tag = version;
+     hash = "sha256-DiDXO2XnD3We6NhP81z7aIHzHrHDi/nkqy98OT9986w=";
+   };
+ 
+-  propagatedBuildInputs = [ click ];
++  build-system = [
++    setuptools
++  ];
++
++  dependencies = [
++    click
++  ];
+ 
+   nativeCheckInputs = [
+     pytestCheckHook
+     hypothesis
+   ];
+ 
+-  meta = with lib; {
++  disabledTests = [
++    "test_cli_bounding_tile"
++    "test_cli_bounding_tile2"
++    "test_cli_bounding_tile_bbox"
++    "test_cli_bounding_tile_geosjon"
++    "test_cli_children"
++    "test_cli_multi_bounding_tile"
++    "test_cli_multi_bounding_tile_seq"
++    "test_cli_neighbors"
++    "test_cli_parent"
++    "test_cli_parent_depth"
++    "test_cli_parent_failure"
++    "test_cli_parent_multidepth"
++    "test_cli_quadkey_from_mixed"
++    "test_cli_quadkey_from_quadkeys"
++    "test_cli_quadkey_from_tiles"
++    "test_cli_shapes"
++    "test_cli_shapes_collect"
++    "test_cli_shapes_compact"
++    "test_cli_shapes_failure"
++    "test_cli_shapes_indentation"
++    "test_cli_strict_overlap_contain"
++    "test_cli_tiles_bad_bounds"
++    "test_cli_tiles_bounding_tiles_seq"
++    "test_cli_tiles_bounding_tiles_z0"
++    "test_cli_tiles_geosjon"
++    "test_cli_tiles_implicit_stdin"
++    "test_cli_tiles_multi_bounds"
++    "test_cli_tiles_multi_bounds_seq"
++    "test_cli_tiles_no_bounds"
++    "test_cli_tiles_point_geojson"
++    "test_cli_tiles_points"
++    "test_cli_tiles_seq"
++  ];
++
++  meta = {
+     description = "Spherical mercator tile and coordinate utilities";
+     mainProgram = "mercantile";
+     homepage = "https://github.com/mapbox/mercantile";
+-    license = licenses.bsd3;
+-    maintainers = with maintainers; [ sikmir ];
++    changelog = "https://github.com/mapbox/mercantile/blob/${version}/CHANGES.txt";
++    license = lib.licenses.bsd3;
++    maintainers = with lib.maintainers; [ sikmir ];
+   };
+ }
+
+From 596e5dbd1106264c3fa7d96229a7c3d5640caaca Mon Sep 17 00:00:00 2001
+From: Gaetan Lepage <gaetan@glepage.com>
+Date: Tue, 21 Oct 2025 09:23:38 +0000
+Subject: [PATCH 02/10] python3Packages.mercantile: skip failing tests
+
+Introduced by https://github.com/NixOS/nixpkgs/pull/448189
+---
+ pkgs/development/python-modules/mercantile/default.nix | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/pkgs/development/python-modules/mercantile/default.nix b/pkgs/development/python-modules/mercantile/default.nix
+index 3d8485817d09d..61357b3a7ad6c 100644
+--- a/pkgs/development/python-modules/mercantile/default.nix
++++ b/pkgs/development/python-modules/mercantile/default.nix
+@@ -40,6 +40,8 @@ buildPythonPackage rec {
+   ];
+ 
+   disabledTests = [
++    # AssertionError CLI exists with non-zero error code
++    # This is a regression introduced by https://github.com/NixOS/nixpkgs/pull/448189
+     "test_cli_bounding_tile"
+     "test_cli_bounding_tile2"
+     "test_cli_bounding_tile_bbox"
+
+From dfc593b315628463ad1005c844ad962d95ef9d51 Mon Sep 17 00:00:00 2001
+From: Gaetan Lepage <gaetan@glepage.com>
+Date: Tue, 21 Oct 2025 09:24:44 +0000
+Subject: [PATCH 03/10] python3Packages.mercantile: add versionCheckHook
+
+---
+ pkgs/development/python-modules/mercantile/default.nix | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/development/python-modules/mercantile/default.nix b/pkgs/development/python-modules/mercantile/default.nix
+index 61357b3a7ad6c..0c825469ed6e6 100644
+--- a/pkgs/development/python-modules/mercantile/default.nix
++++ b/pkgs/development/python-modules/mercantile/default.nix
+@@ -10,8 +10,9 @@
+   click,
+ 
+   # tests
+-  pytestCheckHook,
+   hypothesis,
++  pytestCheckHook,
++  versionCheckHook,
+ }:
+ 
+ buildPythonPackage rec {
+@@ -35,9 +36,11 @@ buildPythonPackage rec {
+   ];
+ 
+   nativeCheckInputs = [
+-    pytestCheckHook
+     hypothesis
++    pytestCheckHook
++    versionCheckHook
+   ];
++  versionCheckProgramArg = "--version";
+ 
+   disabledTests = [
+     # AssertionError CLI exists with non-zero error code
+
+From 47709159d15ba2c0e32b1b5ffc28898203a490f5 Mon Sep 17 00:00:00 2001
+From: Gaetan Lepage <gaetan@glepage.com>
+Date: Tue, 21 Oct 2025 12:49:57 +0000
+Subject: [PATCH 04/10] python3Packages.gtts: relax click
+
+---
+ pkgs/development/python-modules/gtts/default.nix | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/pkgs/development/python-modules/gtts/default.nix b/pkgs/development/python-modules/gtts/default.nix
+index 36b3f6835d751..24bc7eb2ed4f6 100644
+--- a/pkgs/development/python-modules/gtts/default.nix
++++ b/pkgs/development/python-modules/gtts/default.nix
+@@ -29,6 +29,9 @@ buildPythonPackage rec {
+ 
+   build-system = [ setuptools ];
+ 
++  pythonRelaxDeps = [
++    "click"
++  ];
+   dependencies = [
+     beautifulsoup4
+     click
+@@ -53,12 +56,12 @@ buildPythonPackage rec {
+ 
+   pythonImportsCheck = [ "gtts" ];
+ 
+-  meta = with lib; {
++  meta = {
+     description = "Python library and CLI tool to interface with Google Translate text-to-speech API";
+     mainProgram = "gtts-cli";
+     homepage = "https://gtts.readthedocs.io";
+     changelog = "https://gtts.readthedocs.io/en/latest/changelog.html";
+-    license = licenses.mit;
+-    maintainers = with maintainers; [ unode ];
++    license = lib.licenses.mit;
++    maintainers = with lib.maintainers; [ unode ];
+   };
+ }
+
+From 861e3f5cc36c0f15047eafe7e570f17539fd2ab3 Mon Sep 17 00:00:00 2001
+From: Gaetan Lepage <gaetan@glepage.com>
+Date: Tue, 21 Oct 2025 12:54:51 +0000
+Subject: [PATCH 05/10] python3Packages.fiona: disable tests failing witch
+ click 8.2.1
+
+---
+ .../python-modules/fiona/default.nix          | 58 +++++++++++++++++++
+ 1 file changed, 58 insertions(+)
+
+diff --git a/pkgs/development/python-modules/fiona/default.nix b/pkgs/development/python-modules/fiona/default.nix
+index 6a7c8b51bee30..04d5d9b8f5f60 100644
+--- a/pkgs/development/python-modules/fiona/default.nix
++++ b/pkgs/development/python-modules/fiona/default.nix
+@@ -95,6 +95,64 @@ buildPythonPackage rec {
+ 
+     # see: https://github.com/Toblerity/Fiona/issues/1273
+     "test_append_memoryfile_drivers"
++
++    # AssertionError CLI exists with non-zero error code
++    # This is a regression introduced by https://github.com/NixOS/nixpkgs/pull/448189
++    "test_bbox_json_yes"
++    "test_bbox_no"
++    "test_bbox_where"
++    "test_bbox_yes"
++    "test_bbox_yes_two_files"
++    "test_bool_seq"
++    "test_bounds_explode_with_obj"
++    "test_calc_seq"
++    "test_collect_ld"
++    "test_collect_no_rs"
++    "test_collect_noparse"
++    "test_collect_noparse_records"
++    "test_collect_noparse_rs"
++    "test_collect_rec_buffered"
++    "test_collect_rs"
++    "test_creation_options"
++    "test_different_crs"
++    "test_distrib"
++    "test_distrib_no_rs"
++    "test_dst_crs_default_to_src_crs"
++    "test_dst_crs_epsg3857"
++    "test_dst_crs_no_src"
++    "test_existing_property"
++    "test_explode"
++    "test_explode_output_rs"
++    "test_explode_pp"
++    "test_explode_with_id"
++    "test_filter"
++    "test_fio_load_layer"
++    "test_fio_load_layer_append"
++    "test_load__auto_detect_format"
++    "test_load__auto_detect_format"
++    "test_load__auto_detect_format"
++    "test_load__auto_detect_format"
++    "test_load__auto_detect_format"
++    "test_map_count"
++    "test_multi_layer"
++    "test_one"
++    "test_precision"
++    "test_reduce_area"
++    "test_reduce_area"
++    "test_reduce_union"
++    "test_reduce_union_zip_properties"
++    "test_seq"
++    "test_seq"
++    "test_seq_no_rs"
++    "test_seq_rs"
++    "test_seq_rs"
++    "test_two"
++    "test_vfs"
++    "test_where_no"
++    "test_where_yes"
++    "test_where_yes_two_files"
++    "test_with_id"
++    "test_with_obj"
+   ];
+ 
+   pythonImportsCheck = [ "fiona" ];
+
+From e48fa78780570db2551d46a194256d1e0ed45e09 Mon Sep 17 00:00:00 2001
+From: Gaetan Lepage <gaetan@glepage.com>
+Date: Tue, 21 Oct 2025 13:00:39 +0000
+Subject: [PATCH 06/10] python3Packages.rasterio: cleanup
+
+---
+ .../python-modules/rasterio/default.nix       | 56 +++++++++----------
+ 1 file changed, 26 insertions(+), 30 deletions(-)
+
+diff --git a/pkgs/development/python-modules/rasterio/default.nix b/pkgs/development/python-modules/rasterio/default.nix
+index 9fc55c214146a..167d493cc892b 100644
+--- a/pkgs/development/python-modules/rasterio/default.nix
++++ b/pkgs/development/python-modules/rasterio/default.nix
+@@ -1,42 +1,43 @@
+ {
+   lib,
++  stdenv,
+   buildPythonPackage,
+   fetchFromGitHub,
+-  pytestCheckHook,
+-  pythonOlder,
+-  stdenv,
+-  testers,
+ 
++  # build-system
++  cython,
++  gdal,
++  numpy,
++  setuptools,
++
++  # dependencies
+   affine,
+   attrs,
+-  boto3,
+   certifi,
+   click,
+   click-plugins,
+   cligj,
+-  cython,
+-  fsspec,
+-  gdal,
+-  hypothesis,
++  snuggs,
++
++  # optional-dependencies
+   ipython,
+   matplotlib,
+-  numpy,
++  boto3,
++
++  # tests
++  fsspec,
++  hypothesis,
+   packaging,
++  pytestCheckHook,
+   pytest-randomly,
+-  setuptools,
+   shapely,
+-  snuggs,
+-  wheel,
+-
+-  rasterio, # required to run version test
++  versionCheckHook,
+ }:
+ 
+ buildPythonPackage rec {
+   pname = "rasterio";
+   version = "1.4.3";
+-  format = "pyproject";
+-
+-  disabled = pythonOlder "3.8";
++  pyproject = true;
+ 
+   src = fetchFromGitHub {
+     owner = "rasterio";
+@@ -50,15 +51,14 @@ buildPythonPackage rec {
+       --replace-fail "cython~=3.0.2" cython
+   '';
+ 
+-  nativeBuildInputs = [
++  build-system = [
+     cython
+     gdal
+     numpy
+     setuptools
+-    wheel
+   ];
+ 
+-  propagatedBuildInputs = [
++  dependencies = [
+     affine
+     attrs
+     certifi
+@@ -83,7 +83,9 @@ buildPythonPackage rec {
+     pytestCheckHook
+     pytest-randomly
+     shapely
++    versionCheckHook
+   ];
++  versionCheckProgramArg = "--version";
+ 
+   preCheck = ''
+     rm -r rasterio # prevent importing local rasterio
+@@ -107,18 +109,12 @@ buildPythonPackage rec {
+ 
+   pythonImportsCheck = [ "rasterio" ];
+ 
+-  passthru.tests.version = testers.testVersion {
+-    package = rasterio;
+-    version = version;
+-    command = "${rasterio}/bin/rio --version";
+-  };
+-
+-  meta = with lib; {
++  meta = {
+     description = "Python package to read and write geospatial raster data";
+     mainProgram = "rio";
+     homepage = "https://rasterio.readthedocs.io/";
+     changelog = "https://github.com/rasterio/rasterio/blob/${version}/CHANGES.txt";
+-    license = licenses.bsd3;
+-    teams = [ teams.geospatial ];
++    license = lib.licenses.bsd3;
++    teams = [ lib.teams.geospatial ];
+   };
+ }
+
+From fe899cf2ae42fd856079645db7d24f71c06235b1 Mon Sep 17 00:00:00 2001
+From: Gaetan Lepage <gaetan@glepage.com>
+Date: Tue, 21 Oct 2025 13:01:51 +0000
+Subject: [PATCH 07/10] python3Packages.rasterio: disable tests failing with
+ click 8.2.1
+
+---
+ pkgs/development/python-modules/rasterio/default.nix | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/pkgs/development/python-modules/rasterio/default.nix b/pkgs/development/python-modules/rasterio/default.nix
+index 167d493cc892b..53c1513e2c9da 100644
+--- a/pkgs/development/python-modules/rasterio/default.nix
++++ b/pkgs/development/python-modules/rasterio/default.nix
+@@ -104,6 +104,15 @@ buildPythonPackage rec {
+     "test_warp"
+     "test_warpedvrt"
+     "test_rio_warp"
++
++    # AssertionError CLI exists with non-zero error code
++    # This is a regression introduced by https://github.com/NixOS/nixpkgs/pull/448189
++    "test_sample_stdin"
++    "test_transform"
++    "test_transform_point"
++    "test_transform_point_dst_file"
++    "test_transform_point_multi"
++    "test_transform_point_src_file"
+   ]
+   ++ lib.optionals stdenv.hostPlatform.isDarwin [ "test_reproject_error_propagation" ];
+ 
+
+From 525a729d80ae34b62e91b94dc7913a45a4077c95 Mon Sep 17 00:00:00 2001
+From: Gaetan Lepage <gaetan@glepage.com>
+Date: Tue, 21 Oct 2025 13:18:27 +0000
+Subject: [PATCH 08/10] python3Packages.morecantile: cleanup
+
+---
+ .../python-modules/morecantile/default.nix    | 21 ++++++++++++-------
+ 1 file changed, 13 insertions(+), 8 deletions(-)
+
+diff --git a/pkgs/development/python-modules/morecantile/default.nix b/pkgs/development/python-modules/morecantile/default.nix
+index c5e29eecfd02c..8d0fd9ef7373a 100644
+--- a/pkgs/development/python-modules/morecantile/default.nix
++++ b/pkgs/development/python-modules/morecantile/default.nix
+@@ -3,23 +3,26 @@
+   stdenv,
+   buildPythonPackage,
+   fetchFromGitHub,
+-  pytestCheckHook,
+-  pythonOlder,
+ 
++  # build-system
++  flit,
++
++  # dependencies
+   attrs,
+   click,
+-  flit,
+-  mercantile,
+   pydantic,
+   pyproj,
++
++  # tests
++  mercantile,
+   rasterio,
++  pytestCheckHook,
+ }:
+ 
+ buildPythonPackage rec {
+   pname = "morecantile";
+   version = "6.2.0";
+   pyproject = true;
+-  disabled = pythonOlder "3.8";
+ 
+   src = fetchFromGitHub {
+     owner = "developmentseed";
+@@ -28,9 +31,9 @@ buildPythonPackage rec {
+     hash = "sha256-ohTSgkjgaANS/Pli4fao+THA4ltts6svj5CdJEgorz0=";
+   };
+ 
+-  nativeBuildInputs = [ flit ];
++  build-system = [ flit ];
+ 
+-  propagatedBuildInputs = [
++  dependencies = [
+     attrs
+     click
+     pydantic
+@@ -52,7 +55,9 @@ buildPythonPackage rec {
+ 
+   meta = {
+     description = "Construct and use map tile grids in different projection";
+-    homepage = "https://developmentseed.org/morecantile/";
++    homepage = "https://developmentseed.org/morecantile";
++    downloadPage = "https://github.com/developmentseed/morecantile";
++    changelog = "https://github.com/developmentseed/morecantile/releases/tag/${src.tag}";
+     license = lib.licenses.mit;
+     teams = [ lib.teams.geospatial ];
+     mainProgram = "morecantile";
+
+From cd82aae7e87ff68fc1230fb9f3bf0e884a62d6d1 Mon Sep 17 00:00:00 2001
+From: Gaetan Lepage <gaetan@glepage.com>
+Date: Tue, 21 Oct 2025 13:18:55 +0000
+Subject: [PATCH 09/10] python3Packages.morecantile: disable tests failing with
+ click 8.2.1
+
+---
+ .../python-modules/morecantile/default.nix      | 17 ++++++++++++++++-
+ 1 file changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/pkgs/development/python-modules/morecantile/default.nix b/pkgs/development/python-modules/morecantile/default.nix
+index 8d0fd9ef7373a..2246f96736bda 100644
+--- a/pkgs/development/python-modules/morecantile/default.nix
++++ b/pkgs/development/python-modules/morecantile/default.nix
+@@ -46,7 +46,22 @@ buildPythonPackage rec {
+     rasterio
+   ];
+ 
+-  disabledTests = lib.optionals stdenv.hostPlatform.isDarwin [
++  disabledTests = [
++    # AssertionError CLI exists with non-zero error code
++    # This is a regression introduced by https://github.com/NixOS/nixpkgs/pull/448189
++    "test_cli_shapes"
++    "test_cli_shapesWGS84"
++    "test_cli_strict_overlap_contain"
++    "test_cli_tiles_bad_bounds"
++    "test_cli_tiles_geosjon"
++    "test_cli_tiles_implicit_stdin"
++    "test_cli_tiles_multi_bounds"
++    "test_cli_tiles_multi_bounds_seq"
++    "test_cli_tiles_ok"
++    "test_cli_tiles_points"
++    "test_cli_tiles_seq"
++  ]
++  ++ lib.optionals stdenv.hostPlatform.isDarwin [
+     # https://github.com/developmentseed/morecantile/issues/156
+     "test_tiles_when_tms_bounds_and_provided_bounds_cross_antimeridian"
+   ];
+
+From 333591a6ee64c8cae8723ef6b1e8eb4222d3bfee Mon Sep 17 00:00:00 2001
+From: Gaetan Lepage <gaetan@glepage.com>
+Date: Tue, 21 Oct 2025 13:19:41 +0000
+Subject: [PATCH 10/10] python3Packages.morecantile: add versionCheckHook
+
+---
+ pkgs/development/python-modules/morecantile/default.nix | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/pkgs/development/python-modules/morecantile/default.nix b/pkgs/development/python-modules/morecantile/default.nix
+index 2246f96736bda..e9f4650acb189 100644
+--- a/pkgs/development/python-modules/morecantile/default.nix
++++ b/pkgs/development/python-modules/morecantile/default.nix
+@@ -17,6 +17,7 @@
+   mercantile,
+   rasterio,
+   pytestCheckHook,
++  versionCheckHook,
+ }:
+ 
+ buildPythonPackage rec {
+@@ -44,7 +45,9 @@ buildPythonPackage rec {
+     mercantile
+     pytestCheckHook
+     rasterio
++    versionCheckHook
+   ];
++  versionCheckProgramArg = "--version";
+ 
+   disabledTests = [
+     # AssertionError CLI exists with non-zero error code
