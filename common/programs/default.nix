@@ -9,6 +9,7 @@
     ./direnv.nix
     ./fastfetch.nix
     ./firefox.nix
+    ./foliate.nix
     ./gimp.nix
     ./git.nix
     ./gnupg.nix
