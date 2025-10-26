@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./android.nix
     ./audacity.nix
     ./authenticator.nix
     ./czkawka.nix

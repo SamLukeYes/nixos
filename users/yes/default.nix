@@ -15,7 +15,6 @@ in
       description = "Sam L. Yes";
       group = "yes";
       extraGroups = [
-        "adbusers"
         "networkmanager"
         "wheel"
         "wireshark"
@@ -30,7 +29,6 @@ in
     "http://127.0.0.1:7890";
 
   programs = {
-    adb.enable = true;
     wireshark = {
       enable = true;
       package = pkgs.wireshark;
@@ -78,9 +76,6 @@ in
         ".local/share/applications"
         ".local/share/backgrounds"
         ".local/share/icons"
-
-        # adb
-        ".android"
 
         # syncthing
         ".shortcuts"
