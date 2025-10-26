@@ -43,7 +43,6 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/arch-install-scripts-update.patch
-      ./patches/fix-python-packages.patch
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
