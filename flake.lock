@@ -30,11 +30,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1760368448,
-        "narHash": "sha256-RdlyW31+whtzmtOg5oixVV8wFYfM7oAJDeJPFyoafds=",
+        "lastModified": 1761664640,
+        "narHash": "sha256-Rf8riw8sp9Q1cD9VD5XVFGJ0l8thuWUubQAuvVBfoB8=",
         "owner": "SamLukeYes",
         "repo": "archix",
-        "rev": "5011b4cf19b5087b19e5fc174a63ead57e9ff92a",
+        "rev": "f91c051f570a67487a151e7d764d2a9dd5aff111",
         "type": "github"
       },
       "original": {
