@@ -1,17 +1,22 @@
-From 4b0c7a122979c942db1aeb95a9d1c12d4a8f2e80 Mon Sep 17 00:00:00 2001
+From ea1b8fd3bfab6fce74b701ef1f3f1eab83ee4682 Mon Sep 17 00:00:00 2001
 From: SamLukeYes <samlukeyes123@gmail.com>
-Date: Thu, 2 Oct 2025 03:03:08 +0800
+Date: Tue, 4 Nov 2025 00:44:30 +0800
 Subject: [PATCH] arch-install-scripts: 29 -> 31
 
 ---
- .../ar/arch-install-scripts/package.nix       | 26 ++++++++++++-------
- 1 file changed, 17 insertions(+), 9 deletions(-)
+ .../ar/arch-install-scripts/package.nix       | 31 +++++++++++++------
+ 1 file changed, 22 insertions(+), 9 deletions(-)
 
 diff --git a/pkgs/by-name/ar/arch-install-scripts/package.nix b/pkgs/by-name/ar/arch-install-scripts/package.nix
-index 2a6ac6a6b146a6..8226245bd7579a 100644
+index 2a6ac6a6b146a..310dd15257ad4 100644
 --- a/pkgs/by-name/ar/arch-install-scripts/package.nix
 +++ b/pkgs/by-name/ar/arch-install-scripts/package.nix
-@@ -23,14 +23,14 @@
+@@ -19,18 +19,19 @@
+     "/usr/bin/vendor_perl"
+     "/usr/bin/core_perl"
+   ],
++  chrootSetprivPath ? "/usr/bin/setpriv",
+ }:
  
  resholve.mkDerivation rec {
    pname = "arch-install-scripts";
@@ -28,12 +33,13 @@ index 2a6ac6a6b146a6..8226245bd7579a 100644
    };
  
    nativeBuildInputs = [
-@@ -40,11 +40,11 @@ resholve.mkDerivation rec {
+@@ -40,12 +41,16 @@ resholve.mkDerivation rec {
  
    postPatch = ''
      substituteInPlace ./Makefile \
 -      --replace "PREFIX = /usr/local" "PREFIX ?= /usr/local"
 +      --replace-fail "PREFIX = /usr/local" "PREFIX ?= /usr/local"
++
      substituteInPlace ./pacstrap.in \
 -      --replace "cp -a" "cp -LR --no-preserve=mode" \
 -      --replace "unshare pacman" "unshare ${pacman}/bin/pacman" \
@@ -41,10 +47,14 @@ index 2a6ac6a6b146a6..8226245bd7579a 100644
 +      --replace-fail "cp -a" "cp -LR --no-preserve=mode" \
 +      --replace-fail "unshare pacman" "unshare ${pacman}/bin/pacman" \
 +      --replace-fail '"$gpg_dir" "$newroot/$gpg_dir"' '"$gpg_dir" "$newroot/$gpg_dir" && chmod 700 "$newroot/etc/pacman.d/gnupg"'
++
      echo "export PATH=${lib.strings.makeSearchPath "" chrootPath}:\$PATH" >> ./common
++    substituteInPlace ./arch-chroot.in \
++      --replace-fail "sd_args+=(setpriv" "sd_args+=(${chrootSetprivPath}"
    '';
  
-@@ -80,10 +80,17 @@ resholve.mkDerivation rec {
+   installFlags = [ "PREFIX=$(out)" ];
+@@ -80,10 +85,17 @@ resholve.mkDerivation rec {
          util-linux
        ];
  
@@ -65,7 +75,7 @@ index 2a6ac6a6b146a6..8226245bd7579a 100644
        fix = {
          mount = true;
          umount = true;
-@@ -93,6 +100,7 @@ resholve.mkDerivation rec {
+@@ -93,6 +105,7 @@ resholve.mkDerivation rec {
          "$setup"
          "$pid_unshare"
          "$mount_unshare"
