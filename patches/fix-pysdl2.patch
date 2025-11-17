@@ -1,0 +1,27 @@
+From 1e256c001a82519a46cee3480a567f494984a28a Mon Sep 17 00:00:00 2001
+From: Yiyu Zhou <yiyuzhou19@gmail.com>
+Date: Sun, 16 Nov 2025 20:31:00 -0800
+Subject: [PATCH] python3Packages.pysdl2: fix tests
+
+---
+ pkgs/development/python-modules/pysdl2/default.nix | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/pkgs/development/python-modules/pysdl2/default.nix b/pkgs/development/python-modules/pysdl2/default.nix
+index 41320ca8b5b85..dfcc76bb132b9 100644
+--- a/pkgs/development/python-modules/pysdl2/default.nix
++++ b/pkgs/development/python-modules/pysdl2/default.nix
+@@ -82,10 +82,9 @@ buildPythonPackage rec {
+     # GetPrefPath for OrgName/AppName is None
+     "test_SDL_GetPrefPath"
+ 
+-    # TODO: Remove once sdl2-compat is updated to 2.32.56
+-    "test_SDL_SetWindowDisplayMode"
+-    "test_SDL_SetWindowFullscreen"
+-    "test_SDL_GetPlatform"
++    # AssertionError:
++    # clip: Could not set clip rect SDL_Rect(x=2, y=2, w=0, h=0)
++    "test_SDL_GetSetClipRect"
+   ];
+ 
+   meta = {
