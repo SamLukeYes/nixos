@@ -43,6 +43,7 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/fix-pysdl2.patch
+      ./patches/fix-gnome-extensions.patch
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;

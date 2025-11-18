@@ -1,0 +1,203 @@
+From ffd415c485749b2f9d9afc71b7f7239b038d69de Mon Sep 17 00:00:00 2001
+From: winston <hey@winston.sh>
+Date: Fri, 14 Nov 2025 23:55:28 +0100
+Subject: [PATCH 1/7] gnome-shell-extensions: fix GIRepository
+ `prepend_search_path` calls
+
+---
+ pkgs/by-name/gn/gnome-shell-extensions/fix_gmenu.patch | 2 +-
+ pkgs/by-name/gn/gnome-shell-extensions/fix_gtop.patch  | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/by-name/gn/gnome-shell-extensions/fix_gmenu.patch b/pkgs/by-name/gn/gnome-shell-extensions/fix_gmenu.patch
+index 1254f532d6118..189c05b09904b 100644
+--- a/pkgs/by-name/gn/gnome-shell-extensions/fix_gmenu.patch
++++ b/pkgs/by-name/gn/gnome-shell-extensions/fix_gmenu.patch
+@@ -15,7 +15,7 @@ index 6eb58f1..28e1195 100644
+  import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
+  import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
+  
+-+GIRepository.Repository.prepend_search_path('@gmenu_path@');
+++GIRepository.Repository.dup_default().prepend_search_path('@gmenu_path@');
+ +const {default: GMenu} = await import('gi://GMenu');
+  const appSys = Shell.AppSystem.get_default();
+  
+diff --git a/pkgs/by-name/gn/gnome-shell-extensions/fix_gtop.patch b/pkgs/by-name/gn/gnome-shell-extensions/fix_gtop.patch
+index 61c90f184d1ec..b9ec9275ba396 100644
+--- a/pkgs/by-name/gn/gnome-shell-extensions/fix_gtop.patch
++++ b/pkgs/by-name/gn/gnome-shell-extensions/fix_gtop.patch
+@@ -17,7 +17,7 @@ index 37d2eb1..232d0d5 100644
+  
+  import * as Main from 'resource:///org/gnome/shell/ui/main.js';
+  
+-+GIRepository.Repository.prepend_search_path('@gtop_path@');
+++GIRepository.Repository.dup_default().prepend_search_path('@gtop_path@');
+ +const GTop = (await import("gi://GTop")).default;
+ +
+  const THRESHOLD_HIGH = 0.80;
+
+From 099716cfbece8f1c6fee02a999ac2ecb7a198073 Mon Sep 17 00:00:00 2001
+From: Doron Behar <doron.behar@gmail.com>
+Date: Sat, 15 Nov 2025 20:23:25 +0200
+Subject: [PATCH 2/7] gnomeExtensions.gsconnect: use lib.mesonOption
+
+---
+ .../gnome/extensions/gsconnect/default.nix       | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/pkgs/desktops/gnome/extensions/gsconnect/default.nix b/pkgs/desktops/gnome/extensions/gsconnect/default.nix
+index 594bd158950d3..9f3a2377bd234 100644
+--- a/pkgs/desktops/gnome/extensions/gsconnect/default.nix
++++ b/pkgs/desktops/gnome/extensions/gsconnect/default.nix
+@@ -68,14 +68,14 @@ stdenv.mkDerivation (finalAttrs: {
+   ];
+ 
+   mesonFlags = [
+-    "-Dgnome_shell_libdir=${gnome-shell}/lib"
+-    "-Dchrome_nmhdir=${placeholder "out"}/etc/opt/chrome/native-messaging-hosts"
+-    "-Dchromium_nmhdir=${placeholder "out"}/etc/chromium/native-messaging-hosts"
+-    "-Dopenssl_path=${openssl}/bin/openssl"
+-    "-Dsshadd_path=${openssh}/bin/ssh-add"
+-    "-Dsshkeygen_path=${openssh}/bin/ssh-keygen"
+-    "-Dsession_bus_services_dir=${placeholder "out"}/share/dbus-1/services"
+-    "-Dinstalled_test_prefix=${placeholder "installedTests"}"
++    (lib.mesonOption "gnome_shell_libdir" "${gnome-shell}/lib")
++    (lib.mesonOption "chrome_nmhdir" "${placeholder "out"}/etc/opt/chrome/native-messaging-hosts")
++    (lib.mesonOption "chromium_nmhdir" "${placeholder "out"}/etc/chromium/native-messaging-hosts")
++    (lib.mesonOption "openssl_path" "${openssl}/bin/openssl")
++    (lib.mesonOption "sshadd_path" "${openssh}/bin/ssh-add")
++    (lib.mesonOption "sshkeygen_path" "${openssh}/bin/ssh-keygen")
++    (lib.mesonOption "session_bus_services_dir" "${placeholder "out"}/share/dbus-1/services")
++    (lib.mesonOption "installed_test_prefix" "${placeholder "installedTests"}")
+   ];
+ 
+   postPatch = ''
+
+From d6c615f935be48f0774f51aa932056feac085f1f Mon Sep 17 00:00:00 2001
+From: winston <hey@winston.sh>
+Date: Sat, 15 Nov 2025 02:01:49 +0100
+Subject: [PATCH 3/7] gnomeExtensions.gsconnect: fix GIRepository
+ `prepend_search_path` call
+
+---
+ pkgs/desktops/gnome/extensions/gsconnect/fix-paths.patch | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pkgs/desktops/gnome/extensions/gsconnect/fix-paths.patch b/pkgs/desktops/gnome/extensions/gsconnect/fix-paths.patch
+index 2ab8f86cf672f..cef649450e6f8 100644
+--- a/pkgs/desktops/gnome/extensions/gsconnect/fix-paths.patch
++++ b/pkgs/desktops/gnome/extensions/gsconnect/fix-paths.patch
+@@ -18,7 +18,7 @@ index 00000000..d009dfd9
+ +++ b/src/__nix-prepend-search-paths.js
+ @@ -0,0 +1,2 @@
+ +import GIRepository from 'gi://GIRepository';
+-+'@typelibPath@'.split(':').forEach(path => GIRepository.Repository.prepend_search_path(path));
+++'@typelibPath@'.split(':').forEach(path => GIRepository.Repository.dup_default().prepend_search_path(path));
+ diff --git a/src/extension.js b/src/extension.js
+ index 53ecd5fc..78782357 100644
+ --- a/src/extension.js
+
+From 0136004fbb8b8e09db3c57fa38f8a9c4c6d8eefd Mon Sep 17 00:00:00 2001
+From: winston <hey@winston.sh>
+Date: Sat, 15 Nov 2025 02:03:00 +0100
+Subject: [PATCH 4/7] gnomeExtensions.applications-menu: fix GIRepository
+ `prepend_search_path` call
+
+---
+ ...apps-menu_at_gnome-shell-extensions.gcampax.github.com.patch | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pkgs/desktops/gnome/extensions/extensionOverridesPatches/apps-menu_at_gnome-shell-extensions.gcampax.github.com.patch b/pkgs/desktops/gnome/extensions/extensionOverridesPatches/apps-menu_at_gnome-shell-extensions.gcampax.github.com.patch
+index 58f539d1525fd..66f5ba3d7eba9 100644
+--- a/pkgs/desktops/gnome/extensions/extensionOverridesPatches/apps-menu_at_gnome-shell-extensions.gcampax.github.com.patch
++++ b/pkgs/desktops/gnome/extensions/extensionOverridesPatches/apps-menu_at_gnome-shell-extensions.gcampax.github.com.patch
+@@ -9,7 +9,7 @@ index c608441..2b25335 100644
+ -import GMenu from 'gi://GMenu';
+ +
+ +import GIRepository from 'gi://GIRepository';
+-+GIRepository.Repository.prepend_search_path('@gmenu_path@');
+++GIRepository.Repository.dup_default().prepend_search_path('@gmenu_path@');
+ +const {default: GMenu} = await import('gi://GMenu');
+ +
+  import GObject from 'gi://GObject';
+
+From 50ac60d0f696ce4da37939a69c5cf7aa8fa18d1b Mon Sep 17 00:00:00 2001
+From: winston <hey@winston.sh>
+Date: Sat, 15 Nov 2025 02:03:49 +0100
+Subject: [PATCH 5/7] gnomeExtensions.vitals: fix GIRepository
+ `prepend_search_path` call
+
+---
+ .../extensionOverridesPatches/vitals_at_corecoding.com.patch    | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pkgs/desktops/gnome/extensions/extensionOverridesPatches/vitals_at_corecoding.com.patch b/pkgs/desktops/gnome/extensions/extensionOverridesPatches/vitals_at_corecoding.com.patch
+index 96f763d043125..c2b96d76a0f2d 100644
+--- a/pkgs/desktops/gnome/extensions/extensionOverridesPatches/vitals_at_corecoding.com.patch
++++ b/pkgs/desktops/gnome/extensions/extensionOverridesPatches/vitals_at_corecoding.com.patch
+@@ -6,7 +6,7 @@ index 39d175a..9815b77 100644
+  import { gettext as _ } from 'resource:///org/gnome/shell/extensions/extension.js';
+  import NM from 'gi://NM';
+ 
+-+imports.gi.GIRepository.Repository.prepend_search_path('@gtop_path@');
+++imports.gi.GIRepository.Repository.dup_default().prepend_search_path('@gtop_path@');
+ +
+  let GTop, hasGTop = true;
+  try {
+
+From 3f13f58cba2dbb0f5578144b24800fced5117250 Mon Sep 17 00:00:00 2001
+From: winston <hey@winston.sh>
+Date: Sat, 15 Nov 2025 02:04:09 +0100
+Subject: [PATCH 6/7] gnomeExtensions.system-monitor-next: fix GIRepository
+ `prepend_search_path` call
+
+---
+ .../system-monitor-next_at_paradoxxx.zero.gmail.com.patch       | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/pkgs/desktops/gnome/extensions/extensionOverridesPatches/system-monitor-next_at_paradoxxx.zero.gmail.com.patch b/pkgs/desktops/gnome/extensions/extensionOverridesPatches/system-monitor-next_at_paradoxxx.zero.gmail.com.patch
+index 19eedbf27a985..18812eddd852d 100644
+--- a/pkgs/desktops/gnome/extensions/extensionOverridesPatches/system-monitor-next_at_paradoxxx.zero.gmail.com.patch
++++ b/pkgs/desktops/gnome/extensions/extensionOverridesPatches/system-monitor-next_at_paradoxxx.zero.gmail.com.patch
+@@ -22,7 +22,7 @@ index ee8c3a9..ca72885 100644
+  
+  import * as Util from "resource:///org/gnome/shell/misc/util.js";
+  
+-+GIRepository.Repository.prepend_search_path('@gtop_path@');
+++GIRepository.Repository.dup_default().prepend_search_path('@gtop_path@');
+ +const GTop = (await import("gi://GTop")).default;
+ +
+  const NetworkManager = NM;
+
+From 7b76aa14bc571e3bec40025c146eefb14b800bae Mon Sep 17 00:00:00 2001
+From: winston <hey@winston.sh>
+Date: Sat, 15 Nov 2025 02:04:50 +0100
+Subject: [PATCH 7/7] gnomeExtensions.drop-downterminal: fix GIRepository
+ `prepend_search_path` call
+
+---
+ .../gnome/extensions/drop-down-terminal/fix_vte_and_gjs.patch | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/desktops/gnome/extensions/drop-down-terminal/fix_vte_and_gjs.patch b/pkgs/desktops/gnome/extensions/drop-down-terminal/fix_vte_and_gjs.patch
+index 3544c91ee8958..cb7a36286ae9d 100644
+--- a/pkgs/desktops/gnome/extensions/drop-down-terminal/fix_vte_and_gjs.patch
++++ b/pkgs/desktops/gnome/extensions/drop-down-terminal/fix_vte_and_gjs.patch
+@@ -4,7 +4,7 @@
+  
+  // Author: Stéphane Démurget <stephane.demurget@free.fr>
+  
+-+imports.gi.GIRepository.Repository.prepend_search_path('@vte@/lib/girepository-1.0')
+++imports.gi.GIRepository.Repository.dup_default().prepend_search_path('@vte@/lib/girepository-1.0')
+ +
+  const Lang = imports.lang;
+  const Gettext = imports.gettext.domain("drop-down-terminal");
+@@ -25,7 +25,7 @@
+  
+  // Author: Stéphane Démurget <stephane.demurget@free.fr>
+ +
+-+imports.gi.GIRepository.Repository.prepend_search_path('@vte@/lib/girepository-1.0')
+++imports.gi.GIRepository.Repository.dup_default().prepend_search_path('@vte@/lib/girepository-1.0')
+ +
+  const Lang = imports.lang;
+  
