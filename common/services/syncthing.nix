@@ -9,7 +9,10 @@ in {
     systemService = false;
   };
 
-  systemd.user.services.syncthing.wantedBy = [ "graphical-session.target" ];
+  systemd.user.services.syncthing = {
+    wantedBy = [ "graphical-session.target" ];
+    serviceConfig.RestartSec = 5;
+  };
 
   environment.systemPackages = with pkgs; [
     syncthing
