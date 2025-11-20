@@ -113,16 +113,8 @@
       archix = import inputs.archix { pkgs = final; };
       archlinuxcn-keyring = inputs.archlinuxcn-keyring;
 
-      # https://github.com/NixOS/nixpkgs/pull/350152
       gnomeExtensions = prev.gnomeExtensions // {
-        todotxt = prev.gnomeExtensions.todotxt.overrideAttrs (old: {
-          postPatch = ''
-            for js in libs/*.js; do
-              substituteInPlace $js \
-                --replace-quiet "import Clutter from 'gi://Clutter'" "imports.gi.GIRepository.Repository.prepend_search_path('${final.mutter.passthru.libdir}'); const Clutter = (await import('gi://Clutter')).default"
-            done
-          '';
-        });
+        # override gnome extensions here
       };
     } // lib.packagesFromDirectoryRecursive {
       inherit (final) callPackage;
