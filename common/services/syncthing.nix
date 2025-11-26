@@ -11,7 +11,10 @@ in {
 
   systemd.user.services.syncthing = {
     wantedBy = [ "graphical-session.target" ];
-    serviceConfig.RestartSec = 5;
+    serviceConfig = {
+      RestartSteps = 3;
+      RestartMaxDelaySec = 60;
+    };
   };
 
   environment.systemPackages = with pkgs; [
