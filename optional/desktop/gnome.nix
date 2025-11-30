@@ -11,7 +11,6 @@
       gnome-shell-extensions        # use the standalone extensions
       decibels                      # use celluloid instead
       epiphany                      # use firefox instead
-      gnome-text-editor             # use vscode instead
       gnome-calculator              # use xonsh instead
       gnome-calendar                # not syncing calendar to PC
       gnome-contacts                # useless on PC

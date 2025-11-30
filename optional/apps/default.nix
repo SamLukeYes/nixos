@@ -3,6 +3,9 @@
 {
   imports = [
     ./java
+    ./gimp.nix
+    ./telegram.nix
+    ./vscode.nix
   ];
   
   environment.systemPackages = with pkgs; [

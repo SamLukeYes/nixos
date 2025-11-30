@@ -6,6 +6,7 @@
 
     config = ''
       $LANG = "zh_CN.UTF-8"
+      $XONSH_COLOR_STYLE = 'native'
 
       if __xonsh__.env.get("XDG_SESSION_TYPE") == "wayland":
           $GTK_IM_MODULE = ""

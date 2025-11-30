@@ -11,7 +11,6 @@
     ./fastfetch.nix
     ./firefox.nix
     ./foliate.nix
-    ./gimp.nix
     ./git.nix
     ./gnupg.nix
     ./libreoffice.nix
@@ -19,8 +18,6 @@
     ./pacman.nix
     ./pixi.nix
     ./shijima.nix
-    ./telegram.nix
-    ./vscode.nix
     ./xonsh.nix
     ./xournalpp.nix
   ];

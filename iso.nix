@@ -18,7 +18,10 @@
 
   networking.proxy.default = lib.mkForce null;
 
-  programs.firefox.package = lib.mkForce pkgs.firefox;
+  programs = {
+    firefox.package = lib.mkForce pkgs.firefox;
+    starship.enable = lib.mkForce false;
+  };
 
   services.displayManager.sddm.enable = lib.mkForce false;
 
