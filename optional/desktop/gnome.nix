@@ -6,7 +6,7 @@
   ];
 
   environment = {
-    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/x11/desktop-managers/gnome.nix
+    # https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/services/desktop-managers/gnome.nix
     gnome.excludePackages = with pkgs; [
       gnome-shell-extensions        # use the standalone extensions
       decibels                      # use celluloid instead
@@ -18,7 +18,7 @@
       gnome-music                   # use celluloid instead
       gnome-weather                 # use MSN weather instead
       simple-scan                   # no scanner available
-      totem                         # use celluloid instead
+      showtime                      # use celluloid instead
       evince                        # use web browser for pdf
       geary                         # use web browser instead
     ];
