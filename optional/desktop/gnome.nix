@@ -32,6 +32,7 @@
 
     systemPackages = with pkgs; [
       celluloid
+      file-roller
       gnome-firmware
       gnome-sound-recorder
       refine
