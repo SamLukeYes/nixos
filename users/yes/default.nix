@@ -105,7 +105,7 @@ in
       ];
 
       files = config.users.persistence.files ++ [
-        ".config/mimeapps.list"
+        { file = ".config/mimeapps.list"; how = "symlink"; }
         ".config/user-dirs.dirs"
       ];
     };
