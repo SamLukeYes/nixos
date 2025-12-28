@@ -17,9 +17,9 @@
       gnome-maps                    # use online maps instead
       gnome-music                   # use celluloid instead
       gnome-weather                 # use MSN weather instead
-      simple-scan                   # no scanner available
+      papers                        # use web browser for pdf
       showtime                      # use celluloid instead
-      evince                        # use web browser for pdf
+      simple-scan                   # no scanner available
       geary                         # use web browser instead
     ];
 
