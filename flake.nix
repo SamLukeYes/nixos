@@ -6,11 +6,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    angrr = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:linyinfeng/angrr";
-    };
-
     archix = {
       inputs = {
         nixpkgs.follows = "nixpkgs";
@@ -59,7 +54,6 @@
       ];
     };
     sharedOverlays = [
-      inputs.angrr.overlays.default
       self.overlays.default
     ];
     supportedSystems = [ system ];
@@ -76,7 +70,6 @@
       channelName = "nixos-unstable";
       specialArgs = { inherit inputs; };
       modules = [
-        inputs.angrr.nixosModules.angrr
         inputs.archix.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
 

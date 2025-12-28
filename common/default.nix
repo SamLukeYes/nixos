@@ -19,8 +19,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  system.rebuild.enableNg = true;
-
   time.timeZone = "Asia/Shanghai";
 
   users.defaultUserShell = "/run/current-system/sw/bin/xonsh";
