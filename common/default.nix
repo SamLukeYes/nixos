@@ -10,6 +10,7 @@
       ./nix.nix
       ./preservation.nix
       ./programs
+      ./security.nix
       ./services
       ./systemd.nix
       ./virtualisation
