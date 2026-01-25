@@ -7,6 +7,7 @@
           commandLineArgs = "--touch-events=true --wayland-text-input-version=3";
         }).fhsWithPackages (ps: with ps; [
           libGL  # required by conda env
+          pacman  # set up pacman.conf
 
           # for debugging upstream Shimeji-Desktop
           xorg.libX11
