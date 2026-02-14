@@ -12,7 +12,7 @@
       environment = {
         etc."xonsh/xonshrc".text = lib.mkForce "";
         systemPackages = with pkgs; [
-          xorg.xeyes
+          xeyes
         ];
       };
 

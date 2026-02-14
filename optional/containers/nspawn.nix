@@ -44,8 +44,8 @@
 
       xhost = {
         serviceConfig = {
-          ExecStart = "${pkgs.xorg.xhost}/bin/xhost +local:";
-          ExecStop = "${pkgs.xorg.xhost}/bin/xhost -local:";
+          ExecStart = "${pkgs.xhost}/bin/xhost +local:";
+          ExecStop = "${pkgs.xhost}/bin/xhost -local:";
           RemainAfterExit = true;
           Restart = "on-failure";
           RestartSec = 5;

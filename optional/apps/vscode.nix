@@ -10,8 +10,8 @@
           pacman  # set up pacman.conf
 
           # for debugging upstream Shimeji-Desktop
-          xorg.libX11
-          xorg.libXrender
+          libX11
+          libXrender
         ]
         # https://github.com/NixOS/nixpkgs/issues/356340
         ++ lib.optional
