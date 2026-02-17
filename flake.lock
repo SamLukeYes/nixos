@@ -72,6 +72,22 @@
         "type": "github"
       }
     },
+    "mpv": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1771169788,
+        "narHash": "sha256-YzJcR8vU76IpII7AXe2LjU3vuugavtLNbTIjK4XYslM=",
+        "owner": "mpv-player",
+        "repo": "mpv",
+        "rev": "aa82213726fe1613d04a77b9fc3bb2ef37b13180",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mpv-player",
+        "repo": "mpv",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -143,6 +159,7 @@
         "archix": "archix",
         "archlinuxcn-keyring": "archlinuxcn-keyring",
         "flake-utils-plus": "flake-utils-plus",
+        "mpv": "mpv",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

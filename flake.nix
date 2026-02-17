@@ -20,6 +20,11 @@
 
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
+    mpv = {
+      flake = false;
+      url = "github:mpv-player/mpv";
+    };
+
     nix-index-database = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-index-database";
@@ -106,6 +111,10 @@
       gnomeExtensions = prev.gnomeExtensions // {
         # override gnome extensions here
       };
+
+      mpv-unwrapped = prev.mpv-unwrapped.overrideAttrs (old: {
+        src = inputs.mpv;
+      });
     } // lib.packagesFromDirectoryRecursive {
       inherit (final) callPackage;
       directory = ./pkgs;
