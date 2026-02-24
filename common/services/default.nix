@@ -17,7 +17,10 @@
 
     logind.settings.Login.HandleLidSwitch = "ignore";
 
-    ollama.enable = true;
+    ollama = {
+      enable = true;
+      package = pkgs.ollama-vulkan;
+    };
 
     power-profiles-daemon.enable = false;
 
