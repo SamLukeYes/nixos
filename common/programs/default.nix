@@ -17,6 +17,7 @@
     ./nodejs.nix
     ./pacman.nix
     ./pixi.nix
+    ./ppsspp.nix
     ./shijima.nix
     ./xonsh.nix
     ./xournalpp.nix
