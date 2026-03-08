@@ -3,9 +3,21 @@
 {
   environment = {
     systemPackages = with pkgs; [
-      ((vscode.override {
-          commandLineArgs = "--touch-events=true --wayland-text-input-version=3";
-        }).fhsWithPackages (ps: with ps; [
+      # Nix managed variant
+      (vscode-with-extensions.override {
+        vscode = vscodium;
+        vscodeExtensions = with vscode-extensions; [
+          continue.continue
+          eamodio.gitlens
+          jnoortheen.nix-ide
+          mkhl.direnv
+          ms-python.debugpy
+          ms-python.python
+        ];
+      })
+
+      # FHS variant
+      (vscode.fhsWithPackages (ps: with ps; [
           libGL  # required by conda env
           pacman  # set up pacman.conf
 
@@ -30,5 +42,6 @@
 
   users.persistence.directories = [
     ".config/Code"
+    ".config/VSCodium"
   ];
 }
