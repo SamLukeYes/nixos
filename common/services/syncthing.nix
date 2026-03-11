@@ -23,6 +23,7 @@ in {
     (makeAutostartItem {
       name = "syncthingtray";
       package = syncthingtrayPkg;
+      appendExtraArgs = ["--wait"];
     })
   ];
 
