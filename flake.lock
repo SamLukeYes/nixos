@@ -75,11 +75,11 @@
     "mpv": {
       "flake": false,
       "locked": {
-        "lastModified": 1773328095,
-        "narHash": "sha256-yia2ntpmd2V7Ra1sOVY7PY5SkIPAlTKFSv0X7IPPV6A=",
+        "lastModified": 1773411211,
+        "narHash": "sha256-ezzAXycp9vtZliW6j+UTIP0hD3RGVA/G1xrAeo76olQ=",
         "owner": "mpv-player",
         "repo": "mpv",
-        "rev": "d83931aa617d70968b348b3d9e837345fe908bc3",
+        "rev": "fbdaddf9688c6f52e9f2d3d9cf7722d420669574",
         "type": "github"
       },
       "original": {
@@ -125,11 +125,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1773122722,
-        "narHash": "sha256-FIqHByVqxCprNjor1NqF80F2QQoiiyqanNNefdlvOg4=",
+        "lastModified": 1773282481,
+        "narHash": "sha256-b/GV2ysM8mKHhinse2wz+uP37epUrSE+sAKXy/xvBY4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "62dc67aa6a52b4364dd75994ec00b51fbf474e50",
+        "rev": "fe416aaedd397cacb33a610b33d60ff2b431b127",
         "type": "github"
       },
       "original": {
