@@ -15,6 +15,8 @@
 
     fstrim.enable = true;
 
+    kmscon.enable = true;
+
     logind.settings.Login.HandleLidSwitch = "ignore";
 
     ollama.enable = true;
