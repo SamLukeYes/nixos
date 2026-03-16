@@ -22,7 +22,7 @@
 
     mpv = {
       flake = false;
-      url = "github:mpv-player/mpv";
+      url = "github:mpv-player/mpv/fbdaddf9688c6f52e9f2d3d9cf7722d420669574";
     };
 
     nix-index-database = {

@@ -75,16 +75,17 @@
     "mpv": {
       "flake": false,
       "locked": {
-        "lastModified": 1773596409,
-        "narHash": "sha256-O1OJnDnyf79rquizoMIwdUNyGpszBjbKtP0LnXZQUJ4=",
+        "lastModified": 1773411211,
+        "narHash": "sha256-ezzAXycp9vtZliW6j+UTIP0hD3RGVA/G1xrAeo76olQ=",
         "owner": "mpv-player",
         "repo": "mpv",
-        "rev": "b51131dff917fbccbedc62a8719bd976a05b5160",
+        "rev": "fbdaddf9688c6f52e9f2d3d9cf7722d420669574",
         "type": "github"
       },
       "original": {
         "owner": "mpv-player",
         "repo": "mpv",
+        "rev": "fbdaddf9688c6f52e9f2d3d9cf7722d420669574",
         "type": "github"
       }
     },
