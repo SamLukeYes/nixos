@@ -9,6 +9,7 @@
         vscodeExtensions = with vscode-extensions; [
           continue.continue
           eamodio.gitlens
+          github.vscode-github-actions
           jnoortheen.nix-ide
           mkhl.direnv
           ms-python.debugpy
