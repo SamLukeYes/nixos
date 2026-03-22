@@ -27,12 +27,10 @@
         "https://mirrors.ustc.edu.cn/nix-channels/store"
       ];
       extra-substituters = [
-        "https://linyinfeng.cachix.org"
         "https://nix-community.cachix.org"
         "https://cache.garnix.io"
       ];
       trusted-public-keys = [
-        "linyinfeng.cachix.org-1:sPYQXcNrnCf7Vr7T0YmjXz5dMZ7aOKG3EqLja0xr9MM="
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
