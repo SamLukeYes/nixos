@@ -1,0 +1,29 @@
+From 05a63675f532e1361984b7c59852a546d8d94fab Mon Sep 17 00:00:00 2001
+From: "R. Ryantm" <ryantm-bot@ryantm.com>
+Date: Sun, 29 Mar 2026 12:20:21 +0000
+Subject: [PATCH] celluloid: 0.29 -> 0.30
+
+---
+ pkgs/by-name/ce/celluloid/package.nix | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/pkgs/by-name/ce/celluloid/package.nix b/pkgs/by-name/ce/celluloid/package.nix
+index 6d2cfc7b42744..6d35b6d78f484 100644
+--- a/pkgs/by-name/ce/celluloid/package.nix
++++ b/pkgs/by-name/ce/celluloid/package.nix
+@@ -22,13 +22,13 @@
+ 
+ stdenv.mkDerivation (finalAttrs: {
+   pname = "celluloid";
+-  version = "0.29";
++  version = "0.30";
+ 
+   src = fetchFromGitHub {
+     owner = "celluloid-player";
+     repo = "celluloid";
+     tag = "v${finalAttrs.version}";
+-    hash = "sha256-p4jMEM+ikcyVIi7cHm7u0wk9PKD8YJyhRXABgsh/SJc=";
++    hash = "sha256-UIjbEVV1VHySaJ0QIbCcdVyXd96XeE5ks5Z0NVMJ5hU=";
+   };
+ 
+   nativeBuildInputs = [
