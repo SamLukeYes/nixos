@@ -8,7 +8,7 @@
       dates = "weekly";
       options = "--delete-older-than 3d";
     };
-    package = pkgs.nix;
+    package = pkgs.lix;
     settings = {
       auto-optimise-store = true;
       builders-use-substitutes = true;
