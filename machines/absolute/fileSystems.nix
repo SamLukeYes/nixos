@@ -4,6 +4,7 @@
   fileSystems = {
     "/boot" = {
       device = "/dev/disk/by-label/SYSTEM";
+      fsType = "vfat";
       options = [
         # https://github.com/nix-community/disko/issues/527
         "umask=0077"
@@ -16,6 +17,7 @@
     };
     "/persistent/home" = {
       device = "/dev/disk/by-label/data";
+      fsType = "ext4";
     };
   };
 
