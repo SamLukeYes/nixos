@@ -21,6 +21,11 @@
 
     ollama.enable = true;
 
+    openssh = {
+      enable = true;
+      settings.PasswordAuthentication = false;
+    };
+
     power-profiles-daemon.enable = false;
 
     throttled.enable = false;
