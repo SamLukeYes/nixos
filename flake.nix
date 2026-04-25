@@ -114,6 +114,16 @@
         # override gnome extensions here
       };
 
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (
+          python-final: python-prev: {
+            vulkan = python-prev.vulkan.overridePythonAttrs (oldAttrs: {
+              dependencies = [ python-final.cffi ];
+            });
+          }
+        )
+      ];
+
       mpv-unwrapped = prev.mpv-unwrapped.overrideAttrs (old: {
         src = inputs.mpv;
       });
