@@ -42,7 +42,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/xonsh-0.23.0.patch  # https://github.com/NixOS/nixpkgs/pull/511805
       ./patches/xonsh-0.23.1.patch  # https://github.com/NixOS/nixpkgs/pull/512906
     ];
     nixpkgs-patched =
