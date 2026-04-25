@@ -46,7 +46,7 @@ in
 
   systemd.services.mihomo.serviceConfig = {
     Restart = "on-failure";
-    RestartStep = 5;
+    RestartSteps = 5;
     RestartMaxDelaySec = "1min";
   };
 
