@@ -1,0 +1,25 @@
+From b07305823393e93af763459ad78072eb6b60588c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E9=AA=91=E5=A3=AB=E5=A7=AC?= <2067834160@qq.com>
+Date: Thu, 21 May 2026 23:47:21 +0800
+Subject: [PATCH] python3Packages.jedi-language-server: fix test with jedi
+ 0.20.0
+
+---
+ .../python-modules/jedi-language-server/default.nix           | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/pkgs/development/python-modules/jedi-language-server/default.nix b/pkgs/development/python-modules/jedi-language-server/default.nix
+index 05374f57690e2..ee63c0a81d29c 100644
+--- a/pkgs/development/python-modules/jedi-language-server/default.nix
++++ b/pkgs/development/python-modules/jedi-language-server/default.nix
+@@ -37,6 +37,10 @@ buildPythonPackage rec {
+     poetry-core
+   ];
+ 
++  pythonRelaxDeps = [
++    "jedi"
++  ];
++
+   dependencies = [
+     docstring-to-markdown
+     jedi
