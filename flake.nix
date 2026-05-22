@@ -42,6 +42,7 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
+      ./patches/xonsh-0.23.7.patch  # https://github.com/NixOS/nixpkgs/pull/521232
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
