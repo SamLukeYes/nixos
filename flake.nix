@@ -42,8 +42,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/pylsp-fix.patch  # https://github.com/NixOS/nixpkgs/pull/522650
-      ./patches/xonsh-0.23.7.patch  # https://github.com/NixOS/nixpkgs/pull/521232
       ./patches/relax-jedi.patch  # https://github.com/NixOS/nixpkgs/pull/522705
     ];
     nixpkgs-patched =
