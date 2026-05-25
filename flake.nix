@@ -42,7 +42,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/relax-jedi.patch  # https://github.com/NixOS/nixpkgs/pull/522705
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
