@@ -30,7 +30,10 @@
       url = "github:nix-community/nix-index-database";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     preservation.url = "github:nix-community/preservation";
   };
