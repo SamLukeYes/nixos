@@ -7,6 +7,8 @@
   ];
 
   environment = {
+    defaultPackages = [];
+
     variables = {
       BROWSER = lib.getExe config.programs.firefox.package;
       LIBVA_DRIVER_NAME = "iHD";
