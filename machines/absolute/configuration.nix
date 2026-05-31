@@ -30,7 +30,7 @@
     };
   };
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 
   # TODO: add paru modules to archix
   programs.pacman.conf.extraConfig = ''
