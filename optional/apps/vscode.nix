@@ -7,7 +7,6 @@
       (vscode-with-extensions.override {
         vscode = vscodium;
         vscodeExtensions = with vscode-extensions; [
-          continue.continue
           eamodio.gitlens
           jnoortheen.nix-ide
           mkhl.direnv
@@ -42,6 +41,11 @@
 
   users.persistence.directories = [
     ".config/Code"
+    ".vscode"
+    ".vscode-shared"
+
     ".config/VSCodium"
+    ".vscode-oss"
+    ".vscode-oss-shared"
   ];
 }

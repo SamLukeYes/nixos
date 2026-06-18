@@ -95,9 +95,7 @@ in
         ".config/VirtualBox"
 
         # vscode extensions
-        ".continue"
         ".m2"
-        ".vscode"  # I only see extensions here
         ".local/share/vscode-sqltools"
 
         # wireshark
