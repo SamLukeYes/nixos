@@ -19,7 +19,10 @@
 
     logind.settings.Login.HandleLidSwitch = "ignore";
 
-    ollama.enable = true;
+    ollama = {
+      enable = true;
+      package = pkgs.ollama-vulkan;
+    };
 
     openssh = {
       enable = true;
