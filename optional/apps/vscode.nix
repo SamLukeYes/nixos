@@ -10,6 +10,7 @@
           eamodio.gitlens
           jnoortheen.nix-ide
           mkhl.direnv
+          ms-ceintl.vscode-language-pack-zh-hans
           ms-python.debugpy
           ms-python.python
         ];
