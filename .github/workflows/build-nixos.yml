@@ -2,9 +2,9 @@ name: Build NixOS
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - update_flake_lock_action
+  pull_request:
+    paths:
+      - 'flake.lock'
 
 jobs:
   build-nixos:
