@@ -26,4 +26,3 @@ jobs:
         with:
           commit-msg: "github-actions: update flake.lock"
           pr-title: "github-actions: update flake.lock"
-          

@@ -1,0 +1,32 @@
+name: Build NixOS
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - update_flake_lock_action
+
+jobs:
+  build-nixos:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      
+      - name: Set up Nix
+        uses: cachix/install-nix-action@v31
+
+      - name: Cachix
+        uses: cachix/cachix-action@v17
+        with:
+          name: samlukeyes123
+          extraPullNames: nix-community
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+
+      - name: Build NixOS
+        run: |
+          nix build '.#nixosConfigurations.absolute.config.system.build.toplevel'
