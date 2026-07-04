@@ -6,6 +6,7 @@
     confMode = "0644";
     conf.extraConfig = ''
       [options]
+      CacheDir = /var/cache/pacman/pkg/
       Color
       ILoveCandy
 
