@@ -45,7 +45,6 @@
     system = "x86_64-linux";
     channel-patches = [
       # Add nixpkgs patches here
-      ./patches/xonsh-update.patch
       ./patches/pacman-fix.patch
     ];
     nixpkgs-patched =
