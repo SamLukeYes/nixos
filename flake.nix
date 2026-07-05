@@ -46,6 +46,7 @@
     channel-patches = [
       # Add nixpkgs patches here
       ./patches/xonsh-update.patch
+      ./patches/pacman-fix.patch
     ];
     nixpkgs-patched =
       flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
