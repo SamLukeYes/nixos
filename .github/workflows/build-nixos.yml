@@ -29,4 +29,4 @@ jobs:
 
       - name: Build NixOS
         run: |
-          nix build '.#nixosConfigurations.absolute.config.system.build.toplevel'
+          nix build -L '.#nixosConfigurations.absolute.config.system.build.toplevel'
