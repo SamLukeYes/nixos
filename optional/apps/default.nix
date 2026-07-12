@@ -12,6 +12,6 @@
     gnome-frog
     
     # large optional dependencies of GUI applications
-    texlive.combined.scheme-full
+    texliveFull
   ];
 }
