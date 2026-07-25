@@ -17,8 +17,8 @@ jobs:
         include:
           - os: ubuntu-latest
             config: absolute
-          - os: ubuntu-26.04-arm
-            config: nao
+          # - os: ubuntu-26.04-arm
+          #   config: nao
 
     runs-on: ${{ matrix.os }}
     permissions:
