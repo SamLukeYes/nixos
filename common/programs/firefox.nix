@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   programs.firefox = {
@@ -10,6 +10,13 @@
       DisablePocket = true;
       DisableTelemetry = true;
     };
+  };
+
+  environment.variables = {
+    BROWSER = lib.getExe config.programs.firefox.package;
+    LIBVA_DRIVER_NAME = "iHD";
+    MOZ_DBUS_REMOTE = "1";
+    MOZ_USE_XINPUT2 = "1";
   };
 
   users.persistence.directories = [
