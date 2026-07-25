@@ -10,7 +10,6 @@
     file  # frequently used to view executable type
     nix-tree  # frequently used to inspect space usage
     sqlite  # to fix nix database in case of corruption
-    trashy  # trash across filesystems
     waypipe  # wayland support for containerized apps
     yt-dlp  # frequently used to download videos
   ];
