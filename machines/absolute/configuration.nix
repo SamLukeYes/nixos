@@ -12,6 +12,8 @@
     ../../users/yes
   ];
 
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   hardware.bluetooth.powerOnBoot = false;
   
   services = {
