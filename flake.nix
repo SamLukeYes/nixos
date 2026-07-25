@@ -89,6 +89,7 @@
         {
           environment.etc."nix/inputs/nixpkgs-patched".source = nixpkgs-patched;
           time.timeZone = "Asia/Shanghai";
+          system.stateVersion = "26.05";
         }
 
         inputs.preservation.nixosModules.preservation
@@ -105,7 +106,7 @@
       nao = {
         system = "aarch64-linux";
         modules = [
-          inputs.nixos-avf.avf
+          inputs.nixos-avf.nixosModules.avf
           ./machines/nao
         ];
       };

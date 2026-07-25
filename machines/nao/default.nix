@@ -13,11 +13,13 @@
     ../../common/i18n.nix
     ../../common/nix.nix
     ../../common/security.nix
-    ../optional/fonts
+    ../../optional/fonts
   ];
 
   boot.binfmt = {
     emulatedSystems = [ "x86_64-linux" ];
     preferStaticEmulators = true;
   };
+
+  nixpkgs.config.allowUnsupportedSystem = true;
 }
