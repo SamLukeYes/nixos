@@ -20,6 +20,4 @@
     emulatedSystems = [ "x86_64-linux" ];
     preferStaticEmulators = true;
   };
-
-  nixpkgs.config.allowUnsupportedSystem = true;
 }
