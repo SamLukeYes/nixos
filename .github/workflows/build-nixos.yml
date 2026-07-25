@@ -8,7 +8,19 @@ on:
 
 jobs:
   build-nixos:
-    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        os:
+          - ubuntu-latest
+          - ubuntu-26.04-arm
+        include:
+          - os: ubuntu-latest
+            config: absolute
+          - os: ubuntu-26.04-arm
+            config: nao
+
+    runs-on: ${{ matrix.os }}
     permissions:
       contents: read
       id-token: write
@@ -29,4 +41,4 @@ jobs:
 
       - name: Build NixOS
         run: |
-          nix build -L '.#nixosConfigurations.absolute.config.system.build.toplevel'
+          nix build -L ".#nixosConfigurations.${{ matrix.config }}.config.system.build.toplevel"
