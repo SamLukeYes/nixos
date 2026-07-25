@@ -22,8 +22,6 @@
 
   time.timeZone = "Asia/Shanghai";
 
-  users.defaultUserShell = "/run/current-system/sw/bin/xonsh";
-
   xdg.portal.xdgOpenUsePortal = true;
 }
 

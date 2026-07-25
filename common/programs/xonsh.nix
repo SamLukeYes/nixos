@@ -25,6 +25,8 @@
     ];
   };
 
+  users.defaultUserShell = "/run/current-system/sw/bin/xonsh";
+
   users.persistence = {
     directories = [
       ".config/xonsh"
