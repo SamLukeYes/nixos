@@ -30,6 +30,11 @@
       url = "github:nix-community/nix-index-database";
     };
 
+    nixos-avf = {
+      url = "github:nix-community/nixos-avf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,7 +69,7 @@
     sharedOverlays = [
       self.overlays.default
     ];
-    supportedSystems = [ system ];
+    supportedSystems = [ system "aarch64-linux" ];
 
     channels = {
       nixos-unstable = {
@@ -81,7 +86,10 @@
         inputs.archix.nixosModules.default
         inputs.nix-index-database.nixosModules.nix-index
 
-        { environment.etc."nix/inputs/nixpkgs-patched".source = nixpkgs-patched; }
+        {
+          environment.etc."nix/inputs/nixpkgs-patched".source = nixpkgs-patched;
+          time.timeZone = "Asia/Shanghai";
+        }
 
         inputs.preservation.nixosModules.preservation
         self.nixosModules.impermanent-users
@@ -93,6 +101,15 @@
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
         ./machines/absolute/configuration.nix
       ];
+
+      nao = {
+        system = "aarch64-linux";
+        modules = [
+          inputs.nixos-avf.avf
+          ./machines/nao
+        ];
+      };
+
       nixos-iso.modules = [
         ./iso.nix
       ];

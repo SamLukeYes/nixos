@@ -20,8 +20,6 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-  time.timeZone = "Asia/Shanghai";
-
   xdg.portal.xdgOpenUsePortal = true;
 }
 
