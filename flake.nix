@@ -157,13 +157,15 @@
 
     nixosModules.impermanent-users = import ./modules/impermanent-users.nix;
 
-    homeConfigurations."nao" = inputs.home-manager.lib.homeManagerConfiguration {
+    homeConfigurations."droid" = inputs.home-manager.lib.homeManagerConfiguration {
         pkgs = getPkgs "aarch64-linux";
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
         modules = [
           inputs.nix-index-database.homeModules.default
+          { programs.nix-index-database.comma.enable = true; }
+
           ./machines/nao
         ];
 
