@@ -158,7 +158,12 @@
     nixosModules.impermanent-users = import ./modules/impermanent-users.nix;
 
     homeConfigurations."droid" = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = getPkgs "aarch64-linux";
+        pkgs = import nixpkgs-patched {
+          system = "aarch64-linux";
+          config = channelsConfig;
+          # Not using overlays for now
+          # overlays = sharedOverlays;
+        };
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
