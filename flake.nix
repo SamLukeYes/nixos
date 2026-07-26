@@ -18,6 +18,13 @@
       url = "github:archlinuxcn/archlinuxcn-keyring";
     };
 
+    home-manager = {
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:nix-community/home-manager";
+    };
+
     flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
     mpv = {
@@ -28,11 +35,6 @@
     nix-index-database = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-index-database";
-    };
-
-    nixos-avf = {
-      url = "github:nix-community/nixos-avf";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-hardware = {
@@ -70,6 +72,11 @@
       self.overlays.default
     ];
     supportedSystems = [ system "aarch64-linux" ];
+    getPkgs = system: import nixpkgs-patched {
+      inherit system;
+      config = channelsConfig;
+      overlays = sharedOverlays;
+    };
 
     channels = {
       nixos-unstable = {
@@ -105,8 +112,8 @@
 
       nao = {
         system = "aarch64-linux";
+        output = "homeConfigurations";
         modules = [
-          inputs.nixos-avf.nixosModules.avf
           ./machines/nao
         ];
       };
@@ -119,11 +126,7 @@
     defaultPackage.${system} =
       self.nixosConfigurations.nixos-iso.config.system.build.isoImage;
 
-    legacyPackages.${system} = import nixpkgs-patched {
-      inherit system;
-      config = channelsConfig;
-      overlays = sharedOverlays;
-    };
+    legacyPackages.${system} = getPkgs system;
 
     overlays.default = final: prev: {
       archix = import inputs.archix { pkgs = final; };
@@ -153,5 +156,19 @@
     };
 
     nixosModules.impermanent-users = import ./modules/impermanent-users.nix;
+
+    homeConfigurations."nao" = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = getPkgs "aarch64-linux";
+
+        # Specify your home configuration modules here, for example,
+        # the path to your home.nix.
+        modules = [
+          inputs.nix-index-database.homeModules.default
+          ./machines/nao
+        ];
+
+        # Optionally use extraSpecialArgs
+        # to pass through arguments to home.nix
+      };
   };
 }
