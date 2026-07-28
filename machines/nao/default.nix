@@ -1,6 +1,6 @@
 # Nao is a Home Manager module that is used in the Terminal App on Aikawa
 
-{ ... }:
+{ pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -19,7 +19,9 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [ ];
+  home.packages = with pkgs; [
+    deploy-rs  # deploy VPS from Aikawa
+  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
