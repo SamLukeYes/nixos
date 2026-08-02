@@ -69,9 +69,6 @@
       # CLI programs required by file-roller
       _7zz
       binutils
-
-      # themes
-      yaru-theme
     ];
   };
 
