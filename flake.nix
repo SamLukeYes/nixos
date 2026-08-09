@@ -110,14 +110,6 @@
         ./machines/absolute/configuration.nix
       ];
 
-      nao = {
-        system = "aarch64-linux";
-        output = "homeConfigurations";
-        modules = [
-          ./machines/nao
-        ];
-      };
-
       nixos-iso.modules = [
         ./iso.nix
       ];
