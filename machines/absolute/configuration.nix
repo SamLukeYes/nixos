@@ -15,6 +15,8 @@
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   hardware.bluetooth.powerOnBoot = false;
+
+  networking.hostName = "absolute";
   
   services = {
     thinkfan = {
