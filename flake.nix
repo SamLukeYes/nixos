@@ -25,8 +25,6 @@
       url = "github:nix-community/home-manager";
     };
 
-    flake-utils-plus.url = "github:gytis-ivaskevicius/flake-utils-plus";
-
     mpv = {
       flake = false;
       url = "github:mpv-player/mpv/fbdaddf9688c6f52e9f2d3d9cf7722d420669574";
@@ -45,129 +43,142 @@
     preservation.url = "github:nix-community/preservation";
   };
 
-  # Outputs can be anything, but the wiki + some commands define their own
-  # specific keys. Wiki page: https://nixos.wiki/wiki/Flakes#Output_schema
-  outputs = { self, nixpkgs, flake-utils-plus, ... }@inputs: 
-  let
-    system = "x86_64-linux";
-    channel-patches = [
-      # Add nixpkgs patches here
-    ];
-    nixpkgs-patched =
-      flake-utils-plus.lib.patchChannel system nixpkgs channel-patches;
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, archix, nix-index-database, preservation, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      lib = nixpkgs.lib;
 
-  in flake-utils-plus.lib.mkFlake rec {
-    inherit (nixpkgs) lib;
-    inherit self inputs;
-    channelsConfig = {
-      allowlistedLicenses = with lib.licenses; [
-        virtualbox-puel
+      # Patch framework kept as a native flake hook.
+      # When the list is empty, the system resolves to the plain flake input.
+      # When patches are added, the list is applied to the nixpkgs source tree.
+      channel-patches = [
+        # Add nixpkgs patches here
       ];
-      allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-        "code"
-        "vscode"
-      ];
-    };
-    sharedOverlays = [
-      self.overlays.default
-    ];
-    supportedSystems = [ system "aarch64-linux" ];
-    getPkgs = system: import nixpkgs-patched {
-      inherit system;
-      config = channelsConfig;
-      overlays = sharedOverlays;
-    };
+      nixpkgs-patched =
+        if builtins.length channel-patches == 0
+        then nixpkgs
+        else nixpkgs.lib.applyPatches {
+          src = nixpkgs;
+          patches = channel-patches;
+        };
 
-    channels = {
-      nixos-unstable = {
-        input = nixpkgs;
-        patches = channel-patches;
+      channelsConfig = {
+        allowlistedLicenses = with lib.licenses; [
+          virtualbox-puel
+        ];
+        allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+          "code"
+          "vscode"
+        ];
       };
-    };
 
-    hostDefaults = {
-      inherit system;
-      channelName = "nixos-unstable";
-      specialArgs = { inherit inputs; };
-      modules = [
-        inputs.archix.nixosModules.default
-        inputs.nix-index-database.nixosModules.nix-index
-
+      commonModules = [
+        archix.nixosModules.default
+        nix-index-database.nixosModules.nix-index
         {
-          environment.etc."nix/inputs/nixpkgs-patched".source = nixpkgs-patched;
           time.timeZone = "Asia/Shanghai";
           system.stateVersion = "26.05";
+          nixpkgs = {
+            config = channelsConfig;
+            overlays = [ self.overlays.default ];
+          };
+          nix.registry = {
+            nixpkgs.to = {
+              type = "path";
+              path = nixpkgs;
+            };
+            nixpkgs-patched.to = {
+              type = "path";
+              path = nixpkgs-patched;
+            };
+          };
         }
-
-        inputs.preservation.nixosModules.preservation
+        preservation.nixosModules.preservation
         self.nixosModules.impermanent-users
       ];
-    };
 
-    hosts =  {
-      absolute.modules = [
-        inputs.nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
-        ./machines/absolute/configuration.nix
-      ];
+      getPkgs = system: import nixpkgs-patched {
+        inherit system;
+        config = channelsConfig;
+        overlays = [ self.overlays.default ];
+      };
+    in
+    {
+      legacyPackages.${system} = getPkgs system;
 
-      nixos-iso.modules = [
-        ./iso.nix
-      ];
-    };
-    
-    defaultPackage.${system} =
-      self.nixosConfigurations.nixos-iso.config.system.build.isoImage;
+      defaultPackage.${system} =
+        self.nixosConfigurations.nixos-iso.config.system.build.isoImage;
 
-    legacyPackages.${system} = getPkgs system;
+      overlays.default = final: prev: {
+        archix = import archix { pkgs = final; };
+        archlinuxcn-keyring = inputs.archlinuxcn-keyring;
+        comma = prev.comma.override { nix = final.lix; };
 
-    overlays.default = final: prev: {
-      archix = import inputs.archix { pkgs = final; };
-      archlinuxcn-keyring = inputs.archlinuxcn-keyring;
-      comma = prev.comma.override { nix = final.lix; };
+        gnomeExtensions = prev.gnomeExtensions // {
+          # override gnome extensions here
+        };
 
-      gnomeExtensions = prev.gnomeExtensions // {
-        # override gnome extensions here
+        pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+          (
+            python-final: python-prev: {
+              vulkan = python-prev.vulkan.overridePythonAttrs (oldAttrs: {
+                dependencies = [ python-final.cffi ];
+              });
+            }
+          )
+        ];
+
+        mpv-unwrapped = prev.mpv-unwrapped.overrideAttrs (old: {
+          src = inputs.mpv;
+        });
+      } // lib.packagesFromDirectoryRecursive {
+        inherit (final) callPackage;
+        directory = ./pkgs;
       };
 
-      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
-        (
-          python-final: python-prev: {
-            vulkan = python-prev.vulkan.overridePythonAttrs (oldAttrs: {
-              dependencies = [ python-final.cffi ];
-            });
-          }
-        )
-      ];
+      nixosModules.impermanent-users = import ./modules/impermanent-users.nix;
 
-      mpv-unwrapped = prev.mpv-unwrapped.overrideAttrs (old: {
-        src = inputs.mpv;
-      });
-    } // lib.packagesFromDirectoryRecursive {
-      inherit (final) callPackage;
-      directory = ./pkgs;
-    };
+      nixosConfigurations = {
+        absolute = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            inherit nixpkgs-patched;
+          };
+          modules = commonModules ++ [
+            nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
+            ./machines/absolute/configuration.nix
+          ];
+        };
 
-    nixosModules.impermanent-users = import ./modules/impermanent-users.nix;
+        nixos-iso = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs;
+            inherit nixpkgs-patched;
+          };
+          modules = commonModules ++ [
+            ./iso.nix
+          ];
+        };
+      };
 
-    homeConfigurations."droid" = inputs.home-manager.lib.homeManagerConfiguration {
+      homeConfigurations."droid" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs-patched {
           system = "aarch64-linux";
           config = channelsConfig;
-          # Not using overlays for now
-          # overlays = sharedOverlays;
         };
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
         modules = [
-          inputs.nix-index-database.homeModules.default
+          nix-index-database.homeModules.default
           { programs.nix-index-database.comma.enable = true; }
-
           ./machines/nao
         ];
 
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
+        extraSpecialArgs = {
+          inherit inputs;
+          inherit nixpkgs-patched;
+        };
       };
-  };
+    };
 }

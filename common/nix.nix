@@ -17,7 +17,6 @@
         "flakes" "nix-command"
       ];
       fallback = true;
-      flake-registry = "";
       keep-failed = true;
       keep-outputs = true;
       max-jobs = 2;   # https://github.com/NixOS/nixpkgs/issues/198668
@@ -36,9 +35,5 @@
       ];
     };
 
-    # requires flake-utils-plus
-    generateNixPathFromInputs = true;
-    generateRegistryFromInputs = true;
-    linkInputs = true;
   };
 }
