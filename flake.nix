@@ -163,7 +163,7 @@
       };
 
       homeConfigurations."droid" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs-patched {
+        pkgs = import nixpkgs {
           system = "aarch64-linux";
           config = channelsConfig;
         };
@@ -176,7 +176,6 @@
 
         extraSpecialArgs = {
           inherit inputs;
-          inherit nixpkgs-patched;
         };
       };
     };
