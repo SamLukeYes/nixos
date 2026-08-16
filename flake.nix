@@ -80,10 +80,7 @@
         {
           time.timeZone = "Asia/Shanghai";
           system.stateVersion = "26.05";
-          nixpkgs = {
-            config = channelsConfig;
-            overlays = [ self.overlays.default ];
-          };
+
           nix.registry = {
             nixpkgs.to = {
               type = "path";
@@ -104,9 +101,11 @@
         config = channelsConfig;
         overlays = [ self.overlays.default ];
       };
+
+      pkgs = getPkgs system;
     in
     {
-      legacyPackages.${system} = getPkgs system;
+      legacyPackages.${system} = pkgs;
 
       defaultPackage.${system} =
         self.nixosConfigurations.nixos-iso.config.system.build.isoImage;
@@ -142,10 +141,9 @@
 
       nixosConfigurations = {
         absolute = nixpkgs.lib.nixosSystem {
-          inherit system;
+          inherit system pkgs;
           specialArgs = {
             inherit inputs;
-            inherit nixpkgs-patched;
           };
           modules = commonModules ++ [
             nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
@@ -154,10 +152,9 @@
         };
 
         nixos-iso = nixpkgs.lib.nixosSystem {
-          inherit system;
+          inherit system pkgs;
           specialArgs = {
             inherit inputs;
-            inherit nixpkgs-patched;
           };
           modules = commonModules ++ [
             ./iso.nix
