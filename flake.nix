@@ -53,12 +53,14 @@
       # When patches are added, the list is applied to the nixpkgs source tree.
       channel-patches = [
         # Add nixpkgs patches here
+        ./patches/waypipe-fix.patch
       ];
       nixpkgs-patched =
         if builtins.length channel-patches == 0
         then nixpkgs
-        else nixpkgs.lib.applyPatches {
+        else nixpkgs.legacyPackages.${system}.applyPatches {
           src = nixpkgs;
+          name = "nixpkgs-patched";
           patches = channel-patches;
         };
 
