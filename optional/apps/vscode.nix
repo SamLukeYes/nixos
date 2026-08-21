@@ -30,6 +30,7 @@
           config.services.desktopManager.gnome.enable gnome-shell
       ))
 
+      mcp-nixos  # for GitHub Copilot
       nil  # for VSCode nix IDE
       python3Packages.python-lsp-server  # for VSCode xonsh IDE
       wl-clipboard-x11  # for VSCode Office Viewer Markdown Editor
