@@ -54,7 +54,7 @@
       gnomeExtensions.easyScreenCast
       gnomeExtensions.places-status-indicator
       gnomeExtensions.system-monitor-next
-      gnomeExtensions.todotxt
+      gnomeExtensions.todo-widget
 
       # GStreamer plugins
       gst_all_1.gst-plugins-bad
@@ -107,7 +107,6 @@
       ".local/share/keyrings"
       ".local/share/nautilus"
       ".local/share/org.gnome.SoundRecorder"
-      { directory = ".local/share/todo.txt"; how = "symlink"; }
     ];
   };
 }
