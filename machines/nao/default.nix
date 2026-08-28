@@ -50,7 +50,10 @@
   
   # KDE Connect
   qt.enable = true;
-  services.kdeconnect.enable = true;
+  services.kdeconnect = {
+    enable = true;
+    package = lib.nixGL.wrap pkgs.kdePackages.kdeconnect;
+  };
   systemd.user.services.kdeconnect = {
     Service.Environment = map (x: "${x.name}=${x.value}")
       (lib.attrsToList config.home.sessionVariables);
