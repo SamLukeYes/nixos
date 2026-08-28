@@ -21,6 +21,7 @@
   # environment.
   home.packages = with pkgs; [
     deploy-rs  # deploy VPS from Aikawa
+    yt-dlp-light  # download music
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -34,7 +35,9 @@
     '';
   };
 
-  home.sessionVariables = { };
+  home.sessionVariables = {
+    DISPLAY = ":0";
+  };
 
   nix.gc = {
     automatic = true;
@@ -44,4 +47,8 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  
+  # KDE Connect
+  qt.enable = true;
+  services.kdeconnect.enable = true;
 }
