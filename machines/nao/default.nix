@@ -1,6 +1,6 @@
 # Nao is a Home Manager module that is used in the Terminal App on Aikawa
 
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -51,4 +51,8 @@
   # KDE Connect
   qt.enable = true;
   services.kdeconnect.enable = true;
+  systemd.user.services.kdeconnect = {
+    Service.Environment = config.home.sessionVariables;
+    Install.WantedBy = [ "default.target" ];
+  };
 }
