@@ -35,7 +35,7 @@
     '';
   };
 
-  systemd.user.sessionVariables = {
+  home.sessionVariables = {
     DISPLAY = ":0";
   };
 
