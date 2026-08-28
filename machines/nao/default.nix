@@ -52,7 +52,7 @@
   qt.enable = true;
   services.kdeconnect = {
     enable = true;
-    package = lib.nixGL.wrap pkgs.kdePackages.kdeconnect;
+    package = config.lib.nixGL.wrap pkgs.kdePackages.kdeconnect;
   };
   systemd.user.services.kdeconnect = {
     Service.Environment = map (x: "${x.name}=${x.value}")
