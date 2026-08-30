@@ -53,7 +53,6 @@
       # When patches are added, the list is applied to the nixpkgs source tree.
       channel-patches = [
         # Add nixpkgs patches here
-        ./patches/xonsh-update.patch
       ];
       nixpkgs-patched =
         if builtins.length channel-patches == 0
