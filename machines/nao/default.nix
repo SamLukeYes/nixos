@@ -21,6 +21,7 @@
   # environment.
   home.packages = with pkgs; [
     deploy-rs  # deploy VPS from Aikawa
+    nil  # nix lsp
     yt-dlp-light  # download music
   ];
 
@@ -47,16 +48,4 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  
-  # KDE Connect
-  qt.enable = true;
-  services.kdeconnect = {
-    enable = true;
-    package = config.lib.nixGL.wrap pkgs.kdePackages.kdeconnect-kde;
-  };
-  systemd.user.services.kdeconnect = {
-    Service.Environment = map (x: "${x.name}=${x.value}")
-      (lib.attrsToList config.home.sessionVariables);
-    Install.WantedBy = [ "default.target" ];
-  };
 }
