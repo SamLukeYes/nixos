@@ -1,6 +1,6 @@
 # Nao is a Home Manager module that is used in the Terminal App on Aikawa
 
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -30,14 +30,16 @@
   home.file = {
     ".xonshrc".text = ''
       source-bash ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-      source ~/.xonshrc-unmanaged
       $PATH.insert(0, "~/.nix-profile/bin")
       $XONSH_COLOR_STYLE = 'native'
+      source ~/.xonshrc-unmanaged
     '';
   };
 
   home.sessionVariables = {
-    DISPLAY = ":0";
+    MOZ_ENABLE_WAYLAND = "1";
+    MOZ_USE_XINPUT2 = "1";
+    QT_IM_MODULE = "fcitx";
   };
 
   nix.gc = {
