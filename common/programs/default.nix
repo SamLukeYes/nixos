@@ -13,6 +13,7 @@
     ./foliate.nix
     ./git.nix
     ./gnupg.nix
+    ./keepassxc.nix
     ./libreoffice.nix
     ./misc-cli.nix
     ./nodejs.nix
