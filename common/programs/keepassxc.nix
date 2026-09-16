@@ -1,8 +1,12 @@
 { pkgs, ... }:
 
 {
-  environment.systemPackages = [
-    pkgs.keepassxc
+  environment.systemPackages = with pkgs; [
+    keepassxc
+    (makeAutostartItem {
+      name = "org.keepassxc.KeePassXC";
+      package = keepassxc;
+    })
   ];
 
   users.persistence.directories = [
