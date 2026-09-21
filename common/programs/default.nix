@@ -4,7 +4,6 @@
   imports = [
     ./android.nix
     ./audacity.nix
-    ./authenticator.nix
     ./czkawka.nix
     ./dconf.nix
     ./direnv.nix
