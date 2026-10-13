@@ -2,9 +2,7 @@
 
 {
   boot = {
-    kernelParams =
-      lib.optional (!config.zramSwap.enable) "zswap.enabled=1"
-      ++ lib.optionals config.virtualisation.virtualbox.host.enable
+    kernelParams = lib.optionals config.virtualisation.virtualbox.host.enable
         (if config.virtualisation.virtualbox.host.enableKvm
         then [
           # https://github.com/cyberus-technology/virtualbox-kvm#known-issues-and-limitations
@@ -27,5 +25,6 @@
       };
     };
     swraid.enable = lib.mkDefault false;
+    zswap.enable = !config.zramSwap.enable;
   };
 }
