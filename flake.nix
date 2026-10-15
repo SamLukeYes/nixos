@@ -112,7 +112,7 @@
       overlays.default = final: prev: {
         archix = import archix { pkgs = final; };
         archlinuxcn-keyring = inputs.archlinuxcn-keyring;
-        comma = prev.comma.override { nix = final.lix; };
+        # comma = prev.comma.override { nix = final.lix; };
 
         gnomeExtensions = prev.gnomeExtensions // {
           # override gnome extensions here
