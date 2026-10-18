@@ -28,13 +28,14 @@
     #(config.lib.nixGL.wrap celluloid)
     qadwaitadecorations
     qadwaitadecorations-qt6
-    (xonsh.override { extraPackages = ps: with ps; [ distro ]})
+    (xonsh.override { extraPackages = ps: with ps; [ distro ]; })
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
     ".xonshrc".text = ''
+      # source-bash /etc/profile
       source-bash ~/.nix-profile/etc/profile.d/hm-session-vars.sh
       $PATH.insert(0, "~/.nix-profile/bin")
       $XONSH_COLOR_STYLE = 'native'
