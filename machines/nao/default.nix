@@ -1,6 +1,6 @@
 # Nao is a Home Manager module that is used in the Terminal App on Aikawa
 
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -23,6 +23,12 @@
     deploy-rs  # deploy VPS from Aikawa
     nil  # nix lsp
     yt-dlp-light  # download music
+
+    # maintained packages
+    #(config.lib.nixGL.wrap celluloid)
+    qadwaitadecorations
+    qadwaitadecorations-qt6
+    (xonsh.override { extraPackages = ps: with ps; [ distro ]})
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -32,7 +38,7 @@
       source-bash ~/.nix-profile/etc/profile.d/hm-session-vars.sh
       $PATH.insert(0, "~/.nix-profile/bin")
       $XONSH_COLOR_STYLE = 'native'
-      source ~/.xonshrc-unmanaged
+      source ~/xonshrc-unmanaged.xsh
     '';
   };
 
@@ -40,13 +46,21 @@
     MOZ_ENABLE_WAYLAND = "1";
     MOZ_USE_XINPUT2 = "1";
     QT_IM_MODULE = "fcitx";
+    QT_WAYLAND_DECORATION = "adwaita";
   };
 
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 30d";
+  nix = {
+    keepOldNixPath = false;
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
   };
+
+  qt.enable = true;
+
+  xdg.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
