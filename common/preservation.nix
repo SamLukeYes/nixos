@@ -1,10 +1,8 @@
 { config, lib, ... }:
 
 {
-  boot.initrd.systemd.enable = lib.mkDefault true;
-
   preservation = {
-    enable = lib.mkDefault config.boot.initrd.systemd.enable;
+    enable = lib.mkDefault true;
     preserveAt."/persistent" = {
       directories = [
         { directory = "/etc"; inInitrd = true; }

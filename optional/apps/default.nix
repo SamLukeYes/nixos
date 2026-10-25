@@ -9,8 +9,6 @@
   ];
   
   environment.systemPackages = with pkgs; [
-    gnome-frog
-    
     # large optional dependencies of GUI applications
     texliveFull
   ];
