@@ -40,8 +40,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # https://github.com/nix-community/preservation/pull/36
-    preservation.url = "github:nix-community/preservation/ed8dbeaac0ad240341259c814cade7163a53fc1f";
+    preservation.url = "github:nix-community/preservation";
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-hardware, archix, nix-index-database, preservation, ... }@inputs:
