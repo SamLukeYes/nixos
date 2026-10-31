@@ -55,7 +55,8 @@
         # Add nixpkgs patches here
         ./patches/xonsh-update.patch
       ];
-      nixpkgs-patched =
+      
+      getPatchedNixpkgs = system:
         if builtins.length channel-patches == 0
         then nixpkgs
         else nixpkgs.legacyPackages.${system}.applyPatches {
@@ -63,6 +64,8 @@
           name = "nixpkgs-patched";
           patches = channel-patches;
         };
+
+      nixpkgs-patched = getPatchedNixpkgs system;
 
       channelsConfig = {
         allowlistedLicenses = with lib.licenses; [
@@ -96,7 +99,7 @@
         self.nixosModules.impermanent-users
       ];
 
-      getPkgs = system: import nixpkgs-patched {
+      getPkgs = system: import (getPatchedNixpkgs system) {
         inherit system;
         config = channelsConfig;
         overlays = [ self.overlays.default ];
@@ -163,10 +166,7 @@
       };
 
       homeConfigurations."droid" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "aarch64-linux";
-          config = channelsConfig;
-        };
+        pkgs = getPkgs "aarch64-linux";
 
         modules = [
           nix-index-database.homeModules.default
