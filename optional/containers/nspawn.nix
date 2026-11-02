@@ -3,17 +3,19 @@
 {
   systemd = {
     nspawn = (builtins.mapAttrs (name: value: {
-      filesConfig = {
-        Bind = [
-          "/dev/dri"
-          "/dev/video0"
-        ];
-        BindReadOnly = [
-          "/etc/resolv.conf"
-          "/tmp/.X11-unix"
-        ];
+      settings = {
+        Files = {
+          Bind = [
+            "/dev/dri"
+            "/dev/video0"
+          ];
+          BindReadOnly = [
+            "/etc/resolv.conf"
+            "/tmp/.X11-unix"
+          ];
+        };
+        Network.Private = false;
       };
-      networkConfig.Private = false;
     }) {
       archlinux = {};
     });
