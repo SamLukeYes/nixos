@@ -18,13 +18,6 @@
       url = "github:archlinuxcn/archlinuxcn-keyring";
     };
 
-    home-manager = {
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
-      url = "github:nix-community/home-manager";
-    };
-
     mpv = {
       flake = false;
       url = "github:mpv-player/mpv/fbdaddf9688c6f52e9f2d3d9cf7722d420669574";
@@ -35,6 +28,11 @@
       url = "github:nix-community/nix-index-database";
     };
 
+    nixos-avf = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:SamLukeYes/nixos-avf-koiTerminal/nixos-unstable";
+    };
+
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,7 +41,7 @@
     preservation.url = "github:nix-community/preservation";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, archix, nix-index-database, preservation, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-hardware, archix, nix-index-database, preservation, ... }@inputs:
     let
       system = "x86_64-linux";
       lib = nixpkgs.lib;
@@ -77,7 +75,6 @@
       };
 
       commonModules = [
-        archix.nixosModules.default
         nix-index-database.nixosModules.nix-index
         {
           time.timeZone = "Asia/Shanghai";
@@ -148,10 +145,22 @@
             inherit inputs;
           };
           modules = commonModules ++ [
+            archix.nixosModules.default
             nixos-hardware.nixosModules.lenovo-thinkpad-l13-yoga
             ./machines/absolute/configuration.nix
           ];
         };
+
+        nao = nixpkgs.lib.nixosSystem (let
+          system = "aarch64-linux";
+        in {
+          inherit system;
+          pkgs = getPkgs system;
+          modules = commonModules ++ [
+            inputs.nixos-avf.nixosModules.avf
+            ./machines/nao/configuration.nix
+          ];
+        });
 
         nixos-iso = nixpkgs.lib.nixosSystem {
           inherit system pkgs;
@@ -161,23 +170,6 @@
           modules = commonModules ++ [
             ./iso.nix
           ];
-        };
-      };
-
-      homeConfigurations."droid" = home-manager.lib.homeManagerConfiguration {
-        pkgs = getPkgs "aarch64-linux";
-
-        modules = [
-          nix-index-database.homeModules.default
-          {
-            programs.nix-index-database.comma.enable = true;
-            nix.nixPath = [ "nixpkgs=${nixpkgs}" ];
-          }
-          ./machines/nao
-        ];
-
-        extraSpecialArgs = {
-          inherit inputs;
         };
       };
     };

@@ -36,26 +36,6 @@
         "type": "github"
       }
     },
-    "home-manager": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1793979366,
-        "narHash": "sha256-7OoWDsYO9teiPxl0QdlS5lYE20Pue8/5mpscSL32FUA=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "2c0c1f01521469cf0271180c453c79782d53c2f6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "mpv": {
       "flake": false,
       "locked": {
@@ -80,16 +60,37 @@
         ]
       },
       "locked": {
-        "lastModified": 1793543282,
-        "narHash": "sha256-PHtGxKYM99f8WhGR5YD7iiCiwemKa2wUD4yVI2oALFg=",
+        "lastModified": 1794132860,
+        "narHash": "sha256-iGNtQnUZsi+v6/4NbtYr+dsmASa6GkzXtUcTpE8F3mE=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "cee0f879d338cf08f814210fa6c2b280594ade0a",
+        "rev": "af9249ca33bc2efaae5d071e4c67ddef19dcb681",
         "type": "github"
       },
       "original": {
         "owner": "nix-community",
         "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
+    "nixos-avf": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1794144553,
+        "narHash": "sha256-Vxw21GnuW63ImMgvHY35rAzFy2gsuqvwBG5OsQcR6FE=",
+        "owner": "SamLukeYes",
+        "repo": "nixos-avf-koiTerminal",
+        "rev": "a354bc947addd47556cbc8c8aae77837c9b100b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SamLukeYes",
+        "ref": "nixos-unstable",
+        "repo": "nixos-avf-koiTerminal",
         "type": "github"
       }
     },
@@ -148,9 +149,9 @@
       "inputs": {
         "archix": "archix",
         "archlinuxcn-keyring": "archlinuxcn-keyring",
-        "home-manager": "home-manager",
         "mpv": "mpv",
         "nix-index-database": "nix-index-database",
+        "nixos-avf": "nixos-avf",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "preservation": "preservation"

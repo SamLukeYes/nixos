@@ -1,4 +1,5 @@
-# Nao is a Home Manager module that is used in the Terminal App on Aikawa
+# This is a Home Manager module that was used in the Terminal App on Aikawa
+# Since the VM is broken, this config is no longer in use
 
 { config, pkgs, ... }:
 
