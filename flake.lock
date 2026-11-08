@@ -80,11 +80,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1794144553,
-        "narHash": "sha256-Vxw21GnuW63ImMgvHY35rAzFy2gsuqvwBG5OsQcR6FE=",
+        "lastModified": 1794150299,
+        "narHash": "sha256-upoDasPIz5JyYPtvPjc8HTsNcw0O+CVtSjFPT23CZdk=",
         "owner": "SamLukeYes",
         "repo": "nixos-avf-koiTerminal",
-        "rev": "a354bc947addd47556cbc8c8aae77837c9b100b1",
+        "rev": "22035c0384a7257af97aead26781589281873ae1",
         "type": "github"
       },
       "original": {
