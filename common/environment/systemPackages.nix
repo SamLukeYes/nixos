@@ -5,6 +5,7 @@
     upscaler
 
     # CLI programs
+    deploy-rs  # frequently used to deploy servers
     dig  # must be available without Internet connection
     ffmpeg-headless  # exposing the variant used by yt-dlp
     file  # frequently used to view executable type
