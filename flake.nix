@@ -18,11 +18,6 @@
       url = "github:archlinuxcn/archlinuxcn-keyring";
     };
 
-    mpv = {
-      flake = false;
-      url = "github:mpv-player/mpv/fbdaddf9688c6f52e9f2d3d9cf7722d420669574";
-    };
-
     nix-index-database = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nix-index-database";
@@ -127,10 +122,6 @@
             }
           )
         ];
-
-        mpv-unwrapped = prev.mpv-unwrapped.overrideAttrs (old: {
-          src = inputs.mpv;
-        });
       } // lib.packagesFromDirectoryRecursive {
         inherit (final) callPackage;
         directory = ./pkgs;
