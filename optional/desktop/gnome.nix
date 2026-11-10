@@ -85,12 +85,9 @@
       extraGSettingsOverrides = ''
         [org.gnome.desktop.peripherals.touchpad]
         tap-to-click=true
-        [org.gnome.mutter]
-        experimental-features=['scale-monitor-framebuffer']
       '';
       extraGSettingsOverridePackages = with pkgs; [
         gsettings-desktop-schemas
-        mutter
       ];
     };
   };
