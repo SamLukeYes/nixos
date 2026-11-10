@@ -1,0 +1,31 @@
+From 4089a2e3c5e5dcc9ad4186971dddf487680d9ba7 Mon Sep 17 00:00:00 2001
+From: Logan Devine <logan@zirco.dev>
+Date: Sat, 7 Nov 2026 16:39:20 -0800
+Subject: [PATCH] pixi: use system libs
+
+---
+ pkgs/by-name/pi/pixi/package.nix | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/pkgs/by-name/pi/pixi/package.nix b/pkgs/by-name/pi/pixi/package.nix
+index 2ae5bde437df0..e185acbddd322 100644
+--- a/pkgs/by-name/pi/pixi/package.nix
++++ b/pkgs/by-name/pi/pixi/package.nix
+@@ -8,6 +8,8 @@
+   makeBinaryWrapper,
+   libgit2,
+   openssl,
++  aws-lc,
++  zstd,
+   buildPackages,
+   versionCheckHook,
+   nix-update-script,
+@@ -35,6 +37,8 @@ rustPlatform.buildRustPackage (finalAttrs: {
+   buildInputs = [
+     libgit2
+     openssl
++    aws-lc
++    zstd
+   ];
+ 
+   env = {

@@ -46,6 +46,7 @@
       # When patches are added, the list is applied to the nixpkgs source tree.
       channel-patches = [
         # Add nixpkgs patches here
+        ./patches/pixi-fix.patch
       ];
       
       getPatchedNixpkgs = system:
