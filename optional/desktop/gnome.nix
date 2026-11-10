@@ -54,7 +54,7 @@
       gnomeExtensions.easyScreenCast
       gnomeExtensions.places-status-indicator
       gnomeExtensions.system-monitor-next
-      gnomeExtensions.todo-widget
+      gnomeExtensions.todotxt
 
       # GStreamer plugins
       gst_all_1.gst-plugins-bad
